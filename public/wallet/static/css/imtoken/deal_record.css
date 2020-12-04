@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F4F4F4;
+    height: auto;
+    font-size: .3rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    font-size: 0.4800rem;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom: 1px solid #ebebeb;
+    background-color: #37bac9;
+    z-index: 666;
+}
+.header .back {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0.4000rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    background: url(../../images/imtoken/10.png);
+    background-size: cover;
+}
+.record {
+    background: #fff;
+    height: 1.3rem;
+    width: 100%;
+    /* margin-top:1.2rem; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: .2rem;
+    font-size: .35rem;
+    position: fixed;
+    top: 1.2rem;
+    left: 0;
+    z-index:10;
+}
+
+#con{
+    padding-top: 2.4rem;
+}
+.record div {
+    padding:  .2rem;
+    text-align: center;
+    color: #9A9A9A;
+}
+
+.show {
+    overflow: hidden;
+}
+
+.hover {
+    color: #2EBEC9!important;
+    border-bottom: 1px solid #2EBEC9;
+}
+
+.record-box {
+    background: #FFFFFF;
+    margin-top: .2rem;
+    padding: .2rem .3rem;
+    overflow: hidden;
+    font-size: .35rem;
+    position: relative;
+    /* display: flex; */
+}
+
+.record-l {
+    /* float: left; */
+    color: #9A9A9A;
+    position:relative;
+}
+.record-l  a{
+    display:inline-block;
+    width:1.5rem;
+    height:0.5rem;
+    text-align:center;
+    font-size:0.30rem;
+    border:1px solid #38B9CF;
+    border-radius:0.2rem;
+}
+.record-l .testquit{
+    position:absolute;
+    left:6rem;
+    bottom:1rem;
+}
+.record-l .remoll{
+    position:absolute;
+    left:8rem;
+    bottom:1rem;
+}
+.record-r {
+    position: absolute;
+    right: .2rem;
+    bottom: 3%;
+}
+
+.record-l div ,
+.record-l p{
+    padding: 0.2rem 0rem;
+}
+.record-l p{
+    font-size: .35rem;
+}
+
+.record-l .col1 {
+    color: #38B9CF;
+}
+
+.record-l .col2 {
+    color: #fd482c;
+}
+.record-r p:first-child {
+    color: #38B9CF;
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.record-r p {
+    font-size: .3rem;
+    color: #9A9A9A;
+    padding-top: .2rem;
+}

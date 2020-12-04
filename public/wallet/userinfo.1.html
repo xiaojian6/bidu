@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+</head>
+<body style="background:#f5f5f5;">
+    <div class="user_head_box" id="user_info"  >
+		<div class="user_head_info">
+            <!--/users/user_photo-->
+			<a href="javascript:;" class="user_photo"><img id="user_info_photo" src="" alt=""></a> 
+			<div class="user_name">
+				<p id="user_info_nickname"></p>
+				<p>
+					<i class="iconfont icon-huangguan font20 fontc_yellow"></i>
+					<span class="font14" id="user_grade"></span>
+				</p>
+                <p id="user_address" class="font12"></p>
+			</div>
+		</div>
+	</div>
+    <div class="userinfo_userMoney">
+        <div class="userMoney">
+            <a href="/users/money_adm">
+                <i class="iconfont icon-zichanguanli font24 fontc_hdl"></i>
+                <span class="fontc_3">钱包管理</span>
+            </a>
+            <a href="/users/account_details">
+                <i class="iconfont icon-zhanghumingxi font24 fontc_hdl"></i>
+                <span class="fontc_3">账户明细</span>
+            </a>
+        </div>
+    </div>
+    <div class="mgbfoot">
+        <section class="">
+            <div class="userinfo_box" >
+                <div class="userinfo_item">
+                    <i class="iconfont icon-yaoqing font24 fontc_hdl"></i>
+                    <a  href="/users/binding">
+                        <span class="fontc_3 font16">imtoken账户绑定</span>
+                    </a>
+                </div>
+                <div class="userinfo_item">
+                    <i class="iconfont icon-goumaikuangji font24 fontc_hdl"></i>
+                    <a  href="/users/Miner_item">
+                        <span class="fontc_3 font16">租矿机</span>
+                    </a>
+                </div>
+                <div class="userinfo_item">
+                    <i class="iconfont icon-lianmengshanghu font24 fontc_hdl"></i>
+                    <a  href="/users/union">
+                        <span class="fontc_3 font16">联盟节点</span>
+                    </a>
+                </div>
+                <div class="userinfo_item">
+                    <i class="iconfont icon-tuiguangma font24 fontc_hdl"></i>
+                    <a  href="/users/user_invite">
+                        <span class="fontc_3 font16">邀请码</span>
+                    </a>
+                </div>
+                <div class="userinfo_item">
+                    <i class="iconfont icon-icon_huiyuanshengji_putong font28 fontc_hdl "></i>
+                    <a  href="/users/vipUp">
+                        <span class="fontc_3 font16">会员升级</span>
+                    </a>
+                </div>        
+            </div>
+            <div class="userinfo_box mgt10" >
+                <div class="userinfo_item">
+                    <i class="iconfont icon-duoren font24 fontc_hdl "></i>
+                    <a  href="/users/team">
+                        <span class="fontc_3 font16">团队介绍</span>
+                    </a>
+                </div>
+                <div class="userinfo_item">
+                    <i class="iconfont icon-bangzhu font24 fontc_hdl "></i>
+                    <a  href="/users/helps">
+                        <span class="fontc_3 font16">帮助中心</span>
+                    </a>
+                </div>
+                <div class="userinfo_item">
+                    <i class="iconfont icon-guanyuwomen font24 fontc_hdl"></i>
+                    <a  href="/users/about_us">
+                        <span class="fontc_3 font16">关于我们</span>
+                    </a>
+                </div>            
+            </div>
+        </section>
+        <a class="login_btn quit_btn" href="/users/login">退出登录</a>
+    </div>
+
+    <footer class="backF" style="padding-top:0;">
+		<a href="index.html"  >
+			<i class="iconfont icon-shouye font24 fontc_6"></i>
+			<span class="fontc_9">首页</span>
+		</a>
+        <a href="javascript:;" id="trade_nav" >
+			<i class="iconfont icon-jiaoyi font24 fontc_6"></i>
+			<span class="fontc_9">交易</span>
+		</a>
+        <a href="/users/money_adm" style="position:relative;" >
+			<div class="foot_center">
+				<div>
+					<i class="iconfont icon-qianbao- font24 fontc_f "></i>
+				<span class="">钱包</span>
+				</div>
+			</div>
+		</a>
+		<a href="/users/information" >
+			<i class="iconfont icon-faxian font24 fontc_6 font_bold" ></i>
+			<span class="fontc_9">发现</span>
+		</a>
+		<a href="userinfo.html" class="hdl_act">
+			<i class="iconfont icon-home font24 fontc_6 font_bold"></i>
+			<span class="fontc_9">我的</span>
+		</a>
+	</footer>
+
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script type="text/javascript" src="static/javascripts/userinfo.js"></script>
+
+</body>
+</html>

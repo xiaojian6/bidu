@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>订单取消</title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+      img{
+          width: 10px;
+          vertical-align: middle;
+      }
+      .bgGray3{
+          border-top-left-radius: 2px;
+          border-top-right-radius: 2px;
+      }
+      .brb{
+          border-bottom-left-radius: 2px;
+          border-bottom-right-radius: 2px;
+      }
+      .active{
+          background-color: #5786D2;
+          color: #fff;
+      }
+      .pay_box{
+          padding-bottom: 10px;
+          border-radius: 2px;
+      }
+      .what{width: 15px}
+      .tip p{
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #101C31;
+          position: relative;
+          top: -5px;
+          left: -5px;
+      }
+      .tip p:nth-child(2){
+        left: 5px;
+      }
+      .celcolor{color: #94a8c7}
+      .confirm,.pay_money{
+          display: inline-block;
+          border-radius: 4px;
+      }
+    </style>
+</head>
+<body class="baseBg">
+    <header class="header ">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <!-- <div class="tc title blue4">请付款</div>    -->
+    </header>
+    <div class="plr15">
+        <div class="mt40 ptb10 ft10">
+            <div class="flex between alcenter">
+                <div>
+                    <p class="ft20 white tt_statu"></p>
+                    <p class="blue mt5 celcolor tt_statu2"></p>
+                </div>
+                <div>
+                    <img src="images/msg.png" alt="" style="width:25px;">
+                    <p class="blue mt5">联系对方</p>
+                </div>
+            </div>
+            <div class="bgWhite pay_box mt20">
+                <div class="bgGray3 plr10 ptb15">
+                    <p class="color1">交易总额</p>
+                    <p class="blue ft18 mt10" id="deal_money"></p>
+                </div>
+                <div class="tip flex between">
+                    <p></p>
+                    <p></p>
+                </div>
+                <div class="brb plr10 ft14">
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1 ">买家</span>
+                        <div><span class="color5" id="seller_name"></span> </div>
+                    </div>
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1">单价</span>
+                        <div><span class="color5" id="price"></span></div>
+                    </div>
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1">数量</span>
+                        <div><span class="color5" id="number"></span></div>
+                    </div>
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1">下单时间</span>
+                        <div><span class="color5" id="format_create_time"></span></div>
+                    </div>
+                    <!--<div class="flex ptb10 between alcenter">-->
+                        <!--<span class="color1">订单号</span>-->
+                        <!--<div><span class="color5">11565585885654866</span><img src="images/pay_ico.jpg" alt=""></div>-->
+                    <!--</div>-->
+                    <div class="flex ptb10 between alcenter">
+                        <div class="flex alcenter"><span class="color1">参考号</span><img src="images/query.png" alt="" class="what"></div>
+                        <div><span class="color5" id="data_id"></span> <img src="images/pay_ico.jpg" alt=""></div>
+                    </div>
+                   
+                    <div class="tr mt10">
+                        <a href="javascript:;" class="ptb10 plr10 bgLinearblue hide pay_money white ">确认已收款</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="confirm-box tc hide">
+            <div class="confirm-content tc">
+                <div class="confirm-t" style="padding:15px 0 10px">
+                    <div style="padding-bottom:15px;font-weight: 600;" class="ft16">付款确认</div>
+                    <div class="color1 ">请确认买家已向您付款</div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- 取消订单弹窗 -->
+   <div class="cancel-box tc hide">
+    <div class="cancel-content tc">
+
+        <div class="confirm-t" style="padding:15px 0 10px">
+            <div style="padding-bottom:15px;font-weight: 600;" class=" ft16">确认取消交易</div>
+            <div class="blue">如果您已向卖家付款，请千万不要取消交易</div>
+            <!--<div class=" mt5 color1">取消规则，买家当日累计3笔取消，</div>-->
+            <!--<div class="color1">会限制当日买入功能</div>-->
+            <div style="padding:20px 0 10px" class="ft16">
+                <input type="checkbox" value="" style="-webkit-appearance: checkbox;vertical-align: middle;margin-right: 5px"><span>我还没有付款给对方</span>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<div class="layer_box_pwd" style="z-index: 100000">
+    <div class="layer_opeation2 pb10 bgColor mauto  ">
+        <div class="op_header maincolor plr10 ptb15 white">
+            <p class="ft20 tc">交易密码</p>
+        </div>
+        <div class="plr20 ptb20">
+            <div class="flex alcenter mb20">
+                <p class="color1">请输入交易密码</p>
+                <input type="password" name="password" class="password  ptb10 pl10 inNum_pwd ml10 radius4 flex1">
+            </div>
+            <div class="bgLinearblue  ptb10 flex1 tc confirm_doit radius4 white" >确定</div>
+        </div>
+    </div>
+</div>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script>
+        $(function () {
+            var id = get_param('id');
+            var legal_deal_send_id;
+            initDataToken({url:'legal_deal',data:{id:id}},function (res) {
+                console.log(res);
+                var text1='',text2;
+                switch (res.is_sure){
+                    case 0:
+                    text1='待付款';text2='请等待买家付款'; break;
+                    case 1:
+                    text1='已完成';text2="订单已完成";break ;
+                    case 2:
+                    text1='已取消';text2="订单已取消";break ;
+                    case 3:
+                    text1='已付款';text2="买家已付款，请核实后确认";
+                    break;
+                }     
+                if(res.is_sure==3 && res.type=='buy'){
+                    $('.pay_money').removeClass('hide')
+                }else{
+                    $('.pay_money').addClass('hide')
+                }
+                
+                $('.tt_statu').html(text1);
+                $('.tt_statu2').html(text2)
+                $('#deal_money').html('￥'+res.deal_money);
+                $('#price').html('￥'+res.price);
+                $('#seller_name').html(res.seller_name);
+                $('#number').html(res.number+res.currency_name);
+                $('#format_create_time').html(res.format_create_time);
+                $('#data_id').html(res.id);
+                legal_deal_send_id=res.legal_deal_send_id;
+
+            });
+            var mytype,myurl;
+             // 卖家确认付款
+             $('.pay_money').click(function(){
+                layer.open({
+                    type:1,
+                    style:'width:90%',
+                    content:$('.confirm-box').html(),
+                    btn:['确认','取消'],
+                    yes:function (index){
+                        layer.close(index);
+                        mytype=1;
+                        myurl='legal_deal_user_sure';
+                        $('.layer_box_pwd').show();
+                        // initDataToken({url:'legal_deal_user_sure',type:'post',data:{id:id}},function (res) {
+                        //     layer_msg(res);
+                        //     setTimeout(() => {
+                        //         location.href='fiatrad_detail.html';
+                        //     }, 1500);
+                        // });
+                    }
+        
+                })
+            })
+            $('.confirm').click(function(){
+                layer.open({
+                    className:'layer-cancel',
+                    type:1,
+                    style:'width:90%',
+                    content:$('.cancel-box').html(),
+                    btn:['确认','取消'],
+                    yes:function (index){
+                        layer.close(index);
+                        mytype=2;
+                        myurl='user_legal_pay_cancel';
+                        $('.layer_box_pwd').show();
+                        // initDataToken({url:'user_legal_pay_cancel',type:'post',data:{id:id}},function (res) {
+                        //     layer_msg(res);
+                        // });
+                    }
+        
+                })
+            })
+
+             $('.layer_box_pwd .confirm_doit').click(function(){
+                var password=$('.password').val();
+                if(!password){
+                    return layer_msg('请输入密码')
+                }
+                initDataToken({url:myurl,type:'post',data:{id:id,password}},function (res) {
+                    layer_msg(res);
+                    setTimeout(() => {
+                        if(mytype==1){
+                            location.href='fiatrad_detail.html';
+                        }
+                    }, 1500);
+                });
+            })
+            $('.layer_opeation2').click(function(){
+                return false;
+            })
+            $('.layer_box_pwd').click(function(){
+                $(this).hide();
+            })
+        });
+       
+    </script>
+</body>
+</html>

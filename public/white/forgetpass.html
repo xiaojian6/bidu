@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title></title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <style type="text/css">
+        /*公共样式*/
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#f6f7f9;font-size:14px;font-family: "微软雅黑";}
+        ul li{list-style:none;}
+        a{text-decoration:none;color:#333;}
+        input{outline:0px ;  -webkit-appearance: none; }
+        input[type=button], input[type=submit], input[type="text"],input[type=checkbox],input[type="password"], button { cursor: pointer; -webkit-appearance: none; } 
+        input:focus { outline: none; }
+        /*忘记密码*/
+        .toptit{padding:15px 20px;}
+        .toptit a{color:#adbac0;}
+        header .toptit .return-img{background: url(images/return11.png)no-repeat;
+    background-size: 2.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0px auto;
+    display: block;
+    float: left;margin-left: -10px;}
+        #forgetpass{padding:0 30px;margin-top:60px;}
+        #forgetpass .teltit{overflow:hidden;margin-bottom:35px;}
+        #forgetpass .teltit h5{color:#1d4053;margin-top:0;font-size:28px;margin-bottom:20px;font-weight: bold;}
+        #forgetpass .theme .form-control{background-color:#f6f7f9;border:solid 1px #f6f7f9;box-shadow:none;border-bottom:solid 1px #ccc;border-radius:0px;padding:6px 0;font-size:16px;}
+        #forgetpass .theme input::-webkit-input-placeholder{color:#c5cacd;font-size:16px;}
+        #forgetpass .theme input[placeholder], [placeholder], *[placeholder] {color:#1d455f !important;}
+        #forgetpass .theme .btn-default{background:#588cd8;color:#fff;border-color:#588fe1;width:100%;font-size:15px;margin-top:35px;border-radius:0;padding: 10px 0;}
+        /*弹出框*/
+        .modal{top:auto;font-family: "微软雅黑";}
+        .modal-dialog{margin:0;}
+        .modal-content{border:none;border-radius:0;}
+        .modal .modal-header h4{font-size:15px;color:#2b464f;font-weight:bold;}
+        .modal-header .close{margin-top:3px;font-weight:normal;opacity:0.5;font-size:14px;}
+        .modal .modal-body .form-control{background-color:#fff;border:solid 1px #fff;box-shadow:none;border-bottom:solid 1px #8db3d2;border-radius:0px;padding:6px 0;font-size:16px;}
+        .modal .modal-body label{margin-top:16px;margin-bottom:6px;color:#323b40;font-size:13px;font-weight:500;}
+        .modal .modal-body .form-group{margin-bottom:0;}
+        .modal .modal-body input::-webkit-input-placeholder{color:#c5cacd;}
+        .modal .modal-body input[placeholder], [placeholder], *[placeholder] {color:#1d455f !important;}
+        .modal .modal-body .verification{position:relative;}
+        #fbtain{background:#fff;font-size:14px;border:none;position:absolute;bottom:4px;right:0;color:#5890bd;}
+        .modal-footer{border-top:none;}
+        .modal .modal-footer .btn-primary{background:#588cd8;width:100%;border-color:#588fe1;font-size:16px;}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="toptit">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+        </div>
+    </header>
+    <div id="forgetpass">
+        <div class="teltit">
+            <h5>忘记密码</h5>
+        </div>
+        <div class="theme">
+            <form>
+                <div class="form-group">
+                  <input type="text" class="form-control logtxt focu" id="name" placeholder="请输入邮箱手机号" name="tel" value=""/>
+                    <p id="mes1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                </div>
+                  <a class="btn btn-default" data-toggle="modal" data-target="#next">下一步</a>
+                  <p id="mes2" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+              </form>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="next">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">取消</span></button>
+            <h4 class="modal-title">安全验证</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+                
+                <div class="form-group verification">
+                  <label id="txtname">发送验证码</label>
+                  <input type="text" class="form-control" id="verificate" placeholder="请输入验证码" name="" value=""/>
+                      <input type="button" id="fbtain" value="发送" />
+                    <p id="mes" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p>
+                </div>
+                
+              </form>
+          </div>
+          <div class="modal-footer">
+            
+            <a class="btn btn-primary" onclick="forgetpa()">确认</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+        $(".focu").focus(function(){
+            $(this).css("border-bottom","1px solid #5d7ace")
+        })
+        $(".focu").blur(function(){
+            $(this).css("border-bottom","1px solid #ccc")
+        })
+        //验证手机邮箱
+        $("#name").change(function () {
+            var reg = /^1[34578]\d{9}$/;
+            var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (reg.test($("#name").val()) || emreg.test($("#name").val())) {
+                $("#mes1").html("");
+
+            } else {
+                $("#mes1").html("输入的邮箱或手机号码不符合规则");
+                return;
+            }
+
+        });
+        //获取手机邮箱验证码
+        $("#fbtain").click(function () {
+            var disabled = $("#fbtain").attr("disabled");
+            var name = $("#name").val();
+            var reg = /^1[34578]\d{9}$/;
+            var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            var verifi = $("#verificate").val();
+            if (disabled) {
+                return false;
+            }
+            if (reg.test(name)) {
+                $.ajax({
+                    type: "post",
+                    url: _API+"sms_send",
+                    data: { user_string: name, mobile_code: verifi ,type:'forget' },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        settime();
+                        layer_msg(data.message);
+
+                    }
+                });
+            } if (emreg.test(name)) {
+                $.ajax({
+                    type: "post",
+                    url: _API+"sms_mail",
+                    data: { user_string: name, email_code: verifi , type: 'forget'},
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        settime();
+                        layer_msg(data.message);
+
+                    }
+                });
+            }
+
+        });
+        var countdown = 60;
+        var generate_code = $("#fbtain");
+        function settime() {
+            if (countdown == 0) {
+                generate_code.attr("disabled", false);
+                generate_code.val("发送");
+                $("#fbtain").css('color', '#5890bd');
+                countdown = 60;
+                return false;
+            } else {
+                $("#fbtain").attr("disabled", true);
+                $("#fbtain").css('color', '#b6bfc4');
+                generate_code.val("重新发送(" + countdown + ")");
+                countdown--;
+            }
+            setTimeout(function () {
+                settime();
+            }, 1000);
+        }
+        //
+        function forgetpa() {
+            var names = $("#name").val();
+            var verify = $('#verificate').val();
+            var reg = /^1[34578]\d{9}$/;
+            var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (reg.test(names)) {
+                $.ajax({
+                    type: "post",
+                    url: _API+"user/check_mobile",
+                    data: { "mobile_code": verify },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.type == "ok") {
+                            layer_msg(data.message);
+                            window.location.href = "resetpass.html?user_string=" + names + "&" + "code=" + verify;
+                        } else {
+                            layer_msg(data.message);
+                        }
+                    }
+                });
+            } else if (emreg.test(names)) {
+                $.ajax({
+                    type: "post",
+                    url: _API+"user/check_email",
+                    data: { "email_code": verify },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.type == "ok") {
+                            layer_msg(data.message);
+                            window.location.href = "resetpass.html?user_string=" + names + "&" + "code=" + verify;
+                        } else {
+                            layer_msg(data.message);
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>投诉详情</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/swiper.jquery.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/vue.min.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+	    <script src="./lib/language_cookie.js"></script>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<header class="header">
+				<a class="back mt5" href="javascript:history.go(-1)">
+					
+				</a>
+				<h4 class="ftw ft16">Andrord用户反馈</h4>
+			</header>
+			<div class="header-space"></div>
+			<div class="nav ml12 mt20">
+				<div class="nav1 mt10 mb10">
+					<ul class="bgColor ftw ft14 ptb15" style="border-radius: 4px;">
+						<li class="ml12"><span class="c1">android3.5.2</span>
+							<sapn class="c2">{{List.create_time}}</sapn>
+						</li>
+						<li class="ml12 mt15">回复：{{List.reply_content}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var vue = new Vue({
+		el: '#app',
+		data: {
+			List: []
+		},
+		mounted: function() {
+			var self = this;
+			var id = getUrlParam("id");
+			var token = get_user_login();
+			$.ajax({
+				url: _API + "feedback/detail",
+				type: "POST",
+				dataType: "json",
+				async: true,
+				data: {
+					id: id
+				},
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function success(data) {
+					console.log(data)
+					self.List = data.message;
+					if (data.type == 'ok') {
+
+
+					}
+				}
+			});
+
+		},
+		methods: {
+
+		}
+	});
+
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg); //匹配目标参数
+		if (r != null) return unescape(r[2]);
+		return null; //返回参数值
+	}
+</script>

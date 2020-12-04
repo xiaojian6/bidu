@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>语言</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .lgList{
+            padding-left: 10px;
+        }
+        .lgList li{
+            border-bottom: 1px solid #020f19;
+            height: 50px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header header40 mainbg">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <div class="tc title white">语言</div>  
+    </header>
+    <div class="header-space"></div>
+    <div class="mainbox">
+        <ul class="lgList white">
+          <li data-lg="en">English</li>
+          <li data-lg="zh">简体中文</li>
+          <li data-lg="hk">繁体中文</li>
+          <li data-lg="jp">日本语</li>
+        </ul>
+
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+    <script src="./lib/language_cookie.js"></script>
+    <script>
+        $('.lgList>li').click(function(){
+            var lang=$(this).data('lg');
+            setLang2(lang);
+        })
+    </script>
+    <script>
+        
+    </script>
+</body>
+</html>

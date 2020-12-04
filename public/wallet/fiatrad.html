@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>法币交易</title>
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="static/css/fiatrad.css">
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script src="static/lib/bootstrap.min.js"></script>
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+    <link rel="stylesheet" href="static/css/common.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+</head>
+<body>
+    <header>
+        <div class="toptit mainbg">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+            <div class="fiat">
+                <a href="javascript:;" class="records"><img class="fiat1" src="static/images/fiat1.png" /></a>
+                <!-- <img src="static/images/fiat2.jpg" /> -->
+            </div>
+            <ul class="nav nav-tabs cointypes" role="tablist" >
+              <li role="presentation" class="active" data-type="sell"><a href="javascript:;"   >购买</a></li>
+              <li role="presentation"  data-type="buy" ><a href="javascript:;" >出售</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="fiatrad" class="mb50">
+        <div class="tab-content">
+          <div role="tabpanel"  >
+            <div class="fitab hide">
+                <ul class="fabi nav nav-tabs  flex alcenter" role="tablist">
+
+                </ul>
+            </div>
+              <div class="tab-content mainlist">
+                <div role="tabpanel"  >
+                    <ul>
+
+                    </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="common_footer">
+        <a href="index.html" ><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+        <a href="fiatrad.html" class="active"><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+	<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script>
+    <script src="static/javascripts/main.js"></script>
+    <script>
+        $(function(){
+            var currency_id,cointype,page=1;
+            $('.records').click(function(){
+                location.href='fiatrad_detail.html?id='+currency_id;
+            })
+            // 获取法币
+            initData({url:'/currency/list'},function(res){
+                var legal_list = [];
+                if(res.legal&&res.legal.length>0){
+                    for(var i = 0; i < res.legal.length; i++) {
+                        var cur_data = res.legal[i];
+                        // if (cur_data.show_legal == 1) {
+                            legal_list.push(cur_data);
+                        // }
+                    }
+                    renderList(legal_list);
+                }
+                console.log(res)
+            })
+            function renderList(data){
+                var html='';
+                for(var i in data){
+                    // if(data[i].name=='PB'){
+                        html+=` <li role="presentation" class="${i==2?'active':''}" data-id="${data[i].id}"><a href="#${data[i].name}" aria-controls="${data[i].name}" role="tab" data-toggle="tab">${data[i].name}</a></li>
+                        `
+                    // }
+                }
+                $('.fabi').html(html)
+                // eth币
+                currency_id=$('.fabi li.active').data('id');
+                console.log(currency_id)
+                getData('sell',1,currency_id)
+            }
+            // 获取数据列表
+
+            var type='sell';
+            function getData(type,page,cointype){
+                initDataToken({url:'/c2c_deal_platform',data:{type,page,currency_id:cointype}},function(res){
+                   if(res.data&&res.data.length>0){
+                       renderList2(res.data)
+                   }else{
+                       layer_msg('没有更多数据了...')
+                   }
+                })
+            }
+            // 购买出售切换
+
+            $('.cointypes li').click(function(){
+                $(this).addClass('active').siblings().removeClass('active')
+                $('.mainlist ul').html('')
+                var page=1
+                type=$(this).data('type');
+                currency_id=$('.fabi li.active').data('id');
+                if(type=='sell'){
+                    $('.layer_box .type_title').html('购买');
+                    $('.layer_box .tit_num').html('购买数量');
+              
+                    $('.layer_box .plac_number1').attr('placeholder','请输入欲购买法币总额');
+                    $('.layer_box .plac_number2').attr('placeholder','请输入欲购买数量');
+                 
+                    $('.layer_box .allIn').html('全部买入');
+
+                }else{
+                    $('.layer_box .type_title').html('出售')
+                    $('.layer_box .tit_num').html('出售数量');
+                  
+                    $('.layer_box .plac_number1').attr('placeholder','请输入欲出售法币总额');
+                    $('.layer_box .plac_number2').attr('placeholder','请输入欲出售数量');
+                  
+                    $('.layer_box .allIn').html('全部卖出');
+
+                }
+                console.log(page,type,currency_id)
+                getData(type,page,currency_id)
+
+
+            })
+            $('body').on('click','.fabi li',function(){
+                $('.mainlist ul').html('')
+                currency_id=$(this).data('id')
+                var page=1;
+                console.log(type,page,currency_id)
+                getData(type,page,currency_id)
+            })
+            function renderList2(data){
+                var html='';
+                for(var i in data){
+                var sellername=data[i].seller_name ||'无名'
+                    html+=` <li>
+                            <a href="fiatrad_shop.html?id=${data[i].seller_id}">
+                                <p>
+                                    <em>${sellername.substr(0,1)}</em>
+                                    <b class=''>${sellername}</b>
+                                </p>
+                            
+                            <div class='white_gray mt10 mb10 flex between alcenter'>
+                                <small>数量 ${data[i].surplus_number} ${data[i].currency_name}</small>
+                                <div>
+                                    <p class="color1 tr">单价</p>
+                                    <span>￥${data[i].price}</span>
+                                </div>
+                             </div>
+                            <img src="static/images/zhi.png" style="display:${data[i].way=='ali_pay'?'inline-block':'none'}" />
+                            <img src="static/images/chat.png" class="ml10" style="display:${data[i].way=='we_chat'?'inline-block':'none'}"/>
+                            <img src="static/images/card.png" class="ml10" style="display:${data[i].way=='bank'?'inline-block':'none'}"/>
+                            <div class="btn btn-default ${data[i].type=='sell'?'':'hidden'}" href="javascript:;"  data-type='sell' data-id='${data[i].id}'>购买</div>
+                            <div class="btn btn-default des ${data[i].type=='buy'?'':'hidden'}" href="javascript:;" data-type='buy' data-id='${data[i].id}'>出售</div>
+                            </a>
+                        </li>`
+                }
+               $('.mainlist ul').append(html)
+            }
+            $(window).scroll(function(){
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if(scrollTop + windowHeight == scrollHeight){
+                    page++;
+                    getData(type,page,currency_id);
+                }
+            })
+       
+            $('body').on('click','.mainlist .btn',function(){
+                var id=$(this).data('id');
+                layer_confirm('确认下单吗？',function(){
+                    initDataToken({url:'/c2c/do_legal_deal',type:'post',data:{id}},function(res){
+                        layer_msg(res.msg)
+                        setTimeout(() => {
+                            if(res.data.type=='sell'){
+                                location.href="fiatrad_pay.html?id="+res.data.id;
+                            }else{
+                                location.href='fiatrad_pay_cancel_buy.html?id='+res.data.id;
+                            }
+                        }, 1500);
+                    })
+                })
+                
+                return false;
+                // total
+            })
+           
+            // 切换
+
+            $('.tab_con .item').click(function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                currentTab=$(this).data('tab');
+                $('.tab_content .'+currentTab).show().siblings().hide();
+                var val=$('.tab_content .'+currentTab).find('.num').val() || 0;
+                console.log(currentTab,val)
+                if(currentTab=='legal'){
+                    $('.total').html("￥"+(val-0).toFixed(2))
+                }else{
+                    $('.total').html("￥"+(val*price).toFixed(2))
+                }
+                // $('.total').html('0.00');
+            })
+           
+        })
+    </script>
+</body>
+</html>

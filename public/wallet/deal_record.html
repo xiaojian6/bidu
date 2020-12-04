@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>我的承兑</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/css/imtoken/deal_record.css" />
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<body>
+        <div id="user_info" ></div>
+
+    <div class="header">
+        <i class="back backPage"></i> <h5>我的承兑</h5>
+    </div>
+    <style>
+      .tests{width: 100%;display: flex;justify-content: space-around;position: fixed;top: 1.2rem;left: 0;z-index: 99;height: 1.3rem;align-items: center; padding: .2rem;background: #fff;}
+      .tests li{text-align: center;list-style: none;padding: .2rem;}
+      .on{color: #2EBEC9!important;border-bottom: 1px solid #2EBEC9;}
+      #con{
+          padding: 0;
+      }
+      .record_box li{
+          list-style: none;
+          padding: .2rem .5rem;
+      }
+    </style>
+    <!-- <ul class="tests">
+        <li class="on">充值记录</li>
+        <li>提现记录</li>
+    </ul> -->
+    <div class="record_box" style="height: 2.5rem;padding-top: 1.3rem;">
+        <!-- <div id="record" class="record">
+            <div class="hover" data-id="buy">充值记录</div>
+            <div data-id="sell">提现记录</div>
+        </div> -->
+        <ul style="height: 1.3rem; display: flex;align-items: center;justify-content: space-around;background-color: #fff;">
+            <li class="hover rec-item" data-id="buy">充值记录</li>
+            <li class="rec-item" data-id="sell">提现记录</li>
+        </ul>
+    </div>
+    
+    <ul id="con">
+        <li class="show buy" >
+            <!-- <div class="record-box">
+                <div class="record-l">
+                    <p>18200.00000&nbsp;CNY</p>
+                    <p>供应商ID&nbsp;&nbsp;AAABBBCCC</p>
+                    <p>完成</p>
+                </div>
+                <div class="record-r">
+                    <p>充值</p>
+                    <p>2018/7/24/16:55:45</p>
+                </div>
+            </div>
+            <div class="record-box">
+                <div class="record-l">
+                    <p>18200.00000&nbsp;CNY</p>
+                    <p>供应商ID&nbsp;&nbsp;AAABBBCCC</p>
+                    <p>完成</p>
+                </div>
+                <div class="record-r">
+                    <p>充值</p>
+                    <p>2018/7/24/16:55:45</p>
+                </div>
+            </div>
+            <div class="record-box">
+                <div class="record-l">
+                    <p>18200.00000&nbsp;CNY</p>
+                    <p>供应商ID&nbsp;&nbsp;AAABBBCCC</p>
+                    <p>完成</p>
+                </div>
+                <div class="record-r">
+                    <p>充值</p>
+                    <p>2018/7/24/16:55:45</p>
+                </div>
+            </div> -->
+        </li>
+        <li class="show sell" style="display: none;" >
+            
+            <!-- <div class="record-box">
+                <div class="record-l">
+                    <p>18200.00000&nbsp;CNY</p>
+                    <p>供应商ID&nbsp;&nbsp;AAABBBCCC</p>
+                    <p>完成</p>
+                </div>
+                <div class="record-r">
+                    <p>提现</p>
+                    <p>2018/7/24/16:55:45</p>
+                </div>
+            </div> -->
+        </li>
+    </ul>
+    <div style="padding-bottom:1.5rem"></div>
+    <div class="common_footer">
+            <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+            <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+            	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+            <a href="fiatrad.html"  class="active" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+            <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+        </div>
+	    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+	    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	
+        <script type="text/javascript" src="static/javascripts/deal_record.js"></script>
+        <script>
+     
+        </script>
+</body>
+
+</html>

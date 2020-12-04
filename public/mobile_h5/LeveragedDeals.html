@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/LeveragedDeals.css" />
+	<link rel="stylesheet" type="text/css" href="css/footer.css" />
+</head>
+
+<body class="bgColor">
+	<div id="app" v-cloak>
+		<div id="header" class="bgColor">
+			<div class="header bgColor">
+				<p class="pull-left sideOpen">
+					<img class="mt10 leval-header-img" src="images/list.png" />
+					<span class="trade-name ftw"></span>
+				</p>
+				<p class="pull-right right">
+					<img class="lever-detail" src="images/datamap.png" alt="">
+					<img class="recordList" src="images/record1.png" alt="">
+				</p>
+			</div>
+			<div class="header-center bgColor">
+				<div>
+					<span class="legal_title active place" data-localize="deals.leverorder">合约下单</span>
+					<span class="currency_title positions" data-localize="deals.leverposition">合约持仓</span>
+				</div>
+			</div>
+			<div class="header-spaces"></div>
+			<!-- <ul class="mt10 mb10">
+				<li class="text-center">
+					<strong class="use_legal_num">--</strong>
+					<span class="mt5">可用<span class="use_legal" style="display:inline;"></span></span>
+				</li>
+				<li class="text-center">
+					<strong class="use_currency_num">--</strong>
+					<span class="mt5">可用<span class="use_currency" style="display:inline;"></span></span>
+				</li>
+			</ul> -->
+		</div>
+		<div id="place">
+			<div id="data" class="bgColor pb10 ft12">
+				<div class="pull-left active">
+					<div class="deal ft14">
+						<span class="pull-left buy business">
+							<a data-localize="transaction.buy">买入</a>
+							<em></em>
+						</span>
+						<span class="sell business">
+							<a data-localize="transaction.sell">卖出</a>
+						</span>
+					</div>
+					<div class="select-price clearfix ft14">
+						<span class="fl active" data-id="1" data-localize="transaction.marketprice">市价</span>
+						<span class="fr" data-id="0" data-localize="transaction.limit">限价</span>
+					</div>
+					<div class="control1">
+						<input type="text" class="white_gray" data-localize="deals.you" value="以当前最优价格交易" disabled>
+					</div>
+					<div class="control hide">
+						<input type="number" data-localize="deals.inputprice" placeholder="请输入价格">
+					</div>
+					<div class="LimitedPrice">
+						<p class="ftw" style="font-size:14px;" data-localize="deals.selectmul">请选择倍数</p>
+						<p class="multiple_sel ftw bgColor multiples">
+							<!-- <option v-for="item in multList">{{item}}</option> -->
+						</p>
+						<div class="num mt5 ftw">
+							<p>
+								<a href="javascript:;"  data-localize="deals.onehand">1手等于</a>
+								<b class="share-num" style="font-weight:normal;"></b>
+								<b class="share-name" style="font-weight:normal;"></b>
+							</p>
+							<!-- <h5 style="margin-top: 5px;" data-localize="deals.hand">交易手数</h5> -->
+							<!-- <span data-id="1">1手</span>
+							<span data-id="3">3手</span>
+							<span data-id="5">5手</span>
+							<span data-id="10">10手</span> -->
+						</div>
+					</div>
+					<div class="lever-total ftw">
+						<p class="clearfix">
+							<span class="fl" data-localize="deals.marketval">合约市值</span>
+							<span class="market-value fr">0.0000</span>
+						</p>
+						<p class="clearfix mt5">
+							<span class="fl" data-localize="deals.bond">保证金</span>
+							<span class="bond fr">0.0000</span>
+						</p>
+						<p class="clearfix mt5">
+							<span class="fl" data-localize="deals.service">交易服务费</span>
+							<span class="transaction-fee fr">0.0000</span>
+						</p>
+						
+					</div>
+					    <p class="ftw mt5">
+							<span data-localize="deals.balance">余额：</span>
+							<span class="use_legal_num">0.0000</span>	
+						</p>
+					<div class="transactionAmount mb10">
+						<button class="buy_sell" >
+							<span data-localize="transaction.buy"></span>
+							<span data-localize="deals.makemore">（做多）</span>
+							<span class="legal_title"></span>
+						</button>
+					</div>
+				</div>
+
+				<div class="pull-right active1 ftw">
+					<!--卖出-->
+					<div class="ft10color1">
+						<div class="flex alcenter around pb10  ft12">
+							<div class="flex1 tl" data-localize="transaction.handicap">盘口</div>
+							<div class="flex1 tr mr5" data-localize="transaction.price">价格</div>
+							<div class="flex1 tr" data-localize="transaction.number">数量</div>
+						</div>
+						<div>
+							<div class="sell_out">
+
+							</div>
+							<div style="padding-left: 20px">
+								<p style="font-size:16px;color: #de5959;" class="new_price"></p>
+							    <p class="gray">≈<span class="cny_price"></span> CNY</p>
+							</div>
+						</div>
+					</div>
+					<!--买入-->
+					<div class="ft10color1">
+						<div class="buyIn">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mask1">
+				<div id="Limited">
+					<ul>
+						<li></li>
+						<li class="cancel" data-localize="transaction.cancel">取消</li>
+					</ul>
+				</div>
+			</div>
+			<div style="height:10px;background-color:#061623;"></div>
+			<div id="entrust" style="margin-bottom: 50px;" class="ftw bgColor mt10">
+				<div>
+					<h3 class="pull-left " data-localize="deals.current">
+						当前委托
+					</h3>
+					<p class="pull-right filtrate all">
+						<img src="images/record1.png" />
+						<span data-localize="deals.all">
+							全部
+						</span>
+					</p>
+					<ul class="list_ul" style="margin-top:35px;">
+						<li class="ft12 clearfix">
+							<span class="width1 tc fl" data-localize="deals.type">类型</span>
+							<span class="width2 tc fl" data-localize="transaction.time">时间</span>
+							<span class="width2 tc fl" data-localize="transaction.price">价格</span>
+							<span class="width2 tc fl" data-localize="transaction.turnover">交易量</span>
+							<span class="width1 tc fl" data-localize="transaction.option">操作</span>
+						</li>
+						<div class="conplete_list color1 ft12" style="padding: 10px 0;">
+
+						</div>
+					</ul>
+
+				</div>
+				<div class="no_record" style="display:none;">
+					<p>
+						<img src="images/anonymous.png" />
+					</p>
+					<p data-localize="transaction.nodata">暂无记录</p>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="sideColumn" class="ftw bgColor">
+			<h4>
+				<!-- <span class="side">HBG</span> -->
+				<img src="images/arrows.png" class="pull-right sideclose" />
+			</h4>
+			<ol class="tabs">
+			</ol>
+			<ul class="ul" style="display:block">
+
+			</ul>
+		</div>
+
+		<!-- 持仓列表  -->
+		<div class="position" style="display:none;">
+			<h4 class="position-name ftw bgColor"></h4>
+			<p class='fengxian' data-localize="deals.risk">风险率：</p>
+			<ul class="position-list ftw">
+
+			</ul>
+			<button style="text-align:center;background-color: rgba(0, 0, 0, 0);border: none;outline: none;width: 100%;" class="more ftw mt15" data-localize="transaction.getmore">加载更多</button>
+			<div class="no_records" style="display:none;">
+				<p>
+					<img src="images/anonymous.png" />
+				</p>
+				<p data-localize="transaction.nodata">暂无记录</p>
+			</div>
+		</div>
+	</div>
+	<!-- 一键平仓 -->
+	<div class="stop-trade clearfix">
+		 <p class="fl"><span data-localize="deals.total">持仓总盈亏：</span><span class="total-pro pl5"></span></p>
+		 <button class="fr total-btn" type="button" data-localize="deals.onekey">一键平仓</button>
+	</div>
+	<!-- 设置止盈止损弹窗 -->
+<div style="height:50px;"></div>
+<footer>
+	<a href="index.html">
+		<div>
+			<p class="img img0"></p>
+			<span data-localize="footer.home">首页</span>
+		</div>
+	</a>
+	<a href="market.html">
+		<div>
+			<p class="img img1"></p>
+			<span data-localize="footer.quotation">行情</span>
+		</div>
+	</a>
+	<!-- <a href="fiatrad.html">
+		<div>
+			<p class="img img2"></p>
+			<span>法币交易</span>
+		</div>
+	</a> -->
+	<a href="transaction.html">
+		<div>
+			<p class="img img2"></p>
+			<span data-localize="footer.currency">币币交易</span>
+		</div>
+	</a>
+	<a href="javascripts:;" class="select">
+		<div>
+			<p class="img img3"></p>
+			<span data-localize="footer.lever">杠杆交易</span>
+		</div>
+	</a>
+	<a href="assets.html">
+		<div>
+			<p class="img img4"></p>
+			<span data-localize="footer.assets">资产</span>
+		</div>
+	</a>
+</footer>
+
+	<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="lib/socket.io.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+	<script type="text/javascript" src="lib/layer_mobile/layer.js"></script>
+	<script type="text/javascript" src="lib/vue.min.js"></script>
+	<script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+	<script type="text/javascript" src="javascripts/main.js"></script>
+	<script type="text/javascript" src="javascripts/LeveragedDeals.js"></script>
+	<script type="text/javascript" src="javascripts/LeveragedDeal.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>团队介绍</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/swiper-3.4.2.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+</head>
+<style>
+	.team_item li{
+		display: flex;
+		padding:1.2rem 1rem 1rem 1rem;
+	}
+	.team_item li:nth-child(2n+1){
+		background:#fff;
+		color:#333;
+	}
+	.team_item li:nth-child(2n){
+		    flex-flow: row-reverse;
+			color:#fff
+	}
+	.team_item li img{
+		width:80px;
+		height:80px;
+		border-radius: 50%;
+	}
+	.teams_info{
+		font-size:14px;
+		margin-left:1rem;
+		flex:1;
+	}
+</style>
+<body style="background:#23262e;">
+	<header class="borderB" style="background: #23262e;">
+		<!--<i class="iconfont icon-jianzuo font24  fontc_6 backPage"></i>-->
+		<h1 class="fontc_f font18">团队介绍</h1>
+	</header>
+	<div style="margin-bottom:4rem;" class="mgthead">
+		<ul class="team_item">
+			<li>
+				<img src="static/images/qianbao/1.png" alt="" width="80" height="80">
+				<div class="teams_info">
+					<p class="font18 fontc_qbmine">Amit Sthi</p>
+					<p >印度Amit Sthi，毕业于印度理工学院，从事多年的信息化处理工作，曾就职于印度著名的信实工业公司。</p>
+				</div>
+			</li>
+			<li>
+				<img src="static/images/qianbao/2.png" alt="" style="width:5rem;height:5rem;">
+				<div class="teams_info">
+					<p class="font18 fontc_qbmine">Laurent Rouault</p>
+					<p >法国Laurent Rouault，毕业于勒芒大学，曾就职于阿尔卡特阿斯通公司，有着丰富的咨询经验。     </p>
+				</div>
+			</li>
+			<li>
+				<img src="static/images/qianbao/3.png" alt="" style="width:5rem;height:5rem;">
+				<div class="teams_info">
+					<p class="font18 fontc_qbmine">Jean christo</p>
+					<p >俄国Jean christo,毕业于圣彼得堡大学，曾就业于著名的电商Ozon公司亚州区域高管，有着多年且丰富的零售经验。  </p>
+				</div>
+			</li>
+			<li>
+				<img src="static/images/qianbao/4.png" alt="" style="width:5rem;height:5rem;">
+				<div class="teams_info">
+					<p class="font18 fontc_qbmine">Raymond Konhon</p>
+					<p >德国Raymond Konhon,毕业于慕尼黑工业大学，曾于SAp公司从事软件开发与信息技术咨询。</p>
+				</div>
+			</li>
+			
+		</ul>
+	</div>
+	<footer class="qb_foot" style="background:#2d313b;border-top:1px solid #2d313b;">
+		<a href="/users/qb_index" >
+			<i class="iconfont icon-shouye font24"></i>
+			<span>首页</span>
+		</a>
+		<a href="index.html"  >
+			<i class="iconfont icon-wallet font24"></i>
+			<span>钱包</span>
+		</a>
+		<a href="/users/qb_jishu">
+			<i class="iconfont icon-xiangmu font24"></i>
+			<span>技术</span>
+		</a>
+		<a href="/users/qb_team"   class="qbact">
+			<i class="iconfont icon-duoren font24"></i>
+			<span>团队</span>
+		</a>
+	</footer>
+
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/javascripts/swiper-3.4.2.min.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script> 
+		var mySwiper = new Swiper('.swiper-container', {
+			// loop:true,
+			autoplay:3000,
+			pagination : '.swiper-pagination'
+			// paginationType : 'fraction'
+		})
+</script>
+</body>
+</html>

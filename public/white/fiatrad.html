@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>法币交易</title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/fiatrad.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <header>
+        <div class="toptit">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+            <div class="fiat">
+                <a href="javascript:;" class="records"><img class="fiat1" src="images/fiat1.jpg" /></a> 
+                <img src="images/fiat2.jpg" />
+            </div>
+            <ul class="nav nav-tabs cointypes" role="tablist" >
+              <li role="presentation" class="active" data-type="sell"><a href="javascript:;"   >购买</a></li>
+              <li role="presentation"  data-type="buy" ><a href="javascript:;" >出售</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="fiatrad">
+        <div class="tab-content">
+          <div role="tabpanel"  >
+            <div class="fitab">
+                <ul class="fabi nav nav-tabs  flex alcenter" role="tablist">
+                
+                </ul>
+            </div>
+              <div class="tab-content mainlist">
+                <div role="tabpanel"  >
+                    <ul>
+                       
+                    </ul>
+                </div>
+               
+                
+              </div>
+          </div>
+         
+        </div>
+    </div>
+    <style>
+		.layer_opeation	{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background-color: #fff;
+        }
+        .all{
+            right: 10px;
+            top:0;
+            height: 100%;
+        }
+        .inNum{
+            border:1px solid #C6D0D6;
+        }
+        .tab_con{
+            width: 45%;
+        }
+        .active{
+            color: #5282D0;
+            border-bottom: 1px solid #5282D0;
+        }
+        input::placeholder{
+            color: #BEC9D0;
+        }
+        .unlegal{
+            display: none;
+        }
+    </style>
+    <div class="layer_box">
+        <div class="layer_opeation pb10">
+            <div class="op_content">
+                <div class="op_header flex between bgGray plr10 ptb15">
+                    <div class="">
+                        <p class="ft20 black "><span class="type_title">购买</span> <span class="cointype">USDT</span>  </p>
+                        <P class="mt15">单价<span class="blue price">￥6.88</span></P>
+                    </div>
+                    <div class="tc"><img src="images/coin_type.png" alt="" class="coin_logo"></div>
+                </div>
+                <div class="op_con plr10 bgWhite">
+                    <div class="tab mb10 flex mt10">
+                        <div class="ft14 pr10 tab_con flex bdb pb5">
+                            <div class="color1 item active mr20" data-tab='legal'>CNY交易</div>
+                            <div class="color1 item tit_num" data-tab='unlegal'>购买数量</div>
+                        </div>
+                    </div>
+                    <div class="tab_content">
+                        <div class="mt10 legal">
+                            <div class="reltive inNum plr10 mb10">
+                                <input type="text" class="block ptb15 num plac_number1" placeholder="请输入欲购买法币总额" >
+                                <div class="abstrot all ptb15 ft14">
+                                    <span class="black pr10 bdr">CNY</span>
+                                    <span class="blue pl10 allIn" >全部买入</span>
+                                </div>
+                            </div>
+                            <p class="color1">限额<span class="limit">￥100.00-99591.00</span></p>
+                            <!-- <p class="ft10 tr color1 mb10">实际购买 <span class="actual">0.0000 </span><span class="cointype"></span> </p> -->
+                            <div class="ft14 flex alcenter between mt10">
+                                <span class="color1 ">交易总额</span>
+                                <span class="blue ft18 total" >￥0.00</span>
+                            </div>
+                        </div>
+                        <div class="mt10 unlegal">
+                                <div class="reltive inNum plr10 mb10">
+                                    <input type="text" class="block ptb15 num plac_number2" placeholder="请输入要购买数量" >
+                                    <div class="abstrot all ptb15 ft14">
+                                        <span class="black pr10 bdr cointype"></span>
+                                        <span class="blue pl10 allIn" >全部买入</span>
+                                    </div>
+                                </div>
+                                <p class="color1">限额<span class="limit">￥100.00-99591.00</span></p>
+                                <!-- <p class="ft10 tr color1 mb10">实际购买 <span class="actual">0.0000 </span><span class="cointype"></span> </p> -->
+                                <div class="ft14 flex alcenter between mt10">
+                                    <span class="color1 ">交易总额</span>
+                                    <span class="blue ft18 total" >￥0.00</span>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex between alcenter mt10 white plr10">
+                <div class="bgLinear ptb15 flex1 tc">
+                    <span class="cutdown">60</span> s自动取消
+                </div>
+                <div class="bgGray2 ml15 ptb15 flex1 tc doit" data-id="">下单</div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script>
+        $(function(){
+            var currency_id,cointype;
+            $('.records').click(function(){
+                location.href='fiatrad_detail.html?id='+currency_id;
+            })
+            // 获取法币
+            initData({url:'currency/list'},function(res){
+                if(res.legal&&res.legal.length>0){
+                    renderList(res.legal);
+                }
+                console.log(res)
+            })
+            function renderList(data){
+                var html='';
+                for(var i in data){
+                    html+=` <li role="presentation" class="${i==0?'active':''}" data-id="${data[i].id}"><a href="#${data[i].name}" aria-controls="${data[i].name}" role="tab" data-toggle="tab">${data[i].name}</a></li>
+                    `
+                }
+                $('.fabi').html(html)
+                currency_id=$('.fabi li').eq(0).data('id');
+                console.log(currency_id)
+                getData('sell',1,currency_id)
+            }
+            // 获取数据列表
+          
+            var type='sell';
+            function getData(type,page,cointype){
+                initDataToken({url:'legal_deal_platform',data:{type,page,currency_id:cointype}},function(res){
+                   if(res.data&&res.data.length>0){
+                       renderList2(res.data)
+                   }else{
+                       layer_msg('没有更多数据了...')
+                   }
+                })
+            }
+            // 购买出售切换
+
+            $('.cointypes li').click(function(){
+                $(this).addClass('active').siblings().removeClass('active')
+                $('.mainlist ul').html('')
+                var page=1
+                type=$(this).data('type');
+                currency_id=$('.fabi li.active').data('id');
+                if(type=='sell'){
+                    $('.layer_box .type_title').html('购买');
+                    $('.layer_box .tit_num').html('购买数量');
+                    $('.layer_box .plac_number1').attr('placeholder','请输入欲购买法币总额');
+                    $('.layer_box .plac_number2').attr('placeholder','请输入欲购买数量');
+                    $('.layer_box .allIn').html('全部买入');
+
+                }else{
+                    $('.layer_box .type_title').html('出售')
+                    $('.layer_box .tit_num').html('出售数量');
+                    $('.layer_box .plac_number1').attr('placeholder','请输入欲出售法币总额');
+                    $('.layer_box .plac_number2').attr('placeholder','请输入欲出售数量');
+                    $('.layer_box .allIn').html('全部卖出');
+
+                }
+                console.log(page,type,currency_id)
+                getData(type,page,currency_id)
+
+               
+            })
+            $('body').on('click','.fabi li',function(){
+                $('.mainlist ul').html('')
+                currency_id=$(this).data('id')
+                page=1;
+                console.log(type,page,currency_id)
+                getData(type,page,currency_id)
+            })
+            function renderList2(data){
+                var html='';
+                for(var i in data){
+                    html+=` <li>
+                            <a href="fiatrad_shop.html?id=${data[i].seller_id}"><p><em>${data[i].seller_name.substr(0,1)}</em><b>${data[i].seller_name}</b><small class="fr">1690 | 99%</small></p>
+                            <small class="fr">单价</small>
+                            <p><small>数量 ${data[i].surplus_number} BTC<br />限额 ￥${data[i].limitation.min}-￥${data[i].limitation.max}</small><span>￥${data[i].price}</span></p>
+                            <img src="images/zhi.png" style="display:${data[i].way=='ali_pay'?'inline-block':'none'}" />
+                            <img src="images/wechat.png" class="ml10" style="display:${data[i].way=='we_chat'?'inline-block':'none'}"/>
+                            <img src="images/card.png" class="ml10" style="display:${data[i].way=='bank'?'inline-block':'none'}"/>
+                            <div class="btn btn-default ${data[i].type=='sell'?'':'hidden'}" href="javascript:;"  data-type='sell' data-id='${data[i].id}'>购买</div>
+                            <div class="btn btn-default des ${data[i].type=='buy'?'':'hidden'}" href="javascript:;" data-type='buy' data-id='${data[i].id}'>出售</div>
+                            </a>
+                        </li>`
+                }
+               $('.mainlist ul').append(html)
+            }
+            $(window).scroll(function(){
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if(scrollTop + windowHeight == scrollHeight){ 
+                    page++;
+                    getData(type,page,currency_id);
+                }
+            }) 
+            var price,min,max,surplus_number,currentTab='legal';
+            var time=60;
+            var interId;
+            $('body').on('click','.mainlist .btn',function(){
+                var id=$(this).data('id');
+                $('.layer_box').show();
+                // 倒计时
+                interId=setInterval(function(){
+                    time--;
+                    $('.cutdown').html(time);
+                    if(time<0){
+                        clearInterval(interId)
+                        $('.layer_box').hide();
+                        time=60;
+                        $('.cutdown').html(time);
+                    }
+                },1000)
+                console.log(id)
+                initDataToken({url:'legal_deal_info',data:{id}},function(data){
+                    price=data.price;
+                    min=data.limitation.min;
+                    max=data.limitation.max;
+                    surplus_number=data.surplus_number;
+                    $('.doit').data('id',data.id)
+                    $('.price').html(data.price);
+                    $('.cointype').html(data.currency_name);
+                    $('.limit').html('￥'+data.limitation.min+'-'+data.limitation.max)
+                })
+                return false;
+                // total
+            })
+            // 下单
+            $('.doit').click(function(){
+                var id=$(this).data('id');
+                var means='money';
+                if(currentTab=='legal'){
+                    num=$('.legal .num').val();
+                    means='money';
+                    if(!num){
+                        return layer_msg('请输入欲购买法币总额')
+                    }
+                }else{
+                    means='number';
+                    num=$('.unlegal .num').val();
+                    if(!num){
+                        return layer_msg('请输入欲购买数量')
+                    }
+                }
+                initDataToken({url:'do_legal_deal',data:{id,means,value:num},type:'post'},function(res){
+                    layer_msg(res)
+                    setTimeout(function(){
+                        location.href='fiatrad_detail.html'
+                    },1500)
+                })
+            })
+            // 全部买入
+            $('.allIn').click(function(){
+                if(currentTab=='legal'){
+                    $(this).parents('.inNum').find('.num').val(max);
+                    $('.total').html('￥'+max.toFixed(2))
+                }else{
+                    $(this).parents('.inNum').find('.num').val(surplus_number);
+                    $('.total').html('￥'+(price*surplus_number).toFixed(2))
+                }
+               
+            })
+            // 切换
+
+            $('.tab_con .item').click(function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                currentTab=$(this).data('tab');
+                $('.tab_content .'+currentTab).show().siblings().hide();
+                var val=$('.tab_content .'+currentTab).find('.num').val() || 0;
+                console.log(currentTab,val)
+                if(currentTab=='legal'){
+                    $('.total').html("￥"+(val-0).toFixed(2))
+                }else{
+                    $('.total').html("￥"+(val*price).toFixed(2))
+                }
+                // $('.total').html('0.00');
+            })
+            // 输入
+            $('.num').keydown(function(e){
+                var code=e.keyCode;
+                if(!((code >=48 && code<= 57) || (code>=96 && code<=105) || code==8 || code==46 || code==110 ||code==190)){   
+                   return false; 
+                }
+            })
+            $('.num').keyup(function(){
+                if(currentTab=='legal'){
+                    var value=($(this).val()-0).toFixed(2)
+                    $(this).parents('.inNum').siblings().find('.total').html("￥"+value);
+                }else{
+                    $('.op_con .total').html( '￥'+($(this).val()*$('.op_header .price').html()-0).toFixed(2));
+                }
+                
+            })
+            $('.layer_box').click(function(){
+                $(this).hide();
+                time=60;
+                $('.cutdown').html(time);
+                clearInterval(interId)
+            })
+            $('.layer_opeation').click(function(){
+                return false;
+            })
+            
+        })
+    </script>
+</body>
+</html>

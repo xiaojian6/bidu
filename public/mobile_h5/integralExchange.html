@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>积分兑换BEAU平台</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .mainbox{padding: 10px;}
+        .topbox{height: 150px;border-radius: 5px;padding-left: 0px;background-image: linear-gradient(90deg, #5887D3,#6696E5);padding: 10px;}
+        .less{padding-top: 10px;}
+        .number{font-size: 24px;}
+        .numbox{width: 100%;padding: 0 10px;border-radius: 4px;}
+        .inputs{height: 50px;}
+        .submit{width:100%;height: 40px;border-radius: 4px;background:#5887D3;margin-top: 80px;}
+        .go{position: absolute;right: 12px;display: block;top: 0px;}
+        .gos{right: 45px;}
+        .red{color: #ce3939}
+        .choose li{width: 25%;border: 1px solid #1a2a46;border-radius: 5px;padding: 10px;margin-bottom: 10px;margin-right: 10px;}
+        .select{background:#5887D3;border: 1px solid #5887D3; }
+        .inNum {border: 1px solid #2c425f;}
+    </style>
+</head>
+<body>
+    <header class="header header40 mainbg">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <div class="tc title white" data-localize="jc.title">积分兑换BEAU平台</div>  
+        <!-- <a href="bindInfo.html" class="white go gos" data-localize="jc.bind">绑定账号</a> -->
+        <a href="https://app.beauglobal.com" class="white go gos blue" data-localize="jc.gotd">去交易</a>
+        <a href="integral_record.html" class="white go">
+            <img src="images/record1.png" alt="" class="recordList mt10" style="width:20px">
+        </a> 
+    </header>
+    <div class="header-space"></div>
+    <ul class="mainbox">
+        <div class="topbox white ft12">
+            <div>
+                <p class="mt10 ft18 number">--</p>
+                <p class="less ft14" data-localize="jc.balance">JC余额</p>
+            </div>
+            <p class="mt10">
+                <span data-localize="jc.cannum">可用JC数量： </span>
+                <span class="canuse">--</span>
+            </p>
+            <!-- <p class="mt5">
+                <span>积分价值： </span>
+                <span class="jcPrice">--</span>
+            </p> -->
+            <p class="mt5">
+                <span data-localize="jc.new">BEAU最新价： </span>
+                <span class="mkPrice">--</span>
+            </p>
+        </div>
+        <!-- <div class="numbox flex alcenter mainbg mt15 white">
+            <span class="exnum">转出地址：</span>
+            <input type="number" class="flex1 pl10 inputs address" placeholder="请输入手机号">
+        </div> -->
+        <div class="numbox flex alcenter mainbg mt15 white">
+            <span class="exnum" data-localize="jc.exnum">兑换数量 ：</span>
+            <input type="number" class="flex1 pl10 inputs numbers" id="numbers" placeholder="请输入JC数量 " data-localize="jc.pnum">
+        </div>
+        <div class="flex mt5 ft12 red">
+            <!-- <p>
+                <span>费率:</span> 
+                <span class="rate">0.00</span>
+            </p>
+            <p class="ml10">
+                <span>手续费:≈</span> 
+                <span class="ratevom">0.00</span>
+            </p> -->
+            <p class="ml10">
+                <span data-localize="jc.canex">可兑换BEAU数量:≈</span> 
+                <span class="dnum">0.00</span>
+            </p>
+        </div>
+        <ul class="mt10 flex wrap choose tc white">
+            <li>
+                <p>100</p>
+            </li>
+            <li>
+                <p>200</p>
+            </li>
+            <li>
+                <p>300</p>
+            </li>
+        </ul>
+
+        <input type="button" value="立即兑换" class="white submit" data-localize="jc.exnow">
+
+    </div>
+    <!-- <div class="layer_box_pwd" style="z-index: 100000">
+        <div class="layer_opeation2 pb10 bgColor mauto  ">
+            <div class="op_header maincolor plr10 ptb15 white">
+                <p class="ft20 tc" data-localize="fat.pwd">交易密码</p>
+            </div>
+            <div class="plr20 ptb20">
+                <div class="flex alcenter mb20">
+                    <p class="color1" data-localize="fat.ppwd">请输入交易密码</p>
+                    <input type="password" name="password" class="password  ptb10 pl10 inNum ml10 radius4 flex1">
+                </div>
+                <div class="bgLinearblue  ptb10 flex1 tc confirm_doit radius4 white" data-localize="fat.sure">确认下单</div>
+            </div>
+        </div>
+    </div> -->
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script>
+        var token = get_user_login2();
+        var number=0;//积分余额
+        var rate=0;//手续费率
+        var canuse=0;//可用积分余额
+        var jcPrice=0;//积分价值
+        var mkPrice=0;//兑换价格
+        var difference=0;//差值
+        var dnum=0;//可兑换代币数量
+        var numberses;
+        getnum();
+        $('input[type=password]').blur(function(){
+            setTimeout(function(){
+                document.body.scrollTop = document.body.scrollHeight;
+            },300);
+        })
+        function getnum(){
+            $.ajax({
+                url: _API + "jc/info",
+                type: "GET",
+                dataType: "json",
+                async: true,
+                beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                },
+                success: function (res) {
+                    if (res.type == 'ok') {
+                        $('.number').text(res.message.jc_integral);
+                        $('.rate').text((res.message.jc_exchange_fee-0)*100+'%')
+                        $('.canuse').text(res.message.free_jc_integral);
+                        $('.jcPrice').text('1RM='+res.message.jc_price+'$')
+                        $('.mkPrice').text('$'+((res.message.market_price-0)+(res.message.jc_price_difference-0)).toFixed(4))
+                        number = res.message.jc_integral-0;
+                        rate = res.message.jc_exchange_fee-0;
+                        canuse = res.message.free_jc_integral-0;
+                        jcPrice = res.message.jc_price-0;
+                        difference = res.message.jc_price_difference-0;
+                        mkPrice = res.message.market_price-0+difference;
+                        console.log(mkPrice)
+                       
+                    } else {
+                        layer_msg(res.message);
+                        // setTimeout(function(){
+                        //     location.href='bindInfo.html'
+                        // },2000)
+                    }
+                }
+            });
+        //     number=500;
+        //     rate=10
+        //     $('.number').text(number);
+        //     $('.rate').text(rate+'%')
+        }
+        
+        $('#numbers').keyup(function(){
+            $('.choose>li').removeClass('select');
+            var numbers = Number($('.numbers').val());
+            var vol=(numbers*rate).toFixed(2);
+            dnum=(numbers*jcPrice/mkPrice).toFixed(2)
+            $('.ratevom').text(vol);
+            $('.dnum').text(dnum)
+            eqal(numbers);
+            
+        })
+        function eqal(num){
+            $(".choose>li").each(function(index,item){
+                if(Number($(item).find('p').text())==num){
+                    $(item).addClass('select');
+                }
+            });
+        }
+        $('.choose').on('click','li',function(){
+            $(this).addClass('select').siblings().removeClass('select');
+            var numbers = Number($(this).text());
+            var vol=(numbers*rate).toFixed(2);
+            dnum=(numbers*jcPrice/mkPrice).toFixed(2)
+            $('.numbers').val(Number($(this).text()))
+            $('.ratevom').text(vol);
+            $('.dnum').text(dnum);
+        })
+        $('.submit').click(function(){
+            var numbers = $('.numbers').val();
+            if(numbers==''||numbers<=0){
+              return layer_msg(ptnum);
+            }
+            // if(numbers>canuse){
+            //   return layer_msg('可用积分数量不足'); 
+            // }
+            numberses=numbers;
+            // $('.layer_box_pwd').show();
+            layer_loading();
+            $.ajax({
+                type: 'POST',
+                url: _API + 'jc/exchange',
+                dataType: 'json',
+                data: {
+                    use_number:numberses,
+                },
+                beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                },
+                success: function (res) {
+                    layer_close();
+                    if (res.type == 'ok') {
+                        layer_msg(res.message);
+                        setTimeout(function(){
+                            location.reload();
+                        },1500)
+                    } else {
+                        layer_msg(res.message);
+                    }
+                }
+            });
+            
+        })
+        $('.layer_box_pwd .confirm_doit').click(function(){
+            var password=$('.password').val();
+            if(!password){
+                return layer_msg(ppwd)
+            }
+            $.ajax({
+                type: 'POST',
+                url: _API + 'jc/exchange',
+                dataType: 'json',
+                data: {
+                    use_number:numberses,
+                    password:password
+                },
+                beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                },
+                success: function (res) {
+                    if (res.type == 'ok') {
+                        layer_msg(res.message);
+                        setTimeout(function(){
+                            location.reload();
+                        },1500)
+                    } else {
+                        layer_msg(res.message);
+                    }
+                }
+            });
+        })
+        $('.layer_opeation').click(function(){
+            return false;
+        })
+        $('.layer_opeation2').click(function(){
+            return false;
+        })
+        $('.layer_box_pwd').click(function(){
+            $(this).hide();
+        })
+        
+    
+    </script>
+</body>
+</html>

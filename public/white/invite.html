@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>邀请</title>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+        <script src="javascripts/main.js"></script>
+        <script src="javascripts/jquery.cookie.js"></script>
+        <script src="lib/vue.min.js"></script>
+        <script src="lib/bootstrap.min.js"></script>
+        <link href="lib/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
+        <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				list-style:none;
+				text-decoration: none;
+			}
+			header{
+				width: 90%;
+				margin:0 auto;
+				overflow: hidden;
+				line-height:94px;
+				
+			}
+			header>img{
+				margin-top:30px;
+				float: left;
+			}
+			header>span{
+				font-size:30px;
+				float: right;
+				color:#5e727d;
+			}
+			nav{
+				width: 90%;
+				margin:0 auto;
+				overflow: hidden;
+			}
+			nav img{
+				width: 100%;
+			}
+			.nav1{
+				width: 100%;
+				background:#353b51;
+			}
+			.ranking{
+				width:90%;
+				margin:0 auto;
+				overflow: hidden;
+			}
+			.first{
+				width: 33%;
+				float: left;
+				background-color:#f7fbfe;
+				margin-top:83px;
+				text-align: center;
+				font-size:26px;
+				margin-left:0.3%;
+			}
+			.first p{
+				line-height:80px;
+				font-size:26px;
+				color:#888d90 ;
+			}
+			.firstTop{
+				width:108px;
+				height:134px;
+				margin:0 auto;
+				margin-top:20px;
+				background:url(images/myimg/aDASD.png) no-repeat ;
+				background-size: 100% 100%;
+				text-align: center;
+				line-height:134px;
+				overflow: hidden;
+				text-align: center;
+				color: #fff;
+				justify-content: center
+
+			}
+			.firstTop p{
+				/* float: left; */
+				margin-top:60px;
+				color: #fff;
+				font-size: 20px;
+				/* margin-left:26px; */
+			}
+			.firstTop p i:nth-child(2){
+				font-size: 30px;
+			}
+			.second{
+				background:url(images/myimg/yi.png) no-repeat ;
+				background-size: 100% 100%;
+			}
+			.third{
+				background:url(images/myimg/san.png) no-repeat ;
+				background-size: 100% 100%;
+			}
+			.more{
+				widows: 100%;
+				line-height:60px;
+				font-size:26px;
+				text-align: center;
+				border-bottom:5px solid #f6f7fb;
+				
+			}
+			.more a{
+				color:#698ab3;
+			}
+			.con{
+				width: 100%;
+				height: 512px;
+				background:url(images/myimg/111@2x.png) no-repeat ;
+				background-size: 100% 100%;
+				margin-bottom:243px;
+			}
+			.con img{
+				width: 240px;
+				margin:50px 0;
+			}
+			figure{
+				width: 374px;
+				margin: 0 auto;
+				text-align: center;
+			}
+			figure h5{
+				font-size:30px;
+				color:#5792d3;
+			}
+			figure p{
+				font-size:22px;
+			}
+			.ruqun{
+				display: block;
+				width: 183px;
+				height: 60px;
+				margin:0 auto;
+				margin-top:40px;
+				background:#5686d0;
+				line-height:60px;
+				text-align: center;
+				color:#fff;	
+				font-size:24px;
+			}
+			footer{
+				width: 100%;
+				height: 243px;
+				position:fixed;
+				bottom:0;
+				background-color:#fff;
+			}
+			.footerTop{
+				width: 90%;
+				line-height:56px;
+				margin:0 auto;
+				font-size:26px;
+				margin-top:32px;
+			}
+			.footerBot{
+				width: 90%;
+				line-height:92px;
+				margin:0 auto;
+				margin-top:32px;
+			}
+			.footerLeft{
+				display: inline-block;
+				width:60%;
+				float: left;
+				text-align: center;
+				line-height:92px;
+				font-size:28px;
+				color:#fff;
+				background-color:#5889d6;
+			}
+			.footerRight{
+				display: inline-block;
+				width:30%;
+				float:right;
+				color:#fff;
+				text-align: center;
+				font-size:28px;
+				line-height:92px;
+				background-color:#93a4b3;
+			}
+			.color5{color: #5786d2}
+		    .modal{top:auto;font-family: "微软雅黑";}
+            .modal-dialog{margin:0;}
+            .modal-content{border:none;border-radius:0;}
+            #fbtain{background:#fff;font-size:14px;border:none;position:absolute;bottom:4px;right:0;color:#5890bd;}
+            .modal-footer{border-top:none;}
+            .modal .modal-footer .btn-primary{background:#588cd8;width:100%;border-color:#588fe1;font-size:16px;}
+            .am-nav>li{
+			       display: none;
+		    }
+		    #tab1,#tab2,#tab3{
+		    	height:800px;
+		    	overflow: hidden;
+		    }
+		     #tab1 img,#tab2 img,#tab3 img{
+		     	width: 100%;
+		    	height:800px;
+		    }
+		    #modal-header{
+		    	height:800px;
+		    }
+		    .ass{
+		    	width: 100%;
+		    	height: 800px;
+		    	position: absolute;
+		    	top:0;
+		    	background:rgba(0,0,0,0.5);
+		    	display: none;
+		    }
+		    .ass>img,.Bss>img,.Css>img{
+		    	float: right;
+		    	margin-right:20px;
+		    	margin-top:20px;
+		    	width: 47px;
+		    	height: 47px;
+		    }
+		    .Bss{
+		    	width: 100%;
+		    	height: 800px;
+		    	position: absolute;
+		    	top:0;
+		    	background:rgba(0,0,0,0.5);
+		    	display: none;
+		    }
+		    .Css{
+		    	width: 100%;
+		    	height: 800px;
+		    	position: absolute;
+		    	top:0;
+		    	background:rgba(0,0,0,0.5);
+		    	display: none;
+		    }
+		    .ass1{
+		    	width: 100%;
+		    	height:200px;
+		    	background:#fff;
+		    	position: fixed;
+		    	bottom:0;
+		    	overflow: hidden;
+		    }
+		    .ass1_1{
+		    	width: 65%;
+		    	float: left;
+		    	font-size:28px;
+		    	padding-left:5%;
+		    }
+		    .ass1_1 h3{
+		    	font-size:36px;
+		    	margin-top:20px;
+		    }
+		    .ass1_2{
+		    	width:30%;
+		    	float: left;
+		    	overflow: hidden;
+		    }
+		    .ass1_2>img{
+		    	width: 100%;
+
+		    }
+		    .modal-body{
+		    	width:95%;
+		    	margin-left:2.5%;
+		    	height:300px;
+		    	overflow: hidden;	
+		    }
+		    .modal-body>div{
+		    	width: 25%;
+		    	text-align:center;
+		    	float: left;
+		    }
+		    .nav1_1{
+		    	width: 90%;
+		    	margin:0 auto;
+		    	border-bottom:1px solid #4d5369;
+		    	overflow: hidden;
+		    }
+		    .nav1_1 h3{
+		    	font-size:34px;
+		    	line-height:50px;
+		    	margin-top:30px;
+		    	color:#fff;
+		    }
+		    .nav1_1 p{
+		    	font-size:24px;
+		    	line-height:50px;
+		    	color:#888fa3;
+		    	margin-bottom:20px;
+		    }
+		    .nav1_2{
+		    	width: 90%;
+		    	margin:0 auto;
+		    	overflow: hidden;
+		    }
+		     .nav1_2 div{
+		     	float: left;
+		     	width:33.33%;
+		     	overflow:hidden;
+		     }
+		      .nav1_2 span{
+		      	color:#99a0b1;
+		      	line-height:80px;
+		      	font-size:26px;
+		      }
+		       .nav1_2 p{
+		      	color:#fff;
+		      	font-size:26px;
+		      }
+		      .img_1{
+		      	float: right;
+		      	width: 18px;
+		      	height: 28px;
+		      	margin-top:64px;
+		      	margin-bottom:80px;
+		      }
+		</style>
+	</head>
+	<body>
+<div id="app">
+		<header>
+			<a href="javascript:history.go(-1)">
+				<img src="images/myimg/40802415792124626_03.jpg" alt="" style="width: 40px;"/>
+			</a>
+			<span class="color5">规则</span>
+		</header>
+		<nav>
+			<img :src="List.image" alt="" v-show="Listii.invite_num==0" />
+			<div class="nav1" v-show="Listii.invite_num!=0" >
+				<div class="nav1_1">
+					<div style="float: left;">
+					<h3>我的收益</h3>
+				    <p>邀请好友可获手续费30%返佣</p>
+					</div>
+				    <img src="images/myimg/jitou.png" alt="" class="img_1" @click="img_1()"/>
+				</div>
+				<div class="nav1_2">
+					<div>
+						<span>邀请人数</span>
+						<p>{{Listii.invite_num}}</p>
+					</div>
+					<div>
+						<span>USDT</span>
+						<p>{{Listii.invite_return_tota}}</p>
+					</div>
+					<div>
+						<span>PTS</span>
+						<p>0.0000</p>
+					</div>
+				</div>
+			</div>	
+		</nav>
+		<div class="ranking">
+		  <div class="first">
+			<div class="firstTop flex alcenter">
+			   <p><i>N0.</i><i class="ft20">2</i></p>
+			</div>
+			<p>{{List2.account}}</p>
+			<span>{{List2.total}}USDT</span>
+		  </div>
+		  <div class="first">
+			<div class="firstTop second">
+			   <p><i>N0.</i><i class="ft20">1</i></p>
+			</div>
+			<p>{{List1.account}}</p>
+			<span>{{List1.total}}USDT</span>
+		  </div>
+		  <div class="first">
+			<div class="firstTop third">
+				<p><i>N0.</i><i class="ft20">3</i></p>
+			</div>
+			<p>{{List3.account}}</p>
+			<span>{{List3.total}}USDT</span>
+		  </div>
+		</div>
+		<div class="more"><a  @click="particulars()">查看完整榜单</a></div>
+		<div class="con">
+			<figure>
+				<img src="images/logo4.png" alt="" />
+				<figcaption>
+					<h5>【Telegram】火币用户群</h5>
+					<p>想和大人交流新技巧，马上入群</p>
+				</figcaption>
+			</figure>
+			<a href="#" class="ruqun">马上入群</a>
+		</div>
+		<footer>
+			<div class="footerTop">
+				<span style="color:#8c9fad">邀请码</span>
+				<span class="color5">{{invite}}</span> 
+			</div>
+			<div class="footerBot">
+				<a href="#" class="footerLeft" data-toggle="modal" data-target="#next" >马上邀请好友加入</a>
+				<a href="#" class="footerRight" data-toggle="modal" data-target="#placard" @click="my_poster()">你的专属海报</a>
+			</div>
+		</footer>
+		<!--马上邀请好友弹框-->
+	<div class="modal fade" tabindex="-1" role="dialog" id="next">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+          	<div  style="width: 100%;text-align: center;font-size:26px;line-height:80px; ">分享链接</div>
+          	<div>
+          		<img src="images/myimg/zdfgsdgv (1).jpg" alt="" />
+          	</div>
+          	<div>
+          		<img src="images/myimg/zdfgsdgv (2).jpg" alt="" />
+          	</div>
+ 
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary" style="font-size: 28px;line-height:70px;" data-dismiss="modal" aria-label="Close" >取消</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--专门海报弹框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="placard">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="modal-header">
+          	
+        <div class="am-tabs" data-am-tabs>
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                 <li class="am-active"><a href="#tab1"></a></li>
+                 <li><a href="#tab2"></a></li>
+                 <li><a href="#tab3"></a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                <img :src="poster1.pic" alt="" />
+                <div class="ass">
+                	<img src="images/myimg/asfsdfsfffff.png" alt="" style="width: 47px; height: 47px;"/>
+                	<div  class="ass1">
+                		<div class="ass1_1">
+                			<h3>火币返佣邀请</h3>
+                			<p>邀请你加入火币网，长按识别二维码</p>
+                		</div>
+                		<div class="ass1_2">
+                			<img src="http://qr.liantu.com/api.php?text=register.html" style="height: 200px;" alt="" />
+                		</div>
+                	</div>
+                </div>
+            </div>
+            <div class="am-tab-panel am-fade" id="tab2">
+                <img :src="poster2.pic" alt="" />
+                <div class="Bss">
+                	<img src="images/myimg/asfsdfsfffff.png" alt="" style="width: 47px; height: 47px;"/>
+                	<div  class="ass1">
+                		<div class="ass1_1">
+                			<h3>火币返佣邀请</h3>
+                			<p>邀请你加入火币网，长按识别二维码</p>
+                		</div>
+                		<div class="ass1_2">
+                			<img src="http://qr.liantu.com/api.php?text=register.html" style="height: 200px;" alt="" />
+                		</div>
+                	</div>
+                </div>
+            </div>
+             <div class="am-tab-panel am-fade" id="tab3">
+                <img :src="poster3.pic" alt="" />
+                <div class="Css">
+                	<img src="images/myimg/asfsdfsfffff.png" alt="" style="width: 47px; height: 47px;"/>
+                	<div  class="ass1">
+                		<div class="ass1_1">
+                			<h3>火币返佣邀请</h3>
+                			<p>邀请你加入火币网，长按识别二维码</p>
+                		</div>
+                		<div class="ass1_2">
+                			<img src="http://qr.liantu.com/api.php?text=register.html" style="height: 200px;" alt="" />
+                		</div>
+                	</div>
+                </div>
+             </div>
+            </div>
+            </div>  
+          </div>
+          <div class="modal-body">
+          	<div  style="width: 100%;text-align: center;font-size:26px;line-height:80px; ">分享专属海报</div>
+          	<div>
+          		<img src="images/myimg/zdfgsdgv (1).jpg" alt="" />
+          	</div>
+          	<div>
+          		<img src="images/myimg/zdfgsdgv (2).jpg" alt="" />
+          	</div>
+ 
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary" style="font-size: 28px;line-height:70px;" data-dismiss="modal" aria-label="Close" >取消</a>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+	</body>
+</html>
+<script>
+	 var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[],
+         List1:[],
+         List2:[],
+         List3:[],
+         invite:'',
+         poster1:[],
+         poster2:[],
+         poster3:[],
+         Listii:[]
+         
+        },
+        mounted: function () {
+             var self = this;
+		     var token = get_user_login();
+		     $.ajax({
+            url: _API + "user/invite",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+            	
+                if (data.type == 'ok') {
+                	self.Listii = data.message;
+                	self.List = data.message.ad;
+                	self.List1 = data.message.inviteList[0];
+                	self.List2 = data.message.inviteList[1];
+                	self.List3 = data.message.inviteList[2];
+                	self.invite=data.message.extension_code;
+                	console.log(self.List);
+                } else if(data.type == '999'){
+                 window.location =_SERVER+'login.html';
+                 layer_msg(data.message);
+                }
+            }
+        });	
+	    },
+	    	methods:{
+            particulars:function(){
+				window.location =_SERVER+'invitation.html'
+			},
+			my_poster:function(){
+			 var self = this;
+		     var token = get_user_login();
+		     $.ajax({
+            url: _API + "user/my_poster",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+                if (data.type == 'ok') {
+                	self.poster1=data.message.pics[0];
+            	    self.poster2=data.message.pics[1];
+            	    self.poster3=data.message.pics[2];
+                } else if(data.type == '999'){
+                   window.location = _SERVER+'login.html';
+                   layer_msg(data.message);
+                }
+            }
+          });		
+		},
+		img_1:function(){
+			window.location =_SERVER+'Invitationreturn.html';
+		}
+	   }
+	});
+	$("#tab1").click(function(){
+            $(".ass").toggle();
+    });
+    $("#tab2").click(function(){
+            $(".Bss").toggle();
+    });
+    $("#tab3").click(function(){
+            $(".Css").toggle();
+    });
+</script>

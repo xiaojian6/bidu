@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>首页</title>
+    <link href="lib/swiper.min.css" rel="stylesheet" />
+    <link href="lib/swipers.css" rel="stylesheet" />
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <link href="lib/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/footer.css"/>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>   
+    <script src="lib/jquery.bootstrap.newsbox.min.js"></script>
+    <script src="lib/swiper.min.js"></script>
+    <style type="text/css">
+       
+    </style>
+    <script type="text/javascript">
+        
+    </script>
+</head>
+<body>
+    <div id="home">
+        <section class="banner">
+        	<div class="swiper-container indexban">
+        		<div class="swiper-wrapper" id="ban">
+        			<div class="banlide swiper-slide swiper-slide-center none-effect">
+        				<a href="#">
+        					<img src="images/ban1.jpg"/>
+        				</a>
+        				<div class="layer-mask"></div>
+        			</div>
+        			<div class="banlide swiper-slide">
+        				<a href="#">
+        					<img src="images/ban2.jpg"/>
+        				</a>
+        				<div class="layer-mask"></div>
+        			</div>
+        			
+        		</div>
+                <div class="swiper-pagination banper"></div>
+        	</div>
+        </section>
+        <div class="news">
+            <img src="images/new1.jpg" />
+            <ul class="demos" style="margin-bottom:0;">
+              	<li class="news-item"></li>
+            	<!--<li class="news-item"><a href="#">提币业务公告</a></li>
+            	<li class="news-item"><a href="#">交易排名</a></li>
+            	<li class="news-item"><a href="#">交易送</a></li>
+            	<li class="news-item"><a href="#">恢复业务公告</a></li>
+            	<li class="news-item"><a href="#">上线公告</a></li>-->
+            </ul>
+        </div>
+        <div class="trade swiper-container">
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide"><a href="dataMap.html">
+                    <small class="usdt">BTC/USDT</small>
+                    <h4>6716.21<span>+0.59%</span></h4>
+                    <small class="cny">≈45435.16CNY</small></a>
+                </li>
+                <li class="swiper-slide"><a href="dataMap.html">
+                    <small class="usdt">BTC/USDT</small>
+                    <h4>6716.21<span>+0.59%</span></h4>
+                    <small class="cny">≈45435.16CNY</small></a>
+                </li>
+                <li class="swiper-slide"><a href="dataMap.html">
+                    <small class="usdt">BTC/USDT</small>
+                    <h4>6716.21<span>+0.59%</span></h4>
+                    <small class="cny">≈45435.16CNY</small></a>
+                </li>
+                <li class="swiper-slide"><a href="dataMap.html">
+                    <small class="usdt">ETH/USDT</small>
+                    <h4>227.91<span>-1.59%</span></h4>
+                    <small class="cny">≈1880.16CNY</small></a>
+                </li>
+                <li class="swiper-slide"><a href="dataMap.html">
+                    <small class="usdt">HT/USDT</small>
+                    <h4>2.2143<span>-1.21%</span></h4>
+                    <small class="cny">≈15.11CNY</small></a>
+                </li>
+            </ul>
+            
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="fiatde">
+            <div class="deals">
+                <a href="fiatrad.html" class="flex between">
+                    <div class="fl-left">
+                       <b>法币交易</b>
+                       <span>多种法币交易，多种支付方式</span> 
+                    </div>
+                    <img src="images/fa.jpg" />
+                    
+                </a>
+            </div>
+            <div class="prost"style="display: none">
+                <ul>
+                    <li><a href="###">
+                            <img class="logo" src="images/tou.png" />
+                            <b>主力指数</b>
+                            <span>数字资产的风向标</span>
+                        </a>
+                    </li>
+                    <li><a href="market.html">
+                            <img class="logo" src="images/jiang.png" />
+                            <b>HADAX</b>
+                            <span>自主数字资产交易所</span>
+                        </a>
+                    </li>
+                    <li><a href="dataMap.html">
+                            <img class="logo" src="images/asset.png" />
+                            <b>HQ10</b>
+                            <span>自主指数产品</span>
+                        </a>
+                    </li>
+                    <li><a href="helpcenter.html">
+                            <img class="logo" src="images/libag.png" />
+                            <b>帮助中心</b>
+                            <span>有问题点我</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="assets">
+            <img src="images/zzz.png" />
+            <b>我的资产</b>
+            <p>登录后可查看</p>
+            <a href="login.html" class="btn btn-default">登录</a>
+        </div>
+        <!--登录后我的资产-->
+        <div class="assetlogin" style="display:none;">
+            <h5>我的资产<img class="eye" src="images/eyes.png" id="imgs" /></h5>
+            <ul>
+                <li><a href="assets.html?type=deal">
+                    <span class="stit">交易账户<img src="images/mores.png" /></span>
+                    <p><span id="content">****</span> CNY</p>
+                    <small>≈<span class="cont">*****</span>USDT</small>
+                    </a>
+                </li>
+                <li><a href="assets.html?type=legal">
+                    <span class="stit">法币账户<img src="images/mores.png" /></span>
+                    <p><span id="content1">*****</span> CNY</p>
+                    <small>≈<span class="cont">*****</span>USDT</small>
+                    </a>
+                </li>                
+                <li style="display: none"><a href="assets.html" >
+                    <span class="stit">杠杆账户<img src="images/mores.png" /></span>
+                    <p><span id="content2">*****</span> CNY</p>
+                    <small>≈<span class="cont">*****</span>USDT</small>
+                    </a>
+                </li>
+                <!--<li><a href="###">
+                    <span>HADAX账户<img src="images/mores.png" /></span>
+                    <p>***** BTC</p>
+                    <small>≈*****CNY</small>
+                    </a>
+                </li>-->
+            </ul>
+        </div>
+        <div class="highlists">
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#performer" aria-controls="home" role="tab" data-toggle="tab">涨幅榜</a></li>
+              <!--<li role="presentation"><a href="#currency" aria-controls="profile" role="tab" data-toggle="tab">新币榜</a></li>-->
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="performer">
+                  <ul>
+                      <li><a href="dataMap.html">
+                          <small>1</small>
+                          <b>SNT/USDT<br /><span>24H量 16885153</span></b>
+                          <b>SNT/USDT<br /><span>￥0.13</span></b>
+                          <button class="btn btn-default">+14.86%</button>
+                          <!--<input class="btn btn-default" type="button" value="+14.86%" />-->
+                          </a>
+                      </li>
+                      <li><a href="dataMap.html">
+                          <small>2</small>
+                          <b>SNT/USDT<br /><span>24H量 16885153</span></b>
+                          <b>SNT/USDT<br /><span>￥0.13</span></b>
+                          <button class="btn btn-default">+14.86%</button>
+                          </a>
+                      </li>
+                      <li><a href="dataMap.html">
+                          <small>3</small>
+                          <b>SNT/USDT<br /><span>24H量 16885153</span></b>
+                          <b>SNT/USDT<br /><span>￥0.13</span></b>
+                          <button class="btn btn-default">+14.86%</button>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="currency">
+                  <ul>
+                      <li>
+                          <a href="dataMap.html">
+                          <small>1</small>
+                          <b>SNT/USDT<br /><span>24H量 16885153</span></b>
+                          <b>SNT/USDT<br /><span>￥0.13</span></b>
+                          <button class="btn btn-default">+14.86%</button>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+            </div>
+        </div>
+    </div>
+<footer>
+    <a href="index.html" class="select">
+        <div>
+            <p class="img img0"></p>
+            <span>首页</span>
+        </div>
+    </a>
+    <a href="market.html">
+        <div>
+            <p class="img img1"></p>
+            <span>行情</span>
+        </div>
+    </a>
+    <a href="transaction.html">
+        <div>
+            <p class="img img2"></p>
+            <span>交易</span>
+        </div>
+    </a>
+    <a href="#" class="onc">
+        <div>
+            <p class="img img3"></p>
+            <span>杠杆交易</span>
+        </div>
+    </a>
+    <a href="assets.html">
+        <div>
+            <p class="img img4"></p>
+            <span>资产</span>
+        </div>
+    </a>	
+</footer>
+    
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+      <script src="lib/layer_mobile/layer.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            // allowSwipeToPrev: false,
+            // loop: true,
+            // direction: 'horizontal',
+            // autoplay: 2500,
+            // slidesPerView: "auto",
+            // centeredSlides:true,
+            // spaceBetween: 30,
+            // // 如果需要分页器
+            // pagination: '.swiper-pagination',
+            // allowSwipeToPrev: false
+        });
+
+        $(".demos").bootstrapNews({
+            newsPerPage: 1,
+            autoplay: true,
+            pauseOnHover: true,
+            navigation: false,
+            direction: 'down',
+            newsTickerInterval: 2500,
+            onToDo: function () {
+            }
+        });
+        
+  	</script>
+  	<script type="text/javascript">
+  	//===============公告列表======================
+       	$.ajax({
+       	    type:'post',
+          	url:_API + 'news/list',
+          	dataType:'json',	
+          	data:{
+          		 c_id:21
+          	},
+          	success:function(data){	
+          		console.log(data)
+				var html='';
+				var title;
+				for(i=0;i<data.message.list.length;i++){
+					html += "<li class='news-item'><a href='journalism.html?id="+data.message.list[i].id+"'>"+data.message.list[i].title+"</a></li>";
+				};
+				$('.demos').html(html);
+          	}
+        });
+		//======================新闻列表======================
+       	$.ajax({
+       	    type:'post',
+          	url:_API + 'news/list',
+          	dataType:'json',	
+          	data:{
+          		c_id:22
+          	},
+          	success:function(data){	
+          	    console.log(data);
+          	    var ban = data.message.list
+          	    var html = '';
+          	    //var title;
+          	    for (i = 0; i < ban.length; i++) {
+          	        var ner = ban[i];
+          	        html += "<div class='banlide swiper-slide swiper-slide-center none-effect'><a href='journalism.html?id=" + ner.id + "'><img src='" + ner.thumbnail + "'/></a><div class='layer-mask'></div></div>";
+          	        
+          	    };
+          	    $('#ban').html(html);
+          	    init();
+          	}
+       	});
+       	function init() {
+           	setTimeout(function () {
+               	var swiper = new Swiper('.indexban', {
+                   	autoplay: true,
+                   	speed: 500,
+                   	loop: true,
+                   	autoplayDisableOnInteraction: false,
+                   	centeredSlides: true,
+                   	slidesPerView: 1.25,
+                  	pagination: '.indexper',
+                   	paginationClickable: true,
+                   	pagination: {
+                       	el: '.banper',
+                       	clickable: true,
+                   	},
+                   	onInit: function (swiper) {
+                       	swiper.slides[2].className = "banlide swiper-slide-active";
+                   	},
+                   	breakpoints: {
+                       	668: {
+                           	slidesPerView: 1.25,
+                       	}
+                   	}
+               	})
+           	}, 0);
+       	}
+           var cny=6.5;
+        //===========我的资产==============   
+		var token = get_user();
+		if(token){
+			$('.assets').hide();
+			$('.assetlogin').show();	
+			
+		//================资产信息==================
+			var token1 = get_user_login();
+	       	$.ajax({
+	       	    type:'post',
+	          	url:_API + 'wallet/list',
+	          	dataType:'json',
+      			beforeSend: function beforeSend(request) {
+	           		request.setRequestHeader("Authorization",token1);
+	           	},
+	          	success:function(data){	
+	          	    console.log(data);
+					$('.assetlogin>ul>li').eq(0).find('p span').html(data.message.change_wallet.totle).parent().next('small').children('span').html(((data.message.change_wallet.totle-0)/cny).toFixed(6));
+					$('.assetlogin>ul>li').eq(1).find('p span').html(data.message.legal_wallet.totle).parent().next('small').children('span').html(((data.message.legal_wallet.totle-0)/cny).toFixed(6));
+					$('.assetlogin>ul>li').eq(2).find('p span').html(data.message.lever_wallet.totle).parent().next('small').children('span').html(((data.message.lever_wallet.totle-0)/cny).toFixed(6));
+
+					$("#imgs").click(function () {
+					    var el = $('#content');
+					    var el1 = $('#content1');
+					    var el2 = $('#content2');
+					    var cl = $('.cont');
+					    if ($("#imgs").attr('src') == 'images/nosee.jpg') {
+					        $("#imgs").attr('src', 'images/eyes.png');
+					        el.html(el.html().replace('*****', data.message.change_wallet.totle));
+					        el1.html(el.html().replace('*****', data.message.legal_wallet.totle));
+					        el2.html(el.html().replace('*****', data.message.lever_wallet.totle));
+					        cl.html(cl.html().replace('*****', data.message.change_wallet.CNY));
+					    } else {
+					        $("#imgs").attr('src', 'images/nosee.jpg');
+					        el.html(el.html().replace(data.message.change_wallet.totle, '*****'));
+					        el1.html(el.html().replace(data.message.legal_wallet.totle, '*****'));
+					        el2.html(el.html().replace(data.message.lever_wallet.totle, '*****'));
+					        cl.html(cl.html().replace(data.message.change_wallet.CNY, '*****'));
+					    }
+					})
+	          	}
+	       	});			
+		}else{
+			$('.assetlogin').hide();
+			$('.assets').show();
+			$('.assets>a').html('去登录').attr('href','login.html');
+		}
+    $('.onc').click(function(){
+        layer_msg("暂未开放")
+    })
+		
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>关于我们</title>
+		<!-- css引入 -->
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<!-- js引入 -->
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/about.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+	    <script src="./lib/language_cookie.js"></script>
+	</head>
+	<body>
+		<header class="header">
+			<a class="back" href="javascript:history.go(-1)">
+			</a>
+			<h4 class="ftw ft16" data-localize="index.aboutus">关于我们</h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="nav about-list">
+			<ul class="ftw ft14">
+				<li class="relation ptb15 pb15 bdt pl12 clearfix">
+					<span data-localize="call.callme">联系我们 </span> 
+					<a href="" class="tel fr">BIBEXbeau@hotmail.com</a>
+				</li>
+				<li class="policy ptb15 pb15 bdt pl12 clearfix">
+					<span data-localize="call.Privacy">隐私政策 </span> 
+					<span class="fr"><img width="16" src="images/myimg/jitou.png" alt="" /></span></li>
+				<!-- <li class="version ptb15 pb15 bdt pl12 clearfix">版本 <span class="fr"><img width="16" src="images/myimg/jitou.png" alt="" /></span></li> -->
+			</ul>
+		</div>
+		<script>
+			$(function() {
+				$('.version').click(function() {
+					layer.open({
+						content: '已经是最新版本了...',
+						skin: 'msg',
+						time: 2 //2秒后自动关闭
+					});
+				})
+				let phones = getlocal_storage('phone');
+				// $('.relation a').attr('href',phones);
+				// $('.relation a').text(phones);
+			})
+		</script>
+	</body>
+</html>

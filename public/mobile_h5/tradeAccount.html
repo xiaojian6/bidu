@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">			
+		<title>交易账户</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	</head>
+	<style>
+    .gtop{
+		padding-top: 30px;
+	}
+	.line{
+		height: 10px;
+		background: linear-gradient(to right, #50667E, #3F556D);
+	}
+	.listbox li{
+		
+		margin-top: 10px;
+	}
+	.titlebox li,.listbox li span{flex: 1;}
+	.recordnone{min-height: 150px;}
+	.recordnone img{width: 80px;}
+	.btbox{position: fixed;bottom: 0;left: 0;z-index: 99;width: 100%;padding:10px 0;background: #061623;border-top: 1px solid #1B2A3E;}
+	.btbox a{display: block;flex: 1;text-align: center}
+	.btbox a img{width: 40px;}
+	.gotrade{
+		height: 30px;
+		line-height: 30px;
+		border-top-left-radius: 15px;
+		border-bottom-left-radius: 15px;
+		padding: 0 15px;
+		border:1px solid #acc5ef6b;
+		border-right: none;
+	}
+	.iconbox{
+		width: 50PX;
+		height: 50PX;
+		text-align: center;
+		margin: 0 auto;
+		background: rgb(23,41,65);
+		border-radius: 4px
+	}
+	.btbox a img{width: 30px;margin: 0 auto;}
+	#header{
+        height: 45px;
+        line-height: 45px;
+    }
+	#header img{width: 25px;margin: 0 5px}
+	.pd85{padding-bottom: 85px}
+	.record_ul {
+		background: #102030;
+		/* height: 16rem;
+        overflow-y: scroll;
+		 */
+	}
+	/* .ul_list_box{
+		height: 16rem;
+		overflow-y: scroll;
+	} */
+
+    .record_li {
+        border-bottom: 1px solid #1B2A3E;
+        padding: 10px 0;
+	}
+	.more{display: none;color: #728DAF;padding: 10px;}
+	.notallow{
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+	</style>
+	<body>
+		<header class="header">
+			<a class="back mt5" href="assets.html">
+				
+			</a>
+			<h4 class="ft16 ftw bodyColor" data-localize="assets.curAccount">交易账户</h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="pd85">
+			<div class="ggbox plr15">
+				<div class="gtop flex between alcenter">
+					<div class="title ft20 bold blue">USDT</div>
+					<!-- <a href="fiatrad.html" class="gotrade blue">法币交易>></a>	 -->
+				</div>
+				<ul class="flex titlebox mt20 white_gray ft12">
+					<li data-localize="assets.avaiable">可用</li>
+					<li class="tc" data-localize="assets.lock">冻结</li>
+					<li class="tr"><span data-localize="assets.conversion">折合</span>($)</li>
+				</ul>
+				<ul class="listbox white ft12">
+					<li class="flex alcenter">
+						<span class="balance-num">0.000000</span>
+						<span class="tc lock-num">0.0000000</span>
+						<span class="tr cny-num">0.0000000</span>
+					</li>
+				</ul>
+				<p class="lines"></p>
+			</div>
+			<div style="height:10px;background:#102030;margin:20px 0"></div>
+			
+			<div class="apply plr10 mb20">
+				<div class="flex between alcenter">
+					<p class="ft18 white" data-localize="assets.caidata">财务记录</p>
+					<!-- <p class="flex alcenter">
+						<img src="images/record1.png" alt="" style="width:20px;">
+						<a class="all_log white_gray" href="" style="padding-left:5px">全部</a>
+					</p> -->
+				</div>
+			
+				<div class="record_li flex mt20 alcenter white ft14 plr20">
+					<span class="flex1 tl" data-localize="assets.num">数量</span>
+					<span class="flex1 tc" data-localize="assets.record">记录</span>
+					<span class="flex1 tr" data-localize="assets.time">时间</span>
+				</div>
+				<div class="ul_list_box">
+					<ul class="record_ul  plr10">
+						
+					</ul>
+					<div class="more tc pd10" data-localize="transaction.more">加载更多</div>
+				</div>
+				<div class="recordnone tc flex alcenter">
+					<div style="width:100%">
+						<img src="images/anonymous.png"/>
+						<p class="color3" data-localize="transaction.nodata">暂无记录</p>				
+					</div>
+				</div>
+
+			</div>
+			<div class="btbox">
+				<div class="flex">
+					<a class="huazhuan ftw " href="javascript:;" style="display: none">
+						<div class="iconbox flex alcenter">
+							<img src="images/hua.png" alt="">
+						</div>
+						<p class="mt5" data-localize="assets.transfer">划转</p>
+					</a>
+					<a href="transaction.html" class="ftw">
+						<div class="iconbox flex alcenter">
+							<img src="images/lever.png" alt="">
+						</div>
+						<p class="mt5" data-localize="assets.currency">币币交易</p>
+					</a>
+					<!-- <a href="" class="charge">
+						<div class="iconbox flex alcenter">
+							<img src="images/cb.png" alt="">
+						</div>
+						<p class="mt5 white">充币</p>
+					</a>
+					<a href="mentionMoney.html" class="moneyout">
+						<div class="iconbox flex alcenter">
+							<img src="images/tb.png" alt="">
+						</div>
+						<p class="mt5 white">提币</p>
+					</a> -->
+				</div>	
+			</div>
+		</div>
+	<script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+	<script src="lib/layer_mobile/layer.js"></script>
+	<script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+	<script>
+	$(function(){
+		var cny=6.9641;
+		var currency=get_param('id'),type=get_param('type'),type_name;
+		$('.all_log').attr('href','tradeHistory.html?id='+currency+'&type='+type);
+        if(type==0){
+            type_name='lever'
+        }else if(type==1){
+            type_name='legal'
+        }else{
+            type_name='change'
+        }
+        console.log(currency,type)
+        initDataToken({url:'wallet/detail',type:'post',data:{currency,type:type_name}},function(res){
+			console.log(res)
+			// var tocny=((res.change_balance-0)+(res.lock_change_balance-0))*res.usdt_price*cny;
+            $('.balance-num').html(res.change_balance)
+            $('.lock-num').html(res.lock_change_balance)
+            $('.cny-num').html(((res.usdt_price-0)*(res.change_balance-0)).toFixed(8))
+			$('.title').html(res.currency_name)
+			name=res.currency_name;
+			if(res.is_legal){
+				$('.huazhuan').attr('style','display:block');
+			}
+			$('.huazhuan').attr('href','transferredLegal.html?id='+ currency+'&name='+name);
+			var allow=res.recharge_and_withdraw_opened
+			if(allow==1){
+				$('.charge').attr('href','chargeMoney.html?id='+currency+'&name='+name)
+			    $('.moneyout').attr('href','mentionMoney.html?id='+currency+'&type=change');
+			}else{
+				$('.charge').addClass('notallow').attr('href','javascript:void(0)');
+				$('.moneyout').addClass('notallow').attr('href','javascript:void(0)');
+			}
+			
+			
+		})
+		var page=1;
+		 //获取财务记录
+		 getdata();
+		 function getdata(){
+			initDataToken01({ url: 'wallet/legal_log', type: 'post', data: { currency, type,page } }, function (res) {
+				console.log(res);
+				if (res.type == 'ok') {
+					var msg = res.message.list;
+					var html = '';
+					if (msg.length == 0) {
+						$('.more').hide();
+						if(page==1){
+							$('.record_ul').addClass('hide');
+							$('.recordnone').removeClass('hide');
+						}
+					} else {
+						$('.record_ul').removeClass('hide');
+						$('.recordnone').addClass('hide');
+						$('.more').show();
+					}
+
+					$.each(msg, function (k, v) {
+						// console.log(k,v)
+						html += `
+						<li class="record_li flex alcenter white_gray ft12">
+								<span class="flex1 tl">${(v.value-0).toFixed(8)}</span>
+								<span class="flex2 tc">${v.info}</span>
+								<span class="flex1 tr">${v.created_time}</span>
+							</li>
+						`
+					});
+					// console.log(html)
+					$('.record_ul').append(html);
+				} else if (res.type == 'error') {
+					console.log(res)
+					$('.record_ul').addClass('hide');
+					$('.recordnone').removeClass('hide');
+				}
+
+			})
+		 }
+		// $(window).scroll(function(){
+		// 	var scrolltop=$(this).scrollTop();
+		// 	var documentHeight=$(document).height();
+		// 	var height=$(this).height();
+		// 	console.log(scrolltop,documentHeight,height)
+		// 	if(scrolltop+height==documentHeight){
+		// 		page++
+		// 		getdata()
+		// 	}
+		// })
+		// $('.ul_list_box').scroll(function(){
+		// 	var scrollTop=$(this).scrollTop();
+		// 	var height=$('.record_ul').height();
+		// 	var hegiht2=$(this).height();
+		// 	console.log(scrollTop,hegiht2,height)
+		// 	if(scrollTop+hegiht2==height){
+		// 		page++
+		// 		getdata();
+		// 	}
+		// })
+		$('.more').click(function(){
+			page++
+			getdata();
+		})
+      
+    })
+	</script>
+	</body>
+</html>

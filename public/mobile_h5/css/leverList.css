@@ -1,0 +1,70 @@
+#app{
+	height: 100%;
+}
+.tab-header{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	height: 48px;
+	line-height: 48px;
+	left: 0;
+}
+.tab-header div{
+	width: 82%;
+	margin: 7px auto;
+	height: 34px;
+  line-height: 34px;
+  border-radius: 34px;
+  font-size: 0;
+  display: flex;
+  border: 1px solid #1881d2;
+
+}
+.tab-header span{
+	display: block;
+	width: 33.33%;
+	font-size: 13px;
+	text-align: center;
+	border-radius: 34px;
+}
+.tab-header .active{
+	color: #fff;
+  background-color: #1881d2;
+}
+.content{
+	background-color: #061623;
+}
+.list-header{
+	line-height: 3.0;
+	font-size: 13px;
+}
+.list-content{
+	width: 100%;
+}
+.list-content div{
+	width: 33.3%;
+}
+.no_record{
+	width: 100%;
+	text-align: center;
+	padding-bottom: 20px;
+
+}
+.no_record img{
+	width: 80px;
+	margin-top: 60px;
+}
+.btns{
+	width: 100%;
+	margin-top: 10px;
+	padding-top: 10px;
+	text-align: right;
+}
+.btns button{
+	padding: 5px 25px;
+	background-color: #1881d2;
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	color: #fff;
+}

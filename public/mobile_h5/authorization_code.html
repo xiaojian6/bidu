@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>授权码</title>
+		<link rel="stylesheet" href="css/common.css">
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/vue.min.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+		<script src="./lib/language_cookie.js"></script>
+	</head>
+	<style>
+		.codes{
+			width: 220px;height: 220px;
+			border: 10px solid #fff;
+			margin: 0 auto;
+		}
+		#code{
+			width: 200px;
+			height: 200px;
+		}
+	</style>
+	<body>
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16" data-localize="">我的授权码</h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="code_box plr10 ptb10 tc mt40 ft16">
+		
+			<p class="mtb10 red mt15"><span data-localize="">授权码</span> ：<span class="code"></span></p>
+			<p class="mt10 ftw ft14" data-localize="">将用户添加为代理商时，需要验证用户的授权码</p>
+		</div>
+	</body>
+</html>
+<script src="javascripts/jquery.qrcode.min.js"></script>
+<script src="javascripts/clipboard.min.js"></script>
+<script>
+	$(function() {
+	
+		var token = get_user_login();
+			$.ajax({
+				url: _API + "user/authorization_code",
+				type: "GET",
+				dataType: "json",
+				async: true,
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function success(data) {
+					//console.log(data)
+					
+					if (data.type == 'ok') {
+						code = data.message;
+						$('.code').html(code);
+					} else if (data.type == '999') {
+						window.location = 'login.html';
+					}
+				}
+			});
+		
+		
+	})
+</script>

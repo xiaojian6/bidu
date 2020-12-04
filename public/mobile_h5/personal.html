@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+		<title>我的</title>
+		<link rel="stylesheet" href="css/footer.css">
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/personal.js"></script>
+		<script src="lib/socket.io.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+		<script src="./lib/language_cookie.js"></script>
+		<style>
+			.hide {
+				display: none !important;
+			}
+
+			.login img {
+				width: 34px;
+				height: 34px;
+				float: left;
+				margin-right: 24px;
+			}
+
+			.login p {
+				/*font-size:55px;*/
+				font-size: 25px;
+			}
+
+			.login span {
+				/* margin-left: 60px; */
+				/* margin-top: 30px; */
+				/*font-size:27px;*/
+				font-size: 14px;
+			}
+
+			.nav {
+				width: 90%;
+				margin: 0 auto;
+				overflow: hidden;
+				margin-bottom: 68px;
+			}
+
+			.nav li {
+				width: 100%;
+				line-height: 50px;
+				font-size: 14px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.nav li:last-child>span {
+				border: none;
+			}
+
+			.nav ul>li>i>img {
+				width: 30px;
+				height: 30px;
+				vertical-align: middle;
+				margin-right: 10px;
+			}
+
+			.nav ul>li>img {
+				width: 20px;
+			}
+
+			.nav span {
+				display: block;
+				width: 80%;
+				font-size: 13px;
+			}
+
+			.loginout {
+				margin-top: 10px;
+				padding: 0 10px;
+			}
+
+			.loginout a {
+				display: block;
+				width: 100%;
+				height: 36px;
+				border-radius: 5px;
+				color: #fff;
+				background: -webkit-gradient(linear, left top, right top, from(#689DF2), to(#1881d2));
+				background: linear-gradient(to right, #689DF2, #1881d2);
+				text-align: center;
+				line-height: 36px;
+				font-size: 12px;
+			}
+
+			.login span.name {
+				font-size: 22px;
+			}
+
+			.login span.uid {
+				margin-left: 60px; 
+			}
+		</style>
+	</head>
+
+	<body style="padding-top:50px;">
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1);">
+				
+			</a>
+		
+		</header>
+		<div style="width:90%;margin:0 auto; color:#fff; overflow: hidden;display: none;" class="login" id="login">
+			<p style="display:flex;align-items:center">
+					<img src="images/myimg/touxiang.png" alt="" />
+					<span data-localize="index.plogin">点击登录</span>
+				    <span data-localize="index.welcome">欢迎来到BIBEX</span>
+			</p>
+		</div>
+		<div style="width:90%;margin:0 auto; color:#fff; overflow: hidden;display: none; " class="login" id="ooo">
+			<p><img src="images/myimg/touxiang.png" alt="" />
+				<span class="name"></span>
+			</p>
+		</div>
+		<div class="nav ftw">
+			<ul>
+				<li class="geRen bdb">
+					<i>
+						<img src="images/myimg/geren.png" alt="" />
+					</i>
+					<span data-localize="index.usercenter">个人中心</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<li class="share bdb">
+					<i>
+						<img src="images/myimg/yaoqing.png" alt="" />
+					</i>
+					<span data-localize="index.myshare">我的分享链接</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<li class="ft_shop hide bdb">
+					<i>
+						<img src="images/myimg/wode.png" alt="" />
+					</i>
+					<span data-localize="index.myshop">我的商铺</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<!-- <li class="fabu bdb">
+					<i>
+						<img src="images/myimg/dingdan.png" alt="" />
+					</i>
+					<span data-localize="index.releasec2c">发布C2C</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<li class="fabu_detail bdb">
+					<i>
+						<img src="images/myimg/dingdan.png" alt="" />
+					</i>
+					<span data-localize="index.myc2c">我交易的C2C</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>  -->
+				<li class="language bdb">
+					<i>
+						<img src="images/myimg/wode.png" alt="" />
+					</i>
+					<span data-localize="index.language">语言切换</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<li class="anQuan bdb">
+					<i>
+						<img src="images/myimg/anquan.png" alt="" />
+					</i>
+					<span data-localize="index.security">安全中心</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<li class="shouKuan bdb">
+					<i>
+						<img src="images/myimg/shoukuan.png" alt="" />
+					</i>
+					<span data-localize="index.pay">收款方式</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<li class="tiBi bdb">
+					<i>
+						<img src="images/myimg/dizhi.png" alt="" />
+					</i>
+					<span data-localize="index.bind">绑定提币地址</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+				<li class="guanYu bdb">
+					<i>
+						<img src="images/myimg/about.png" alt="" />
+					</i>
+					<span data-localize="index.aboutus">关于我们</span>
+					<img src="images/myimg/jitou.png" alt="" />
+				</li>
+			</ul>
+			<div class="loginout">
+				<a id="logout" href="login.html" data-localize="index.logout">退出登录</a>
+			</div>
+		</div>
+		
+	</body>
+
+</html>
+<script>
+	$(function() {
+		var token = get_user();
+		$('#logout').click(function() {
+			$.removeCookie('token', {
+				path: "/"
+			});
+			$.removeCookie('userName');
+			$.removeCookie('passwords');
+			$.removeCookie('loginStute');
+		});
+		$.ajax({
+			url: _API + "user/info",
+			type: "GET",
+			dataType: "json",
+			async: true,
+			beforeSend: function beforeSend(request) {
+				request.setRequestHeader("Authorization", token);
+			},
+			success: function success(data) {
+				console.log(data)
+				if (data.type == '999') {
+					layer.open({
+						content: '请登录后再操作',
+						time: 2,
+						skin: 'msg',
+						end: function() {
+							window.location.href = "login.html";
+						}
+					});
+					return false;
+				}
+				if (data.type == 'ok') {
+					setlocal_storage('phone',data.message.account_number);
+					$("#ooo").css("display", "block");
+					$("#login").css("display", "none");
+					$(".name").html(data.message.account);
+					$(".UID").html(data.message.id);
+					$('.share').data('id', data.message.extension_code);
+					
+					
+					if (data.message.is_seller == 1) {
+						$('.ft_shop').removeClass('hide');
+					}
+				} else {
+					$("#ooo").css("display", "none");
+					$("#login").css("display", "block");
+					layer_msg(data.message);
+				}
+			}
+		});
+		$("#login").click(function() {
+			window.location.href =  'login.html';
+		})
+		$('.onc').click(function() {
+			layer_msg("暂未开放")
+		})
+		$('.ai,.kuangji').click(function() {
+			layer_msg('暂未开放')
+		})
+	})
+</script>

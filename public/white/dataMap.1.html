@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/dataMap.css" />
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+		<script src="https://img.hcharts.cn/highstock/highstock.js"></script>
+		<script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+		<script src="https://img.hcharts.cn/highcharts/modules/drag-panes.js"></script>
+	</head>
+<style>
+.flex{display: -webkit-box;display: -ms-flexbox;display: flex;}
+.flex1{-webkit-box-flex: 1;-ms-flex: 1;flex: 1;}
+.between{-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between;}
+.around{-ms-flex-pack: distribute;justify-content: space-around;}
+.alcenter{-webkit-box-align: center;-ms-flex-align: center;align-items: center;}
+.highcharts-axis-resizer {
+	stroke: #eee;
+}
+.highcharts-axis-resizer:hover {
+	stroke: #ccc;
+}
+</style>
+	<body style="background-size: 100%;background:#10202e;">
+		<div id="header">
+			<div class='header'>
+				<p class="pull-left" onclick="location.href='LeveragedDeals.html'">
+					<img src="images/arrows.png" />
+					<span class="coinname">BTC/USDT</span>
+				</p>
+				<p class="pull-right">
+					<img src="images/location.png" />
+				</p>
+			</div>
+			<div class="CNY">
+				<div class="pull-left">
+					<h2 class="new-price"></h2>
+					<h4 class="flex alcenter">
+						<p>≈46871.48CNY</p>
+						<span style="margin-left:5px">+2.51%</span>
+					</h4>
+				</div>
+				<ul class="pull-right">
+					<li class="flex alcenter between">
+						<p>高</p><span class="max-price">468.71</span>
+					</li>
+					<li class="flex alcenter between">
+					   <p>低</p><span class="min-price">468.71</span>
+					</li>
+					<li class="flex alcenter between">
+				       <p>24H量</p><span>46871</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+		<div id="map">
+			<ul class="time">
+				<li class="borb">分时</li>
+				<li>15分</li>
+				<li>1小时</li>
+				<li>4小时</li>
+				<li>1天</li>
+			</ul>
+			<hr class="hr" />
+			<div class="map">
+				<div id="main" style="width: 98%; height: 390px;background: #131f30;margin: 0 auto;"></div>
+				<!-- <div id="main1" style="width: 98%; height: 100px;background: #131f30;margin: 0 auto;"></div> -->
+			</div>
+			<hr class="hr" />
+		</div>
+		<div id="record">
+			<ul class="information">
+				<li class="borb">深度</li>
+				<li>成交</li>
+				<li>简介</li>
+			</ul>
+			<div>
+				<table>
+					<tr>
+						<th>盘口</th>
+						<th>价格</th>
+						<th>数量</th>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td class="red">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td class="red">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td class="red">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td class="red">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td class="red">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td class="gre">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td class="gre">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td class="gre">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td class="gre">6919.90</td>
+						<td>0.689</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td class="gre">6919.90</td>
+						<td>0.689</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<th>时间</th>
+						<th>方向</th>
+						<th>价格</th>
+						<th>数量</th>
+					</tr>
+					<tr>
+						<td>14:50:30</td>
+						<td>买入</td>
+						<td>0.63251</td>
+						<td>6.5589</td>
+					</tr>
+					<tr>
+						<td>14:50:30</td>
+						<td>买入</td>
+						<td>0.63251</td>
+						<td>6.5589</td>
+					</tr>
+					<tr>
+						<td>14:50:30</td>
+						<td>卖出</td>
+						<td>0.63251</td>
+						<td>6.5589</td>
+					</tr>
+					<tr>
+						<td>14:50:30</td>
+						<td>买入</td>
+						<td>0.63251</td>
+						<td>6.5589</td>
+					</tr>
+					<tr>
+						<td>14:50:30</td>
+						<td>买入</td>
+						<td>0.63251</td>
+						<td>6.5589</td>
+					</tr>
+				</table>
+				<table style="width:95%;margin:0 auto">
+					<tr>
+						<td colspan="2" class="text-left td">Bitcoin Cash</td>
+					</tr>
+					<tr>
+						<td class="text-left">发行时间</td>
+						<td class="text-right">2019-9-12</td>
+					</tr>
+					<tr>
+						<td class="text-left">发行总量</td>
+						<td class="text-right">21000000</td>
+					</tr>
+					<tr>
+						<td class="text-left">流量总量</td>
+						<td class="text-right">169875532</td>
+					</tr>
+					<tr>
+						<td class="text-left">众筹价格</td>
+						<td class="text-right">--</td>
+					</tr>
+					<tr>
+						<td class="text-left">白皮书</td>
+						<td class="text-right">2019-9-12</td>
+					</tr>
+					<tr>
+						<td class="text-left">官网</td>
+						<td class="text-right">http:/blockdozer.com/insight/</td>
+					</tr>
+					<tr>
+						<td class="text-left">区块查询</td>
+						<td class="text-right">https://www.bitcoincash.org/</td>
+					</tr>
+					<tr>
+						<td class="text-left">白皮书</td>
+						<td class="text-right">https://blockchair.com/bitcoin-cash/blocks</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text-left td">简介</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text-left">
+							火币网是数字代币（Token）交易的一个平台。移动端有3个火币相关的APP，分别是火币OTC，火币比特币，火币Widget。常用的是火币OTC和火币比特币。这两个 App分别是做什么的呢？ 火币OTC是法币交易平台，也就是用CNY与BTC、ETH、USDT进行交易。BTC、ETH、USDT是火币OTC指定的与法币交易的Token，这三种Token将作为“媒介”或者“货币”用于其他数字Token的交易。 火币比特币是币币交易平台，也就是使用BTC、ETH、USDT来与其他形形色色的数字Token进行交易。BTC、ETH、USDT的获得，就是通过上一段介绍的火币OTC的CNY买入来获得。 总结一下，在火币平台上交易的思路就是，先用CNY在火币OTC上买入一定量的BTC（或ETH，或USDT，或者各买一些），然后进行“划转”操作，即，将这些用CNY买来的BTC、ETH、USDT通过“法币到币币的划转”过程转移到火币比特币资产里。划转后，你的火币OTC里的这些资产就转到了火币比特币账户里。 接下来就在火币比特币平台上进行与其他Token的交易操作了。
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		</div>
+		<div id="bottom">
+			<button onclick="location.href='LeveragedDeals.html'">买入</button>
+			<button onclick="location.href='LeveragedDeals.html'">卖出</button>
+			<dl>
+				<dt>
+					<img src="images/collect2.png"/>
+				</dt>
+				<dd>
+					添加自选
+				</dd>
+			</dl>
+		</div>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script type="text/javascript" src="javascripts/dataMap.js"></script>
+		<script type="text/javascript" src="lib/echarts.js"></script>
+		<script>
+			$(function(){
+				var myChart;
+				
+				var params=get_all_params()
+				var legal_id = params.legal_id;
+				var currency_id =params.currency_id;
+				var type=1;
+				var a=14;
+				var b=19;
+			$('.time li').click(function(){
+				var n=$(this).index();
+				type=n+1;
+				switch (type){
+					case 1:
+						a=14;
+						b=19;
+					break;
+					case 2:
+					    a=6;
+						b=16;
+					break;
+					case 3:
+					    a=6;
+						b=16;
+					break;
+					case 4:
+					    a=6;
+						b=16;
+					break;
+					case 5:
+					    a=0;
+						b=10;
+					break;
+				}
+				$(this).addClass('bord').siblings().removeClass('bord')
+				console.log(n,type);
+                chart(type,a,b)
+			})
+			function chart(type,a,b){
+				$.ajax({
+					type: 'post',
+					url: _API + 'deal/info',
+					data: {
+						legal_id: legal_id,
+						currency_id: currency_id,
+						type:type
+					},
+					dataType: 'json',
+					// beforeSend: function beforeSend(request) {
+					// 	request.setRequestHeader("Authorization", token);
+					// },
+					success: function (res) {
+						console.log(res);
+						if(res.type=='ok'){
+							$('.coinname').text(res.message.legal.name+'/'+res.message.currency.name)
+							$('.new-price').text(res.message.last_price);
+							$('.max-price').text(res.message.now_quotation.highest);
+							$('.min-price').text(res.message.now_quotation.minimum)
+							var datas=res.message.quotation;
+							var dateses=[];
+                            for(let i=0;i<datas.length;i++){
+								var dataList=[];
+								console.log((datas[i].end_time).substring(a,b))
+								dataList.push((datas[i].end_time).substring(a,b),Number(datas[i].start_price),Number(datas[i].end_price),Number(datas[i].highest),Number(datas[i].minimum))
+								dateses.push(dataList)
+								if(i==datas.length-1){
+									console.log(dateses)
+									getChart2(splitData(dateses));
+								}
+							}
+						}else{
+							layer_msg(res.message)
+						}
+
+					}
+				});
+			}
+				
+			chart(type,a,b);
+	    // 图
+		 function splitData(rawData) {
+			 var categoryData = [];
+			 var values = [];
+			 var macds = [];
+			 var difs = [];
+			 var deas = [];
+			 for (var i = 0; i < rawData.length; i++) {
+				 categoryData.push(rawData[i].splice(0, 1)[0]);
+				 values.push(rawData[i])
+				 macds.push(rawData[i][6]);
+				 difs.push(rawData[i][7]);
+				 deas.push(rawData[i][8]);
+			 }
+			 console.log(categoryData)
+			 return {
+				 categoryData: categoryData,
+				 values: values,
+				 macds: macds,
+				 difs: difs,
+				 deas: deas
+			 };
+		 }
+		 
+		 function calculateMA(dayCount,data0) {
+			 var result = [];
+			 for (var i = 0, len = data0.values.length; i < len; i++) {
+				 if (i < dayCount) {
+					 result.push('-');
+					 continue;
+				 }
+				 var sum = 0;
+				 for (var j = 0; j < dayCount; j++) {
+					 sum += data0.values[i - j][1];
+				 }
+				 result.push(sum / dayCount);
+			 }
+			 return result;
+		 }
+	
+		 function getChart2(data0){
+			Highcharts.setOptions({
+				lang: {
+					rangeSelectorZoom: ''
+				}
+			});
+			var groupingUnits = [[
+				'week',                         // unit name
+				[1]                             // allowed multiples
+			], [
+				'month',
+				[1, 2, 3, 4, 6]
+			]]
+			var chart = Highcharts.stockChart('main', {
+				rangeSelector: {
+					selected: 1,
+					inputDateFormat: '%Y-%m-%d'
+				},
+				title: {
+					text: 'test'
+				},
+				xAxis: {
+					dateTimeLabelFormats: {
+						millisecond: '%H:%M:%S.%L',
+						second: '%H:%M:%S',
+						minute: '%H:%M',
+						hour: '%H:%M',
+						day: '%m-%d',
+						week: '%m-%d',
+						month: '%y-%m',
+						year: '%Y'
+					}
+				},
+				tooltip: {
+					split: false,
+					shared: true,
+				},
+				yAxis: [{
+					labels: {
+						align: 'right',
+						x: -3
+					},
+					title: {
+						text: '股价'
+					},
+					height: '65%',
+					resize: {
+						enabled: true
+					},
+					lineWidth: 2
+				}, {
+					labels: {
+						align: 'right',
+						x: -3
+					},
+					title: {
+						text: '成交量'
+					},
+					top: '65%',
+					height: '35%',
+					offset: 0,
+					lineWidth: 2
+				}],
+				series: [{
+					type: 'candlestick',
+					name: '平安银行',
+					color: 'green',
+					lineColor: 'green',
+					upColor: 'red',
+					upLineColor: 'red',
+					tooltip: {
+					},
+					navigatorOptions: {
+						color: Highcharts.getOptions().colors[0]
+					},
+					data: data0.values,
+					dataGrouping: {
+						units: groupingUnits
+					},
+					id: 'sz'
+				},{
+						name: 'MA5',
+						type: 'line',
+						data: calculateMA(5,data0),
+						smooth: true,
+						lineStyle: {
+							normal: {
+								opacity: 0.5
+							}
+						}
+					}, {
+						name: 'MA10',
+						type: 'line',
+						data: calculateMA(10,data0),
+						smooth: true,
+						lineStyle: {
+							normal: {
+								opacity: 0.5
+							}
+						}
+					}, {
+						name: 'MA20',
+						type: 'line',
+						data: calculateMA(20,data0),
+						smooth: true,
+						lineStyle: {
+							normal: {
+								opacity: 0.5
+							}
+						}
+					}, {
+						name: 'MA30',
+						type: 'line',
+						data: calculateMA(30,data0),
+						smooth: true,
+						lineStyle: {
+							normal: {
+								opacity: 0.5
+							}
+						}
+					}, {
+						name: 'MACD',
+						type: 'bar',
+						xAxisIndex: 1,
+						yAxisIndex: 1,
+						data: data0.macds,
+						itemStyle: {
+							normal: {
+								color: function(params) {
+									var colorList;
+									if (params.data >= 0) {
+										colorList = '#ef232a';
+									} else {
+										colorList = '#14b143';
+									}
+									return colorList;
+								},
+							}
+						}
+					}, {
+						name: 'DIF',
+						type: 'line',
+						xAxisIndex: 1,
+						yAxisIndex: 1,
+						data: data0.difs
+					}, {
+						name: 'DEA',
+						type: 'line',
+						xAxisIndex: 1,
+						yAxisIndex: 1,
+						data: data0.deas
+					}
+				]
+			});
+			
+		 }
+        function getChart(data0){
+			console.log(data0)
+			option = {
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {
+							type: 'cross'
+						}
+					},
+					grid: [{
+						left: '3%',
+						top: '0',
+						height: '75%'
+					}, {
+						left: '3%',
+						right: '10%',
+						top: '80%',
+						height: '10%'
+					}],
+					xAxis: [{
+						type: 'category',
+						data: data0.categoryData,
+						scale: true,
+						boundaryGap: false,
+						axisLine: {
+							onZero: false,
+							lineStyle: {
+								color: 'red',
+							}
+						},
+						splitLine: {
+							show: false
+						},
+						splitNumber: 20
+					}, {
+						type: 'category',
+						gridIndex: 1,
+						data: data0.categoryData,
+						axisLabel: {
+							show: false
+						},
+				
+					}],
+					yAxis: [{
+						scale: true,
+						splitArea: {
+							show: true
+						},
+						axisLine: {
+							lineStyle: {
+								color: 'red',
+							}
+						},
+						position: 'right'
+					}, {
+						gridIndex: 1,
+						splitNumber: 3,
+						axisLine: {
+							onZero: false
+						},
+						axisTick: {
+							show: false
+						},
+						splitLine: {
+							show: false
+						},
+						axisLabel: {
+							show: true
+						},
+						axisLine: {
+				
+							lineStyle: {
+								color: 'red'
+				
+							}
+						},
+						position: 'right'
+					}],
+					dataZoom: [{
+						type: 'inside',
+						start: 100,
+						end: 80
+					}, {
+						show: true,
+						type: 'slider',
+						y: '90%',
+						start: 50,
+						end: 100
+					}, {
+						show: false,
+						xAxisIndex: [0, 1],
+						type: 'slider',
+						start: 20,
+						end: 100
+					}],
+					series: [{
+							name: '555',
+							type: 'candlestick',
+							data: data0.values,
+							markPoint: {
+								data: [{
+									name: 'XX标点'
+								}]
+							},
+							markLine: {
+								silent: true,
+								data: [{
+									yAxis: 2222,
+								}]
+							}
+						}, {
+							name: 'MA5',
+							type: 'line',
+							data: calculateMA(5,data0),
+							smooth: true,
+							lineStyle: {
+								normal: {
+									opacity: 0.5
+								}
+							}
+						}, {
+							name: 'MA10',
+							type: 'line',
+							data: calculateMA(10,data0),
+							smooth: true,
+							lineStyle: {
+								normal: {
+									opacity: 0.5
+								}
+							}
+						}, {
+							name: 'MA20',
+							type: 'line',
+							data: calculateMA(20,data0),
+							smooth: true,
+							lineStyle: {
+								normal: {
+									opacity: 0.5
+								}
+							}
+						}, {
+							name: 'MA30',
+							type: 'line',
+							data: calculateMA(30,data0),
+							smooth: true,
+							lineStyle: {
+								normal: {
+									opacity: 0.5
+								}
+							}
+						}, {
+							name: 'MACD',
+							type: 'bar',
+							xAxisIndex: 1,
+							yAxisIndex: 1,
+							data: data0.macds,
+							itemStyle: {
+								normal: {
+									color: function(params) {
+										var colorList;
+										if (params.data >= 0) {
+											colorList = '#ef232a';
+										} else {
+											colorList = '#14b143';
+										}
+										return colorList;
+									},
+								}
+							}
+						}, {
+							name: 'DIF',
+							type: 'line',
+							xAxisIndex: 1,
+							yAxisIndex: 1,
+							data: data0.difs
+						}, {
+							name: 'DEA',
+							type: 'line',
+							xAxisIndex: 1,
+							yAxisIndex: 1,
+							data: data0.deas
+						}
+				
+				
+				
+					]
+				}; 
+			if (myChart != null && myChart != "" && myChart != undefined) {
+				myChart.dispose();
+			}
+			echarts.dispose(document.getElementById("main"))
+			var myChart = echarts.init(document.getElementById('main'));
+			myChart.setOption(option); 
+				
+		}	 
+		
+				
+	})	
+    </script>
+	</body>
+
+</html>

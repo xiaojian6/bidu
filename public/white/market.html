@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>HBG/HADAX</title>
+	<link rel="stylesheet" type="text/css" href="css/market.css" />
+	<link rel="stylesheet" type="text/css" href="css/footer.css" />
+	<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+	<script src="javascripts/jquery.cookie.js"></script>
+	<script src="lib/layer_mobile/layer.js"></script>
+	<script src="javascripts/main.js"></script>
+	<style>
+		.legal_wrap {
+			padding-top: 42px;
+		}
+		.wrap-main-two {
+			margin-bottom: 55px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrap-tab" id="content">
+		<div class="wrap-table info">
+			<ul class="legal_ul">
+				<!-- <li>
+					<h5>自选</h5>
+				</li>
+				<li>
+					<h5>USDT</h5>
+				</li>
+				<li>
+					<h5>BTC</h5>
+				</li>
+				<li>
+					<h5>ETH</h5>
+				</li>
+				<li>
+					<h5>HT</h5>
+				</li> -->
+			</ul>
+			<div class="wrap-cont">
+				<div class="inContent">
+					<div class="wrap-main-two legal_wrap">
+
+					</div>
+				</div>
+				<div class="inContent">
+
+					<div class="wrap-main">
+
+					</div>
+
+
+				</div>
+				<div class="inContent">
+
+					<div class="wrap-main">
+
+					</div>
+
+				</div>
+				<div class="inContent">
+
+					<div class="wrap-main">
+
+					</div>
+
+				</div>
+				<div class="inContent">
+
+					<div class="wrap-main">
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="wrap-table info">
+			<ul>
+				<li class="wrap-btm">
+					<h5>自选</h5>
+				</li>
+				<li>
+					<h5>BTC</h5>
+				</li>
+				<li>
+					<h5>ETH</h5>
+				</li>
+				<li>
+					<h5>HT</h5>
+				</li>
+			</ul>
+			<div class="wrap-cont">
+				<div class="inContent" style="padding-top: 42px;">
+
+				</div>
+				<div class="inContent">
+
+					<div class="wrap-main">
+
+					</div>
+
+				</div>
+				<div class="inContent">
+
+					<div class="wrap-main">
+
+					</div>
+					<div class="wrap-box-two">
+						<h6>创新区</h6>
+						<a href="javascript:;">创新区介绍&nbsp;></a>
+					</div>
+
+				</div>
+				<div class="inContent">
+
+					<div class="wrap-main">
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<a href="index.html">
+			<div>
+				<p class="img img0"></p>
+				<span>首页</span>
+			</div>
+		</a>
+		<a href="market.html" class="select">
+			<div>
+				<p class="img img1"></p>
+				<span>行情</span>
+			</div>
+		</a>
+		<a href="transaction.html">
+			<div>
+				<p class="img img2"></p>
+				<span>交易</span>
+			</div>
+		</a>
+		<a href="#"  class="onc">
+			<div>
+				<p class="img img3"></p>
+				<span>杠杆交易</span>
+			</div>
+		</a>
+		<a href="personal.html">
+			<div>
+				<p class="img img4"></p>
+				<span>我的</span>
+			</div>
+		</a>
+	</footer>
+	<script>
+
+		$(function () {
+			var datas;
+			var token = get_user_login();
+			$.ajax({
+				url: _API + 'currency/quotation',
+				type: 'get',
+				dataType: 'json',
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function (res) {
+					console.log(res);
+					if (res.type == 'ok') {
+						datas = res.message;
+						var legal_html = '';
+						var currency_html = '';
+						var msg = res.message;
+						console.log(msg)
+						for (var i = 0; i < msg.length; i++) {
+							legal_html += `
+									<li>
+										<h5>${msg[i].name}</h5>
+									</li>
+						`
+							if (i == 0) {
+								$.each(msg[i].quotation, function (k, v) {
+									currency_html += `
+								<a href="dataMap.html?legal_id=${v.id}&currency_id=${msg[i].id}" class="main-asset">
+									<div class="main-name">
+										<div class="name_1">
+											<h5>${v.name}</h5>
+											<span>/${msg[i].name}</span>
+										</div>
+										<div class="name_2">
+											24H量
+											<span>17200</span>
+										</div>
+									</div>
+									<div class="main-price">
+										<div class="name_1">${v.last_price}</div>
+										<div class="name_2">¥${v.yesterday_last_price}</div>
+									</div>
+									<div class="main-rate">
+										<div class="rate_green" style="background:${v.proportion >= 0 ? '#02BF85' : '#E56C41'}">${v.proportion >= 0 ? '+' + v.proportion : '-' + v.proportion}%</div>
+									</div>
+								</a>
+								`
+								})
+							}
+						};
+						// console.log(currency_html);
+						$('.legal_wrap').html(currency_html)
+						//法币赋值
+						$('.legal_ul').html(legal_html);
+
+						$(".info li:first").addClass("wrap-btm").siblings().addClass("old");
+						$("#content div:first").show().siblings().hide();
+						$(".inContent:first").show().siblings().hide();
+					}
+				}
+			});
+			$("#title li").click(function () {
+				$(this).addClass("wrap-title").removeClass("old").siblings().addClass("old").removeClass("wrap-title");
+				$(".info ").hide().eq($("#title li").index(this)).show();
+				//$(".info div:first-child").show().siblings().hide();
+				$(".info div:first-child").filter(".inContent").show().siblings().hide();
+				$(".info li:first-child").addClass("wrap-btm").removeClass("old").siblings().addClass("old").removeClass(
+					"wrap-btm");
+			});
+			//法币切换
+			$('.info').on('click', 'li', function () {
+				console.log(datas);
+				var arr_list = '';
+				var idx = $(this).index();
+				console.log(idx)
+				$(this).addClass("wrap-btm").removeClass("old").siblings().addClass("old").removeClass("wrap-btm");
+				$(".inContent").hide().eq($(".info li").index(this)).show();
+				$.each(datas, function (k, v) {
+					if (idx == k) {
+						console.log(idx);
+						console.log(k);
+						$.each(datas[k].quotation, function (m, n) {
+							arr_list += `
+										<a href="dataMap.html?legal_id=${n.id}&currency_id=${v.id}" class="main-asset">
+											<div class="main-name">
+												<div class="name_1">
+													<h5>${n.name}</h5>
+													<span>/${v.name}</spawrap-mainn>
+												</div>
+												<div class="name_2">
+													24H量
+													<span>17200</span>
+												</div>
+											</div>
+											<div class="main-price">
+												<div class="name_1">${n.last_price}</div>
+												<div class="name_2">¥${n.yesterday_last_price}</div>
+											</div>
+											<div class="main-rate">
+												<div class="rate_green" style="background:${n.proportion >= 0 ? '#02BF85' : '#E56C41'}">${n.proportion >= 0 ? '+' + n.proportion : '-' + v.proportion}%</div>
+											</div>
+										</a>
+										`
+						})
+
+					}
+				});
+				$('.wrap-main').html(arr_list);
+			})
+
+
+		});
+		   $('.onc').click(function(){
+            layer_msg("暂未开放")
+        })
+	</script>
+
+</body>
+
+</html>

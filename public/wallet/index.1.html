@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/footer2.css" />
+	<link rel="stylesheet" type="text/css" href="static/css2/swiper-3.4.2.min.css" />
+    <!-- <script src="static/javascripts/imtoken/flexble.js"></script> -->
+
+</head>
+<style>
+	.swiper-container{
+		width:100%;
+	}
+	.swiper-container img{
+		width:100%;
+	}
+	.swiper-pagination-bullet{
+		width:16px;
+		height:6px;
+		border-radius: 2px;
+		background:#1c6659;
+	}
+	.swiper-pagination-bullet-active{
+		background:#24c9cd !important;
+	}
+</style>
+<body class="backf5">
+	<div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="static/images/hdl/banner01.jpg" alt="" /></div>
+				<div class="swiper-slide"><img src="static/images/hdl/banner02.jpg" alt="" /></div>
+				<div class="swiper-slide"><img src="static/images/hdl/banner03.jpg" alt="" /></div>
+			</div>
+		     <!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
+		<div class="nav_head backF">
+			<a href="/users/register"  class="act">
+				<i class="iconfont icon-zhuce"></i>
+				<span>注册</span>
+			</a>
+			<a href="javascript:;"  class="trade_nav">
+				<i class="iconfont icon-jiaoyi"></i>
+				<span>交易</span>
+			</a>
+			<a href="/users/chatRoom" >
+				<i class="iconfont icon-liaotian"></i>
+				<span>聊天室</span>
+			</a>
+			<a href="javascript:;" class="trade_nav" >
+				<i class="iconfont icon-qiehuan"></i>
+				<span>C2C</span>
+			</a>
+		</div>
+
+		<div class="news_box">
+			<i class="iconfont icon-laba font24 fontc_f mgr10"></i>
+			<div id="news_box">   
+				<div id="news_item">
+					<a href="article_detail.html?id=63">用户如何快速购买所需要的商品</a>  
+					<a href="article_detail.html?id=62">用户购买必看指南</a>                                                                     
+					<a href="article_detail.html?id=60">委托资产价值实现协议</a>                                                                      
+					<a href="article_detail.html?id=59">什么叫定向期权?</a>                                                                      
+					<a href="article_detail.html?id=58">如何获得权益价值？</a>
+				</div>     
+				<div id="news_item1"></div>                                                         
+			</div>
+		</div>
+	</div>
+	<section class="mgbfoot backF"  id="user_info" >
+		<div>
+			<!--<ul class="coin_nav_class">
+				<li class="act">
+					<span>USDT</span>
+				</li>
+				<li>
+					<span>BTC</span>
+				</li>
+				<li>
+					<span>ETH</span>
+				</li>
+				<li>
+					<span>QTUM</span>
+				</li>
+				<li>
+					<span>LIMITED</span>
+				</li>
+				<li>
+					<span>自选区</span>
+				</li>
+			</ul>-->
+			<!--<p class="hang_title">市场行情</p>-->
+			<div class="coin_body">
+				<div>
+					<ul class="coin_thead">
+						<li>
+							<span>交易量</span>
+							<i class="iconfont icon-shangsheng"></i>
+						</li>
+						<li>
+							<span>价格</span>
+						</li>
+						<li>
+							<span>24H涨跌</span>
+						</li>
+					</ul>
+					<ul class="coin_tbody">
+						<!--<li>
+							<div class="coin_trade">
+								<img src="static/images/hdl/icon_ytb.png" class="coin_icon" width="38" height="38" alt="">
+								<p class="mgl10">
+									<span class="">以太币</span>
+									<span class="font14 fontc_9">$968.72万</span>
+								</p>
+							</div>
+							<div>
+								<p>
+									<span style="display: block">$428.66</span>
+									<span class="font14 fontc_9">￥3028.00</span>
+								</p>
+							</div>
+							<div>
+								<span class="coin_updown coin_down">-3.85%</span>
+							</div>
+						</li>-->
+						
+					</ul>
+					<!--<div class="coin_dealCount">
+						<ul class="deal_count_nav">
+							<li>
+								<p class="fontc_9 font14">24H最高价</p>
+								<span class="font_bold red">$1.976</span>
+							</li>
+							<li>
+								<p class="fontc_9 font14">24H最低价</p>
+								<span class="font_bold green">$1.976</span>
+							</li>
+							<li>
+								<p class="fontc_9 font14">24H成交量</p>
+								<span class="fontc_3 font_bold">P189.76万</span>
+							</li>
+							<li class="font_bold fontc_hdl">
+								<span>去交易</span>
+								<span>
+									<i class="iconfont icon-jianyou"></i>
+								</span>
+							</li>
+						</ul>
+						<div id="main" style="width:90%;height:260px;margin-left:5%;"></div>
+					</div>-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="common_footer">
+		<a href="index.html" class="active"><i class="icon-size iconfont">&#xe6e4;</i>资产</a>
+		<a href="market.html"><i class="icon-size iconfont">&#xe66c;</i>行情</a>
+		<a href="deal.html"><i class="icon-size iconfont">&#xe60d;</i>交易</a>
+		<a href="/users/information"><i class="icon-size iconfont">&#xe631;</i>发现</a>
+		<a href="userinfo.html" ><i class="icon-size iconfont">&#xe629;</i>我的</a>
+	</div>
+	
+
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/javascripts/swiper-3.4.2.min.js"></script>
+	<!--<script type="text/javascript" src="static/javascripts/echarts.min.js"></script>-->
+	<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/index.js"></script>
+	<script> 
+	$(function(){
+		var mySwiper = new Swiper('.swiper-container', {
+			autoplay:3000,
+			pagination : '.swiper-pagination'
+		})
+
+		$(".trade_nav").click(function(){
+			layer_msg("功能还在开发中.....")
+		})
+
+		 //文字上下滚动
+		var speed=60 
+		var demo=document.getElementById("news_box"); 
+		var demo2=document.getElementById("news_item1"); 
+		var demo1=document.getElementById("news_item"); 
+		demo2.innerHTML=demo1.innerHTML 
+		function Marquee(){ 
+			if(demo.scrollTop>=demo1.offsetHeight){
+			demo.scrollTop=0; 
+			}
+			else{ 
+			demo.scrollTop=demo.scrollTop+1;
+			} 
+		} 
+		var MyMar=setInterval(Marquee,speed) 
+		demo.onmouseover=function(){clearInterval(MyMar)} 
+		demo.onmouseout=function(){MyMar=setInterval(Marquee,speed)}
+		
+
+	})
+		
+
+   </script>
+	
+
+</body>
+</html>

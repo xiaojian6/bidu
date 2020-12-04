@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title></title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    
+   
+    <style type="text/css">
+        .overhide{overflow:hidden;}
+        .close {
+            color: #06365a;
+            text-shadow: none
+        }
+        .header {
+            height: 45px;
+            line-height: 45px;
+            z-index: 999;
+            background: #061623;
+
+        }
+        /*注册*/
+        #register {
+            padding: 0 30px;
+            margin-top: 45px;
+            margin-bottom: 25px;
+        }
+
+        #register .teltit {
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+        #register .teltit h5 {
+            color: #F2F5FF;
+            margin-top: 0;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        #register .teltit span {
+            color: #e56737;
+            /*margin-top:10px;*/
+        }
+
+        #register .teltit span img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        #register .theme .form-control {
+            background-color: transparent;
+            border: solid 1px transparent;
+            box-shadow: none;
+            border-bottom: solid 1px #3e536b;
+            border-radius: 0px;
+            padding: 6px 0;
+            font-size: 12px;
+        }
+
+        #register .theme input::-webkit-input-placeholder {
+            color: #c5cacd;
+            font-size: 14px;
+        }
+
+        #register .theme input[placeholder],
+        [placeholder],
+        *[placeholder] {
+            color: #fff !important;
+        }
+
+        #register .theme .form-group {
+            position: relative;
+        }
+
+        #register .theme .btn-default {
+            background: #1881d2;
+            color: #fff;
+            border-color: transparent;
+            width: 100%;
+            font-size: 14px;
+            margin-top: 35px;
+            border-radius: 3px;
+            padding: 8px 0;
+        }
+
+        #register .theme .help-block {
+            color: #588fe1;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        #register .yecount {
+            font-size: 14px;
+            margin-top: 20%;
+        }
+
+        #register .yecount a {
+            color: #1881d2;
+            font-weight: 600;
+        }
+
+        /*弹出框*/
+        .modal-header {
+            border-bottom: 1px solid #3e536b
+        }
+
+        .modal {
+            top: auto;
+            font-family: "微软雅黑";
+        }
+
+        .modal-dialog {
+            margin: 0;
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 0;
+            background-color: #102030
+        }
+
+        .modal .modal-header h4 {
+            font-size: 15px;
+            color: #5181d8;
+            font-weight: bold;
+        }
+
+        .modal-header .close {
+            margin-top: 3px;
+            font-weight: normal;
+            opacity: 0.5;
+            font-size: 14px;
+            color: #728DAF;
+        }
+
+        .modal .modal-body .form-control {
+            background-color: transparent;
+            border: solid 1px transparent;
+            box-shadow: none;
+            border-bottom: solid 1px #3e536b;
+            border-radius: 0px;
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .modal .modal-body label {
+            margin-top: 14px;
+            margin-bottom: 6px;
+            color: #728DAF;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .modal .modal-body .form-group {
+            margin-bottom: 0;
+        }
+
+        .modal .modal-body input::-webkit-input-placeholder {
+            color: #c5cacd;
+        }
+
+        .modal .modal-body input[placeholder],
+        [placeholder],
+        *[placeholder] {
+            color: #fff !important;
+        }
+
+        .modal .modal-body .verification {
+            position: relative;
+            text-align: left;
+        }
+
+        #fbtain {
+            font-size: 14px;
+            border: none;
+            position: absolute;
+            bottom: 4px;
+            right: 0;
+            color: #728DAF;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        .modal .modal-footer .btn-primary {
+            background: #1881d2;
+            width: 100%;
+            border-color: #1881d2;
+            font-size: 14px;
+        }
+
+        #mbtain {
+            background: transparent;
+            font-size: 14px;
+            border: none;
+            position: absolute;
+            bottom: 4px;
+            right: 0;
+            color: #1881d2;
+        }
+
+        form {
+            text-align: center;
+        }
+        .country {
+            z-index: 9;
+            flex-wrap: wrap;
+            top: 45px;
+            right: 0;
+            width: 0;
+            position: absolute;
+            display: none;
+            height: 100%;
+            background: #061623;
+            overflow-y:scroll;
+        }
+        .p10{padding: 10px;}
+        .c_number{color: #87a2cd;}
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a class="back" href="javascript:history.go(-1)">
+
+        </a>
+        <h4 class="ftw ft16" data-localize="lg.phregister">手机注册</h4>
+    </header>
+    <div class="header-space"></div>
+    <div id="register">
+        <!--手机注册-->
+        <div id="telregis">
+            <div class="teltit">
+                <h5 data-localize="lg.phregister">手机注册</h5>
+                <p><img src="images/regi.png" style="width: 20px;" />
+                    <span data-localize="lg.noset">注册后不能修改</span>
+                </p>
+            </div>
+            <div class="theme">
+                <form>
+                    <div class="flex alcenter white showcity" onclick="showcity(0)">
+                        <span class='city_name name1'>China</span>
+                        <img src="images/down.png" alt="">
+                    </div>
+                    <div class="form-group mt20">
+                        <div class='flex alcenter white' style='border-bottom: solid 1px #3e536b;'>
+                            <div class='flex alcenter showcity' onclick="showcity(1)">
+                                <span class='city_code'>+86</span>
+                                <img class='ml10' style='width:10px;' src="images/trade_arrow_down.png" alt=""> 
+                            </div>
+                            
+                            <input type="text" class="form-control logtxt focu ftw flex1" style='border:none;padding-left:3px' id="tel" placeholder="请输入手机号" data-localize="lg.pphone" name="tel" value="" />
+                        </div>
+                        <p id="mes1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                    </div>
+                    <a class="btn btn-default phonebtn" data-toggle="modal" data-target="#telnext" data-localize="lg.next">下一步</a>
+                    <p id="mes" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                    <a class="help-block" href="javascript:;" id="regismail" data-localize="lg.emregister">邮箱注册</a>
+                    <!-- <a class="help-block" href="javascript:;" >点击下载BIBEXAPP</a> -->
+                </form>
+            </div>
+            <div class="yecount ftw">
+                <span data-localize="lg.have">已有BIBEX账号？</span>
+                <a href="login.html" data-localize="lg.lgs">登录</a>
+            </div>
+        </div>
+        <!--邮箱注册-->
+        <div id="emailregis" style="display:none;">
+            <div class="teltit">
+                <h5 data-localize="lg.emregister">邮箱注册</h5>
+                <p>
+                    <img src="images/regi.png" style="width: 20px;" />
+                    <span data-localize="lg.noset">注册后不能修改</span>  
+                </p>
+            </div>
+            <div class="theme">
+                <form>
+                    <div class="flex alcenter white showcity" onclick="showcity(0)">
+                        <span class='city_name name2'>China</span>
+                        <img src="images/down.png" alt="">
+                    </div>
+                    <div class="form-group mt20">
+                        <input type="text" class="form-control logtxt focu" id="emails" placeholder="邮箱" data-localize="lg.email" name="emails"
+                            value="" />
+                        <p id="mess1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                    </div>
+
+                    <a class="btn btn-default emailbtn" data-toggle="modal" data-target="#emailnext" data-localize="lg.next">下一步</a>
+                    <p id="mess" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+
+                    <a class="help-block" href="javascript:;" id="registel" data-localize="lg.phregister">手机注册</a>
+                </form>
+            </div>
+            <div class="yecount ftw">
+                <span data-localize="lg.have">已有BIBEX账号？</span>
+                <a href="login.html" data-localize="lg.lgs">登录</a>
+            </div>
+        </div>
+    </div>
+    <!--手机注册弹框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="telnext">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color:#728DAF" data-localize="lg.ceil">取消</span>
+                    </button>
+                    <h4 class="modal-title" data-localize="lg.msgtest">短信验证</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group verification">
+                            <!-- <label id="phone" style="color:#728DAF">发送验证码</label> -->
+                            <input type="text" class="form-control focu" id="telverifi" placeholder="请输入手机验证码" data-localize="lg.ppcode" name=""
+                                value="" />
+                            <input type="button" id="fbtain" data-localize="lg.send" value="发送" />
+                            <p id="m1" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary confirm_btn1" data-localize="lg.sure">确认</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--邮箱注册弹框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="emailnext">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" data-localize="lg.ceil">取消</span>
+                    </button>
+                    <h4 class="modal-title" data-localize="lg.emtest">邮箱验证</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group verification">
+                            <label id="email" data-localize="lg.scode">发送验证码</label>
+                            <input type="text" class="form-control" id="emailverifi" placeholder="请输入邮箱验证码" data-localize="lg.pemcode" name=""
+                                value="" />
+                            <input type="button" id="mbtain" data-localize="lg.send" value="发送" />
+                            <p id="m2" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary confirm_btn"  data-localize="lg.sure">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="country">
+        <!-- <li class="flex between p10 white">
+            <span class="c_name">中国</span>
+            <span class="c_number">+89</span>
+        </li> -->
+    </ul>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="./lib/fastclick.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+    <script src="./lib/language_cookie.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/country.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        FastClick.attach(document.body);
+        $('input[type=text]').blur(function(){
+            setTimeout(function(){
+                document.body.scrollTop = document.body.scrollHeight;
+            },300);
+        })
+        $('.confirm_btn').click(function(){
+            var email = $("#emails").val();
+            var emverify = $('#emailverifi').val();
+            var nationality= $('.name2').text();
+            var country_code = $('.city_code').text();
+            $.ajax({
+                type: "post",
+                url: _API + "user/check_email",
+                data: {
+                    "email_code": emverify,
+                    "user_string": email,
+                    "country_code": country_code,
+                    "scene": "register",
+                    "lang": lg
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.type == "ok") {
+                        layer_msg(data.message);
+
+                        // window.location.href = "setpass.html?user_string=" + email + "&" + "code=" +emverify;
+                        if (get_param('code')) {
+                            window.location.href = "setpass.html?user_string=" + email + "&" + "code=" +
+                                emverify + '&cod=' + get_param('code')+ "&nationality="+nationality;
+                        } else {
+                            window.location.href = "setpass.html?user_string=" + email + "&" + "code=" +
+                                emverify+ "&nationality="+nationality;
+                        }
+                    } else {
+                        layer_msg(data.message);
+                    }
+                }
+            }) 
+        }) 
+        $('.confirm_btn1').click(function(){
+            var phone = $("#tel").val();
+            var verify = $("#telverifi").val();
+            var nationality= $('.name1').text();
+            var country_code = $('.city_code').text();
+            $.ajax({
+                type: "post",
+                url: _API + "user/check_mobile",
+                data: {
+                    "mobile_code": verify,
+                    "user_string": phone,
+                    "country_code": country_code,
+                    "scene": "register",
+                    "lang": lg
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.type == "ok") {
+                        layer_msg(data.message);
+                        if (get_param('code')) {
+                            window.location.href = "setpass.html?user_string=" + phone + "&" + "code=" +
+                                verify + '&cod=' + get_param('code')+ "&country_code="+country_code+'&nationality='+encodeURI(nationality);
+                        } else {
+                            window.location.href = "setpass.html?user_string=" + phone + "&" + "code=" +
+                                verify+ "&country_code="+country_code+'&nationality='+encodeURI(nationality);
+                        }
+
+                    } else {
+                        layer_msg(data.message);
+                    }
+                }
+            });
+        })
+    })
+        var types=0;
+        function showcity(type){
+            types=type;
+            $('.country').show().animate({'width':'100%'})
+            $('body').addClass('overhide')
+        }
+        var html='';
+        $.each(country, function(k,v){
+            html+=`
+                <li class="flex between p10 white">
+                    <div>
+                        <span class="c_name">${v.name_en}</span>
+                        <span class="c_ename ml5">(${v.name_cn})</span>
+                    </div>
+                    <span class="c_number">${v.area_code}</span>
+                </li>  
+            `
+        })
+        $('.country').html(html)
+        $('.country').on('click','li',function(){
+            if(types==0){
+                $('.city_name').text($(this).find('.c_name').text());
+            }
+            $('.city_code').text($(this).find('.c_number').text())
+            $('.country').hide().animate({'width':"0"})
+            $('body').removeClass('overhide')
+        })
+        
+
+        // $('.showcity').click(function(){
+        //     $('.country').show().animate({'width':'100%'})
+        //     $('body').addClass('overhide')
+        // })
+        
+        $("#tel").keyup(function () {
+            if ($(this).val().length > 10) {
+                $(".phonebtn").css("background", "#588fe1")
+            }
+        })
+        $("#emails").keyup(function () {
+            if ($(this).val().length > 5) {
+                $(".emailbtn").css("background", "#588fe1")
+            }
+            // else{
+            //     $(".emailbtn").css("background","#3e536b")
+            // }
+        })
+        $("#regismail").click(function () {
+            $("#telregis").hide();
+            $("#emailregis").show();
+        })
+        $("#registel").click(function () {
+            $("#telregis").show();
+            $("#emailregis").hide();
+        });
+        // $(".focu").focus(function () {
+        //     $(this).css("border-bottom", "1px solid #5072cc")
+        // })
+        // $(".focu").blur(function () {
+        //     $(this).css("border-bottom", "1px solid #3e536b")
+        // })
+        //注册验证手机
+        $("#tel").change(function () {
+            var reg = /^1[345678]\d{9}$/;
+            if ($("#tel").val() != '') {
+                $("#mes1").html("");
+
+            } else {
+                $("#mes1").html(pmobile);
+                return;
+            }
+            var erroMesg = $("#mes1").html();
+            var phone = $("#tel").val();
+
+            if (erroMesg == "" && phone.length != 11) {
+                return;
+            }
+        });
+        //注册验证邮箱
+        $("#emails").change(function () {
+            var emreg =
+                /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (emreg.test($("#emails").val())) {
+                $("#mess1").html("");
+            } else {
+                $("#mess1").html(mnot);
+                return;
+            }
+        });
+        //获取手机验证码
+        $("#fbtain").click(function () {
+            var disabled = $("#fbtain").attr("disabled");
+            var phone = $("#tel").val();
+            var verify = $('#telverifi').val();
+            var country_code = $('.city_code').text();
+            if (disabled) {
+                return false;
+            }
+
+            $.ajax({
+                type: "post",
+                url: _API + "sms_send",
+                data: {
+                    "user_string": phone,
+                    "scene": 'register',
+                    "country_code":country_code,
+                    lang:lg
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.type == 'ok') {
+                        settime();
+                        layer_msg(data.message);
+                    } else {
+                        layer_msg(data.message);
+                    }
+                }
+            });
+        });
+
+        //获取邮箱验证码
+        $("#mbtain").click(function () {
+            var disabled = $("#mbtain").attr("disabled");
+            var email = $("#emails").val();
+            var emverify = $('#emailverifi').val();
+            var country_code = $('.city_code').text() || '+86';
+            if (disabled) {
+                return false;
+            }
+
+            $.ajax({
+                type: "post",
+                url: _API + "sms_mail",
+                data: {
+                    "user_string": email,
+                    "email_code": emverify,
+                    "scene": 'register',
+                    "country_code":country_code,
+                    lang:lg
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.type == 'ok') {
+                        settime();
+                        layer_msg(data.message);
+                    } else {
+                        layer_msg(data.message);
+                    }
+                }
+            });
+        });
+        var countdown = 60;
+        var generate_code = $("#mbtain,#fbtain");
+
+        function settime() {
+            if (countdown == 0) {
+                generate_code.attr("disabled", false);
+                generate_code.val(tsend);
+                $("#mbtain,#fbtain").css('color', '#5890bd');
+                countdown = 60;
+                return false;
+            } else {
+                $("#mbtain,#fbtain").attr("disabled", true);
+                $("#mbtain,#fbtain").css('color', '#b6bfc4');
+                generate_code.val( countdown + "s");
+                countdown--;
+            }
+            setTimeout(function () {
+                settime();
+            }, 1000);
+        }
+        //
+        
+            
+        
+    </script>
+</body>
+
+</html>

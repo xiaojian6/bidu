@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>兑换记录</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        [v-cloak] {display: none}
+        body{padding-bottom: 20px;}
+        .header-space{height: 40px;}
+        .p15{padding: 15px;}
+        .listbox{padding: 0 7% 7%;}
+        .tl{text-align: left}
+        .listbox li{padding: 10px;border-radius: 5;margin-top: 10px;}
+        .listbox div{padding: 5px 0}
+        
+        .m30{margin-top: 30%;}
+    </style>
+</head>
+<body>
+    <header class="header header40 mainbg">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <div class="tc title white">兑换记录</div>   
+    </header>
+    <div class="header-space"></div>
+    <div id="app" v-cloak>
+        <ul class="listbox white">
+            <li class="mainbg" v-for='(item,index) in relist'>
+                <!-- <div class="flex1">
+                    <p>详情</p>
+                    <p class="tl">{{item.memo}}</p>
+                </div> -->
+                <!-- <div class="flex tc">
+                   <div class="flex1">
+                        <p>数量</p>
+                        <p class="mt10">{{item.reward_qty}}</p>
+                    </div>
+                    
+                    <div class="flex1">
+                        <p>时间</p>
+                        <p class="mt10">{{item.create_time}}</p>
+                    </div> 
+                </div> -->
+                <div class="flex between alcenter">
+                   <span data-localize="jc.exnum">兑换数量：</span> 
+                   <span>{{item.exchange_num}}</span>
+                </div>
+                <div class="flex between alcenter">
+                    <span data-localize="jc.cannum">使用JC数量：</span>
+                    <span>{{item.integral}}</span>
+                </div>
+                <div class="flex between alcenter">
+                    <span data-localize="jc.exprice">兑换价格：</span>
+                    <span>{{item.fact_market_price}}</span>
+                </div>
+                <!-- <div class="flex between alcenter">
+                    <span>手续费：</span>
+                    <span>{{item.fee}}</span>
+                </div>
+                <div class="flex between alcenter">
+                    <span>费率：</span>
+                    <span>{{item.fee_ratio}}</span>
+                </div>
+                <div class="flex between alcenter">
+                    <span>积分价值：</span>
+                    <span>${{item.integral_price}}</span>
+                </div> -->
+                <div class="flex between alcenter">
+                    <span data-localize="jc.extime">兑换时间：</span>
+                    <span>{{item.created_at}}</span>
+                </div>
+            </li>
+        </ul>
+        <div class="tc p15 white_gray" @click='more' v-if="show" data-localize="transaction.getmore">加载更多</div>
+        <div class="tc mt30 nodata" style="display:none">
+            <img src="images/anonymous.png" style="width:80px;">
+            <p class="white" data-localize="transaction.nomore">暂无记录</p>
+        </div>
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="lib/vue.min.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <script>
+        var token = get_user_login2();
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                relist:[],
+                page:1,
+                show:false
+            },
+            methods:{
+                getlist(){
+                    var that = this;
+                    $.ajax({
+                        url: _API + "jc/exchange?page="+that.page,
+                        type: "GET",
+                        dataType: "json",
+                        async: true,
+                        beforeSend: function beforeSend(request) {
+                            request.setRequestHeader("Authorization", token);
+                        },
+                        success: function (res) {
+                            if (res.type == 'ok') {
+                                console.log(res)
+                                var list = res.message.data
+                                if(list.length>9){
+                                    that.show=true;
+                                }else{
+                                    that.show=false;
+                                }
+                                that.relist=that.relist.concat(list);
+                                if(that.relist.length==0){
+                                    $('.nodata').show();
+                                }
+
+                            } else {
+                            }
+                        }
+                    });
+                },
+                more(){
+                    this.page=this.page+1;
+                    this.getlist();
+                }
+            },
+            mounted(){
+                this.getlist();
+            }
+        })
+
+    </script>
+</body>
+</html>

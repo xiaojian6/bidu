@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>矿机详情</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" href="static/css/base.css">
+    <link rel="stylesheet" href="static/css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="static/css/iconfont.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<style>
+    .con {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .2rem;
+    }
+    .con img{
+        width: 3rem;
+        height: 3rem;
+    }
+    .con .coninfo{
+        margin-left: .3rem;
+        font-size: .35rem;
+        flex: 1;
+    }
+    .con .coninfo p{
+        height: .8rem;
+        line-height: .8rem;
+    }
+</style>
+<body>
+    <div id="user_info" ></div>
+    <div class="header">
+        <h5>矿机列表</h5>
+        <i class="back backPage"></i>
+    </div>   
+    <div class="con">
+        <img src="static/images/miner/miner_item.png" alt="" class="img">
+        <div class="coninfo">
+            <p >矿机名称：<span class="name"></span></p>
+            <p >矿机价格：<span class="price"></span></p>
+            <!-- <p >每日返比例：<span class="bili"></span> </p> -->
+            <!-- <p >到期时间：<span class="time"></span> </p> -->
+        </div>
+    </div>
+   
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    
+    <script>
+        $(function(){
+        //   /user/ltc
+        // address
+        var address = $("#user_info").data("address")
+        if (address != ""){
+            layer_loading()
+            $.ajax({
+                type: "get",
+                url: laravel_api + "/ltc/detail",
+                data: {
+                    id:get_param('id'),
+                    user_id:address
+                },
+                dataType: "json",
+                success: function(data){
+                    layer_close();
+                    if(data.type=='ok'){
+                        var data=data.message;
+                        $('.img').attr('src',data.thumbnail)
+                        $('.name').html(data.name)
+                        $('.price').html(data.price)
+                        $('.bili').html(data.price)
+                    }
+                    console.log(data)
+                },error:function(err){
+                    layer_close();
+                }
+            })
+        }
+    })
+  
+    </script>
+</body>
+</html>        

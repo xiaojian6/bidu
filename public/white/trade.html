@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的交易</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+</head>
+<style>
+#header{height: 45px;line-height: 45px;}
+#header img{width: 25px;margin: 0 5px}
+.title-select p{flex:1;height: 40px;line-height: 40px}
+.title-select p span{padding: 5px;}
+.active span{border-bottom: 1px solid #689cf1;color:#689cf1 }
+.title-item span{flex: 1;}
+.title-item .time{flex: 2}
+.listitem span,.listitem p{flex:1}
+.listitem .time{flex:2}
+.mtb10{margin-top: 20px ;margin-bottom:20px}
+.content>div{display: none;}
+.content .select{display: block;}
+.content a{color: #5282D0}
+.content .red{color: #de5959}
+#cel{padding: 3px 10px;border: 1px solid #588ee4;border-radius: 4px; color: #5282D0}
+.plr5{padding: 0 5px}
+.pd50{padding-bottom: 50px}
+</style>
+<body>
+    <div id="header">
+        <a class="pull-left flex alcenter" href='personal.html'>					
+            <img src="images/arrows.png"/>
+            <span>交易账户</span>
+        </a>
+    </div>
+    <div class="pd50">
+        <div class="title-select flex alcenter tc">
+            <p class="active" data-urls="transaction_out"><span>正在卖</span></p>
+            <p data-urls="transaction_in"><span>正在买</span></p>
+            <p data-urls="transaction_complete"><span>已完成</span></p>
+        </div>
+        <div class="content ft12 plr5">
+            <div class="select">
+                <div class="flex tc title-item mt5">
+                    <span>币种</span>
+                    <span>价格</span>
+                    <span>数量</span>
+                    <span class="time">时间</span>
+                    <span id="todo">操作</span>
+                </div>
+                <ul class="outlist">
+
+                </ul>
+                <div class="load-more tc gray6">加载更多</div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script>
+    $(function(){
+        // 切换
+        $('.title-select>p').click(function(){
+            var n=$(this).index();
+            page =1;
+            urls= $(this).attr('data-urls');
+            $('.outlist').html('');
+            // $('.inlist').html('');
+            // $('.completelist').html('');
+            // $('.content>div').hide().eq(n).show();
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.load-more').show();
+            getDataing(urls)
+        })
+        var token = get_user_login();
+        var page =1;
+        var urls='transaction_out';
+        getDataing(urls);
+        // 获取数据
+        function getDataing(urls){
+            console.log(urls)
+            layer_loading();
+            $.ajax({
+                url: _API + urls,
+                type: "POST",
+                data:{page:page},
+                dataType: "json",
+                async: true,
+                beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+                },
+                success: function success(res) {
+                    layer_close();
+                    console.log(res)
+                    if (res.type == 'ok') {
+                    var html='';
+                    if(res.message.list.length===0){
+                        layer_msg('没有更多了');
+                        $('.load-more').hide();
+                        return false;
+                    }
+                    var types='';
+                    if(urls=='transaction_out'){
+                        types='out';
+                    }else if(urls=='transaction_in'){
+                        types='in';
+                    }else{
+                        types='';
+                    }
+                    for (i in res.message.list){
+                        var typt_str = '';
+                        if(urls=='transaction_complete'){
+                            if(res.message.list[i].type == 'in'){
+                                typt_str = '买入';
+                            }else{
+                                typt_str = '卖出';
+                            }
+                        }else{
+                            typt_str = '撤销';
+                        }
+                        html+=` <li class="flex alcenter tc listitem mtb10  color9">
+                                <span>${res.message.list[i].legal_name}/${res.message.list[i].currency_name}</span>
+                                <span>${res.message.list[i].price}</span>
+                                <span>${res.message.list[i].number}</span>
+                                <span class="time">${res.message.list[i].create_time}</span>
+                                <p>
+                                    <a href="javascript:;" data-id="${res.message.list[i].id}" data-type="${types}" id="${typt_str=='撤销'?'cel':''}" class="${typt_str=='卖出'?'red':'blues'}" >${typt_str}</a>
+                                </p>
+                            </li>`
+                    }
+                    $('.outlist').append(html);
+                    if(urls=='transaction_complete'){
+                        $('#todo').text('完成类型')
+                    }
+                    page++;
+                    } else if (res.type == '999') {
+                        window.location = _SERVER + 'login.html';
+                    }
+                }
+            });
+        }
+        // 加载更多
+        $('.load-more').click(function(res){
+            getDataing(urls);
+        }) 
+
+        // 撤销
+        $("body").on("click","#cel",function(){
+            var id = $(this).attr('data-id');
+            var type = $(this).attr('data-type');
+            var obj = $(this);
+            console.log(id)
+            layer.open({
+            content: '您确定要撤销吗？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                layer_loading();
+                $.ajax({
+                    type: "POST",
+                    url: _API + 'transaction_del',
+                    data: {
+                        type:type,
+                        id:id
+                    },
+                    dataType: "json",
+                    async: true,
+                    beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                    },
+                    success: function(res){
+                        console.log(res)
+                        layer_close();
+                        layer_msg(res.message)
+                        if (res.type=="ok"){
+                            obj.parent().parent().remove()
+                        }
+                    }
+                })
+            }
+          });
+        })
+    })
+    </script>
+</body>
+</html>

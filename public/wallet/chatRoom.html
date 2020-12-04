@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>聊天室</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+</head>
+
+<body style="background: #f5f5f5;">
+    <header class="borderB">
+        <i class="iconfont icon-jianzuo font24  fontc_3 backPage" style="color: #fff"></i>
+        <h1 class="fontc_3" id="chat_num" style="color: #fff">聊天室(0)</h1>
+    </header>
+    <div id="user_info"  class="mgthead mgbfoot">
+        <section>
+            <!--<div class="tab_nav">
+                <div class="act">
+                    <span>聊天室</span>
+                </div>
+                <div>
+                    <span>公告</span>
+                </div>
+                <div>
+                    <span>客服</span>
+                </div>
+            </div>-->
+            <!--<img src="static/images/home/xian_qu.png" style="width:100%;" />-->
+            <div class="chat_box">
+                <div class="chatRoom clearfix" style="overflow-y: scroll;padding-right:12px;"  >
+                   <div id="msg_content" class="speech_con">
+                        <!--<div class="leftd">
+                            <span class="leftd_h">
+                                <img src="static/images/home/usr.jpg" />
+                            </span>
+                            <div class="speech_boxl">
+                                <p class="speech_name">A零度</p>
+                                <div class="speech left" > 二货，你看你傻样！ </div>
+                            </div>
+                        </div>
+                        -->
+                   </div>
+                   <!--聊天输入框-->
+                   <div class="chat_input">
+                        <input id="content" value="" type="text" >
+                         <!--<i class="iconfont icon-xiaolian font28 fontc_6 "></i>-->
+                         <span id="send_msg" class="speech_send">发送</span>
+                   </div>
+                </div>
+                <!--<div class=" hide" >
+                  
+                </div>
+                <div class=" hide" >
+                  
+                </div>-->
+            </div>
+        </section>   
+    </div>
+
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script type="text/javascript" src="static/javascripts/chatRoom.js"></script>
+    <script src='https://cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script>
+    <script>
+       $(".tab_nav >div").click(function(){
+            var index = $(this).index();
+            $(this).addClass("act").siblings().removeClass("act");
+            $(".chat_box >div").eq(index).removeClass("hide").siblings().addClass("hide");
+       })
+
+       var headH = $("header").height() + $(".chat_input").height();
+       var bodyH = $(window).height();
+       $(".chatRoom").css("height",bodyH - headH);
+       $('.chatRoom').scrollTop( $('.chatRoom')[0].scrollHeight );
+    </script>
+</body>
+</html>

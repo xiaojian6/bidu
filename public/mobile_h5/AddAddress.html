@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>添加地址</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/vue.min.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+	    <script src="./lib/language_cookie.js"></script>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<!-- 头部 -->
+			<header class="header">
+				<a class="back mt5" href="javascript:history.go(-1)">
+				</a>
+				<h4 class="ftw ft16" data-localize="ads.adds">添加地址</h4>
+			</header>
+			<div class="header-space"></div>
+			<div class="part add-address ftw ft16">
+				<div class="partOne">
+					<p data-localize="ads.address">地址</p>
+					<div class="partTwo mt15 mb20"><input class="ftw" type="text" placeholder="输入或粘贴地址" data-localize="ads.padd" id="address" /></div>
+					<p data-localize="ads.remark">备注</p>
+					<div class="partTwo mt15"><input class="ftw" type="text" id="beizhu" /></div>
+				</div>
+			</div>
+			<footer class="add-address-confirm">
+				<a href="javascript:;" class="ftw" @click="but()" data-localize="td.confirm">确定</a>
+			</footer>
+		</div>
+	</body>
+</html>
+<script>
+	var vue = new Vue({
+		el: '#app',
+		data: {
+			List: [],
+			name: '',
+			id: '',
+			twoNum: '1',
+			has_address_num: '',
+
+		},
+		mounted: function() {
+			var self = this;
+			var id = getUrlParam("id");
+			var name = getUrlParam("name");
+			var has_address_num = getUrlParam("has_address_num");
+			var countNum = 1;
+			countNum += Math.floor(has_address_num);
+
+			self.name = name;
+			self.id = id;
+			self.has_address_num = has_address_num;
+			$("#beizhu").attr("value", name + "-Address" + countNum)
+		},
+		methods: {
+			but: function() {
+				var id = getUrlParam("id");
+				var self = this;
+				var token = get_user_login();
+				var address = $("#address").val();
+				var beizhu = $("#beizhu").val();
+				$.ajax({
+					url: _API + "wallet/addaddress",
+					type: "POST",
+					dataType: "json",
+					async: true,
+					data: {
+						currency_id: id,
+						address: address,
+						notes: beizhu
+
+					},
+					beforeSend: function beforeSend(request) {
+						request.setRequestHeader("Authorization",
+							token);
+					},
+					success: function success(data) {
+						console.log(data)
+						self.List = data;
+						if (data.type == "ok") {
+							window.location.href = "address.html";
+						} else if (data.type == "999") {
+							window.location.href = "login.html";
+						}
+					}
+				})
+			},
+		}
+	});
+
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg); //匹配目标参数
+		if (r != null) return unescape(r[2]);
+		return null; //返回参数值
+	}
+</script>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>充币</title>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<style>
+.cbox{padding: 15px 0;}
+.name{height: 40px;line-height: 40px;padding-left: 10px;}
+.codes{width: 180px;margin: 0 auto;}
+#code{width: 180px;height: 180px;border: 10px solid #fff;}
+.ra2{border-radius: 2px;}
+.pd10{padding-bottom: 10px;}
+button{border: none;padding: 3px 10px;background: #2e4456;}
+</style>
+<body>
+<header class="header">
+    <a class="back mt5" href="javascript:history.go(-1)">
+        
+    </a>
+    <h4 class="ftw ft16 bodyColor" data-localize="assets.cmoney">充币</h4>
+</header>
+<div class="header-space"></div>
+<div class="plr15 mt20">
+    <div class="name titles ra2 bold darkpart white">--</div>
+    <div class="cbox darkpart mt20">
+        <div class="codebox ra2">
+            <div class="codes">
+                <div id="code"></div>
+            </div>
+        </div>
+        <div class="tc plr10 ft12 white_gray mt20" data-localize="assets.caddress">充币地址</div>
+        <div class="address tc plr10 ft14 ftw mt10"></div>
+        <div class="blue tc mt10">
+            <button class="copy white_gray ra2 ft12" data-localize="assets.copyaddress">复制地址</button>
+        </div>
+    </div>
+    <div class="ft12 ftw mt40 white_gray pd10">
+        <span data-localize="assets.a01">请勿向上述地址充值任何非</span> 
+        <span class="titles"></span><span data-localize="assets.a02">资产，</span>
+        <span data-localize="assets.a03">否则资产将不可找回。</span>
+        <br>
+        <span class="titles"></span>
+        <span data-localize="assets.a04">充币仅支持simple send的方法，使用其他方法的充币暂时无法上账，请您谅解。</span>
+        <br>
+        <span data-localize="assets.a05">您充值至上述地址后，需要整个网络节点的确认，1次网络确认后到账，6次网络确认可提币。</span>
+        <br>
+        <span data-localize="assets.a06">最小充值金额：</span>
+        <span class="mainnum"></span> <span class="titles"></span>,
+        <span data-localize="assets.a07">小于最小金额的充值将不会上账且无法退回。</span>
+        <span data-localize="assets.a08">您的充值地址不会经常改变，可以重复充值;如有更改，我们会尽量通过网络公告或邮件通知您。</span>
+        <br>
+        <span data-localize="assets.a09">请务必确认电脑及浏览器安全，防止信息被篡改或泄露。</span>
+    </div>
+         
+</div>
+<script src="lib/jquery-2.1.1.min.js"></script>
+<script src="javascripts/main.js"></script>
+<script src="javascripts/jquery.cookie.js"></script>
+<script src="lib/layer_mobile/layer.js"></script>
+<script src="javascripts/jquery.qrcode.min.js"></script>
+<script src="javascripts/clipboard.min.js"></script>
+<script src="./lib/jquery.localize.min.js"></script>
+<script src="./lib/language_cookie.js"></script>
+<script>         
+$(function(){
+    var token = get_user_login();
+    var currency=get_param('id');
+    var coin_type=get_param('name');
+    var contract_address;
+    //获取user_id
+    var user_id;
+    $.ajax({
+            url: _API + "user/info",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            data:{
+                
+            },
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization",token);
+            },
+            success: function (res) {
+                if(res.type == 'ok'){
+                    user_id = res.message.id;
+                    getrate()
+                }
+            }
+        });
+    function getData(contract_address){
+        layer_loading();
+        $.ajax({
+            type: "GET",
+            url: '/walletMiddle/GetRechargeAddress?coin_type='+coin_type+'&user_id='+user_id+'&contract_address='+contract_address,
+            data: {},
+            dataType: "json",
+            async: true,
+            success: function(res){
+                layer_close();
+                if (res.code==0){
+                    console.log(res)
+                    $('.address').html(res.data.address)
+                    code(res.data.address);
+                    copy(res.data.address)
+                } else {
+                    // layer_msg(res.message);
+                }
+            }
+        })
+    }
+    function getrate(){
+        $.ajax({
+            type: "POST",
+            url: _API + 'wallet/get_info',
+            data: {
+                currency:currency
+            },
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function(res){
+                layer_close();
+                if (res.type=="ok"){
+                    name = res.message.name;
+                    coin_type = res.message.type;
+                    $('.titles').html(name);
+                    contract_address = res.message.contract_address;
+                    getData(contract_address);
+                }else{
+                    console.log(res.message)
+                }
+            }
+        })
+    }
+    // 生成二维码
+    function code(addre){
+
+        $('#code').qrcode({
+            width: 160, //宽度
+            height:160, //高度
+            text:addre
+        });
+    }
+     // 复制地址
+    function copy(addre){
+        var content = addre;
+        var clipboard = new Clipboard('.copy', {
+        text: function () {
+            return content;
+        }
+    });
+    clipboard.on('success', function (e) {
+        layer_msg(copys)
+    });
+
+    clipboard.on('error', function (e) {
+        layer_msg(pcopy)
+    });
+    }
+    
+
+})
+</script>
+</body>
+</html>

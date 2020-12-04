@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>重置密码</title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <style type="text/css">
+        /*公共样式*/
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#f6f7f9;font-size:14px;font-family: "微软雅黑";}
+        ul li{list-style:none;}
+        a{text-decoration:none;color:#333;}
+        input{outline:0px ;  -webkit-appearance: none; }
+        input[type=button], input[type=submit], input[type="text"],input[type=checkbox],input[type="password"], button { cursor: pointer; -webkit-appearance: none; } 
+        input:focus { outline: none; }
+        /*重置密码*/
+        .toptit{padding:15px 20px;}
+        .toptit a{color:#adbac0;}
+        header .toptit .return-img{background: url(images/return11.png)no-repeat;
+    background-size: 2.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0px auto;
+    display: block;
+    float: left;margin-left: -10px;}
+        #resetpass{padding:0 30px;margin-top:60px;}
+        #resetpass .txtit{margin-bottom:35px;}
+        #resetpass .txtit h5{color:#2b464f;margin-top:0;font-size:28px;margin-bottom:10px;}
+        #resetpass .txtit span{color:#9aa4a6;}
+        #resetpass .theme .form-control{background-color:#f6f7f9;border:solid 1px #f6f7f9;box-shadow:none;border-bottom:solid 1px #5d7ace;border-radius:0px;padding:6px 5px;font-size:16px;}
+        #resetpass .theme input::-webkit-input-placeholder{color:#c5cacd;font-size:16px;}
+        #resetpass .theme input[placeholder], [placeholder], *[placeholder] {color:#1d455f !important;}
+        #resetpass .theme .btn-default{background:#588cd8;color:#fff;border-color:#588fe1;width:100%;font-size:15px;margin-top:35px;border-radius:0;}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="toptit">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+        </div>
+    </header>
+    <div id="resetpass">
+        <div class="txtit">
+            <h5>重新设置密码</h5>
+            <span>6-20个字符，不可以是纯数字</span>
+        </div>
+        <div class="theme">
+            <form>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="oldpassword" placeholder="请输入原密码" name="oldpassword" value=""/>
+                    <p id="mes4" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="setpassword" placeholder="请输入新密码" name="password" value=""/>
+                    <p id="mes1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="verifypassword" placeholder="请再次输入新密码" name="repassword" value=""/>
+                    <p id="mes2" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p>
+                </div>
+                  <a class="btn btn-default" id="resetp">重置密码</a>
+                  <p id="mes3" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+              </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //验证密码
+        $("#oldpassword").change(function () {
+            var pass = $("#oldpassword").val();
+            if (pass.length < 6 || pass.length > 16) {
+                $("#mes4").html("密码的长度在6~16位");
+
+            } else {
+                $("#mes4").html("");
+            }
+        })
+        $("#setpassword").change(function () {
+            var pass = $("#setpassword").val();
+            if (pass.length < 6 || pass.length > 16) {
+                $("#mes1").html("密码的长度在6~16位");
+
+            } else {
+                $("#mes1").html("");
+            }
+        })
+        $("#verifypassword").change(function () {
+
+            if ($("#setpassword").val() != $("#verifypassword").val()) {
+                $("#mes2").html("两次密码输入不一致");
+                return;
+            } else {
+                $("#mes2").html("");
+            }
+
+        })
+        //重置密码
+        $('#resetp').click(function () {
+
+            var sss = function () {
+
+                var ps = /^[a-zA-Z0-9]{6,16}$/;
+                if (!ps.test($('#oldpassword').val())) {
+                    layer_msg('密码必须为 6-16 位');
+                } else {
+                    return true;
+                }
+            }
+
+            var s = function () {
+
+                var ps = /^[a-zA-Z0-9]{6,16}$/;
+                if (!ps.test($('#setpassword').val())) {
+                    layer_msg('密码必须为 6-16 位');
+                } else {
+                    return true;
+                }
+            }
+
+            var ss = function () {
+                if ($('#verifypassword').val() == $('#setpassword').val()) {
+                    return true;
+                } else {
+                    layer_msg('两次密码输入不一致');
+                }
+            }
+
+
+
+      
+            var oldpass = $('#oldpassword').val();
+            var pass = $('#setpassword').val();
+            var repass = $('#verifypassword').val();
+            
+
+            if (s() == true && ss() == true && sss() == true) {
+               
+                var token = get_user_login();
+                $.ajax({
+                    type: "post",
+                    url: _API+"safe/update_password",
+                    data: { oldpassword:oldpass, password: pass, re_password: repass },
+                    datatype: "json",
+                    beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+                    success: function (data) {
+                        layer_msg(data.message);
+                        //console.log(data.message);
+                        if (data.type == "ok") {
+
+                            setTimeout(function () {
+                                window.location.href = "Security.html";
+                            }, 2000);
+
+
+                        }
+                    }
+                });
+            } else {
+                //layer_msg('请检查输入信息')
+            }
+        })
+        
+    </script>
+</body>
+</html>

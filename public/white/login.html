@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title></title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <style type="text/css">
+        /*公共样式*/
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#f6f7f9;font-size:14px;font-family: "微软雅黑";}
+        ul li{list-style:none;}
+        a{text-decoration:none;color:#333;}
+        input{outline:0px ;  -webkit-appearance: none; }
+        input[type=button], input[type=submit], input[type="text"],input[type=checkbox],input[type="password"], button { cursor: pointer; -webkit-appearance: none; } 
+        input:focus { outline: none; }
+        /*登录*/
+        .toptit{padding:15px 20px;}
+        .toptit a{color:#adbac0;}
+        #login{padding:0px 30px;margin-top:25px;margin-bottom:25px;}
+        #login .logo{overflow:hidden;margin-bottom:35px;}
+        #login .logo img{width:120px;}
+        #login .logo h5{color:#aeb9bf;}
+        /* #5072cc */
+        #login .theme .form-control{background-color:#f6f7f9;border:solid 1px #f6f7f9;box-shadow:none;border-bottom:solid 1px #ccc;border-radius:0px;padding:6px 0;font-size:16px;}
+        #login .theme input::-webkit-input-placeholder{color:#c5cacd;font-size:16px;}
+        #login .theme input[placeholder], [placeholder], *[placeholder] {color:#1d455f !important;}
+        #login .theme .form-group{position:relative;}
+        #login .theme img{position:absolute;top:8px;right:4px;width:16px;height:16px;}
+        #login .theme .btn-default{background:#588cd8;color:#fff;border-color:#588fe1;width:100%;font-size:15px;margin-top:35px;border-radius:0;padding: 10px 0;}
+        #login .theme .help-block{color:#588fe1;text-decoration:none;cursor:pointer;margin-top:30px;}
+        #login .nocount{color:#849eab;font-size:16px;margin-top:45%;}
+        #login .nocount a{color:#588fe1;font-weight:600;}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="toptit">
+            <a href="javascript:;" onclick="javascript:history.go(-1);">取消</a>
+        </div>
+    </header>
+    <div id="login">
+        <div class="logo">
+            <img src="images/logo4.png" style="width:190px" />
+            <h5>登录必火</h5>
+        </div>
+        <div class="theme">
+            <form>
+                <div class="form-group">
+                  <input type="text" class="form-control logtxt" id="name" placeholder="请输入手机号或邮箱" name="name" value=""/>
+                    <p id="mes1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control logtxt" id="password" placeholder="请输入密码" name="password" value="" onblur="passblur()"/>
+                      <input type="text" class="form-control logtxt" id="text" placeholder="请输入密码" value="" style="display:none" onblur="txtblur()"/>
+                  <img src="images/accountm.png" id="imgs" onclick="shpass()" />
+                    <p id="mes2" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p>
+                </div>
+                  <a class="btn btn-default" id="sendLogin" onclick="logon()">登录</a>
+                  <p id="mes3" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                
+                  <a class="help-block" href="forgetpass.html">忘记密码？</a>
+              </form>
+        </div>
+        <div class="nocount">还没有必火账号？<a href="register.html">注册</a></div>
+    </div>
+    <script type="text/javascript">
+        function shpass() {
+            $("#text").toggle();
+            $("#password").toggle();
+            if ($("#imgs").attr('src') == 'images/accountm.png') {
+                $("#imgs").attr('src', 'images/eyes.png');
+            } else {
+                $("#imgs").attr('src', 'images/accountm.png');
+            }
+        }
+        function txtblur() {
+            $("#password").val($("#text").val());
+        }
+        function passblur() {
+            $("#text").val($("#password").val());
+        };
+
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                logon();
+            }
+        });
+        $(".theme input").focus(function(){
+            $(this).css("border-bottom","1px solid #5072cc")
+        })
+        $(".theme input").blur(function(){
+            $(this).css("border-bottom","1px solid #ccc")
+        })
+        //验证手机邮箱
+        $("#name").change(function () {
+            var reg = /^1[34578]\d{9}$/;
+            var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (reg.test($("#name").val()) || emreg.test($("#name").val())) {
+                $("#mes1").html("");
+
+            } else {
+                $("#mes1").html("输入的邮箱或手机号码不符合规则");
+                return;
+            }
+            var erroMesg = $("#mes1").html();
+            var name = $("#name").val();
+
+            if (erroMesg == "" && name.length != 11) {
+                return;
+            }
+        });
+        //验证密码
+        $("#password").change(function () {
+            var pass = $("#password").val();
+            if (pass.length < 6 || pass.length > 16) {
+                $("#mes2").html("密码的长度在6~16位");
+                //layer_msg("密码的长度在6~16位");
+
+            } else {
+                $("#mes2").html("");
+            }
+        })
+        //登录
+        function logon() {
+            var name = $("#name").val();
+            var reg = /^1[34578]\d{9}$/;
+            var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            var t = function () {
+                if (!emreg.test(name) && !reg.test(name)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            var pass = $("#password").val();
+            var p = function () {
+                if (pass.length >= 6 && $("#mes2").html() != '请输入正确密码') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            if (t() == true && p() == true) {
+
+                $.ajax({
+                    type: "post",
+                    url: _API+"user/login",
+                    data: { "user_string": name, "password": pass },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data)
+                       
+                        if (data.type == 'ok') { 
+                            layer_msg("登录成功")
+                            set_user(data.message, 7);
+                            window.location.href ="index.html";
+                        } else {
+                            layer_msg(data.message);
+                            
+                        }
+                    }
+                })
+            } else {
+
+                layer_msg('手机号码 邮箱不正确或密码不对');
+                
+            }
+        }
+    </script>
+</body>
+</html>

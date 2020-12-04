@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>提币地址</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/vue.min.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+	    <script src="./lib/language_cookie.js"></script>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<header class="header">
+				<a class="back mt5" href="javascript:history.go(-1)">
+				</a>
+				<h4 class="ftw ft16" data-localize="ads.tas">提币地址</h4>
+			</header>
+			<div class="header-space"></div>
+			<ul id="ul" class="ftw ft14">
+				<li class="ptb15 pb15 pl12 bdt" v-for="(aa) in List" @click="particulars(aa.id,aa.name,aa.has_address_num)">
+					<span class="clearfix">{{aa.name}}
+					<img class="fr ml10" width="18" src="images/myimg/jitou.png" alt="" />
+						<p class="fr">{{aa.has_address_num}}</p>
+					</span>
+					
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
+<script>
+	var vue = new Vue({
+		el: '#app',
+		data: {
+			List: []
+		},
+		mounted: function() {
+			var self = this;
+			var token = get_user_login();
+			$.ajax({
+				url: _API + "wallet/currencylist",
+				type: "GET",
+				dataType: "json",
+				async: true,
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function success(data) {
+					console.log(data)
+					self.List = data.message;
+					if (data.type == 'ok') {
+
+					} else if (data.type == '999') {
+						window.location = 'login.html';
+					}
+				}
+			});
+		},
+		methods: {
+			particulars: function(id, name, has_address_num) {
+				window.location = 'detailed.html?id=' + id + '&name=' + name + '&has_address_num=' + has_address_num;
+			}
+		}
+	});
+</script>

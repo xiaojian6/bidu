@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>帮助中心</title>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style type="text/css">
+        /*公共样式*/
+        *{margin:0;padding:0;box-sizing:border-box;}
+        ul li{list-style:none;}
+        /*帮助中心*/
+        .toptit{padding:15px 20px 0 20px;overflow:hidden;position:fixed;top:0;left:0;right:0;border-bottom:solid 1px #1B2A3E;text-align:center;padding-right:3rem;}
+        .toptit a{color:#adbac0;}
+        header .toptit .return-img{background: url(images/return1.jpg)no-repeat;
+    background-size: 2.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0px auto;
+    display: block;
+    float: left;margin-left: -10px;}
+        .toptit span{font-size:18px;}
+        #helpe{margin-top: 56px;}
+        #helpe .logotit{padding:15px 20px;margin-bottom:15px;}
+        #helpe ul.hcenter{padding:15px 20px;}
+        #helpe ul.hcenter li{border:solid 1px #1B2A3E;padding:25px 0;
+            text-align:center;margin-bottom:30px;border-radius:4px;font-size:15px;}
+        #helpe .recommend{padding:0 20px;}
+        #helpe .recommend h3{margin-bottom: 15px;}
+        #helpe .recommend ul li{padding:17px 0;border-bottom:solid 1px #1B2A3E;}
+    </style>
+</head>
+<body>
+    <header class="mainbg ">
+        <div class="toptit">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+            <span>帮助中心</span>
+        </div>
+    </header>
+    <div id="helpe">
+        <div class="logotit">
+            <img src="images/logo4.png" />
+        </div>
+        <ul class="hcenter">
+            <li class="mainbg "><a href="#">Bingbi 公告</a></li>
+            
+        </ul>
+        <div class="recommend">
+            <h3 class="">被推荐的文章</h3>
+            <ul id="relist">
+                <li><a href="#">有关CVCOIN改币名和开盘公告有关CVCOIN改币名和开盘</a></li>
+               
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //帮助中心新闻类别
+        $.ajax({
+            type: "post",
+            url: _API+"news/help",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                var hs = data.message;
+                var html = "";
+                for (var i = 0; i < hs.length; i++) {
+                    html += "<li class='mainbg '><a href='javascirpt:;'>" + hs[i].name + "</a></li>";
+                }
+                $("ul.hcenter").html(html);
+            }
+        });
+        //新闻推荐文章
+        $.ajax({
+            type: "post",
+            url: _API+"news/recommend",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var res = data.message;
+                var html = "";
+                for (var i = 0; i < res.length; i++) {
+                    html += "<li class='white_gray'><a href='journalism.html?id=" + res[i].id + "'>" + res[i].title + "</a></li>";
+                }
+                $("#relist").html(html);
+            }
+        })
+    </script>
+</body>
+</html>

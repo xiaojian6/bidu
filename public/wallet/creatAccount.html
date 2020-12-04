@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>创建钱包</title>
+    <link rel="stylesheet" href="static/css/imtoken/create_wallet.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<body>
+<div class="header">
+    <h5>创建钱包</h5>
+    <i class="back backPage"></i>
+</div>
+<div class="tips">
+    <div>
+        <ul>
+            <li>密码用于保护私钥和交易授权,强度非常重要</li>
+            <li>nbtoken 不储存密码，也无法帮您找回，请务必牢记</li>
+        </ul>
+    </div>
+</div>
+<form id="form_content" action="/users/creataccounts" method="post" >
+<div class="form_box">
+    <!-- <input type="text" name="account_number" id="wallet_name" placeholder="钱包名称" class="one_line_input"> -->
+    <input type="password" id="password" name="password" placeholder="密码" class="one_line_input">
+    <input type="password" id="password_prompt" name="password_prompt"  placeholder="确认密码" class="one_line_input">
+    <!-- <input type="text" id="memorizing_words" name="memorizing_words"  placeholder="密码提示信息(可不填)" class="one_line_input"> -->
+    <div class="agreement">
+        <i class="ckb"></i>
+        我已经仔细阅读并同意 <a href="javascript:;" class="fontc_hdl theme_color">服务及隐私条款</a>
+    </div>
+    <input name="content" type="hidden" id="input_content" value="<%= word_content %>">
+    <input name="user_id" type="hidden" id="user_id" value="<%= user_id %>">
+    <a href="javascript:;" class="btn_1 login_btn">创建钱包</a>
+</form>
+    <div class="theme_color">
+        <a href="#" class="btn-in">导入钱包</a>
+    </div>
+</div>
+<div class="common_footer">
+    <a href="index.html" class="active"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/creatAccount.js"></script>		
+</body>
+</html>

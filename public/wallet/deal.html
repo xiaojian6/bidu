@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <meta name="viewport" content="width=750"> -->
+    <meta charset="utf-8" />
+    <title>BTC/USDT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/css/imtoken/deal.css" />
+    <link rel="stylesheet" href="static/css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="static/css/iconfont.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+
+</head>
+
+<body>
+    <div id="user_info" ></div>
+    <!--  头部begin -->
+    <div class="header">
+        <h5>BTC/USDT</h5>
+        <i class="back backPage"></i>
+    </div>
+    <!-- 头部end -->
+    <!-- 买入begin -->
+    <div class="centera">
+        <div class="tab">
+            <p id="oranger">
+                <a class="hover" href="javascript:;" data-id="buy">买入</a>
+                <a href="javascript:;" data-id="sell">卖出</a> 
+            </p>
+            <p class="del">
+                <a href="delegation_cur.html">当前委托</a>
+                <a href="delegation_history.html">历史委托</a>
+            </p>
+        </div>
+        <div id="tablea" class="tablea">
+            <div class="box">
+                <div class="box-t">
+                    <!-- 买入 -->
+                    <div class="box-l" id="buy">
+                        <p class="usable">余额:USDT</p>
+                        <div class="box-num">
+                            <div id="all-balance" class="all-balance cny-balance">0.00</div>
+                        </div> 
+                        <p class="usable">价格:BTC/USDT</p>
+                        <div class="box-num">
+                            <input type="number" placeholder="请输入价格" id="buy-price"/>
+                            <img src="static/images/icon/plus.png" alt="" class="plus">
+                            <img src="static/images/icon/minus.png" alt="" class="minus">
+                        </div>  
+
+                        <p class="usable">数量</p>           
+                        <div class="box-num">
+                            <input type="number" placeholder="数量(BTC)" id="buy-num"/>
+                            <img src="static/images/icon/plus.png" alt="" class="plus2">
+                            <img src="static/images/icon/minus.png" alt="" class="minus">
+                        </div>
+
+                        <p class="usable">交易额</p>                        
+                        <div class="box-num">
+                            <input type="number" placeholder="总额(USDT)" disabled id="buy-total" style="background: #fff" />
+                            <span style="position: relative;left: 79%;top: -0.9rem;color:#999">USDT</span>
+                        </div>
+
+                        <div class="box-btn">
+                            <button class="box-btn-l " id="buyIn">买入&nbsp;BTC</button>
+                        </div>
+                    </div>
+                    <!-- 卖出 -->
+                    <div class="box-l" style="display: none" id="sell">
+                        <p class="usable">余额:BTC</p>
+                        <div class="box-num">
+                            <div id="all-balance" class="all-balance jnb-balance">0.00</div>
+                        </div> 
+                        <p class="usable">价格:BTC/USDT</p>
+                        <div class="box-num">
+                            <input type="number" placeholder="请输入价格" id="sell-price"/>
+                            <img src="static/images/icon/plus.png" alt="" class="plus">
+                            <img src="static/images/icon/minus.png" alt="" class="minus">
+                        </div>  
+
+                        <p class="usable">数量</p>           
+                        <div class="box-num">
+                            <input type="number" placeholder="数量(BTC)" id="sell-num"/>
+                            <img src="static/images/icon/plus.png" alt="" class="plus2">
+                            <img src="static/images/icon/minus.png" alt="" class="minus">
+                        </div>
+
+                        <p class="usable">交易额</p>                        
+                        <div class="box-num">
+                            <input type="number" placeholder="总额(BTC)" disabled id="sell-total" style="background: #fff" />
+                            <span style="position: relative;left: 79%;top: -0.9rem;color:#999">BTC</span>
+                        </div>
+                        <div class="box-btn">
+                            <button class="box-btn-l col-red" id="sellOut">卖出&nbsp;BTC</button>
+                        </div>
+                    </div>
+                    <!-- 买卖价格数据 -->
+                    <div class="box-r" >
+                        <div class="box-tab seller_table">
+                            <div class="title">
+                                <span>卖价</span>
+                                <span>数量</span>
+                            </div>
+                        </div>
+                        <div class="last-price">
+                            0.00
+                        </div>
+                        <div class="box-tab-b buy_table">
+                            <div class="title">
+                                <span>买价</span>
+                                <span>数量</span>
+                            </div>                  
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="cont-btm">
+            <div class="line"></div>
+            <div class="cont-box">
+                <div class="tit">成交记录</div>
+                <div class="title">
+                    <span>成交时间</span>
+                    <span>成交价格</span>
+                    <span>成交数量</span>
+                </div>
+                <div class="complete_list">
+    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 买入end -->
+    <div class="common_footer">
+        <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html"><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        <!-- <a href="deal.html" class="active"><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+        <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+    <!-- 买入end -->
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script src='https://cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script>
+    <script type="text/javascript" src="static/javascripts/imtoken/deal.js"></script>
+
+</body>
+
+</html>

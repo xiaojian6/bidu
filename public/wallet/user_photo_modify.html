@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>修改头像</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+</head>
+<style type="text/css">
+    .input-con img{width: 50px;height: 50px;}
+    .upload_image {
+    padding: 4px 10px;
+    height: 28px;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 30px;
+    margin-top: 10px;
+    display: inline-block;
+}
+.upload_image input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.img_view {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 20px auto;
+}
+.img_view {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 20px auto;
+}
+.img_view img {
+    width: 100%;
+    height: 100%;
+}
+</style>
+<body style="background:#f2f2f2; ">
+    <div class="header">
+        <h5>修改头像</h5>
+        <i class="back backPage"></i>
+    </div>
+    <section class="mgthead">
+        <div class="upload_image">
+            <form  enctype="multipart/form-data" class="font14" style="line-height:1.8rem;">
+                <input type="file" accept="image/*" id="upload" value="">上传头像
+            </form>
+        </div>
+        <div class="img_view">
+            <img src="static/images/icon/default.jpg" alt="">
+        </div>
+        <a class="login_btn quit_btn" href="javascript:;">保存并使用</a>
+    </section>
+
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+</body>
+</html>

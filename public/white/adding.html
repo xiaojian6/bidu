@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>添加方式</title>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/swiper.jquery.min.js"></script>
+        <script src="javascripts/main.js"></script>
+        <script src="javascripts/jquery.cookie.js"></script>
+        <script src="lib/vue.min.js"></script>
+        <script src="lib/layer_mobile/layer.js"></script>
+		<style type="text/css">
+		*{
+				margin: 0;
+				padding: 0;
+				list-style:none;
+				text-decoration: none;
+			}
+		header{
+			width: 90%;
+			margin:0 auto;
+		}
+		header img{
+			margin-top:42px;
+			width: 48px;
+			height:47px;
+		}
+		.txt{
+			width: 90%;
+			margin:0 auto;
+			line-height:162px;
+			font-size:56px;
+			color:#0c2c41;
+		}
+		.nav{
+			width: 90%;
+			margin:0 auto;
+			font-size:30px;
+			margin-bottom:108px;
+		}
+		input{
+			border: none;
+			width:100%;
+			line-height:96px;
+			font-size:30px;
+			outline:none;
+			
+		}
+		.from{
+			width: 100%;
+			border-bottom:1px solid #E2E2E2;
+			margin-top:20px;
+		}
+		footer{
+			width:90%;
+			line-height:100px;
+		    margin-left:5% ;
+			background: #fff;
+		}
+		footer a{
+			display: inline-block;
+			width: 100%;
+			background-color:#ced9db;
+			text-align: center;
+			font-size:30px;
+			line-height:100px;
+			color:#fff;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="app">	
+		<header>
+			<a href="javascript:history.go(-1)"><img src="images/myimg/40802415792124626_03.jpg" alt="" /></a>
+		</header>
+		<div class="txt">
+			<h4>添加方式</h4>
+		</div>
+		<div class="nav">
+			<div class="from">
+				姓名<br>
+				<input type="text" id="name"/>
+			</div>
+			<div class="from">
+				开户行名称<br>
+				<input type="text"  id="yinhang"/>
+			</div>
+			<div class="from">
+				银行账号<br>
+				<input type="text" id="yinHu" />
+			</div>
+			<div class="from">
+				支付宝账号<br>
+				<input type="text" id="zfb"/>
+			</div>
+			<div class="from">
+				微信昵称<br>
+				<input type="text" id="wxname"/>
+			</div>
+			<div class="from">
+				微信账号<br>
+				<input type="text" id="wxzhanghu" />
+			</div>
+		</div>
+		<footer>
+			<a href="#" @click="add()">保存</a>
+		</footer>
+		</div>
+	</body>
+</html>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[]
+        },
+        mounted: function () {
+             var self = this;
+		     var token = get_user_login();
+		 $.ajax({
+            url: _API + "user/cash_info",
+            type: "POST",
+            dataType: "json",
+            async: true,
+            data:{
+            },
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+                if (data.type == 'ok') {
+                	 var data = data.message;
+                	$("#name").attr("value",data.real_name);
+                	$("#yinhang").attr("value",data.bank_name);
+                	$("#yinHu").attr("value",data.bank_account);
+                	$("#zfb").attr("value",data.alipay_account);
+                	$("#wxname").attr("value",data.wechat_nickname);
+                	$("#wxzhanghu").attr("value",data.wechat_account) ;	
+                } else{
+                	layer_msg(data.message);
+                };
+                if(data.type == '999'){
+                    window.location =_SERVER+'login.html';
+                }
+            }
+           });	
+	    },
+	    methods:{
+				   //跳详情
+            particulars:function(id){
+			window.location =_SERVER+'Transferred.html?Id='+ id;
+		},
+			add:function(){
+			 var self = this;
+		     var token = get_user_login();
+		     var name=$("#name").val();
+		     var yinhang=$("#yinhang").val();
+		     var yinHu=$("#yinHu").val();
+		     var zfb=$("#zfb").val();
+		     var wxname=$("#wxname").val();
+		     var wxzhanghu=$("#wxzhanghu").val();
+		     $.ajax({
+            url: _API + "user/cash_save",
+            type: "POST",
+            dataType: "json",
+            async: true,
+            data:{
+            	real_name:name,
+            	bank_name:yinhang,
+            	bank_account:yinHu,
+            	alipay_account:zfb,
+            	wechat_nickname:wxname,
+            	wechat_account:wxzhanghu
+            },
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+            	self.List = data.message;
+                if (data.type == 'ok') {
+                	layer_msg('操作成功');
+			        window.location.reload();
+                } else{
+                	layer_msg(data.message);
+                }
+                if(data.type == '999'){
+                 window.location ='login.html';
+                }
+            }
+           });	
+		}
+	   }
+	});
+</script>

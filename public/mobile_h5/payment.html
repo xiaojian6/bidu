@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>转出</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <script type="text/javascript" src="lib/vue.min.js"></script>
+</head>
+<style>
+.connectbox{margin-top: 25px;}
+.input_box{width: 80%;}
+.input_box input{height: 40px;width:100%;border:none;border-bottom: 1px solid #3e536b;padding-left: 10px;background: transparent;border-radius: 0px;font-size: 16px;}
+.input_box img{position: absolute;top: 14px;right: 4px;width: 16px;height: 16px}
+button{height: 40px;width: 100%;border-radius: 4px;border: none;margin-top: 50px;}
+input[placeholder], [placeholder], *[placeholder] {
+    color: #fff !important;
+}
+</style>
+<body>
+    <div id="app" v-cloak>
+        <header class="header">
+            <!-- <a class="back mt5" href="javascript:history.go(-1)">
+                
+            </a> -->
+            <h4 class="ftw ft16">支付</h4>
+        </header>
+        <div class="header-space"></div>
+        <div class="connectbox">
+            <!-- <div class="logo tc">
+                <img src="images/logo.png" style="width: 50px;">
+                <h5 class="white_gray mt10">BIBEX</h5>
+            </div> -->
+            <div class="input_box mauto mt20">
+                <div class="reltive">
+                    <input type="text" class="form-control" placeholder="请输入账号">
+                    <img src="images/account.png" alt="">
+                </div>
+                <!-- <div class="mt10 reltive">
+                    <input type="password" class="form-control" placeholder="请输入密码" v-model='password'>
+                    <img src="images/password.png" alt="">
+                </div> -->
+                <div class="mt10 reltive">
+                    <input type="number" class="form-control" placeholder="请输入金额">
+                    <img src="images/money.png" alt="">
+                </div>
+                <button class="btnbg ftw" @click='sendData'>确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script> 
+    <script>
+    var vue = new Vue({
+        el: '#app',
+        data:{
+           account:'',
+           password:'',
+           number:'',
+        },
+        methods:{
+            sendData(){
+                var that =this;
+                if(that.account==''){
+                    return layer_msg('账号不能为空');
+                }
+                if(that.password==''){
+                    return layer_msg('密码不能为空');
+                }
+                if(that.number=='' || that.number<=0){
+                    return layer_msg('请输入金额');
+                }
+                $.ajax({
+                    url: _API + "",
+                    type: "POST",
+                    dataType: "json",
+                    async: true,
+                    data:{
+                        account:that.account,
+                        password:that.password,
+                        number:that.number
+                    },
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
+            },
+        },
+        mounted(){
+       
+        }
+    })
+    </script>  
+</body>
+</html>

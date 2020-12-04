@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>个人设置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+    <link rel="stylesheet" href="static/css/footer2.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+</head>
+<style type="text/css">
+    .input-con img{width: 50px;height: 50px;}
+    .setInfo p{
+        line-height: 2.5rem;
+        /* background-color: #E2E2E2; */
+        color: #9F9F9F;
+        font-size: .9rem;
+        padding-left: 1rem;
+    }
+    .setInfo p img{
+        display: inline-block;
+        vertical-align: middle;
+        width: 1.4rem;
+        height: 1.4rem;
+        margin-right: .5rem;
+    }
+    .setInfo .item .info{
+        line-height: 3rem;
+        /* border-bottom: 1px solid #E6E6E6; */
+        font-size: 1rem;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .setInfo .item .info span{
+        width: 6.5rem;
+    }
+    .setInfo .item .info input{
+        /* border-bottom: 1px  solid #cccaca */
+    }
+    .setInfo .item .info input,
+    .setInfo .item .info select{
+        flex: 1;
+        height: 2.5rem;
+    }
+    .login_box{
+        padding: 0;
+    }
+    select{
+        /* display: inline-block;
+        width: 70%; */
+        border:none;
+        border-bottom: 1px solid #cccaca;
+        background-color: transparent;
+    }
+    .line{
+       height: .4rem;
+       background-color: #E6E6E6;
+    }
+    .btnSure{
+        margin-top: 1rem;
+    }
+</style>
+<body style="background:#f2f2f2; ">
+    <div id="user_info"  ></div>
+    <header class="borderB">
+        <i class="iconfont icon-jianzuo font24  fontc_6 backPage"></i>
+        <h1 class="fontc_6">个人设置</h1>
+    </header>
+
+    <section style="margin-top:3rem;">
+        <div class="loginPage mgt10">
+            <div class="login_box" style="background: #fff;padding-bottom:0;">
+                <form action="">
+                    <input type="hidden" name="address" value="<%= address %>">
+                    <div class="setInfo">
+                        <div class="item">
+                                <div class="info">
+                                    <span>真实姓名：</span>
+                                    <input type="text" name="real_name" placeholder="输入您的真实姓名">
+                                </div> 
+                        </div>
+                        <div class="line"></div>
+                        <p><img src="static/images/imtoken/icon_3@2x.png" alt=""> 微信信息</p>
+                        <div class="wechat item">
+                            <div class="info">
+                                <span>微信昵称：</span>
+                                <input type="text" name="wechat_nickname" placeholder="请输入微信昵称">
+                            </div>
+                            <div class="info">
+                                <span>微信账号：</span>
+                                <input type="text" name="wechat_account" placeholder="请输入微信账号">
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <p><img src="static/images/imtoken/icon_2@2x.png" alt="">支付宝信息</p>
+                        <div class="zhibu item">
+                            <!-- <div class="info">
+                                <span>支付宝昵称：</span>
+                                <input type="text"  placeholder="请输入支付宝昵称">
+                            </div> -->
+                            <div class="info">
+                                <span>支付宝账号：</span>
+                                <input type="text" name="alipay_account" placeholder="请输入支付宝账号">
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <!-- <p> <img src="static/images/imtoken/icon_1@2x.png" alt="">银行卡信息</p>
+                        <div class="zhibu item">
+                            <div class="info">
+                                <span>银行卡：</span>
+                                <select name="bank_id" id="bank">
+                                </select>
+                            </div>
+                            <div class="info">
+                                <span>卡号：</span>
+                                <input type="text" name="bank_account" placeholder="请输入卡号">
+                            </div>
+                        </div> -->
+                    </div>
+                </form>
+                <!-- <div class="login_tab" >
+                    <div class="input-con">
+                        <span class="fontc_3 font14">头像</span>
+                        <a href="/users/user_photo_modify" class="mgl10" style="display: flex;align-items:center;">
+                            <img src="static/images/home/usr.jpg" alt="">
+                             <i class="iconfont icon-jianyou fontc_9 font20"></i>
+                        </a>
+                    </div>
+                    <div class="input-con">
+                        <span class="fontc_3 font14">昵称</span>
+                        <span>
+                            <i class="fontc_3 txt">summer</i>
+                        </span>
+                    </div>
+                    <div class="input-con">
+                        <span class="fontc_3 font14">创建时间</span>
+                        <span>
+                            <i class="fontc_3 font14">2017-8</i>
+                        </span>
+                    </div>
+                    <div class="input-con">
+                        <span class="fontc_3 font14">账户</span>
+                        <span>
+                            <i class="fontc_3 txt">CNY</i>
+                            <i class="iconfont icon-jianyou fontc_9 font20"></i>
+                        </span>
+                    </div>
+                    <div class="input-con">
+                        <span class="fontc_3 font14">手机号</span>
+                        <span>
+                            <i class="fontc_3 txt">13212324566</i>
+                            <i class="iconfont icon-jianyou fontc_9 font20"></i>
+                        </span>
+                    </div>
+                    <div class="input-con">
+                        <span class="fontc_3 font14">我的二维码</span>
+                        <span>
+                            <i class="iconfont icon-erweima fontc_9 font24"></i>
+                            <i class="iconfont icon-jianyou fontc_9 font20"></i>
+                        </span>
+                    </div>
+                </div> -->
+                
+            </div>
+            <a class="login_btn btnSure" href="javascript:;">确定修改</a>
+            <!-- <a class="login_btn quit_btn" href="/users/login">退出登录</a> -->
+        </div>
+    </section>
+    <div style="height: 2rem;"></div>
+
+    <div class="common_footer">
+		<a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+		<a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+			<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+		<a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+		<a href="userinfo.html"  class="active" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script>
+        $(function(){
+            var address = $("#user_info").data("address")
+            console.log(address)
+            function getData(url,type,data,callback){
+                data=data || {};
+                type=type ||'get'
+                $.ajax({
+                    url:laravel_api + url,
+                    type:type,
+                    data:data,
+                    success:function(res){
+                        // console.log(res)
+                        if(res.type=='ok'){
+                            callback && callback(res.message)
+                        }else{
+                            layer_msg(data.message);
+                        }
+                    }
+                })
+            }
+            // getData('/banks',null,null,function(data){
+            //     var html='';
+            //     if(data && data.length>0){
+            //         for(var i in data){
+            //             html+=`<option value="${data[i].id}">${data[i].name}</option>`
+            //         }
+            //         $('#bank').html(html)
+            //     }
+               
+            // });
+            getData('/user/cash_info',null,{address:address},function(data){
+                console.log(data)
+                if(data){
+                    for(var k in data){
+                        var type=$('[name='+k+']').attr('type');
+                        console.log(type)
+                        if(type!=undefined&&type!=null){
+                            if(type=="text"){
+                                $('[name='+k+']').val(data[k])
+                            }
+                            
+                        }
+                    }
+                    // console.log(data.bank_id)
+                    // $("#bank").val(data.bank_name);
+                    // $('#bank').find("option[value="+data.bank_id+"]").attr("selected",true);  
+                }
+                
+                
+            })
+            $('.btnSure').click(function(){
+                var t=$('form').serializeArray();
+                var data={}
+                $.each(t, function() {
+                    data[this.name] = this.value;
+                });
+                console.log(data)
+                getData('/user/cash_info','post',data,function(data){
+                    layer_msg(data)
+                })
+            })
+        })
+    </script>
+</body>
+</html>

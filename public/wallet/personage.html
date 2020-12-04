@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>个人中心</title>
+		<link rel="stylesheet" href="static/css/common.css">
+		<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+		<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+		<script src="static/javascripts/jquery.cookie.js"></script>
+		<script type="text/javascript" src="static/javascripts/main.js"></script>
+		<script src="static/lib/mobile-util.js"></script>
+		<script src="static/lib/vue.min.js"></script>
+		<!-- <link rel="stylesheet" href="css/common.css"> -->
+		<style>
+		*{
+				margin: 0;
+				padding: 0;
+                list-style: none;
+				text-decoration: none;
+			}
+
+		.aaa{
+			width: 100%;
+			overflow: hidden;
+			border-bottom: 10px solid #E2E2e2;
+    		border-top: 10px solid #E2E2e2;
+		}
+		ul{
+			width:100%;
+			overflow: hidden;
+			padding:0 10px;
+			margin:10px 0px;
+		}
+		.aaa h3{
+		   display: block;
+		   width: 100%;
+		   font-size:14px;
+		   line-height:40px;
+		   padding-left:10px;
+		   border-bottom:1px solid #eee;
+		}
+		.aaa span{
+			float:right;
+			margin-right:20px;
+		}
+		.aaa h3>span{
+			color:#fa6643;
+			font-size: 12px;
+		}
+		 ul li{
+			font-size:14px;
+			line-height: 2.7;
+		}
+		.btn{
+			display: block;
+			width: 90%;
+			margin: 40px auto 0;
+			padding: 10px 0;
+			border:none;
+		}
+		</style>
+	</head>
+	<body>
+	 <div id="app">
+		<div class="header baseBg2 tc flex">
+			<a class="back backPage"  href="javascript:history.go(-1);"></a>
+			<h5 class="block mauto white">个人中心</h5>
+		</div>
+		<div class="aaa color1 pt40">
+			<h3>身份验证     
+				<span v-show="List.review_status==1">审核中</span>
+				<span v-show="List.review_status==2">已认证</span>
+			</h3>
+			<ul>
+				<li v-show="List.review_status==0">·&nbsp;认证后可提升提币额度</li>
+				<li v-show="List.review_status==0">·&nbsp;认证后可进行法币交易</li>
+				<li v-show="List.review_status==1">·&nbsp;认证后可提升提币额度</li>
+				<li v-show="List.review_status==1">·&nbsp;认证后可进行法币交易</li>
+				<li v-show="List.review_status==2">姓名<span>{{List.name}}</span></li>
+				<li v-show="List.review_status==2">账户<span>{{List.account}}</span></li>
+				<li v-show="List.review_status==2">UID<span>{{List.id}}</span></li>
+				<li v-show="List.review_status==2">证件号码<span>{{List.card_id}}</span></li>
+			</ul>
+		</div>
+		<button v-show="List.review_status==0" @click="aa()" class="btn bgLinearblue">去认证</button>
+
+	 </div>
+	</body>
+</html>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[]
+        },
+        mounted: function () {
+         var self = this;
+		     var token = get_user_login();
+		     $.ajax({
+            url: laravel_api + "/user/center",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+            	self.List = data.message;
+                if (data.type == 'ok') {
+                	
+                } else if(data.type == '999'){
+                 window.location =_SERVER+'login.html';
+                }
+            }
+        });	
+	    },
+	    	methods:{
+	    		aa:function(){
+	    			window.location =_SERVER+'authentication.html';
+	    		}
+	    }
+	});
+</script>

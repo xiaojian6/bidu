@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <title>K线图</title>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,
+minimun-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/dataMap.css" />
+    <link rel="stylesheet" href="lib/kline/kline.css">
+    <style type="text/css">
+        html,body{
+            overflow: hidden;
+        }
+        .kline {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 462px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="kline">
+        <div id="kline_container"></div>
+    </div>
+        <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+	    <script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/main.js"></script>
+        <script src="lib/kline/jquery.mousewheel.js"></script>
+        <script src="lib/kline/kline.js"></script>
+    <script type="text/javascript">
+        var kline = new Kline({
+            element: "#kline_container",
+            width: $('.kline').width(),
+            height: 650,
+            theme: 'dark', // light/dark
+            language: 'zh-cn', // zh-cn/en-us/zh-tw
+            ranges: ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"],
+            symbol: "BTC",
+            symbolName: "BTC/USD",
+            type: "poll", // poll/socket
+            url: _API + 'currency/fifteen_minutes',
+            limit: 1000,
+            intervalTime: 5000,
+            debug: true,
+            showTrade: true,
+            onResize: function (width, height) {
+                console.log("chart resized: " + width + " " + height);
+            }
+            
+        });
+        kline.draw();
+        console.log(kline.width,$('.kline').width())
+        $('#resize-btn').click(function () {
+            var height = $('#height').val();
+            var width = $('#width').val();
+            kline.resize(width, height);
+        });
+        $('#switch-trade-btn').click(function () {
+            kline.toggleTrade();
+        });
+        $('#set-symbol-btn').click(function () {
+            var symbol = $('#symbol').val();
+            var symbolName = $('#symbol-name').val();
+            kline.setSymbol(symbol, symbolName);
+        });
+        $('#toggle-theme-btn').click(function () {
+            if (kline.theme == "dark") {
+                kline.setTheme("light");
+            } else {
+                kline.setTheme("dark");
+            }
+        });
+        $('#set-lang-btn').click(function () {
+            var lang = $('#lang-select').val();
+            kline.setLanguage(lang);
+        });
+    </script>
+
+</body>
+
+</html>

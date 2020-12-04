@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+
+</head>
+<style type="text/css">
+	body{
+        background:#fcfcfd url(static/images/hdl/login.png) no-repeat;
+        background-size:100%;
+    }
+</style>
+<body>
+    <form id="form_content" action="/users/do_login" method="post" autocomplete="off">
+        <div class="loginPage" style="margin-top:70%;">
+            <div class="login_box">
+                <div class="login_tab" >
+                    <div class="input-con" style="border-bottom:1px solid #a9a9a9;">
+                        <i class="iconfont icon-denglu font24 fontc_6"></i>
+                        <input  type="text" id="account_number" name="account_number" class="login_input fontc_6" placeholder="请输入账号" autocomplete="off"/>
+                    </div>
+                    <div class="input-con" style="border-bottom:1px solid #a9a9a9;">
+                        <i class="iconfont icon-icon-system-fn-lock font24 fontc_6"></i>
+                        <input  class="login_input fontc_6" type="password" id="password" name="password" placeholder="请输入密码" autocomplete="off"/>
+                    </div>
+                </div>
+                <a class="login_btn" href="javascript:;">登录</a>
+                <a class="line_btn" style="background:#bbb;margin-top:1rem;" href="/users/register">注册账户</a>
+            </div>
+        </div>
+        <input name="user_id" type="hidden" id="user_id" value="">
+    </form>
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script type="text/javascript" src="static/javascripts/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>交易记录</title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/fiatrad.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .record_box .item{
+          list-style: none;
+          padding: .2rem .5rem;
+      }
+      .active{
+          color: #5887D3;
+          border-bottom: 1px solid #5887D3;
+      }
+      .record-l{
+          line-height: 1.8;
+      }
+      .record-r {
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+      }
+    </style>
+</head>
+<body>
+    <header class="header bgWhite">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <div class="tc title">交易记录</div>   
+    </header>
+    <div class="record_box mt40 flex ptb10 plr10 bgWhite">
+        <div class="item flex1 active tc">买入记录</div>
+        <div class="item flex1 tc">卖出记录</div>
+    </div>
+    <div class="mt10">
+        <div class="deal_list ft10">
+                <div class="record-box bgWhite plr10 ptb10 mb10 reltive">
+                    <div class="record-l">
+                        <p>11.00000&nbsp;CNY</p>
+                        <div style="display:block">交易账号：1451491129@qq.com</div>
+                        <div style="display:none">提现账号：1451491129@qq.com</div>
+                        <div>承兑商：cn598586</div>
+                        <div>承兑商交易账号：1</div>
+                        <div style="display:none">交易方式：银行</div>
+                        <div style="display:block">交易方式：支付宝</div>
+                        <div style="display:none">交易方式：微信</div>
+                        <p style="display:block" class="blue">等待承兑商确认</p>
+                        <p style="display:block" class="blue">已确认</p>
+                        <p style="display:block" class="red">已拒绝</p>
+                        
+                    </div>
+                    <div class="record-r color1 ">
+                        <p class="tr blue ft14 mb20">充值</p>
+                        <p>承兑时间：2018-09-16 14:37:51</p>
+                        <p style="display:block">确认时间：未确认</p>
+                    </div>
+                </div>
+                
+        </div>
+    </div>
+   
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="javascripts/main.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>我的C2C</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/fiatrad.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+    <script src="../javascripts/flexble.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <style>
+        header .toptit .nav-tabs{
+            /* width: 200px; */
+            width: 72%;
+            text-align: center
+        }
+        input,select{
+            background-color: transparent;
+        }
+        .fabu_circle{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color:#689df2;
+            color: #fff;
+            position: fixed;
+            bottom: 10%;
+            right: 10px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .logo{border-radius: 50%;}
+         img{
+            width: 15px;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+        .deal_statu>div{
+            margin-right: 20px;
+            padding: 8px 10px;
+        }
+        /* .deal_statu>div.active{
+            background-color: #5282D0;
+            color: #fff;
+        } */
+        .mainlist{
+            padding-bottom: 55px;
+        }
+        .mainlist>div.select{
+            background: #5282D0;
+            color: #fff;
+        }
+        /* .mainlist>div{
+            background-color: #b5b5b5;
+            color: #fff;
+        } */
+        .active2{
+            color: #5282D0;
+            border-bottom: 2px solid #5282D0
+        }
+        .sp_in_info a{
+            display: block;
+            /* border-bottom: 1px solid #eee; */
+        }
+       
+    </style>
+</head>
+<body>
+    <header>
+        <div class="toptit baseBg">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+            <div class="fiat">
+                <a href="javascript:;" class="records"><img class="fiat1" src="../images/fiat1.jpg" /></a>
+            </div>
+            <ul class="nav nav-tabs cointypes" role="tablist" >
+              <li role="presentation" class="active" data-type="buy"><a href="javascript:;" data-localize="td.mybuys">我的求购</a></li>
+              <li role="presentation"  data-type="sell" ><a href="javascript:;" data-localize="td.mysells">我的出售</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="fiatrad">
+        <div class="tab-content">
+          <div role="tabpanel"  >
+            <div class="fitab ">
+                <ul class="fabi nav nav-tabs  flex alcenter" role="tablist">
+
+                </ul>
+            </div>
+              <div class="tab-content mainlist">
+                    <div class="sp_in_info  white plr10 ">
+                    </div>
+              </div>
+          </div>
+
+        </div>
+    </div>
+    <style>
+		.layer_opeation	{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        background-color: #102030;
+        /* margin-bottom: 45px; */
+        }
+        .all{
+            right: 10px;
+            top:0;
+            height: 100%;
+        }
+        .inNum{
+            border:1px solid #C6D0D6;
+        }
+        .tab_con{
+            width: 45%;
+        }
+        .active{
+            color: #689DF2;
+            /* border-bottom: 1px solid #5282D0; */
+        }
+        .layer_box .active{
+            color: #689DF2;
+            border-bottom: 1px solid #689DF2;
+        }
+        input::placeholder{
+            color: #BEC9D0;
+        }
+        .unlegal{
+            display: none;
+        }
+    </style>
+    <div class="fabu_circle" data-localize="fat.release">发布</div>
+    <div class="layer_box" id="fabu">
+        <div class="layer_opeation pb10">
+            <div class="op_content plr10 white_gray">
+                <!-- <div class="flex alcenter bdb mt20 mb10 ft16 bold tab_type ">
+                    <div class="flex1 mr20 active tc " data-type="sell">出售</div>
+                    <div class="flex1  tc " data-type="buy">求购</div>
+                </div> -->
+               <div class="flex alcenter bdb  ">
+                   <span class="flex1" data-localize="td.currency">币种</span>
+                   <p class="flex2 ptb10">
+                      <span class="coin_type"></span>
+                      <span data-localize="deals.balance ml5">余额</span>
+                      <span class="balance">0.00</span> 
+                   </p>
+                   
+               </div>
+               <div class="flex alcenter bdb ptb10 ">
+                    <span class="flex1" data-localize="td.pmethod">请选择支付方式</span>
+                    <select name="coins" id="method" class="flex2 ptb10 plr10 bd">
+                        <option value="-1" data-localize="td.choose">请选择</option>
+                        <option value="ali_pay" data-localize="td.alipay"> 支付宝</option>
+                        <option value="we_chat" data-localize="td.wechat">微信</option>
+                        <option value="bank" data-localize="td.bank">银行卡</option>
+                    </select>
+                </div>
+                <div class="flex alcenter bdb ptb10 ">
+                    <span class="flex1" data-localize="td.pcoin">请选择货币单位</span>
+                    <select name="ucoins" id="umethod" class="flex2 ptb10 plr10 bd">
+                            <option value="-1" data-localize="td.choose">请选择</option>
+                            <option value="CNY">CNY</option>
+                            <option value="USD">USD</option>
+                            <option value="JPY">JPY</option>
+                    </select>
+                </div>
+                <div class="flex alcenter bdb mt10">
+                    <span class="flex1" data-localize="td.Sprice">单价:</span>
+                    <input class="ptb10 flex2 price" type="number" placeholder="请输入单价" name="price" data-localize="td.pprice">
+                </div>
+                <div class="flex alcenter bdb mt10">
+                    <span class="flex1" data-localize="td.num">数量:</span>
+                    <input class="ptb10 flex2 total_number" type="number" placeholder="请输入数量" name="number" data-localize="td.pnum">
+                </div>
+                <!-- <div class="flex alcenter bdb mt10">
+                    <span class="flex1">最小交易量:</span>
+                    <input class="ptb10 flex2 min_number" type="number" placeholder="请输入最小交易量">
+                </div> -->
+            </div>
+            <div class="flex between alcenter mt10  plr10">
+                <div class="bgLinearblue white ptb10 flex1 tc fabu" data-id="" data-localize="fat.release">发布</div>
+            </div>
+        </div>
+    </div>
+    <div class="layer_box_pwd" style="z-index: 100000">
+        <div class="layer_opeation2 pb10 bgColor mauto  ">
+            <div class="op_header maincolor plr10 ptb15 white">
+                <p class="ft20 tc" data-localize="td.pwd">交易密码</p>
+            </div>
+            <div class="plr20 ptb20">
+                <div class="flex alcenter mb20">
+                    <p class="color1" data-localize="td.ppwd">请输入交易密码</p>
+                    <input type="password" name="password" class="password  ptb10 pl10 inNum ml10 radius4 flex1">
+                </div>
+                <div class="bgLinearblue  ptb10 flex1 tc confirm_doit radius4 white" data-localize="td.sure">确认</div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript" src="../lib/layer_mobile/layer.js"></script>
+    <script src="../javascripts/jquery.cookie.js"></script>
+    <script src="../lib/jquery.localize.min.js"></script>
+	<script src="../lib/language_cookie.js"></script>
+    <script src="../javascripts/main_c2c.js"></script>
+    <script>
+        $(function(){
+            var currency_id;
+            var type='buy',page=1;
+            $('select').change(function(){
+                setTimeout(function(){
+                    document.body.scrollTop = document.body.scrollHeight;
+                },300);
+            })
+            $('input[type=number]').blur(function(){
+                setTimeout(function(){
+                    document.body.scrollTop = document.body.scrollHeight;
+                },300);
+            })
+            $('input[type=password]').blur(function(){
+                setTimeout(function(){
+                    document.body.scrollTop = document.body.scrollHeight;
+                },300);
+            })
+            // 获取法币
+            initData({url:'currency/list'},function(res){
+                var legal_list = [];
+                if(res.legal&&res.legal.length>0){
+                    for(var i = 0; i < res.legal.length; i++) {
+                        var cur_data = res.legal[i];
+                        // if (cur_data.show_legal == 1) {
+                            legal_list.push(cur_data);
+                        // }
+                    }
+                    renderList(legal_list);
+                }
+                console.log(res)
+            })
+            function renderList(data){
+                var html='';
+                for(var i in data){
+                    var name=data[i].name;
+                     html+=` <li role="presentation" class="${name=="USDT"?'active':''}" data-id="${data[i].id}"><a href="#${data[i].name}" aria-controls="${data[i].name}" role="tab" data-toggle="tab">${data[i].name}</a></li>
+                        `
+                }
+                $('.fabi').html(html)
+                currency_id=$('.fabi li.active').data('id');
+                $('.coin_type').html($('.fabi li.active').html())
+                console.log(currency_id)
+                getData(type,currency_id)
+            }
+
+            // 获取数据列表
+
+           
+            function getData(type,currency_id){
+                initDataToken({url:'c2c/seller_trade',data:{type,currency_id,page}},function(res){
+                   if(res.data&&res.data.length>0){
+                    render_list2(res.data)
+                   }else{
+                    //    layer_msg(nomore)
+                   }
+                })
+            }
+            function render_list2(data){
+                var inHtml='';
+                for(var i in data){
+                    inHtml+=`<a href="javascript:;" class='bdb pb10'>
+                            <header class="ft14 ptb10">
+                                <span class="">${data[i].currency_name}</span>
+                            </header>
+                            <div class="flex between alcenter">
+                                <div>${tnum} <span>${Number(data[i].surplus_number).toFixed(2)} ${data[i].currency_name}</span></div>
+                            
+                                <div>
+                                    <div class='tr pb5'>${tprice}</div>
+                                    <div class="blue ft18">${Number(data[i].price).toFixed(2)}<span>(${data[i].coin_code})</span></div>
+                                </div>
+                            </div>
+                            
+                               
+                           
+                            <div class="flex between mt10 alcenter">
+                                <div class="pay_type">
+                                    <img src="../images/card.png" alt="" style="display:${data[i].way=='bank'?'inline-block':'none'}">
+                                    <img src="../images/chat.png" alt="" style="display:${data[i].way=='we_chat'?'inline-block':'none'}">
+                                    <img src="../images/zhi.png" alt="" style="display:${data[i].way=='ali_pay'?'inline-block':'none'}">
+                                </div>
+                                <div>
+                                    
+                                    <div class="btn btn-default white bgLinearblue backOrder" data-id='${data[i].id}'>${withdraw}</div>
+                                    <div class="btn btn-default white bgLinearblue lookOrder" data-id='${data[i].id}'>${see}</div>
+                                </div>
+                            </div>
+                        </a>
+                        `   
+                }
+                $('.sp_in_info').append(inHtml);
+                
+            }
+            $('.records').click(function(){
+                location.href='./fiatrad_detail_fabu.html?id='+currency_id
+            })
+            $(window).scroll(function(){
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if(scrollTop + windowHeight == scrollHeight){ 
+                    ++page;
+                    getData(type,currency_id);
+                }
+            }) 
+            $('.fabu_circle').click(function(){
+                $('.layer_box#fabu').show();
+                console.log(currency_id)
+                var type='legal';
+                var currency=currency_id;
+                initDataToken({url:'wallet/detail',data:{type,currency},type:'post'},function(res){
+                    console.log(res)
+                //    if(res.type=='ok'){
+                      var balance=res.legal_balance;
+                      console.log(balance)
+                      $('.balance').html(balance);
+                //    }else{
+                //     //    layer_msg(nomore)
+                //    }
+                })
+
+            })
+            $('.layer_box').click(function(){
+                $(this).hide();
+            })
+            // tab切换
+            $('.cointypes li').click(function(){
+                $(this).addClass('active').siblings().removeClass('active')
+                var page=1
+                $('.sp_in_info').html('')
+                type=$(this).data('type');
+                getData(type,currency_id)
+            })
+            $('.layer_opeation').click(function(){
+                return false;
+            })
+            // 币种切换
+            $('body').on('click','.fabi li',function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                currency_id=$(this).data('id');
+                page=1;
+                $('.sp_in_info').html('')
+                $('.coin_type').html($(this).html())
+                getData(type,currency_id)
+            })
+            var lay_id,layer_type;
+            // 发布
+            $('.fabu').click(function(){
+                layer_type=1;
+                $('.layer_box_pwd .password').val('');
+                $('.layer_box_pwd').show();
+                $('.layer_box#fabu').hide();
+            })
+            $('.layer_box_pwd .confirm_doit').click(function(){
+                var password=$('.password').val();
+                var coin_code=$('#umethod').val();
+                if(layer_type==1){
+                    var way=$('#method').val();
+                    var price=$('.price').val();
+                    var total_number=$('.total_number').val();
+                    var min_number=$('.min_number').val();
+                    if(way<0){
+                        return layer_msg(pmethod)
+                    }
+                    if(coin_code<0){
+                        return layer_msg(pcoin)
+                    }
+                    if(!price){
+                        return layer_msg(ptprice)
+                    }
+                    if(!total_number){
+                        return layer_msg(ptnum)
+                    }
+                    if(!password){
+                        return layer_msg(ptpwds)
+                    }
+                    initDataToken({url:'c2c_send',data:{type,way,price,total_number,currency_id,password,coin_code},type:'post'},function(res){
+                        layer_msg(res)
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    })
+                }
+                if(layer_type==2){
+                    if(!password){
+                        return layer_msg(ptpwds)
+                    }
+                    initDataToken({url:'c2c/back_send',data:{id:lay_id,password},type:'post'},function(res){
+                        layer_msg(res)
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                    })
+                }
+            
+                $('.layer_box_pwd').hide();
+            })
+              //   撤回订单
+            $('body').on('click','.backOrder',function(){
+                lay_id=$(this).data('id');
+                layer_type=2;
+                $('.layer_box_pwd .password').val('');
+                $('.layer_box_pwd').show();
+            })
+            $('body').on('click','.lookOrder',function(){
+                var id=$(this).data('id');
+                location.href='./shop_fiatrad_detail.html?id='+id
+            })
+            $('.layer_opeation2').click(function(){
+                return false;
+            })
+            $('.layer_box_pwd').click(function(){
+                $(this).hide();
+            })
+           
+        
+        })
+    </script>
+</body>
+</html>

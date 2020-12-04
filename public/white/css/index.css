@@ -1,0 +1,76 @@
+﻿/*公共样式*/
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f7f7fb;font-size:14px;font-family: "微软雅黑";}
+ul li{list-style:none;}
+a,
+a:visited,
+a:active,
+a:hover{text-decoration:none;}
+/*首页*/
+.carousel-indicators li{width:15px;height:1px;border-color:#e3e8ee;margin:-3px;}
+.carousel-indicators .active{width:15px;height:1px;border-color:#8aa0ad;margin:-3px;}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img{width:100%;height:191px;}
+#home .carousel-inner .item img{}
+#home .news{padding:10px;background:#fff;margin-bottom:2px;color:#31556d;}
+#home .news img{width:26px;height:17px;margin-right:5px;float:left;}
+#home .news .demos{height: 20px !important;} /*新闻列表高度设置*/
+#home .news .demos a{color:#31556d;}
+#home .trade{padding:17px 13px;background:#fff;overflow:hidden;margin-bottom:12px;}
+#home .trade ul{/*overflow:hidden;*//*margin-bottom: 5px;*/}
+#home .trade ul li{/*float:left;width:33.3333%;*/text-align:center;}
+#home .trade ul li .usdt{color:#0f191a;font-weight:bold;}
+#home .trade ul li h4{color:#00bd80;font-weight:bold;font-size:16px;}
+#home .trade ul li span{font-size:12px;font-weight:500;margin-top:5px;display:block;}
+#home .trade ul li .cny{color:#97a4aa;}
+#home .trade .swiper-pagination-bullet{width:12px;height:2px;}
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{margin:0 -3px;}
+#home .trade .swiper-pagination-bullet{background:#5f5d5d;}
+#home .trade .swiper-pagination-bullet-active{background:#1a394e;}
+.tab-content{
+	margin-bottom:57px;
+}
+
+/*法币交易*/
+#home .fiatde{/*padding:17px 13px;*/background:#fff;overflow:hidden;margin-bottom:12px;}
+#home .fiatde .deals{border-bottom:solid 1px #f1f5f6;overflow:hidden;padding:17px 0 0 13px;}
+#home .fiatde .deals a{float:left;width:100%;}
+#home .fiatde .deals a b{font-size:16px;color:#2b464f;display:block;}
+#home .fiatde .deals a span{color:#93a2a7;font-size:12px;}
+#home .fiatde .deals img{width:120px;height:55px;float:right;}
+#home .fiatde .prost{overflow:hidden;}
+#home .fiatde .prost ul li{overflow:hidden;float:left;width:50%;padding:17px 13px;border-bottom:solid 1px #fafafa;border-right:solid 1px #fafafa;}
+#home .fiatde .prost ul li:nth-of-type(2n){border-right:none;}
+#home .fiatde .prost ul li img{width:45px;height:45px;float:right;}
+#home .fiatde .prost ul li b{font-size:16px;color:#2b464f;display:block;}
+#home .fiatde .prost ul li span{color:#93a2a7;font-size:12px;}
+
+#home .assets{padding:20px 0px 15px 13px;background:#fff;overflow:hidden;margin-bottom:12px;}
+#home .assets img{width:150px;height:95px;float:right;}
+#home .assets b{font-size:16px;color:#2b464f;}
+#home .assets p{margin:5px 0 15px 0;color:#cbd0d3;font-size:12px;}
+#home .assets .btn-default{color:#4d73be;font-size:14px;font-weight:bold;border-color:#ebebeb;box-shadow:0px 0px 10px 5px #fbfbfb;padding:8px 12px;width:36%;background:#fff;}
+#home .assetlogin{background:#fff;overflow:hidden;margin-bottom:12px;}
+#home .assetlogin h5{overflow:hidden;font-size:16px;font-weight:bold;color:#2b464f;padding:17px 13px;border-bottom:solid 1px #f5f5f5;margin:0;}
+#home .assetlogin img.eye{float:right;width:19px;height:15px;}
+#home .assetlogin ul li{float:left;width:50%;padding:17px 13px;border-bottom:solid 1px #fafafa;border-right:solid 1px #fafafa;}
+#home .assetlogin ul li:nth-of-type(2n){border-right:none;}
+#home .assetlogin ul li span{font-size:12px;font-weight:bold;color:#537fc0;display:inline-block;white-space: nowrap;}
+#home .assetlogin ul li img{width:12px;height:12px;margin-left: 4px;}
+#home .assetlogin ul li p{font-size:12px;color:#2b464f;margin:3px 0;}
+#home .assetlogin ul li small{color:#c2c6c5;}
+
+#home .highlists{background:#fff;}
+.nav-tabs{border-bottom: 1px solid #e9e9e9;}
+.nav-tabs>li{margin-bottom:0;}
+.nav>li>a{font-weight:bold;font-size:16px;color:#c3c8cb;}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{color:#2b464f;border:none;}
+#home .highlists .tab-content{padding:15px 13px 15px 10px;}
+#home .highlists .tab-content ul li{padding:5px 0;overflow:hidden;margin-bottom:15px;}
+#home .highlists .tab-content ul li a{}
+#home .highlists .tab-content ul li small{background:#09bc84;color:#fff;padding:0px 4px;margin-right:9px;float:left;}
+#home .highlists .tab-content ul li:nth-child(2) small{background:#6fe3bc;}
+#home .highlists .tab-content ul li:nth-child(3) small{background:#c5d0d4;}
+#home .highlists .tab-content ul li b{color:#2b464f;display:inline-block;margin-top:-3.5px;}
+#home .highlists .tab-content ul li b:first-of-type{margin-right:15px;}
+#home .highlists .tab-content ul li span{color:#c3c8cb;font-size:12px;font-weight:normal;}
+#home .highlists .tab-content ul li .btn-default{background:#03be87;color:#fff;border-color:#03be87;border-radius:0px;padding:6px;float:right;}

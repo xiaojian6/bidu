@@ -1,0 +1,250 @@
+p{
+	margin: 0;
+}
+body{
+	background-color: #f4f8fb;
+}
+div#header{
+	padding:10px 3% 0;
+	background: #fff;
+}
+div#header div{
+	overflow: hidden;
+	margin: 0;
+}
+div#header div.header{
+	position: fixed;
+	width: 100%;
+	border-bottom: 1px solid #f1f1f1;
+	height: 48px;
+	line-height: 48px;
+	background: #fff;
+	z-index: 99;
+	/* padding-left: 10px; */
+	padding-right: 10px;
+}
+div#header div p img{
+	width: 30px;
+	margin: -6px 1px 0 0;
+}
+div#header div P span{
+	font-size: 18px;
+	font-weight: bold;
+}
+div#header div.CNY{
+	/* margin-top: 45px; */
+	padding-bottom: 7px;
+}
+div#header div.CNY div h2{
+	color: #27b054;
+	text-align: left;
+	font-size: 28px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+div#header div.CNY div h4 {
+	color: #5a718e;
+}
+div#header div.CNY div h4 span{
+	color: #27b054;
+}
+div#header div.CNY ul{
+	list-style: none;
+	width: 30%;
+}
+div#header div.CNY ul li{
+	line-height: 20px;
+	text-align: right;
+}
+div#header div.CNY ul li span{
+	padding: 0 6px;
+}
+
+
+.p{
+	color: #ff4f00;
+}
+.g{
+	color: #03bd87;
+}
+
+
+div#bottom{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 0 3%;
+	height: 70px;
+	background: #fff;
+	font-size:14px;
+}
+div#bottom button{
+	width: calc(48.50vw - 12px);
+	height: 50px;
+	font-size: 18px;
+	color: #fff;
+	outline: none;
+	border: none;
+	border-radius: 2px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+div#bottom button:nth-child(2){
+	margin-left: 0;
+}
+div#bottom button:nth-child(1){
+	background: #27b054;
+}
+div#bottom button:nth-child(2){
+	background: #ff4f00;
+}
+
+/* 买入卖出弹窗 */
+.data-modal{
+	display: none;
+	width: 100%;
+	margin: 0 auto;
+	padding: 10px 15px;
+}
+.modals{
+	background-color: #303032!important;
+}
+.modals .layui-layer-btn a{
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	line-height: 40px;
+	height: 40px;
+}
+.tab p{
+	width: 50%;
+}
+.tab span{
+	display: block;
+	padding: 0 10px 5px;
+}
+.tab .active{
+	border-bottom: 1px solid #1E9FFF;
+}
+.control{
+	line-height: 30px;
+	border: 1px solid #f1f1f1;
+	padding: 0 10px;
+	width: 100%;
+	border-radius: 2px;
+}
+.modals select{
+	background-color: #303032;
+	width: 100%;
+}
+.modals #share{
+	width: 40%;
+}
+.share-num{
+	width: 50%;
+	line-height: 30px;
+	border: 1px solid #f1f1f1;
+	padding: 0 10px;
+	border-radius: 2px;
+}
+.new-price{
+	color: #27b054;
+}
+div#sideColumn h4 img {
+	width: 20px;
+	margin: -6px 5px 0 0;
+}
+div#sideColumn {
+	z-index: 101;
+	position: fixed;
+	top: 0;
+	left: -70%;
+	width: 70%;
+	height: 100%;
+}
+div#sideColumn h4 span {
+	margin: 0 10px;
+	color: #ccc;
+	border: none;
+}
+
+div#sideColumn ol,
+div#sideColumn ul {
+	list-style: none;
+}
+
+div#sideColumn ol {
+	display: flex;
+}
+
+div#sideColumn ol li {
+	float: left;
+	flex: 1;
+	text-align: center;
+	line-height: 35px;
+	color: #ccc;
+}
+div#mask1 {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	display: none;
+	background: rgba(130, 129, 129, 0.5);
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+}
+div#sideColumn ul {
+	overflow-y: scroll;
+	height: calc(100.0vh - 70px)
+}
+
+div#sideColumn ul li {
+	height: 60px;
+	line-height: 60px;
+	text-indent: 15px;
+}
+
+div#sideColumn ul li strong {
+	padding: 0 20px 0 0;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	color: #1A384A;
+}
+
+div#sideColumn ul li strong b{
+	color: #999;
+		font-size: 14px;
+		font-weight: bold;
+}
+
+div#sideColumn ul li p {
+	float: right;
+	/* width: 72%; */
+	padding: 0 10px;
+	margin: 0;
+}
+.texts-lever{
+	margin-top: 10px;
+    line-height: 35px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+#sideColumn ul li{
+	border-bottom:1px solid #f1f1f1;
+}
+.fontC{
+	color:#ff4f00;
+	font-size: 16px;
+	font-weight: bold;
+}
+.gre {
+	color: #27b054;
+	font-size: 16px;
+	font-weight: bold;
+}

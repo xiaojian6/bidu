@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+body{
+	padding-top: 1.2000rem;
+}
+
+.header {
+    width: 100%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    font-size: 0.4800rem;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom: 1px solid #ebebeb;
+    background-color: #37bac9;
+    z-index: 666;
+}
+
+.header .back {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0.4000rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    background: url(/images/imtoken/10.png);
+    background-size: cover;
+}
+.mgthead{
+    margin-top: 1.2rem;
+}

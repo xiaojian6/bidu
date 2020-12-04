@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+		<title>谷歌验证</title>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="javascripts/order.js"></script>
+		<script src="javascripts/main.js"></script>
+        <script src="lib/vue.min.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<style>
+				*{
+				margin: 0;
+				padding: 0;
+				list-style:none;
+				text-decoration: none;
+			}
+		header{
+			width: 90%;
+			margin:0 auto;
+		}
+		header img{
+			margin-top:10px;
+			width: 20px;
+			height:20px;
+		}
+		header p{
+            float:right;
+            right:15px;
+           margin-top:13px;
+           color:#ccc;
+        }
+        .nav{
+             width: 90%;
+             margin:0 auto;
+            height:auto;
+        }
+        .nav ul{
+            width:100%;
+            margin-left:24%;
+        }
+		.nav ul li{
+            float:left;
+            border:1px solid #ccc;
+            width:25%;
+            height:30px;
+            text-align:center;
+            line-height:30px;
+            font-size:14px;
+            color:#ccc;
+        }
+        .nav ul :nth-child(1){
+            border-right:none;
+        }
+        .nav ul :nth-child(2){
+            color:#ccc;
+        }
+        .table{
+            width:100%;
+            padding:0 0;
+        }
+        .table table thead tr th{
+            width:33%;
+            text-align:center;
+            margin:auto;
+            padding:20px 10px 0 10px;
+            font-size:14px;
+            color:#ccc;
+            font-weight:normal;
+            height:30px;
+            line-height:30px;
+        }
+        .table table tbody tr td{
+            width:33%;
+            text-align:center;
+            margin:auto;
+            font-size:14px;
+            color:#ccc;
+            font-weight:normal;
+            height:30px;
+            line-height:30px;
+        }
+        .table table tbody tr :nth-child(1){
+            color:black;
+        }
+        .table table tbody tr :nth-child(2){
+            color:#ccc;
+        }
+        .table table tbody tr :nth-child(3){
+            color:rgba(0, 0, 255, 0.562);
+        }
+        .hover{
+            background:#5786d2;
+            color:white !important;
+        }
+        .table{
+            display:none;
+        }
+		</style>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+		<header>
+            <a href="javascript:history.go(-1)">
+            	<img src="images/arrowlf.png" alt="" />
+            </a>
+            <p>全部</p>
+		</header>
+		<div class="nav">
+            <ul>
+                <li class="hover">邀请记录</li>
+                <li>返佣记录</li>
+            </ul>
+            <div class="curr">
+               <div class="table" style="display:block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>被邀请人账号</th>
+                            <th>邀请时间</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(aa) in List">
+                            <td>{{aa.account}}</td>
+                            <td>{{aa.time.substring(0,10)}}</td>
+                            <td v-show="aa.status==0">生效中</td>
+                            <td v-show="aa.status==1">已禁用</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>被邀请人账号</th>
+                            <th>邀请时间</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(jj) in List1">
+                            <td>{{jj.account}}</td>
+                            <td>{{jj.time}}</td>
+                            <td v-show="jj.status==0">生效中</td>
+                            <td v-show="jj.status==1">已禁用</td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+            </div>
+        </div>
+      </div>
+	</body>
+</html>
+<script>
+      $(document).ready(function(){
+        $(".nav ul li").click(function(){
+            var that=this;
+            $(".curr .table").each(function(index,value){
+                if($(that).index()==index){
+                    $(value).css('display','block');
+                    $(value).siblings().css('display','none');
+                    $(that).addClass("hover");
+                    $(that).siblings().removeClass("hover");
+                }
+            })
+        })
+    })
+</script>
+<script>
+      var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[],
+         List1:[]
+        },
+        mounted: function () {
+             var self = this;
+		     var token = get_user_login();
+		     $.ajax({
+            url: _API + "user/my_invite_list",
+            type: "POST",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+                if (data.type == 'ok') {
+                	self.List= data.message;
+                } else if(data.type == '999'){
+                 window.location ='login.html';
+                }
+            }
+        });
+        $.ajax({
+            url: _API + "user/my_account_return",
+            type: "POST",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {+
+            	console.log(data)
+                if (data.type == 'ok') {
+                	self.List1= data.message;
+                } else if(data.type == '999'){
+                 window.location ='login.html';
+                }
+            }
+        });	
+	    }
+	});
+</script>

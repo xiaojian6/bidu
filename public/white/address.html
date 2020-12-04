@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>提币地址</title>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
+        <script src="javascripts/main.js"></script>
+        <script src="javascripts/jquery.cookie.js"></script>
+        <script src="lib/vue.min.js"></script>
+		<style>
+			*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+		}
+		header{
+			width:90%;
+			position: fixed;
+			top:0;
+			left:5%;
+			background-color:#fff;
+		}
+		header img{
+			width: 48px;height: 48px;
+			margin-top:40px;
+		}
+		header h3{
+			font-size:56px;
+			margin-top:60px;
+			color:#06365a;
+		}
+		#ul{
+			width:95%;
+			margin-left:5%;
+			margin-top:280px;
+		}
+		#ul li{
+			line-height:124px;
+			width:100%;
+			border-bottom:1px solid #ededed;
+			font-size:30px;
+			color:#06365a;
+			overflow:hidden;
+		}
+		#ul span{
+			display: block;
+			width:80%;
+			float:left;
+		}#ul p{
+			float: right;
+		}
+		#ul img {
+			width: 23px;
+			height: 36px;
+			float: right;
+			margin-right:30px;
+			margin-top:43px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<header>
+			<a href="javascript:history.go(-1)"><img src="images/myimg/40802415792124626_03.jpg" alt="" /></a>
+			<h3>提币地址</h3>
+		    </header>
+		<ul id="ul">
+			<li v-for="(aa) in List" @click="particulars(aa.id,aa.name,aa.has_address_num)">
+				<span>{{aa.name}}<p>{{aa.has_address_num}}</p></span>
+				<img src="images/myimg/tiaozhuan.png" alt="" />
+			</li>
+        </ul>
+		</div>
+	</body>
+</html>
+<script>
+	 var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[]
+        },
+        mounted: function () {
+             var self = this;
+		     var token = get_user_login();
+		     $.ajax({
+            url: _API + "wallet/currencylist",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+            	self.List = data.message;
+                if (data.type == 'ok') {
+                	
+                } else if(data.type == '999'){
+                 window.location ='login.html';
+                }
+            }
+        });	
+	    },
+	    	methods:{
+            particulars:function(id,name,has_address_num){
+				window.location ='detailed.html?id='+ id+'&name='+name+'&has_address_num='+has_address_num;
+			}
+	    }
+	});
+</script>

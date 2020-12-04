@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>行情首页</title>
+    <link rel="stylesheet" href="static/css/imtoken/market.css">
+    <link rel="stylesheet" href="static/css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="static/css/iconfont.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+<link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+
+</head>
+<body>
+<div id="user_info"  ></div>
+<div class="header">
+    行情
+    <i class="more"></i>
+</div>
+<table class="asset_table">
+    <tr>
+        <th class="name">资产名称</th>
+        <th class="price">最新价</th>
+        <th class="rate">涨跌幅</th>
+    </tr>
+</table>
+<div class="azxc">
+    <a href="market.html_details" class="asset">
+        <div class="name"><div class="name_1">jnb</div>
+        <div class="name_2">JNB</div>
+        </div>
+        <div class="price">
+            <div class="name_1 newprice"></div>
+            <div class="name_2">
+                <span class="quote">成交量</span>
+                <span class="volume"></span>
+            </div>
+        </div>
+        <div class="rate">
+            <div class="rates"></div>
+        </div>
+    </a>
+</div>
+<div class="common_footer">
+        <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html" class="active"><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+        <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script src='https://cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script>
+	<script type="text/javascript" src="static/javascripts/imtoken/market.js"></script>
+</body>
+</html>

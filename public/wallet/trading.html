@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>C2C</title>
+    <link rel="stylesheet" href="static/css/common.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<style>
+    .trading .iconbox ul li {
+        width: 100%;
+        background: #13171c;
+        padding: 15px;
+        border-bottom: 1px solid #333;
+    }
+
+    .c2c-title {
+        width: 40%;
+        justify-content: space-around;
+        height: 40px;
+    }
+
+    .c2c-title p {
+        padding: 5px 0;
+        border-bottom: 2px solid transparent
+
+    }
+
+    .c2c-title .active {
+        color: #fff;
+        border-bottom: 2px solid #fff;
+    }
+
+    .mt55 {
+        margin-top: 55px;
+    }
+
+    .basebg {
+        /* background: #1f2225 */
+    }
+
+    .tradcontent {
+        padding: 0 10px;
+        border-radius: 8px
+    }
+
+    .h35 {
+        height: 40px;
+    }
+
+    input {
+        background: transparent
+    }
+
+    .blline {
+        border-bottom: 1px solid #eee
+    }
+
+    .pay_select {
+        background: transparent;
+        border: none;
+        color: #37bac9;
+        height: 40px;
+        margin-right: .3rem;
+    }
+
+    .blue {
+        color: #379cf2;
+    }
+
+    .buyinfo {
+        padding: 20px 10px;
+    }
+
+    .trade_btn {
+        width: 100%;
+    }
+
+    .trade_btn input {
+        background: #37bac9;
+        border-radius: 8px;
+        height: 35px;
+        width: 80%;
+        color: #fff;
+    }
+
+    .radius4 {
+        border-radius: 4px;
+    }
+
+    .container > div {
+        display: none;
+    }
+
+    .container > div.choosed {
+        display: block;
+    }
+
+    .w20 {
+        width: 20%;
+    }
+
+    .h40 {
+        height: 40px;
+    }
+
+    .info p {
+        line-height: 40px;
+    }
+    input{
+        color: #37bac9;
+    }
+    .info textarea {
+        width: 100%;
+        color: #37bac9;
+        background-color: transparent;
+        font-size: 14px;
+        margin-bottom: 4px;
+        padding: .2rem;
+        border-radius: .15rem;
+    }
+    
+</style>
+<body>
+<header class="mi-header fixed flex tc">
+    <a href="javascript:history.go(-1)" class="back gold"></a>
+    <div class="c2c-title  ft14 mauto flex w50 alcenter">
+        <p class="active">C2C买入</p>
+        <p>C2C卖出</p>
+    </div>
+</header>
+<div class="trading">
+    <div class="mt55 mb55 container">
+        <div class="tradbox pl10 pr10 choosed gold">
+            <div class="tradcontent basebg">
+                <div class="flex alcenter blline">
+                    <span class=" ft14 w20">购买单价</span>
+                    <input type="text" id="in-price" class="flex1 h35 ml10 pl10 " placeholder="输入购买单价">
+                </div>
+                <div class="flex alcenter blline">
+                    <span class=" ft14 w20">购买数量</span>
+                    <input type="text" id="in-number" class="flex1 h35 ml10 pl10 " placeholder="输入购买数量">
+                </div>
+                <div class="flex alcenter blline">
+                    <span class=" ft14 w20">付款姓名</span>
+                    <input type="text" id="in-name" class="flex1 h35 ml10 pl10 " placeholder="请输入付款人姓名">
+                </div>
+                <div class="flex alcenter blline between">
+                    <span class=" ft14 w20">选择币种</span>
+                    <select class="pay_select fr monty-type" id="in-token">
+                    </select>
+                </div>
+                <div class="flex alcenter blline between">
+                    <span class=" ft14 w20">支付方式</span>
+                    <select class="pay_select fr" id="in-pay-mode">
+                        <option value="支付宝">支付宝</option>
+                        <option value="微信">微信</option>
+                        <option value="银行卡">银行卡</option>
+                    </select>
+                </div>
+                <div class="alcenter blline info">
+                    <p class="ft14">详细信息</p>
+                    <textarea rows="10" id="in-content" placeholder="在此输入详细信息"></textarea>
+                </div>
+                <!--<div class="buyinfo  ft14">-->
+                <!--<textarea name="" cols="30" rows="10">231321231</textarea>-->
+                <!--<p>-->
+                <!--<span>CNY</span>-->
+                <!--<span>-></span>-->
+                <!--<span>USDT</span>-->
+                <!--</p>-->
+                <!--<p class="blline">支付方式:<span class="ml10">支付宝</span></p>-->
+                <!--<p class="blline">单价：<span>6.381</span><span class="gold ml10">(1USDT=￥6.381)</span></p>-->
+                <!--<p class="blue blline">-->
+                <!--您的汇款将直接进入签约客户账户，交易过程中的数字资产由平台托管保护-->
+                <!--</p>-->
+                <!--</div>-->
+            </div>
+            <div class="buy_button trade_btn tc mt40">
+                <input id="in-add" type="button" class="ft14" value="下单">
+            </div>
+        </div>
+        <div class="pl10 pr10 white ft14 gold">
+
+            <div class="basebg flex alcenter h40 radius4 pl10 blline">
+                <span class="w20">出售数量</span>
+                <input type="text" id="out-number" class="flex1 pl10 " placeholder="请输入出售数量">
+            </div>
+            <div class="basebg blline flex alcenter h40 radius4 pl10">
+                <span class="w20">出售单价</span>
+                <input type="text" id="out-price" class="flex1 pl10 " placeholder="请输入出售单价">
+            </div>
+            <div class="basebg blline flex alcenter h40 radius4 pl10">
+                <span class="w20">卖出姓名</span>
+                <input type="text" id="out-name" class="flex1 pl10 " placeholder="请输入卖出人姓名">
+            </div>
+            <div class="flex alcenter blline between blline basebg pl10 radius4">
+                <span class="ft14 w20">选择币种</span>
+                <select class="pay_select fr monty-type" id="out-token">
+                </select>
+            </div>
+            <div class="flex alcenter blline between blline basebg pl10 radius4">
+                <span class="ft14 w20">支付方式</span>
+                <select class="pay_select fr" id="out-pay-mode">
+                    <option value="支付宝">支付宝</option>
+                    <option value="微信">微信</option>
+                    <option value="银行卡">银行卡</option>
+                </select>
+            </div>
+            <div class="alcenter blline between blline basebg pl10 radius4 info">
+                <p class="ft14">详细信息</p>
+                <textarea rows="10" id="out-content" placeholder="在此输入详细信息"></textarea>
+            </div>
+
+            <!--<div class="buyinfo  ft14 radius4 blline basebg">-->
+                <!--<p>-->
+                    <!--<span>CNY</span>-->
+                    <!--<span>-></span>-->
+                    <!--<span>USDT</span>-->
+                <!--</p>-->
+                <!--<p class="blline">支付方式:<span class="ml10">支付宝</span></p>-->
+                <!--<p class="blline">单价：<span>6.381</span><span class="gold ml10">(1USDT=￥6.381)</span></p>-->
+                <!--<p class="blue blline">提币时间：工作日24小时内到账，节假日延至工作日</p>-->
+            <!--</div>-->
+            <div class="buy_button trade_btn tc mt40">
+                <input id="out-add" type="button" class="ft14" value="发布">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="common_footer">
+    <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html"><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="ctoc_buy.html" class="active"><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script>
+<script>
+    $(".c2c-title>p").click(function () {
+        var n = $(".c2c-title>p").index(this);
+        $(".c2c-title>p").eq(n).addClass('active').siblings().removeClass('active');
+        $(".container>div").eq(n).show().siblings().hide();
+    });
+
+    layer_loading('正在加载');
+    $.get(laravel_api+'/currency/list',function(res){
+        var html ='';
+        for (i in res.message){
+            html+='<option value="'+res.message[i].token+'">'+res.message[i].name+'</option>';
+        }
+        $('.monty-type').html(html);
+        layer_close();
+    });
+
+    $('#in-add').click(function(){
+        $.post(laravel_api+'/c2c/add',{
+            price:$('#in-price').val(),
+            number:$('#in-number').val(),
+            name:$('#in-name').val(),
+            pay_mode:$('#in-pay-mode').val(),
+            content:$('#in-content').val(),
+            token:$('#in-token').val(),
+            type:0
+        },function(res){
+            layer_msg(res.message);
+            if(res.type!='ok'){
+                return false;
+            }
+            setTimeout(function(){
+                location.href='my_c2c.html'
+            },2000)
+        })
+    });
+
+    $('#out-add').click(function(){
+        $.post(laravel_api+'/c2c/add',{
+            price:$('#out-price').val(),
+            number:$('#out-number').val(),
+            name:$('#out-name').val(),
+            pay_mode:$('#out-pay-mode').val(),
+            content:$('#out-content').val(),
+            token:$('#out-token').val(),
+            type:1
+        },function(res){
+            layer_msg(res.message);
+            if(res.type!='ok'){
+                return false;
+            }
+            setTimeout(function(){
+                location.href='my_c2c.html'
+            },2000)
+        })
+    })
+</script>
+</body>
+</html>

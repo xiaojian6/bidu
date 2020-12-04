@@ -1,0 +1,39 @@
+$(function(){
+	$(".guanYu").click(function(){
+		window.location.href=_SERVER+'about.html';
+	});
+	$(".tiBi").click(function(){
+		window.location.href=_SERVER+'address.html'; 
+	});
+	$(".shouKuan").click(function(){
+		window.location.href=_SERVER+'adding.html'; 
+	});
+	$(".anQuan").click(function(){
+		window.location.href=_SERVER+'Security.html'; 
+	});
+	$(".geRen").click(function(){
+		window.location.href=_SERVER+'personage.html'; 
+	});
+	$(".yaoQing").click(function(){
+		window.location.href= _SERVER+"invite.html"; 
+	});
+	$(".dingDan").click(function(){
+		window.location.href=_SERVER+'Entrust.html'; 
+	});
+	$(".jiTou").click(function(){
+		window.location.href=_SERVER+'assets.html'; 
+	});
+	$(".legal").click(function(){
+		window.location.href=_SERVER+'fiatrad_detail.html';
+	});
+    $(".seller").click(function(){
+        window.location.href=_SERVER+'legal_operation.html';
+	});
+	$(".trade").click(function(){
+        window.location.href=_SERVER+'trade.html';
+    });
+	// 我的商铺
+	$('.ft_shop').click(function(){
+		location.href='shop_fiatrad.html'
+	})
+})

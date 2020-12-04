@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>订单取消</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+         #header{
+            background: #fff;
+        }
+      img{
+          width: 10px;
+          vertical-align: middle;
+      }
+      .bgGray3{
+          border-top-left-radius: 2px;
+          border-top-right-radius: 2px;
+      }
+      .brb{
+          border-bottom-left-radius: 2px;
+          border-bottom-right-radius: 2px;
+      }
+      .active{
+          background-color: #1881d2;
+          color: #fff;
+      }
+      .pay_box{
+          padding-bottom: 10px;
+          border-radius: 2px;
+      }
+      .what{width: 15px}
+      .tip p{
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #012223;
+          position: relative;
+          top: -5px;
+          left: -5px;
+      }
+      .tip p:nth-child(2){
+        left: 5px;
+      }
+      .celcolor{color: #94a8c7}
+      .header .back{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+        background: url(../images/return1.png ) no-repeat 0 0 /100% 100%;
+    }
+    </style>
+</head>
+<body class="baseBg">
+    <header class="header">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <!-- <div class="tc title blue4">请付款</div>    -->
+    </header>
+    <div class="plr15">
+        <div class="mt40 ptb10 ft10">
+            <div class="flex between alcenter">
+                <div>
+                    <p class="ft20 white" data-localize="td.ceiled">已取消</p>
+                    <p class="blue mt5 celcolor" style="color:#728DAF;" data-localize="td.cover">订单已取消，无法查看支付信息</p>
+                </div>
+                <div class="contact">
+                        
+                    <a href="javascript:;" ><img src="../images/msg.png" alt="" style="width:25px;"></a> 
+                    <p class="blue mt5" style="color:#728DAF;" data-localize="td.call">联系对方</p>
+                </div>
+            </div>
+            <div class="bgWhite pay_box mt20" style="background:#fff;">
+                <div class="bgGray3 plr10 ptb15" style="background:#fff;">
+                    <p class="color1" style="color:#728DAF;" data-localize="td.tdtotal">交易总额</p>
+                    <p class="blue ft18 mt10" id="deal_money" style="color:#06365a;"></p>
+                </div>
+                <div class="tip flex between">
+                    <p></p>
+                    <p></p>
+                </div>
+                <div class="brb plr10 ft14" style="color:#728DAF;">
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1" data-localize="td.seller">卖家</span>
+                        <div><span class="color1" id="seller_name"></span> <img src="../images/vip.png" alt="" class="what"></div>
+                    </div>
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1" data-localize="td.Sprice">单价</span>
+                        <div><span class="color1" id="price"></span></div>
+                    </div>
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1" data-localize="td.num">数量</span>
+                        <div><span class="color1" id="number"></span></div>
+                    </div>
+                    <div class="flex ptb10 between alcenter">
+                        <span class="color1" data-localize="td.ptime">下单时间</span>
+                        <div><span class="color1" id="format_create_time"></span></div>
+                    </div>
+                    <!--<div class="flex ptb10 between alcenter">-->
+                        <!--<span class="color1">订单号</span>-->
+                        <!--<div><span class="color1">11565585885654866</span><img src="../images/pay_ico.jpg" alt=""></div>-->
+                    <!--</div>-->
+                    <div class="flex ptb10 between alcenter">
+                        <div class="flex alcenter"><span class="color1" data-localize="td.cnum">参考号</span><img src="../images/query.png" alt="" class="what"></div>
+                        <div><span class="color1" id="data_id"></span> <img src="../images/pay_ico.jpg" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="confirm-box tc hide">
+        <div class="confirm-content tc">
+            <div class="confirm-t" style="padding:15px 0 10px">
+                <div style="padding-bottom:15px;font-weight: 600;" class="ft16" data-localize="td.conPay">付款确认</div>
+                <div class="color1" data-localize="td.sureDpay">请确认买家已向您付款</div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../lib/layer_mobile/layer.js"></script>
+<script src="../javascripts/jquery.cookie.js"></script>
+<script src="../javascripts/main_c2c.js"></script>
+<script src="../lib/jquery.localize.min.js"></script>
+<script src="../lib/language_cookie.js"></script>
+    <script>
+        $(function () {
+            var id = get_param('id');
+            initDataToken({url:'c2c_deal',data:{id:id}},function (res) {
+                console.log(res);
+                var coin=res.coin_code
+                $('#deal_money').html(Number(res.deal_money).toFixed(2)+coin);
+                $('#price').html(Number(res.price).toFixed(2)+coin);
+                $('#seller_name').html(res.seller_name);
+                $('#number').html(res.number+res.currency_name);
+                $('#format_create_time').html(res.format_create_time);
+                $('#data_id').html(res.id);
+                $('.contact a').attr('href',"tel:"+res.seller_phone)
+
+            });
+            
+        });
+       
+    </script>
+</body>
+</html>

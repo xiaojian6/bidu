@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>首页</title>
+    <link rel="stylesheet" href="lib/swiper.min.css" />
+    <link rel="stylesheet" href="lib/swipers.css" />
+    <link rel="stylesheet" href="lib/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div id="home">
+            <section class="banner">
+                <div class="swiper-container indexban">
+                    <div class="swiper-wrapper" id="ban">
+                        
+                    </div>
+                    <div class="swiper-pagination banper"></div>
+                </div>
+            </section>
+            <div class="news bgColor ml10 mr10 mt10" style="width: auto;">
+                <img src="images/nocite-img.png" />
+                <ul class="demos" style="margin-bottom:0;">
+                   
+                </ul>
+            </div>
+            <div class="trade swiper-container bgColor ml10 mr10">
+                <ul class="swiper-wrapper trade_list">
+                    
+                </ul>
+
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="fiatde bgColor">
+                <div class="deals">
+                    <a href="fiatrad.html" class="flex between">
+                        <img src="images/index-trade.png" />
+                    </a>
+                </div>
+                <div class="prost" style="display: none">
+                    <ul>
+                        <li>
+                            <a href="###">
+                                <img class="logo" src="images/tou.png" />
+                                <b>主力指数</b>
+                                <span>数字资产的风向标</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="market.html">
+                                <img class="logo" src="images/jiang.png" />
+                                <b>HADAX</b>
+                                <span>自主数字资产交易所</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="dataMap.html">
+                                <img class="logo" src="images/asset.png" />
+                                <b>HQ10</b>
+                                <span>自主指数产品</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="helpcenter.html">
+                                <img class="logo" src="images/libag.png" />
+                                <b>帮助中心</b>
+                                <span>有问题点我</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="assets bgColor">
+                <img src="images/zzz.png" />
+                <b>我的资产</b>
+                <p>登录后可查看</p>
+                <a href="login.html" class="btn btn-default">登录</a>
+            </div>
+            <!--登录后我的资产-->
+            <div class="assetlogin bgColor">
+                <h5>我的资产<img class="eye" src="images/eyes.png" id="imgs" @click="changeImg" /></h5>
+                <ul>
+                    <li><a href="assets.html?type=deal">
+                            <span class="stit">交易账户<img src="images/mores.png" /></span>
+                            <p><span id="dealcny">{{dealcny}}</span> PB</p>
+                        </a>
+                    </li>
+                    <li><a href="assets.html?type=legal">
+                            <span class="stit">法币账户<img src="images/mores.png" /></span>
+                            <p><span id="legalcny">{{legalcny}}</span> PB</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="highlists bgColor">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#performer" aria-controls="home" role="tab"
+                            data-toggle="tab">涨幅榜</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active">
+                        <ul id="performer">
+                           
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="index.html" class="select">
+            <div>
+                <p class="img img0"></p>
+                <span>首页</span>
+            </div>
+        </a>
+        <a href="market.html">
+            <div>
+                <p class="img img1"></p>
+                <span>行情</span>
+            </div>
+        </a>
+        <!-- <a href="transaction.html">
+            <div>
+                <p class="img img2"></p>
+                <span>交易</span>
+            </div>
+        </a> -->
+        
+            <div>
+                <p class="img img3"></p>
+                <span>杠杆交易</span>
+            </div>
+        </a>
+        <a href="assets.html">
+            <div>
+                <p class="img img4"></p>
+                <span>资产</span>
+            </div>
+        </a>
+    </footer>
+    <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.bootstrap.newsbox.min.js"></script>
+    <script type="text/javascript" src="lib/swiper.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="lib/layer_mobile/layer.js"></script>
+    <script type="text/javascript" src="lib/vue.min.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
+    <script type="text/javascript" src="javascripts/index.js"></script>
+</body>
+
+</html>

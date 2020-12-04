@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/transaction.css" />
+	<link rel="stylesheet" type="text/css" href="css/footer.css" />
+	<style>
+		.entrust{
+				margin-bottom:57px;
+			}
+			.addplus img{width: 12px;}
+			th {text-align: center};
+			.list_ul li{
+				padding: 5px 0;
+			}
+			.tab-item{
+				padding: 3px 0;	
+			}
+			.tab-active{
+				border-bottom: 2px solid #02c289;
+			}
+			.limit img{
+				width: 20px;
+			}
+			.use_balance{
+				margin-right: 3px;
+			}
+			.conplete_list{
+				height: 300px;
+				overflow: auto;
+			}
+			.limit_price_wrap{
+				background: #1b2a3e;
+			}
+			.limit_price_wrap p{
+				color: #F2F5FF;
+			}
+			.price_active{
+				padding: 8px 0;
+				border-radius: 3px;
+				color: #fff!important;
+				background: #2b60a5;
+			}
+			.price_val{
+				width:100px;height:35px; padding-left:10px;border-right: 1px solid #1B2A3E;
+			}
+			.snum{cursor: pointer;}
+			/* 委托 */
+			.title-select p{flex:1;height: 40px;line-height: 40px}
+			.title-select p span{padding: 5px 0;color: #F2F5FF;}
+			.actives span{border-bottom: 1px solid #689cf1;color:#689cf1!important; }
+			.title-item span{flex: 1;}
+			.title-item .time{flex: 2}
+			.listitem span,.listitem p{flex:1}
+			.listitem .time{flex:2}
+			.mtb10{margin-top: 20px ;margin-bottom:20px}
+			.content{margin-bottom: 70px;}
+			.content>div{display: none;}
+			.content .select{display: block;}
+			.content a{color: #5282D0}
+			.content .red{color: #de5959}
+			#cel{padding: 3px 10px;border: 1px solid #588ee4;border-radius: 4px; color: #5282D0}
+			.plr5{padding: 0 5px}
+		</style>
+</head>
+
+<body>
+	<div id="header">
+		<div>
+			<p class="pull-left sideOpen">
+				<img src="images/list.png" />
+				<span><span class="legal_name"></span>/<span class="currency_name"></span></span>
+			</p>
+			<p class="pull-right">
+				<!-- <img src="images/share.png"/ class="share" onclick="location.href='LeveragedAccounts.html'"> -->
+				<!-- <img src="images/collect.png" class="collect" /> -->
+				<a class="go_eachart" href="">
+					<img src="images/datamap.png" />
+				</a>
+			</p>
+		</div>
+		<!-- <ul>
+				<li>
+					<strong>0.00000000</strong>
+					<span>可用USDT</span>
+				</li>
+				<li>
+					<strong>0.00000000</strong>
+					<span>可用USDT</span>
+				</li>
+				<li>
+					<strong>0.00000000</strong>
+					<span>爆仓价</span>
+				</li>
+			</ul> -->
+		<!-- <p>
+				分享率一一
+				<img src="images/query.png"/>
+			</p> -->
+	</div>
+	<!-- <hr class="hr"/> -->
+	<div id="data">
+		<div class="pull-left active">
+			<div class="deal">
+				<span class="pull-left buy">
+					<a data-localize="transaction.buy">买入</a>
+					<em></em>
+				</span>
+				<span class="sell">
+					<a data-localize="transaction.sell">卖出</a>
+				</span>
+			</div>
+			<div class="LimitedPrice">
+				<!-- <p class="limitedprice">
+					限价
+					<img src="images/pulldown.png" />
+				</p> -->
+				<!-- <div class="limit_price_wrap flex alcenter mb10">
+				   <p class="limit_btn price_active flex flex1 jucenter alcenter ft14">限价交易</p>
+				   <p class="limit_btn flex flex1 jucenter alcenter ft14">市价交易</p>
+				</div> -->
+				<div class="ft16 white flex alcenter openbox">
+					<span class="typename ft14 white_gray" data-localize="transaction.limit">限价</span> 
+					<img src="images/trade_arrow_down.png" class="ml5" style="width:12px;" alt="">
+				 </div>
+				<ul class="Price mt20" style="display:flex;">
+					<!-- <li class="price_num">6919.90</li> -->
+					<input type="number" class="price_val price_num" value="0"  />
+					<input type="text" class="price_val price_txt white_gray hide" data-localize="deals.you" disabled value="以当前最优价格交易" style="width:100%" />
+					<li class="addplus">
+						<span class="subtract">
+							<img src="images/jian.png" />
+						</span>
+						<span class="">|</span>
+						<span class="plus">
+							<img src="images/add.png" />
+						</span>
+					</li>
+				</ul>
+				<h6 class="mt5 ft10">
+					<!-- ≈6919.90CNY -->
+				</h6>
+				<p class="num mt10">
+					<label style="display:flex;height:100%;justify-content: center;">
+						<input type="number" data-localize="transaction.inputnum" placeholder="请输入数量" class="account" style="width:150px;width: 150px;font-size: 14px;padding-left:5px" />
+						<span class="lge_name">BTC</span>
+					</label>
+				</p>
+				<p class="num mt10">
+                    <input type="password" class="keypsw" data-localize="transaction.inputpass" placeholder="请输入资金密码" style="width:150px;width: 150px;font-size: 14px;padding-left:5px">
+				</p>
+				<div class="white_gray mt10">
+					<span data-localize="transaction.avaiable">可用</span>  
+					<span class="use_balance"></span>
+					<span class="use_name"></span></div>
+				<div class=" flex alcenter mt10 mb10 canshow">
+					<span class=" white_gray " data-localize="transaction.turnover">交易额</span>
+					<div class="flex1 pl10 white bold">
+						<span class="all_account">0</span>
+						<span class="pull-right legal_sp white_gray">BTC</span>
+					</div>
+				</div>
+			</div>
+			<div class="transactionAmount mt5">
+				<button class="buy_in">
+					<span data-localize="transaction.buy">买入</span>
+				    <span class="btn_name"></span></button>
+			</div>
+		</div>
+		<div class="pull-right active1">
+			<!--卖出-->
+			<div class="ft10 white_gray">
+				<div class="flex alcenter pb10">
+					<div class="flex1 tl" data-localize="transaction.handicap">盘口</div>
+					<div class="flex2 tr" data-localize="transaction.price">价格</div>
+					<div class="flex2 tr" data-localize="transaction.number">数量</div>
+				</div>
+				<div>
+					<div class="sell_out" style="min-height: 120px;">
+						
+					</div>
+					<p style="color:#de5959;font-size:18px;" class="new_price"></p>
+					<!-- <p ><span>≈</span> <span class="yuecny">0</span><span> CNY</span></p> -->
+				</div>
+			</div>
+			<!--买入-->
+			<div class="ft10 white_gray">
+				<div class="buyIn" style="min-height: 120px;">
+					
+				</div>
+				<!-- <div>
+					<span class="pull-right limit">
+						深度1
+						<img src="images/pulldown.png" style="width:12px;" />
+					</span>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<div id="mask1">
+		<div id="Limited">
+			<ul>
+				<li>
+					<p class="price" data-localize="transaction.limit">限价</p>
+					<p class="price" data-localize="transaction.marketprice">市价</p>
+				</li>
+				<li class="cancel" data-localize="transaction.cancel">取消</li>
+			</ul>
+		</div>
+	</div>
+	<hr class="hr" />
+	<!-- <div id="entrust">
+			<div>
+				<h3 class="pull-left">
+					当前委托
+				</h3>
+				<p class="pull-right filtrate" onclick="location.href='Entrust.html'"> 
+					<img src="images/record1.png"/>
+					<span>
+						全部
+					</span>
+				</p>					
+			</div>
+			<div>
+				<p>
+					<img src="images/anonymous.png"/>
+				</p>
+				<p>暂无记录</p>
+			</div>
+		</div>		 -->
+		<div id="sideColumn" class="ftw bgColor">
+		<h4>
+			<span class="side ft18 bold" data-localize="transaction.currency">币币</span>
+			<img src="images/arrowlf.png" class="pull-right sideclose" />
+		</h4>
+		<ol class="legal bdb">
+			
+		</ol>
+		<ul class="ul" style="height: 80%;overflow-y: scroll;">
+		</ul>
+	</div>
+	<div class="bar mainbg" style="margin-bottom:60px;display: none">
+		<ul class="flex ft14 plr10 bdb white ptb10" >
+			<li class="flex1 tl tab-item ft16 bold" data-localize="transaction.total">全站交易</li>
+		</ul>
+		<ul class="list_ul white ft12">
+			<li class="flex around" style="padding:5px 0; background: #0b1629;">
+				<span class="flex2 tc" data-localize="transaction.time">时间</span>
+				<span class="flex1 tc" data-localize="transaction.price">价格</span>
+				<span class="flex1 tc" data-localize="transaction.turnover">交易量</span>
+			</li>
+			<div class="conplete_list white_gray">
+				<p class="no_rec white_gray tc mt20 hide" data-localize="transaction.nomore">暂无交易记录</p>
+			</div>
+		</ul>
+	</div>
+	<!-- 委托 -->
+	<div>
+		<div class="ft16 white" style="padding:20px 0 10px 10px" data-localize="transaction.mycommission">我的委托</div>
+		<div class="title-select flex alcenter tc">
+			<p class="actives" data-urls="transaction_out"><span data-localize="transaction.currentsell">当前委托(卖出)</span></p>
+			<p data-urls="transaction_in"><span data-localize="transaction.currentbuy">当前委托(买入)</span></p>
+			<p data-urls="transaction_complete"><span data-localize="transaction.his" >历史委托(已完成)</span></p>
+		</div>
+	</div>
+	
+	<div class="content ft12 plr5">
+		<div class="select">
+			<div class="flex tc title-item mt5" style="color:#F2F5FF;">
+				<span data-localize="transaction.currency">币种</span>
+				<span data-localize="transaction.price">价格</span>
+				<span data-localize="transaction.number">数量</span>
+				<span class="time" data-localize="transaction.time">时间</span>
+				<span id="todo" data-localize="transaction.option">操作</span>
+			</div>
+			<ul class="outlist">
+
+			</ul>
+			<div class="nomore tc gray6" style="display: none;padding-top:20px;">
+                <img src="images/nomore.png" alt="" style="width:80px">
+				<p style="padding-top:5px;color: #728DAF" data-localize="transaction.nomore">没有更多了..</p>
+			</div>
+			<div class="load-more tc gray6" style="color:#728DAF;" data-localize="transaction.getmore">加载更多</div>
+		</div>
+	</div>
+	<div class="chooseboxs ft14 tc white_gray ratop">
+        <p class="blue bdb2 ratop" data-type="sell" data-localize="transaction.limit">限价</p>
+        <p data-type="buy" data-localize="transaction.marketprice">市价</p>
+        <div class="mt10 ceilbox"  data-localize="transaction.cancel">取消</div>
+    </div>
+    <div class="masks ceilbox"></div>
+	<footer>
+		<a href="index.html">
+			<div>
+				<p class="img img0"></p>
+				<span data-localize="footer.home">首页</span>
+			</div>
+		</a>
+		<a href="market.html">
+			<div>
+				<p class="img img1"></p>
+				<span data-localize="footer.quotation">行情</span>
+			</div>
+		</a>
+		<!-- <a href="fiatrad.html">
+			<div>
+					<p class="img img2"></p>
+					<span>法币交易</span>
+			</div>
+			</a> -->
+			<a href="transaction.html" class="select">
+				<div>
+					<p class="img img2"></p>
+					<span data-localize="footer.currency">币币交易</span>
+				</div>
+			</a>
+		
+			<a  href="LeveragedDeals.html">
+            <div>
+                <p class="img img3"></p>
+                <span data-localize="footer.lever">杠杆交易</span>
+            </div>
+        </a>
+		<a href="assets.html">
+			<div>
+				<p class="img img4"></p>
+				<span data-localize="footer.assets">资产</span>
+			</div>
+		</a>
+	</footer>
+	<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+	<script src="javascripts/jquery.cookie.js"></script>
+	<script src="lib/layer_mobile/layer.js"></script>
+	<script src="lib/socket.io.js"></script>
+	<script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+	<script type="text/javascript" src="javascripts/transaction.js"></script>
+	<script src="javascripts/main.js"></script>
+	<script type="text/javascript">
+	    var global_currencyId;//全局当前币种id
+		var global_legalId;//全局法币id
+     	var res0;
+		var cny_price;
+		var token = get_user_login();
+        var page =1;
+        var urls='transaction_out';
+		getDataing(urls);
+		// 打开弹窗
+		$('.openbox').click(function(){
+			$('.masks').show();
+			$('.chooseboxs').css('transform','translateY(0)')
+
+		})
+		// 关闭弹窗
+		$('.ceilbox').click(function(){
+			$('.masks').hide();
+			$('.chooseboxs').css('transform','translateY(100%)')
+		})
+		$('.ul').css('display', 'block')
+		// $('.tab-item').click(function () {
+		// 	$(this).addClass('tab-active').siblings().removeClass('tab-active');
+		// })
+		//===============币种======================
+		var token = get_user_login();
+		$('.subtract').click(function(){
+			var num1 = Number($('.Price>input').eq(0).val());
+			num1=(num1*10*10*10*10);
+			console.log(num1)
+			num1 -=1;
+			console.log(num1)
+			num1=((Number(num1))/10000).toFixed(8)
+			console.log(num1)
+            if(num1<=0){
+                num1 = 0;
+            }
+            $('.Price>input').eq(0).val(num1);
+        });
+		$('.plus').click(function(){
+			var num = Number($('.Price>input').eq(0).val()) ;
+			num=Number(num*10*10*10*10);
+			console.log(num)
+			num +=1;
+			num=((Number(num))/10000).toFixed(8)
+            $('.Price>input').eq(0).val(num);
+			$('.all_account').text(($('.price_num').val() * $('.account').val()).toFixed(4))
+		});
+		$('.addplus').click(function(){
+			$('.all_account').text(($('.price_num').val() * $('.account').val()).toFixed(4))
+		})
+		$('.price_num').keyup(function () {
+			$('.all_account').text(($('.price_num').val() * $('.account').val()).toFixed(4))
+		})
+		$('.account').keyup(function () {
+			$('.all_account').text(($('.price_num').val() * $('.account').val()).toFixed(4))
+		})
+		$.ajax({
+			type: 'get',
+			url: _API + 'currency/quotation_new',
+			dataType: 'json',
+			beforeSend: function beforeSend(request) {
+				request.setRequestHeader("Authorization", token);
+			},
+
+			success: function (res) {
+				console.log(res);
+				if (res.type == 'ok') {
+					 res0 = res;
+					//法币赋值
+					var html = '';
+					var currency_html = '';
+					if (res.message.length > 0) {
+						for (var i = 0; i < res.message.length; i++) {
+						currency_html = '';
+						if (res.message[i].is_display == 1) {
+								html += `
+									<li class='white_gray' data-id='${res.message[i].id}'>${res.message[i].name}</li>
+								`;
+							}
+						};
+						var quotations = res.message[0].quotation;
+						for (var j = 0; j < quotations.length; j++) {
+							if (quotations[j].is_display == 1) {
+								currency_html += `
+									<li class='bdb legal_li sideclose'>
+										<strong class="strong_name" data-id='${quotations[j].currency_id}'><span class="curname">${quotations[j].currency_name}</span><span>/${quotations[j].legal_name}</span></strong>
+										<p class="${parseFloat(quotations[j].change) < 0 ? 'fontC' : 'gre'}">
+											<span class="">${quotations[j].now_price || '0.00'}</span>
+											<span class="pull-right ">${(quotations[j].change-0).toFixed(2) || '+0.000'}%</span>
+										</p>
+									</li>
+								`
+							}
+						}
+					}
+					$('.legal').html(html);
+					$('.legal li').eq(0).addClass('side side2');
+					$('.ul').html(currency_html);
+
+					//币种赋值
+					
+					//默认选中的币种
+					$('.legal_li').eq(0).css('background', '#172841');
+					//标题赋值
+					$('.legal_name').text( window.localStorage.getItem('legal_currency')&&JSON.parse(window.localStorage.getItem('legal_currency')).currency_name || $('.strong_name').eq(0).find('.curname').text()).data('id', $('.strong_name').eq(0).data('id')); //币种名
+					$('.currency_name').text(window.localStorage.getItem('legal_currency')&&JSON.parse(window.localStorage.getItem('legal_currency')).legal_name || $('.legal li').eq(0).text()).data('id', $('.legal li').eq(0).data('id'));  //法币名
+					$('.lge_name').text($('.legal_name').text());
+					$('.legal_sp').text($('.currency_name').text());
+					$('.btn_name').text($('.legal_name').text());
+					//初始化交易数据渲染
+					data ={}
+						 //获取上一页传来的的参数
+						var legalId =  get_param('id1') //法币id
+						var currencyId = get_param('id2') //当前币种id
+						var legalName = get_param('name1') //法币名称
+						var currencyName = get_param('name2') //当前币种名称
+						var types = get_param('type') //买入或卖出
+						console.log(types);
+					if(types == 1){         //买入
+						$('.legal_name').text(currencyName);  //标题币种
+						$('.currency_name').text(legalName);  //标题法币
+						$('.deal>span').eq(0).addClass('bor').find('a').addClass('col').siblings('em').addClass('borl');
+						data.legal_id=legalId;
+						data.currency_id=currencyId;
+						global_currencyId = currencyId;
+						global_legalId = legalId;
+						$('.lge_name').text($('.legal_name').text());
+						$('.legal_sp').text($('.currency_name').text());
+						$('.btn_name').text($('.legal_name').text());
+						$('.go_eachart').attr('href','dataMap.html?legal_id='+legalId+'&currency_id='+currencyId+'&symbol='+currencyName+'/'+legalName)  
+					}else if(types == 2){    //卖出
+						$('.sell').addClass('bor2').find('a').addClass('col2').parent().prev().removeClass('bor').find('a').removeClass('col').siblings('em').removeClass('borl').addClass('borr2');
+						$('.transactionAmount').find('button').html(sell+'<span class="btn_name ">'+$('.legal_name').text()+'</span>').addClass('activesell')
+						$('.legal_name').text(currencyName);  //标题币种
+						$('.currency_name').text(legalName);  //标题法币
+						data.legal_id=legalId;
+						data.currency_id=currencyId;
+						global_currencyId = currencyId;
+						global_legalId = legalId;
+						$('.lge_name').text($('.legal_name').text());
+						$('.legal_sp').text($('.currency_name').text());
+						$('.btn_name').text($('.legal_name').text());
+						$('.go_eachart').attr('href','dataMap.html?legal_id='+legalId+'&currency_id='+currencyId+'&symbol='+currencyName+'/'+legalName)
+					}else{
+						$('.deal>span').eq(0).addClass('bor').find('a').addClass('col').siblings('em').addClass('borl');
+						data.legal_id= window.localStorage.getItem('legal_currency')&&JSON.parse(window.localStorage.getItem('legal_currency')).legal_id || $('.side2').data('id');
+						data.currency_id= window.localStorage.getItem('legal_currency')&&JSON.parse(window.localStorage.getItem('legal_currency')).currency_id || $('.strong_name').eq(0).data('id');
+						global_currencyId = window.localStorage.getItem('legal_currency')&&JSON.parse(window.localStorage.getItem('legal_currency')).currency_id || $('.strong_name').eq(0).data('id');
+						global_legalId = window.localStorage.getItem('legal_currency')&&JSON.parse(window.localStorage.getItem('legal_currency')).legal_id || $('.side2').data('id');
+						var legalCurrency = window.localStorage.getItem('legal_currency');
+						$('.go_eachart').attr('href','dataMap.html?legal_id='+((legalCurrency&&JSON.parse(legalCurrency).legal_id)|| $('.side2').data('id'))+'&currency_id='+((legalCurrency&&JSON.parse(legalCurrency).currency_id) || $('.strong_name').eq(0).data('id'))+'&symbol='+$('.legal_name').text()+'/'+$('.currency_name').text())						
+					}
+					//获取余额
+					balance(global_legalId,'legal')
+					$.ajax({
+						type: 'post',
+						url: _API + 'transaction/deal',
+						data: data,
+							
+						dataType: 'json',
+						beforeSend: function beforeSend(request) {
+							request.setRequestHeader("Authorization", token);
+						},
+						success: function (res) {
+							console.log(res);
+							if (res.type == 'ok') {
+								var out = res.message.out;
+								var buyIn = res.message.in;
+								var sell_list = '';
+								var buy_list = '';
+								$.each(out, function (k, v) {
+									sell_list += `
+										<div class="flex alcenter pb10 snum">
+											<div class="flex1 tl">${k + 1}</div>
+											<div class="red flex2 tl vprice">${v.price}</div>
+											<div class="flex2 tr">${v.number}</div>
+										</div>
+										`
+								});
+								$.each(buyIn, function (k, v) {
+									buy_list += `
+										<div class="flex alcenter pb10 snum">
+											<div class="flex1 tl">${k + 1}</div>
+											<div class="gre flex2 tl vprice">${v.price}</div>
+											<div class="flex2 tr">${v.number}</div>
+										</div>
+										`
+								});
+								$('.sell_out').html(sell_list);
+								$('.buyIn').html(buy_list);
+								$('.new_price').text(res.message.last_price);
+						        $('.price_num').val(res.message.last_price);
+
+								cny_price=res.message.cny_price;
+								$('.yuecny').text((res.message.last_price*cny_price).toFixed(2))
+								//全部交易
+								var complete_list = '';
+								$.each(res.message.complete, function (k, v) {
+									complete_list += `
+										<li class="flex around" style="padding:5px 0;">
+											<span class="flex2 tc">${v.time}</span>
+											<span class="flex1 tc">${v.price}</span>
+											<span class="flex1 tc">${v.number}</span>
+										</li>
+										`
+								});
+								if(complete_list == ''){
+                                    $('.no_rec').removeClass('hide');
+								}else{
+									$('.conplete_list').html(complete_list);
+									$('.no_rec').addClass('hide');
+								}
+								console.log('mocur'+data.currency_id,'moleg'+data.legal_id)
+								scoket();
+							}
+						}
+					});
+										
+				};
+			}
+		});
+		//币种切换
+		$('body').on('click','.legal_li',function () {
+			var that =this;
+			// console.log($(this).find('strong').data('id'))
+			$(this).css('background', '#172841').siblings().css('background', 'none');
+			$('.legal_name').text($(this).find('strong>.curname').text());
+			$('.currency_name').text($('.side2').text());
+			$('.legal_name').data('id', $(this).find('strong').data('id'));
+			$('.currency_name').data('id', $('.side2').data('id'));
+			$('.lge_name').text($(this).find('strong>.curname').text());
+			// $('.use_name').text($(this).find('strong>.curname').text());
+			$('.legal_sp').text($('.side2').text());
+			$('.btn_name').text($(this).find('strong>.curname').text());
+			global_currencyId = $(this).find('strong').data('id');
+			global_legalId = $('.side2').data('id');
+			// console.log(global_currencyId)
+			$('.go_eachart').attr('href','dataMap.html?legal_id='+$('.side2').data('id')+'&currency_id='+$(this).find('strong').data('id')+'&symbol='+$(this).find('strong>.curname').text()+'/'+$('.side2').text());
+			var stotageObj = {
+				legal_id:$('.side2').data('id'),
+				currency_id:$(this).find('strong').data('id'),
+				legal_name:$('.side2').text(),
+				currency_name:$(this).find('strong>.curname').text()
+			}
+			stotageObj = JSON.stringify(stotageObj)
+			//将法币和币种的id和name存储
+			window.localStorage.setItem('legal_currency',stotageObj);
+			close();
+			//交易数据渲染
+			$.ajax({
+				type: 'post',
+				url: _API + 'transaction/deal',
+				data: {
+					legal_id:$('.currency_name').data('id'),
+					currency_id:$('.legal_name').data('id')
+				},
+				dataType: 'json',
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function (res) {
+					console.log(res);
+					if (res.type == 'ok') {
+						var out = res.message.out;
+						var buyIn = res.message.in;
+						var sell_list = '';
+						var buy_list = '';
+						$.each(out, function (k, v) {
+							sell_list += `
+							<div class="flex alcenter pb10 snum">
+								<div class="flex1 tl">${k + 1}</div>
+								<div class="red flex2 tl vprice">${v.price}</div>
+								<div class="flex2 tr">${v.number}</div>
+							</div>
+							`
+						});
+						$.each(buyIn, function (k, v) {
+							buy_list += `
+							<div class="flex alcenter pb10 snum">
+								<div class="flex1 tl">${k + 1}</div>
+								<div class="gre flex2 tl vprice">${v.price}</div>
+								<div class="flex2 tr">${v.number}</div>
+							</div>
+							`
+						});
+						cny_price=res.message.legal_currency.cny_price;
+						$('.sell_out').html(sell_list);
+						$('.buyIn').html(buy_list);
+						$('.new_price').text(res.message.last_price);
+						$('.price_num').val(res.message.last_price);
+						$('.yuecny').text((res.message.last_price*cny_price).toFixed(2))
+						//全部交易
+						var complete_list = '';
+						$.each(res.message.complete, function (k, v) {
+							complete_list += `
+							<li class="flex around" style="padding:5px 0;">
+								<span class="flex2 tc">${v.time}</span>
+								<span class="flex1 tc">${v.price}</span>
+								<span class="flex1 tc">${v.number}</span>
+							</li>
+							`
+						});
+						if(complete_list == ''){
+						$('.no_rec').removeClass('hide');
+					}else{
+						$('.conplete_list').html(complete_list);
+						$('.no_rec').addClass('hide');
+					}
+					    console.log('qcur'+$(that).find('strong').data('id'),'qleg'+$('.side2').data('id'))
+						// scoket();
+					}
+				}
+			});
+			//币种切换时可用余额切换
+			if ($('.buy a').attr('class') == 'col') {
+				balance(global_legalId,'legal')
+			}else if ($('.sell a').attr('class') == 'col') {
+				balance(global_currencyId,'change')
+			}
+		});
+		// 点击自动填充价格
+		$('body').on('click','.snum',function(){
+			var nprice=$(this).find('.vprice').html();
+			$('.price_num').val(nprice);
+		})		
+		//点击法币切换
+		$('.legal').on('click','li',function () {
+			$(this).addClass('side side2').siblings().removeClass('side side2');
+			var currency_html = '';
+			var n = $(this).index();
+			var quotation = res0.message[n].quotation
+			for (var j = 0; j < quotation.length; j++) {
+				if (quotation[j].is_display == 1) {
+					currency_html += `
+						<li class='bdb legal_li sideclose'>
+							<strong class="strong_name" data-id='${quotation[j].currency_id}'><span class="curname">${quotation[j].currency_name}</span><span>/${quotation[j].legal_name}</span></strong>
+							<p class="${parseFloat(quotation[j].change) < 0 ? 'fontC' : 'gre'}">
+								<span class="">${quotation[j].now_price || '0.00'}</span>
+								<span class="pull-right ">${(quotation[j].change-0).toFixed(2) || '+0.000'}%</span>
+							</p>
+						</li>
+					`
+				}
+			}
+			$('.ul').html(currency_html);			
+		});
+		//买入、卖出
+		var buy_status=false;
+		var sell_status=false;
+		var count1=0;
+		var count2=0;
+		$('.buy_in').click(function () {
+			// count1=count1+1;
+			console.log(count1,'count1--------')
+			            if($('.keypsw').val() =='' || $('.keypsw').val().length<6){
+							return layer_msg(ptpwd);
+						}
+						if ($('.account').val() == '') {
+							layer_msg(ptnum);
+							count1 = 0;
+							return false;
+						} else {
+							count1=count1+1;
+							//买入
+							layer_loading(pload);
+							if(count1>1){
+								return false;
+							}
+							if ($('.buy a').attr('class') == 'col') {
+
+								$.ajax({
+									url: _API + 'transaction/in',
+									type: 'post',
+									data: {
+										price: $('.price_num').val(),
+										num: $('.account').val(),
+										legal_id: global_legalId,
+										currency_id: global_currencyId,
+										password:$('.keypsw').val()
+									},
+									dataType: 'json',
+									beforeSend: function beforeSend(request) {
+										request.setRequestHeader("Authorization", token);
+									},
+									success: function (res) {
+										layer_close();
+										console.log(res);
+										layer_msg(res.message)
+										$('.account').val('')
+										$('.keypsw').val('')
+										$('.all_account').text(0);
+										count1=0;
+										$('.outlist').html('');
+										balance(global_legalId,'legal')
+										getDataing(urls)
+									},complete:function(){
+										count1=0;
+									}, error: function () {
+										// layer_close();
+										count1=0;
+									}
+								})
+								//卖出
+							} else if ($('.sell a').attr('class') == 'col2') {
+								console.log('卖出')
+								if($('.keypsw').val() =='' || $('.keypsw').val().length<6){
+									return layer_msg(ptpwd);
+								}
+								if(count1>1){
+									return false;
+								}
+								$.ajax({
+									url: _API + 'transaction/out',
+									type: 'post',
+									data: {
+										price: $('.price_num').val(),
+										num: $('.account').val(),
+										legal_id: global_legalId,
+										currency_id: global_currencyId,
+										password:$('.keypsw').val()
+									},
+									dataType: 'json',
+									beforeSend: function beforeSend(request) {
+										request.setRequestHeader("Authorization", token);
+									},
+									success: function (res) {
+										layer_close();
+										console.log('pppppp')
+										console.log(res);
+										layer_msg(res.message)
+										count1=0;
+										$('.account').val('')
+										$('.keypsw').val('')
+										$('.outlist').html('');
+										$('.all_account').text(0);
+										balance(global_currencyId,'change')
+										getDataing(urls)
+									},complete:function(){
+										count1=0;
+									}, error: function () {
+										layer_close();
+										count1=0;
+									}
+								})
+							}
+						}
+					})
+			 //点击买入
+				$('.buy').click(function(){
+					balance(global_legalId,'legal')
+				})
+				//点击卖出
+				$('.sell').click(function(){
+					balance(global_currencyId,'change')
+				});
+			//限价、市价切换
+				// $('.limit_btn').click(function(){
+				// 	var i = $(this).index();
+				// 	$(this).addClass('price_active').siblings().removeClass('price_active');
+				// 	if(i==0){
+				// 		$('.price_num').val(0);
+				// 		$('.price_num').attr('disabled',false);
+				// 	}else{
+				// 		$('.price_num').val($('.new_price').text());
+				// 		$('.price_num').attr('disabled',true);
+				// 	}	
+				// })		
+				$('.chooseboxs>p').click(function(){
+					$('.masks').hide();
+					$('.chooseboxs').css('transform','translateY(100%)')
+					$('.typename').html($(this).text())
+					$(this).addClass('blue').siblings().removeClass('blue')
+					var i =$(this).text();
+					console.log($('.price_txt').val())
+					$('.price_txt').val(you)
+					if(i=='限价' || i=='限價' || i=='Limit' || i=='価格制限'){
+						$('.price_num').show();
+						// $('.price_num').val(0);
+						$('.price_num').val($('.new_price').text());
+						$('.price_num').attr('disabled',false);
+						$('.price_txt').addClass('hide');
+						$('.price_num').show();
+						$('.addplus').show();	
+						$('.canshow').show();				
+
+					}else{
+						$('.price_num').val($('.new_price').text());
+						$('.price_num').hide();
+						$('.addplus').hide();
+						$('.price_num').attr('disabled',true);
+						$('.price_txt').removeClass('hide');
+						$('.canshow').hide();				
+					}	
+				})
+	    //关闭左侧弹层				
+		function close() {
+			$('body').css('overflow', 'auto');
+			$('#Limited').show();
+			$('#mask1').hide();
+			$('#sideColumn').animate({
+				left: '-80%'
+			}, 1000);
+		}
+
+        function socketId(){
+			var d = new Date().getTime();
+			console.log(d);
+			var ran = parseInt(Math.random() * 888 + 101 + '');
+			d = d + '' + ran;
+			return d;
+		}
+		//socket连接封装
+		function scoket(){
+			$.ajax({
+			url: _API + "user/info",
+			type: "GET",
+			dataType: "json",
+			async: true,
+			beforeSend: function beforeSend(request) {
+				request.setRequestHeader("Authorization", token);
+			},
+			success: function success(data) {
+				if (data.type == 'ok') {
+					var socket = io(socket_api);
+					socket.on('connect', function (datas) {
+						socket.emit('login', data.message.id);
+						// 后端推送来消息时
+						socket.on('market_depth', function (msg) {
+							// console.log(msg);
+							if (msg.type == 'market_depth') {
+								
+								// console.log('cur'+global_currencyId,'leg'+global_legalId);
+								// console.log('mcur'+msg.currency_id ,'mleg'+msg.legal_id);
+							if (msg.currency_id == global_currencyId && msg.legal_id == global_legalId) {
+								var sell_list = '';
+								var buy_list = '';
+								var buyIn = msg.bids;
+                                var out = msg.asks.reverse();
+								$.each(out, function (k, v) {
+									var num = (out.length - 0) - Number(k);
+									sell_list += `
+										<div class="flex alcenter pb10" onclick='getnum(${Number(v[0]).toFixed(4)})'>
+											<div class="flex1 tl">${num}</div>
+											<div class="red flex2 tl" style="margin-right:5px;">${Number(v[0]).toFixed(4)}</div>
+											<div class="flex2 tr">${Number(v[1]).toFixed(2)}</div>
+										</div>
+										`
+								});
+								$.each(buyIn, function (k, v) {
+									buy_list += `
+										<div class="flex alcenter pb10" onclick='getnum(${Number(v[0]).toFixed(4)})'>
+											<div class="flex1 tl">${k + 1}</div>
+											<div class="gre flex2 tl" style="margin-right:5px;">${Number(v[0]).toFixed(4)}</div>
+											<div class="flex2 tr">${Number(v[1]).toFixed(2)}</div>
+										</div>
+										`
+								});
+									$('.new_price').text(msg.last_price);
+									$('.yuecny').text((msg.last_price*cny_price).toFixed(2))
+									$('.sell_out').html(sell_list);
+									$('.buyIn').html(buy_list);
+								}
+							}
+
+						})
+					})
+				}
+			}
+		})
+	}
+    function getnum(num){
+		// var num= $(this).find('.vprice').html();
+		console.log(num)
+		$('.price_num').val(num)
+	}
+	//请求可用余额
+		function balance(currency_id,Type){
+			$.ajax({
+					type:'post',
+					url:_API+'wallet/detail',
+					data:{
+						currency:currency_id,
+						type:'change'
+					},
+					dataType: "json",
+					beforeSend: function beforeSend(request) {
+						request.setRequestHeader("Authorization", token);
+					},
+					success:function(res){
+						console.log(res);
+						if(res.type == 'ok'){
+							if(Type == 'legal'){
+								$('.use_balance').text((res.message.change_balance-0).toFixed(8));
+								$('.use_name').text($('.currency_name').text())
+						}else if(Type == 'change'){
+								$('.use_balance').text((res.message.change_balance-0).toFixed(8));
+								$('.use_name').text($('.legal_name').text())
+						}
+					}
+				}
+			})
+		}
+	// 委托
+	// $(function(){
+        // 切换
+        $('.title-select>p').click(function(){
+            var n=$(this).index();
+            page =1;
+            urls= $(this).attr('data-urls');
+            $('.outlist').html('');
+            $(this).addClass('actives').siblings().removeClass('actives');
+			$('.load-more').show();
+			$('.nomore').hide();
+            getDataing(urls)
+        })
+       
+        // 获取数据
+        function getDataing(urls){
+			console.log(urls)
+			console.log(buy,sell)
+            //layer_loading();
+            $.ajax({
+                url: _API + urls,
+                type: "POST",
+                data:{page:page},
+                dataType: "json",
+                async: true,
+                beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+                },
+                success: function success(res) {
+                    // layer_close();
+                    console.log(res)
+                    if (res.type == 'ok') {
+                    var html='';
+                    if(res.message.list.length===0){
+                        // layer_msg('没有更多了');
+						$('.load-more').hide();
+						$('.nomore').show();
+                        return false;
+                    }
+                    var types='';
+                    if(urls=='transaction_out'){
+                        types='out';
+                    }else if(urls=='transaction_in'){
+                        types='in';
+                    }else{
+                        types='';
+                    }
+                    for (i in res.message.list){
+                        var typt_str = '';
+                        if(urls=='transaction_complete'){
+						
+                            if(res.message.list[i].type == 'in'){
+                                typt_str = buy;
+                            }else{
+                                typt_str = sell;
+                            };
+                            html+=` <li class="flex alcenter tc listitem mtb10  color9" style="color:#728DAF;">
+                                <span>${res.message.list[i].currency_name}/${res.message.list[i].legal_name}</span>
+                                <span>${res.message.list[i].price}</span>
+                                <span>${res.message.list[i].number}</span>
+                                <span class="time">${res.message.list[i].time}</span>
+                                <p>
+                                    <a href="javascript:;" data-id="${res.message.list[i].id}" data-type="${types}" id="${typt_str==revoke?'cel':''}" class="${typt_str==buy?'red':'blues'}" >${typt_str}</a>
+                                </p>
+                            </li>`
+                        }else{
+                            typt_str = revoke;
+                            html+=` <li class="flex alcenter tc listitem mtb10  color9" style="color:#728DAF;">
+                                <span>${res.message.list[i].currency_name}/${res.message.list[i].legal_name}</span>
+                                <span>${res.message.list[i].price}</span>
+                                <span>${res.message.list[i].number}</span>
+                                <span class="time">${res.message.list[i].create_time}</span>
+                                <p>
+                                    <a href="javascript:;" data-id="${res.message.list[i].id}" data-type="${types}" id="${typt_str==revoke?'cel':''}" class="${typt_str==buy?'red':'blues'}" >${typt_str}</a>
+                                </p>
+                            </li>`
+                        }
+                    }
+                    $('.outlist').append(html);
+                    if(urls=='transaction_complete'){
+                        $('#todo').text(ttype)
+                    }else{
+						$('#todo').text(todoit)
+					}
+                    // page++;
+                    } else if (res.type == '999') {
+                        window.location =  'login.html';
+                    }
+                }
+            });
+        }
+        // 加载更多
+        $('.load-more').click(function(res){
+			page++;
+            getDataing(urls);
+        }) 
+
+        // 撤销
+        $("body").on("click","#cel",function(){
+            var id = $(this).attr('data-id');
+            var type = $(this).attr('data-type');
+            var obj = $(this);
+            console.log(id)
+            layer.open({
+            content: sureceil
+            ,btn: [sure, ceil]
+            ,yes: function(index){
+                layer_loading();
+                $.ajax({
+                    type: "POST",
+                    url: _API + 'transaction_del',
+                    data: {
+                        type:type,
+                        id:id
+                    },
+                    dataType: "json",
+                    async: true,
+                    beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                    },
+                    success: function(res){
+                        console.log(res)
+                        layer_close();
+                        layer_msg(res.message)
+                        if (res.type=="ok"){
+                            obj.parent().parent().remove()
+                        }
+                    }
+                })
+            }
+          });
+        })
+    // })					
+
+    $('.onc').click(function(){
+        layer_msg("暂未开放")
+    })
+
+
+
+	</script>
+	
+</body>
+
+</html>

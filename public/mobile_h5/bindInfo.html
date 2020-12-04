@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>转出</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <script type="text/javascript" src="lib/vue.min.js"></script>
+</head>
+<style>
+.connectbox{margin-top: 80px;}
+.input_box{width: 80%;}
+.input_box input{height: 40px;width:100%;border:none;border-bottom: 1px solid #3e536b;padding-left: 10px;background: transparent;border-radius: 0px;font-size: 16px;}
+.input_box img{position: absolute;top: 14px;right: 4px;width: 16px;height: 16px}
+button{height: 40px;width: 100%;border-radius: 4px;border: none;margin-top: 50px;}
+input[placeholder], [placeholder], *[placeholder] {
+    color: #fff !important;
+}
+.codes{width: 140px;height: 140px;border: 2px solid #fff;margin: 0 auto;}
+#code{width: 136px;height: 136px;}
+</style>
+<body>
+    <div id="app" v-cloak>
+        <header class="header">
+            <a class="back mt5" href="javascript:history.go(-1)"></a>
+            <h4 class="ftw ft16" data-localize="jc.bind">账号绑定</h4>
+        </header>
+        <div class="header-space"></div>
+        <div class="connectbox">
+            <div class="input_box mauto mt20">
+                <label style="display:none;"><span></span><input type="text" name="hidden1" ></label>
+                <label style="display:none;"><span></span><input type="password" name="hidden2" ></label>
+                <div class="reltive">
+                    <input type="text" class="form-control" placeholder="请输入账号" v-model='account' autocomplete="off" data-localize="jc.paccount">
+                    <img src="images/account.png" alt="">
+                </div>
+                <div class="mt10 reltive">
+                    <input type="password" class="form-control" placeholder="请输入密码" v-model='password' autocomplete="off" data-localize="jc.ppwd">
+                    <img src="images/password.png" alt="">
+                </div>
+                <button class="btnbg ftw" @click='sendData' data-localize="safe.sure">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script> 
+    <script src="javascripts/jquery.qrcode.min.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <script>
+    var vue = new Vue({
+        el: '#app',
+        data:{
+           account:'',
+           password:'',
+        },
+        methods:{
+            seeData(){
+                var that = this;
+                var token = get_user_login();
+                $.ajax({
+                    url: _API + "jc/bind",
+                    type: "GET",
+                    dataType: "json",
+                    async: true,
+                    beforeSend: function beforeSend(request) {
+                        request.setRequestHeader("Authorization", token);
+                    },
+                    success: function (res) {
+                        console.log(res)
+                        if(res.message.user_name){
+                            that.account=res.message.user_name
+                        }
+                    }
+                })
+            },
+            sendData(){
+                var that =this;
+                var token = get_user_login();
+                if(that.account==''){
+                    return layer_msg(paccount);
+                }
+                if(that.password==''){
+                    return layer_msg(pinpwd);
+                }
+                $.ajax({
+                    url: _API + "jc/bind",
+                    type: "POST",
+                    dataType: "json",
+                    async: true,
+                    beforeSend: function beforeSend(request) {
+                        request.setRequestHeader("Authorization", token);
+                    },
+                    data:{
+                        user_name:that.account,
+                        password:that.password,
+                    },
+                    success: function (res) {
+                        console.log(res)
+                        if(res.type=='ok'){
+                            layer_msg(res.message);
+                            setTimeout(function(){
+                                location.reload();
+                            },1500)
+                        }else{
+                            layer_msg(res.message);
+                        }
+                    }
+                })
+            },
+        },
+        mounted(){
+            this.seeData();
+        }
+    })
+    </script>  
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>杠杆账户</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+</head>
+<style>
+	.gtop {
+		padding-top: 10px;
+	}
+
+	.line {
+		height: 10px;
+		background: linear-gradient(to right, #50667E, #3F556D);
+	}
+
+	.listbox li {
+
+		margin-top: 10px;
+	}
+
+	.titlebox li,
+	.listbox li span {
+		flex: 1;
+	}
+
+	.recordnone {
+		min-height: 150px;
+	}
+
+	.recordnone img {
+		width: 80px;
+	}
+
+	.btbox {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		z-index: 99;
+		width: 100%;
+		padding: 10px 0;
+		background: #061623;
+		border-top: 1px solid #1B2A3E;
+	}
+
+	.btbox a {
+		display: block;
+		flex: 1;
+		text-align: center
+	}
+
+	.btbox a img {
+		width: 40px;
+	}
+
+	.gotrade {
+		height: 30px;
+		line-height: 30px;
+		border-radius: 15px;
+		padding: 0 15px;
+		border: 1px solid #acc5ef;
+
+	}
+
+	.iconbox {
+		width: 50PX;
+		height: 50PX;
+		text-align: center;
+		margin: 0 auto;
+		background: rgb(23, 41, 65);
+		border-radius: 4px;
+	}
+
+	.btbox a img {
+		width: 30px;
+		margin: 0 auto;
+	}
+
+	.pd85 {
+		padding-bottom: 85px
+	}
+
+
+	.record_li {
+		border-bottom: 1px solid #1B2A3E;
+		padding: 10px 0;
+	}
+
+	.ul_list_box {
+		height: 16rem;
+		overflow-y: scroll;
+	}
+</style>
+
+<body>
+	<header class="header">
+		<a class="back mt5" href="assets.html">
+
+		</a>
+		<h4 class="ft16 ftw" data-localize="assets.leverAccount">杠杆账户</h4>
+	</header>
+	<div class="header-space"></div>
+	<div class="pd85">
+		<div class="ggbox plr15">
+			<div class="gtop flex between alcenter">
+				<div class="title ft20 bold blue">USDT</div>
+				<!-- <a href="fiatrad.html" class="gotrade ftw">法币交易</a> -->
+			</div>
+			<ul class="flex titlebox mt10 white_gray ft12">
+				<li data-localize="assets.avaiable">可用</li>
+				<li class="tc" data-localize="assets.lock">冻结</li>
+				<li class="tr"><span data-localize="assets.conversion">折合</span> ($)</li>
+			</ul>
+			<ul class="listbox ftw ft12">
+				<li class="flex alcenter">
+					<span class="balance-num">0.00</span>
+					<span class="tc lock-num">0.00</span>
+					<span class="tr cny-num">0.00</span>
+				</li>
+			</ul>
+			<p class="lines"></p>
+		</div>
+		<div style="height:10px;background:#102030;margin:20px 0"></div>
+
+		<div class="apply plr15 mb20">
+			<div class="flex between alcenter">
+				<p class="ft16 ftw" data-localize="assets.caidata">财务记录</p>
+				<!-- <p class="flex alcenter">
+						<img src="images/record1.png" alt="" style="width:20px;">
+						<a class="all_logcolor1" href="" style="padding-left:5px">全部</a>
+					</p> -->
+			</div>
+			<div class="recordnone tc flex alcenter">
+				<div style="width:100%">
+					<img src="images/anonymous.png" />
+					<p class="ftw" data-localize="transaction.nodata">暂无记录</p>
+				</div>
+			</div>
+			<div class="record_ul_box">
+				<div class="record_li flex mt20 alcenter  ft14 plr20 ftw">
+					<span class="flex1 tl" data-localize="assets.num">数量</span>
+					<span class="flex1 tc" data-localize="assets.record">记录</span>
+					<span class="flex1 tr" data-localize="assets.time">时间</span>
+				</div>
+				<div class="ul_list_box">
+					<ul class="record_ul ftw">
+
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<div class="btbox">
+			<div class="flex">
+				<a class="huazhuan ftw" href="javascript:;">
+					<div class="iconbox flex alcenter">
+						<img src="images/hua.png" alt="">
+					</div>
+					<p class="mt5" data-localize="assets.transfer">划转</p>
+				</a>
+				<a href="LeveragedDeals.html" class="ftw">
+					<div class="iconbox flex alcenter">
+						<img src="images/lever.png" alt="">
+					</div>
+					<p class="mt5" data-localize="footer.lever">杠杆交易</p>
+				</a>
+				<!-- <a href="javascript:;" class="charge">
+						<div class="iconbox flex alcenter">
+							<img src="images/cb.png" alt="">
+						</div>
+						<p class="mt5 ftw">充币</p>
+					</a>
+					<a href="javascript:;" class="moneyout">
+						<div class="iconbox flex alcenter">
+							<img src="images/tb.png" alt="">
+						</div>
+						<p class="mt5 ftw">提币</p>
+					</a> -->
+			</div>
+		</div>
+	</div>
+	<script src="lib/jquery-2.1.1.min.js"></script>
+	<script src="javascripts/main.js"></script>
+	<script src="javascripts/jquery.cookie.js"></script>
+	<script src="lib/layer_mobile/layer.js"></script>
+	<script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+	<script>
+		$(function () {
+			var currency = get_param('id'),
+				type = get_param('type'),
+				type_name;
+			$('.all_log').attr('href', 'tradeHistory.html?id=' + currency + '&type=' + type);
+			if (type == 0) {
+				type_name = 'lever'
+			} else if (type == 1) {
+				type_name = 'legal'
+			} else {
+				type_name = 'change'
+			}
+			console.log(currency, type)
+			initDataToken({
+				url: 'wallet/detail',
+				type: 'post',
+				data: {
+					currency,
+					type: type_name
+				}
+			}, function (res) {
+				console.log(res);
+				var cny = res.ExRate - 0;
+				var tocny = (res.usdt_price - 0) * (res.lever_balance - 0);
+				$('.balance-num').html(Number(res.lever_balance).toFixed(8))
+				$('.lock-num').html(Number(res.lock_lever_balance).toFixed(8))
+				$('.cny-num').html(tocny.toFixed(8))
+				$('.title').html(res.currency_name)
+				name = res.currency_name;
+				$('.huazhuan').attr('href', 'transferredLever.html?id=' + currency + '&name=' + name);
+
+			})
+			var page = 1;
+			getdata();
+			//获取财务记录
+			function getdata() {
+				initDataToken01({
+					url: 'wallet/legal_log',
+					type: 'post',
+					data: {
+						currency,
+						type,
+						page
+					}
+				}, function (res) {
+					console.log(res);
+					if (res.type == 'ok') {
+						var msg = res.message.list;
+						var html = '';
+						if (res.message.is_open_CTbi == 1) {
+							$('.charge').attr('href', 'chargeMoney.html?id=' + currency + '&name=' + name)
+							$('.moneyout').attr('href', 'mentionMoney.html?id=' + currency + '&type=lever');
+						} else {
+							$('.charge').click(function () {
+								layer_msg('该功能暂未开放')
+							})
+							$('.moneyout').click(function(){
+								layer_msg('该功能暂未开放')
+							})
+
+						}
+						if (msg.length == 0) {
+							if (page == 1) {
+								$('.record_ul_box').addClass('hide');
+								$('.recordnone').removeClass('hide');
+							}
+						} else {
+							$('.record_ul_box').removeClass('hide');
+							$('.recordnone').addClass('hide');
+						}
+
+						$.each(msg, function (k, v) {
+							html +=
+								`
+                    <li class="record_li flex alcentercolor1 ft12">
+                            <span class="flex1 tl">${Number(v.value).toFixed(8)}</span>
+                            <span class="flex1 tl">${v.info}</span>
+                            <span class="flex1 tr">${v.created_time}</span>
+                        </li>
+                    `
+						});
+						// console.log(html)
+						$('.record_ul').append(html);
+					} else if (res.type == 'error') {
+						console.log(res)
+						$('.record_ul_box').addClass('hide');
+						$('.recordnone').removeClass('hide');
+					}
+
+				})
+			}
+
+			$('.ul_list_box').scroll(function () {
+				var scrollTop = $(this).scrollTop();
+				var height = $('.record_ul').height();
+				var hegiht2 = $(this).height();
+				console.log(scrollTop, hegiht2, height)
+				if (scrollTop + hegiht2 == height) {
+					page++
+					getdata();
+				}
+			})
+
+		})
+	</script>
+</body>
+
+</html>

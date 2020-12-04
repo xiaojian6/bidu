@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>划转</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+</head>
+<style>
+		.bline{border-bottom: 1px solid #eee;padding: 10px 0;}
+		.btnbox{position: fixed;bottom: 10px;padding: 0 15px;width: 100%}
+        .transit{width: 100%;height: 40px;line-height: 40px; color: #fff;background: rgb(62, 84, 108);}
+        .scan{
+            width: 20px;
+        }
+    </style>
+
+<body>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.go(-1);" class="back"></a>
+        <h2 class=" tc">绑定地址</h2>
+    </div>
+    <div class="plr15 mt40">
+        <div class="bline mt30">
+            <p class=" mt20">绑定地址：</p>
+            <div class="flex between alcenter mt10">
+                <input type="number" placeholder="请输入地址" class="ft14 huazhuan-num">
+                <div>
+                   <img src="images/saocode.png" alt="" class="scan">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btnbox">
+        <div class="transit tc ft14">绑定</div>
+    </div>
+
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <script>
+        $(function () {
+
+        })
+    </script>
+</body>
+
+</html>

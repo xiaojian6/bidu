@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
+		<title>添加方式</title>
+		<!-- <script src="../js/mobile-util.js"></script> -->
+		<!-- <script src="lib/jquery-2.1.1.min.js"></script> -->
+		<!-- <script src="lib/swiper.jquery.min.js"></script> -->
+        <!-- <script src="javascripts/main.js"></script> -->
+        <!-- <script src="javascripts/jquery.cookie.js"></script> -->
+        <!-- <script src="lib/vue.min.js"></script> -->
+		<!-- <script src="lib/layer_mobile/layer.js"></script> -->
+		<link rel="stylesheet" href="static/css/common.css">
+		<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+		<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+
+		<script src="static/javascripts/jquery.cookie.js"></script>
+		<script type="text/javascript" src="static/javascripts/main.js"></script>
+		<script src="static/lib/vue.min.js"></script>
+		<style type="text/css">
+		*{
+				margin: 0;
+				padding: 0;
+				list-style:none;
+				text-decoration: none;
+			}
+		
+		header{
+			width: 100%;
+			margin:0 auto;
+			position: fixed;
+			background: #fff;
+			height: 40px;
+			top: 0;
+			left: 0;
+		}
+		header img{
+			margin-top:10px;
+			margin-left: 12px;
+			width: 24px;
+			height:24px;
+		}
+		.txt{
+			width: 90%;
+			margin:0 auto;
+			line-height:40px;
+			font-size:14px;
+			color:#06365a;
+			margin-top: 40px;
+		}
+		.nav{
+			width: 90%;
+			margin:0 auto;
+			margin-bottom:54px;
+		}
+		input{
+			border: none;
+			width:70%;
+			line-height:24px;
+			font-size:12px;
+			outline:none;
+			background: transparent;
+			color: #06365a
+			
+		}
+		.from{
+			width: 100%;
+			border-bottom:1px solid #eee;
+			margin-top:10px;
+			padding:10px 0;
+		}
+		.from>span{
+			flex: 1;
+		}
+		footer{
+			width:90%;
+			line-height:40px;
+		    margin-left:5% ;
+			margin-bottom: 50px;
+		}
+		footer a{
+			display: inline-block;
+			width: 100%;
+			text-align: center;
+			font-size:15px;
+			line-height:40px;
+			color:#fff;
+			background: -webkit-gradient(linear, left top, right top, from(#8febf5 ) ,to(#24c9cd) );
+    		background: linear-gradient(to right, #8febf5  ,#24c9cd );
+		}
+		</style>
+	</head>
+	<body>
+		<div id="app">	
+		<div class="header baseBg2 tc flex">
+			<a class="back backPage"  href="javascript:history.go(-1);"></a>
+			<h5 class="block mauto white">收款方式</h5>
+		</div>
+		
+		<div class="nav pt40">
+			<div class="from flex alcenter between">
+				<span class="">姓名</span>
+				<input type="text" id="name"/>
+			</div>
+			<div class="from flex alcenter between">
+				<span>开户行名称</span>
+				<input type="text"  id="yinhang"/>
+			</div>
+			<div class="from flex alcenter between">
+				<span>银行账号</span>
+				<input type="text" id="yinHu" />
+			</div>
+			<div class="from flex alcenter between">
+				<span>支付宝账号</span>
+				<input type="text" id="zfb"/>
+			</div>
+			<div class="from flex alcenter between">
+				微信昵称<br>
+				<input type="text" id="wxname"/>
+			</div>
+			<div class="from flex alcenter between">
+				<span>微信账号</span>
+				<input type="text" id="wxzhanghu" />
+			</div>
+		</div>
+		<footer>
+			<a href="#" @click="add()">保存</a>
+		</footer>
+		</div>
+	</body>
+</html>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[]
+        },
+        mounted: function () {
+             var self = this;
+		     var token = get_user_login();
+		 $.ajax({
+            url: laravel_api + "/user/cash_info",
+            type: "POST",
+            dataType: "json",
+            async: true,
+            data:{
+            },
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+                if (data.type == 'ok') {
+					 var data = data.message;
+					 if(data){
+						$("#name").attr("value",data.real_name);
+						$("#yinhang").attr("value",data.bank_name);
+						$("#yinHu").attr("value",data.bank_account);
+						$("#zfb").attr("value",data.alipay_account);
+						$("#wxname").attr("value",data.wechat_nickname);
+						$("#wxzhanghu").attr("value",data.wechat_account) ;	
+					 }
+                	
+                } else{
+                	layer_msg(data.message);
+                };
+                if(data.type == '999'){
+                    window.location =_SERVER+'login.html';
+                }
+            }
+           });	
+	    },
+	    methods:{
+				   //跳详情
+            particulars:function(id){
+			// window.location =_SERVER+'Transferred.html?Id='+ id;
+		},
+			add:function(){
+			 var self = this;
+		     var token = get_user_login();
+		     var name=$("#name").val();
+		     var yinhang=$("#yinhang").val();
+		     var yinHu=$("#yinHu").val();
+		     var zfb=$("#zfb").val();
+		     var wxname=$("#wxname").val();
+		     var wxzhanghu=$("#wxzhanghu").val();
+		     $.ajax({
+            url: laravel_api + "/user/cash_save",
+            type: "POST",
+            dataType: "json",
+            async: true,
+            data:{
+            	real_name:name,
+            	bank_name:yinhang,
+            	bank_account:yinHu,
+            	alipay_account:zfb,
+            	wechat_nickname:wxname,
+            	wechat_account:wxzhanghu
+            },
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+            	self.List = data.message;
+                if (data.type == 'ok') {
+					layer_confirm2(data.message,function(){
+						location.href='userinfo.html'
+					})
+                } else{
+                	layer_msg(data.message);
+                }
+                if(data.type == '999'){
+                 window.location ='login.html';
+                }
+            }
+           });	
+		}
+	   }
+	});
+</script>

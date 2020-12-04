@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F4F4F4;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    font-size: 0.4800rem;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom: 1px solid #ebebeb;
+    background-color: #37bac9;
+    z-index: 666;
+  }
+  
+
+  
+  .header .back {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0.4000rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    background: url(../../images/imtoken/10.png);
+    background-size: cover;
+  }
+  
+  .oranger{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+  }
+
+.tablea {
+    overflow: hidden;
+    padding: 1.33rem 0;
+}
+
+.hover {
+    border-bottom: .05rem solid #31BBC6;
+    color: #31BBC6!important;
+}
+
+.centera p a {
+    display: inline-block;
+    text-align: center;
+    font-size: .4rem;
+    color: #101010;
+    padding: .2rem .27rem;
+    font-family: 'Microsoft YaHei';
+}
+
+.information {
+    margin-top: .27rem;
+    background: #fff;
+    padding: 0rem .4rem;
+}
+
+.cceptance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .4rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.35rem;
+}
+
+input.input-con {
+    text-align: right;
+    border: 0;
+    outline: none;
+}
+
+.cceptance:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+
+.cceptance a:last-child {
+    display: inline-block;
+    border: 1px solid #88D6E0;
+    border-radius: .45rem;
+    font-size: 0.3rem;
+    color: #fff;
+    background: #88D6E0;
+    padding: 6px .4rem;
+}
+
+.input-con:nth-last-child(2) {
+    width: 5rem;
+    text-align: left;
+}
+
+.recharge-way {
+    margin-top: .27rem;
+    background: #FFFFFF;
+    padding: 0rem .4rem;
+}
+
+.recharge-way a {
+    display: inline-block;
+    background-image: url(../../images/imtoken/zfb.png);
+    background-size: 1rem;
+    background-position: 0;
+    width: 100%;
+    height: 1.5rem;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: relative;
+}
+
+.recharge-way span {
+    position: relative;
+    top: .52rem;
+    left:1.4rem;
+    color: #000;
+    font-size: .3rem;
+}
+.recharge-way .way-info{
+    position: absolute;
+    top: .22rem;
+    left:1.4rem;
+    color: #000;
+    font-size: .4rem;
+    display: none;
+}
+.recharge-way .way-info p{
+    line-height: .6rem;
+}
+.recharge-way .way-info p:last-child{
+    font-size: .35rem;
+    color:#999;
+}
+.recharge-way i {
+    float: right;
+    margin-top: .61rem;
+    height:.67rem;
+    width: .35rem;
+    background: url(../../images/imtoken/return_r.png)no-repeat;
+    background-size: .25rem;
+}
+
+.recharge-money {
+    margin-top: .27rem;
+    background: #FFFFFF;
+    padding: .27rem;
+    font-size: .35rem
+}
+
+.recharge-money p {
+    font-size: .5rem;
+    padding: .3rem 0 0;
+}
+
+.ipt-money {
+    text-align: left!important;
+    font-size: .5rem;
+    width: 80%;
+}
+
+.acceptance-message {
+    margin-top: .27rem;
+    background: #FFFFFF;
+    padding: .27rem;
+    font-size: .35rem
+}
+
+.acceptance-message i {
+    background: url(../../images/imtoken/xl.png)no-repeat;
+    background-size: .4rem;
+    float: right;
+    width: .4rem;
+    height: .4rem;
+    margin-top: 0.5px;
+}
+
+.btnok{
+	width: 90%;
+	height: 1rem;
+    line-height: 1rem;
+    border-radius: .2rem;
+	text-align: center;
+    background: #24c9cd;
+    margin: .6rem auto 0;
+    
+}
+
+.btnok a{
+	width: 100%;
+	display: inline-block;
+	color: #FFFFFF;
+	font-size: .4rem;
+}
+
+.attention {
+    padding: .4rem;
+    margin-top: .4rem;
+    font-size: 0.3rem;
+    color: #E4624A;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>安全中心</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="javascripts/order.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+		<script src="./lib/language_cookie.js"></script>
+	</head>
+	<body>
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16" data-localize="index.security">安全中心</h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="nav safe-center white">
+			<ul class="ft16">
+				<li>
+					<a href='forgetpass.html?type=1' class='flex alcenter between'>
+						<span data-localize="safe.lgpwd">登录密码</span> 
+						<p class='flex alcenter'>
+							<span data-localize="safe.reset">修改</span> 
+							<img width='18' src='images/myimg/jitou.png' alt='' />
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href='bindpass.html' class='flex alcenter between'>
+						<span data-localize="safe.zpwd">资金密码</span> 
+						<p class='flex alcenter'>
+							<span data-localize="safe.reset">修改</span> 
+							<img width='18' src='images/myimg/jitou.png' alt='' />
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href='authorization_code.html' class='flex alcenter between'>
+						<span data-localize="safe.authorization_code">授权码</span> 
+						<p class='flex alcenter'>
+							<span data-localize="safe.authorization_see">查看</span>
+							<img width='18' src='images/myimg/jitou.png' alt='' /> 
+							
+						</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
+<script>
+	$(document).ready(function() {
+		var token = get_user_login();
+		$.ajax({
+			url: _API + "safe/safe_center",
+			type: "post",
+			dataType: "json",
+			async: true,
+			beforeSend: function beforeSend(request) {
+				request.setRequestHeader("Authorization", token);
+			},
+			success: function success(data) {
+				console.log(data);
+				var html = "<li class='hide'><a href='bindPhone.html' class='clearfix'>手机<span class='fr'>" + [(data.message.mobile == null || data.message.mobile == '') ?'未绑定' : '已绑定'] + "<img width='18' src='images/myimg/jitou.png' alt=''/></span></a></li>" +
+					"<li><a href='forgetpass.html?type=1' class='clearfix'>登录密码<span class='fr'>修改<img width='18' src='images/myimg/jitou.png' alt='' /></span></a></li>"+
+					"<li><a href='bindpass.html' class='clearfix'>法币资金密码<span class='fr'>修改<img width='18' src='images/myimg/jitou.png' alt='' /></span></a></li>"
+				// $(".nav>ul").html(html);
+				var pass = $("#pass").text();
+				if (pass == '已开启') {
+					$("#word").on('click', function() {
+						delgesture();
+						return false;
+					});
+				}
+				console.log(pass);
+				if (data.type == 'ok') {} else if (data.type == '999') {
+					layer_msg("请先登录");
+					window.location = "login.html";
+				}
+			}
+		});
+		//删除手势密码
+		function delgesture() {
+			layer.open({
+				content: '确定删除吗？',
+				btn: ['确定', '取消'],
+				yes: function(index) {
+					var token = get_user_login();
+					$.ajax({
+						url: _API + "safe/gesture_del",
+						type: "POST",
+						dataType: "json",
+						async: true,
+						beforeSend: function beforeSend(request) {
+							request.setRequestHeader("Authorization", token);
+						},
+						success: function success(data) {
+							console.log(data);
+							if (data.type == 'ok') {
+								layer_msg(data.message);
+								setTimeout(function() {
+									window.location.href = "Security.html";
+								}, 2000);
+								layer.close(index);
+							} else if (data.type == '999') {
+								window.location = 'login.html';
+							} else {
+								layer_msg(data.message);
+							}
+						}
+					});
+				}
+			});
+
+		}
+
+
+
+	})
+</script>

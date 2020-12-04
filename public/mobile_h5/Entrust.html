@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/LeveragedDeals.css" />
+	<link rel="stylesheet" type="text/css" href="css/Entrust.css" />
+</head>
+
+<body>
+	<div id="Entrust">
+		<header class="header">
+			<a class="back" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16"><span class="currency_name">USDT</span>/<span class="legal_name">BTC</span></h4>
+		</header>
+		<div class="header-space"></div>
+		<div id="Trading" class="mt10">
+			<div>
+				<h2 class="pull-left ftw" style="font-size:20px">
+					当前委托
+				</h2>
+
+			</div>
+			<!-- <hr /> -->
+			<div class="list_ul">
+				<div class="flex around ftw bdt pb10">
+					<span class="flex1 tc">时间</span>
+					<span class="flex1 tc">价格</span>
+					<span class="flex1 tc">交易量</span>
+					<span class="flex1 tc">操作</span>
+				</div>
+				<ul class="conplete_list " style="padding: 10px 0;">
+
+				</ul>
+			</div>
+			<p class="tc">
+				<img class="loading" src="images/loading.gif" style="width:30px;" />
+			</p>
+			<p style="text-align:center;" class="more ftw">加载更多</p>
+			<div class="Tradingon">
+				<p>
+					交易对
+				</p>
+				<input type="text" placeholder="币种" class="currency" />
+				<span>/</span>
+				<input type="text" placeholder="选择计价币种" class="select" />
+				<ul class="selectCurrency">
+					<li>USDT</li>
+					<li>BTC</li>
+					<li>ETH</li>
+					<li>HT</li>
+				</ul>
+				<p>订单状态</p>
+				<ul>
+					<li>买入</li>
+					<li>卖出</li>
+				</ul>
+				<div>
+					<button class="reset">重置</button>
+					<button class="btn confirm">确定</button>
+				</div>
+			</div>
+			<div class="record" style="display:none;">
+				<img src="images/anonymous.png" />
+				<span>暂无记录</span>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+	<script src="javascripts/jquery.cookie.js"></script>
+	<script src="javascripts/main.js"></script>
+	<script src="lib/layer_mobile/layer.js"></script>
+	<script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+	<script type="text/javascript">
+		var token = get_user_login();
+		$('.filtrate').click(function () {
+			if ($('.filtrate').hasClass('true') == false) {
+				$('.filtrate').addClass('true').find('img').attr('src', 'images/screen1.png').next('span').addClass('span');
+				$('.record').hide();
+				$('.Tradingon').slideDown();
+				$('.more').hide();
+			} else {
+				$('.filtrate').removeClass('true').find('img').attr('src', 'images/screen.png').next('span').removeClass('span');
+				$('.Tradingon').slideUp();
+				$('.more').show(1000);
+			}
+		})
+		$('.confirm').click(function () {
+			$('.filtrate').removeClass('true').find('img').attr('src', 'images/screen.png').next('span').removeClass('span');
+			$('.Tradingon').slideUp();
+			$('.record').show(1000);
+		});
+		$('.reset').click(function () {
+			$('input').val('');
+			$('li').css('border', 'none');
+		})
+
+		$('.Tradingon>ul>li').click(function () {
+			$(this).css('border', '1px solid #1881d2').siblings().css('border', 'none');
+		});
+		$('ul.selectCurrency>li').click(function () {
+			$('.select').val($(this).html()).css('color', 'black!important');
+			$('ul.selectCurrency').hide();
+		});
+		$('.select').click(function () {
+			$('ul.selectCurrency').show();
+		})
+    var pars = get_all_params();
+		var legal_id = pars.legal_id;
+		var currency_id = pars.currency_id;
+		var legal_name = pars.legal_name;
+		var currency_name = pars.currency_name;
+		$('.legal_name').text(legal_name);
+		$('.currency_name').text(currency_name);
+
+		function dealall(pages) {
+			$.ajax({
+				type: 'POST',
+				url: _API + 'lever/dealall',
+				dataType: 'json',
+				data: {
+					legal_id: legal_id,
+					currency_id: currency_id,
+					page: pages,
+					limit: 10,
+				},
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function (res) {
+					if (res.type == 'ok') {
+						$('.loading').css('display', 'none');
+						$('.more').text('加载更多')
+						var all_list = '';
+						$.each(res.message.order.data, function (k, v) {
+							all_list +=
+								`
+						<li class="flex around alcenter ftw bdt" style="padding:5px 0;">
+						<span class="flex1 tc">${timestampToTime(v.create_time)}</span>
+						<span class="flex1 tc">${Number(v.price).toFixed(4)}</span>
+						<span class="flex1 tc">${Number(v.number).toFixed(2)}</span>
+						<span class="flex1 tc"><button class="pingcang" data-id="${v.id}">平仓</button></span>
+					</li>
+						`
+						});
+						$('.conplete_list').html($('.conplete_list').html() + all_list);
+						if (res.message.order.data.length == 0) {
+							$('.more').text(nomore)
+						}
+					} else {
+						layer_msg(res.message);
+					}
+				}
+			});
+		}
+		dealall(1);
+		var page1 = 1;
+		$('.more').click(function () {
+			$('.loading').css('display', 'inline-block');
+			$(this).text('加载中...')
+			page1++;
+			dealall(page1);
+		})
+		//点击平仓操作
+		$('body').on('click', '.pingcang', function () {
+			var that = this;
+			layer.open({
+				anim: 'up',
+				content: sureClose,
+				btn: [sure, ceil],
+				yes: function (index) {
+					$.ajax({
+						type: 'POST',
+						url: _API + 'lever/close',
+						data: {
+							id: $(that).data('id')
+						},
+						dataType: 'json',
+						beforeSend: function beforeSend(request) {
+							request.setRequestHeader("Authorization", token);
+						},
+						success: function (res) {
+							layer.open({
+								content: res.message,
+								time: 1.5
+							})
+							if (res.type == 'ok') {
+								location.reload();
+							}
+						}
+					})
+				}
+			});
+		})
+
+
+
+		//获取上一页传来的参数封装
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) return (r[2]); return null;
+		};
+		//时间戳转换时间
+		function timestampToTime(timestamp) {
+			var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+			var Y = date.getFullYear() + '-';
+			var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+			var D = (date.getDate() > 10 ? date.getDate() : ('0' + date.getDate())) + ' ';
+			var h = (date.getHours() > 10 ? date.getHours() : ('0' + date.getHours())) + ':';
+			var m = (date.getMinutes() > 10 ? date.getMinutes() : ('0' + date.getMinutes())) + ':';
+			var s = (date.getSeconds() > 10 ? date.getSeconds() : ('0' + date.getSeconds()));
+			return Y + M + D + h + m + s;
+		}
+
+		var sname = GetQueryString("name");
+		if (sname != null) {
+			var sname_ = decodeURIComponent(sname);
+			alert(sname_);
+		}
+	</script>
+</body>
+
+</html>

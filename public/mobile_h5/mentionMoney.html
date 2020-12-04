@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提币</title>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<style>
+.bline{border-bottom: 1px solid #1B2A3E;padding: 10px 0;}
+.mt30{margin-top: 30px}
+.color1b{color: #728daf}
+.mention{width: 100%;height: 40px;line-height: 40px;color: #fff;background: #1881d2;border-radius: 4px;}
+.addbox img{width: 20px;}
+.addbox span{padding: 0 5px}
+input{background-color: rgba(0,0,0,0);}
+</style>
+<script>
+    function code(result){
+        $(".address").val(result)
+    } 
+</script>
+<body>
+    <!-- <div id="header">
+        <a class="pull-left flex alcenter" href='javascript:history.go(-1)'>
+            <img src="images/arrows.png" />
+        </a>
+    </div> -->
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16 bodyColor" data-localize="assets.tmoney">提币</h4>
+		</header>
+		<div class="header-space"></div>
+    <div class="plr15 ft14 ftw">
+        <div class="ft20"><span class="title">USDT</span><span data-localize="assets.tmoney">提币</span></div>
+        <p class="mt20 ft12" data-localize="assets.canuse">可用</p>
+        <p class="mt20 ft14 bold"><span class="balance-num">0.00</span> <span class="title">USDT</span></p>
+        <div class="bline mt20">
+            <p class="ft12" data-localize="assets.taddress">提币地址</p>
+            <div class="flex between alcenter mt20">
+                <input type="text" placeholder="请先设置提币地址" data-localize="assets.padd" class="ft14 address flex1 ftw" disabled>
+                <div class="color3 flex alcenter addbox">
+                    <img src="images/ercode.png" alt="" onclick="BSL.Qcode('0','code')">
+                    <!-- <span>|</span>
+                    <img src="images/choose.png" alt=""> -->
+                </div>
+            </div>
+        </div>
+        <div class="bline mt20">
+            <p class="ft12" data-localize="assets.num">数量</p>
+            <div class="flex between alcenter mt20">
+                <input type="number" placeholder="" class="ft14 count ftw">
+                <div>
+                    <span class="white_gray title">USDT</span>
+                    <span class="">|</span>
+                    <span class=" bold all_in" data-localize="assets.all">全部</span>
+                </div>
+            </div>
+        </div>
+        <div class="bline mt30">
+            <p><span data-localize="assets.rate">手续费</span> ( <span class="ratenum">5.000-5.000</span> <span class="title">USDT</span> )</p>
+        </div>
+        <div class="flex between alcenter ft14 mt20">
+            <p data-localize="assets.dnum">到账数量</p>
+            <p class="bold  ft14"><span class="reach-num">0.0000</span> <span class="title  bold">USDT</span></p>
+        </div>
+        <div class="bline mt20">
+            <p class="ft12" data-localize="transaction.pwd">资金密码</p>
+            <div class="flex between alcenter mt20">
+                <input type="password" placeholder="输入资金密码" data-localize="transaction.inputpass" class="ft14 password ftw">
+            </div>
+        </div>
+        <div class="mention tc ft14 mt20" data-localize="assets.tmoney">提币</div>
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <script>
+         $(function () {
+            var currency = get_param('id');
+            var balance,min_number,rate;
+            var token = get_user_login();
+            //获取user_id
+            var user_id;
+            $.ajax({
+                    url: _API + "user/info",
+                    type: "GET",
+                    dataType: "json",
+                    async: true,
+                    data:{
+                       
+                    },
+                    beforeSend: function beforeSend(request) {
+						request.setRequestHeader("Authorization",token);
+					},
+                    success: function (res) {
+                        if(res.type == 'ok'){
+                            user_id = res.message.id;
+                            initData();
+                            // getAddress();
+                        }
+                    }
+                })
+            function initData(){
+                initDataToken({url:'wallet/get_info',type:'post',data:{currency}},function(res){
+                    console.log(res)
+                    balance=res.change_balance;
+                    $('.balance-num').html(Number(balance).toFixed(8))
+                    $('.title').html(res.name)
+                    rate=res.rate;
+                    $('.ratenum').html(rate+'%')
+                    min_number=res.min_number;
+                    $('.count').attr('placeholder','最小提币数量'+Number(min_number).toFixed(2))
+                    var num=0;
+                    $('.reach-num').html(num.toFixed(8));
+                    getAddress(res.name,res.contract_address)
+                })
+            }
+             //获取提币地址
+             function getAddress(name,addr){
+                $.ajax({
+                    url: _DOMAIN+'/walletMiddle/GetDrawAddress',
+                    type: "GET",
+                    dataType: "json",
+                    async: true,
+                    data:{
+                        user_id:user_id,
+                        coin_name:name,
+                        contract_address:addr
+                    },
+                    success: function (res) {
+                        if(res.code == 0){
+                            $('.address').val(res.data.address);
+                        }else{
+                            layer_msg(res.errorinfo)
+                        }
+                    }
+                });
+            };
+            function postData() {
+                var address = $('.address').val();
+                var number = $('.count').val();
+                var password = $('.password').val();
+                if(!address){
+                    layer_msg('请先设置提币地址');
+                    return;
+                } 
+                if(!number){
+                    layer_msg('请输入提币数量');
+                    return;
+                } 
+                if(!password){
+                    layer_msg('请输入资金密码');
+                    return;
+                } 
+
+                if((number-0)<min_number){
+                    console.log(number,min_number)
+                    return layer_msg('输入的提币数量小于最小值');
+                }
+                
+                initDataToken({url:'wallet/out',type:'post',data:{currency,number,rate,address,password}},function(res){
+                    console.log(res)
+                    layer_msg(res)
+                    setTimeout(() => {
+                        location.href='legalAccount.html?id='+currency+'&type=0'
+                    }, 1500);
+                })
+              
+            }
+            $('.mention').click(function(){
+                postData();
+            })
+             
+            $('.all_in').click(function(){
+                $('.count').val(balance)
+            })
+            $('.count').keyup(function(){
+                var value=$(this).val();
+                var num=value*(1-rate/100)
+                $('.reach-num').html(num)
+            })
+           
+        })
+    </script>
+</body>
+
+</html>

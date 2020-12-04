@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <meta name="format-detection" content="telephone=no">
+  <title>代理</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css">
+  <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+  <link href="lib/swipers.css" rel="stylesheet" />
+  <script src="lib/jquery-1.8.3.min.js"></script>
+  <script src="lib/swiper.jquery.min.js"></script>
+  <script src="javascripts/main.js"></script>
+  <script src="javascripts/jquery.cookie.js"></script>
+  <script src="lib/vue.min.js"></script>
+  <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+  <style>
+*{box-sizing: border-box}
+body{
+	background:#061623;
+}
+.blue{color: #1881d2}
+section li{border-bottom: 1px solid #eee;padding: 5px 0;}
+.swiper-container {
+    width: 100%;
+    background:#061623
+  }
+header{
+  height: 35px;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: none;
+  color: #06365a;
+}
+.header-scroll{
+  box-shadow: 0 2px 2px #ccc;
+}
+header img {
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+header a{
+  position: absolute;
+}
+.soso{border-bottom: 1px solid #1B2A3E}
+.flex1 span{color:#728DAF}
+.flex1 p{color: #06365a}
+.zz{color: #8e9ca0}
+header span{
+  line-height: 35px;
+  margin: 0 10px;
+}
+header .active{
+  font-weight: bold;color: #1881d2;
+}
+li a{
+  color: inherit;
+}
+</style>
+</head>
+
+<body style="padding-top:40px">
+  <div id="app" v-cloak>
+    <header><a href="assets.html"></a>
+      <div class="top-tab tc">
+       <!--  <span class="active">杠杆</span> -->
+        <span class="active">法币</span>
+        <span>交易</span>
+      </div>
+
+    </header>
+
+    <div>
+      <!--切换-->
+      <section class="swiper-container mycontainer">
+        <section class="swiper-wrapper">
+          <!-- <section class="swiper-slide"> -->
+<!--             <section class="agent_level">
+              <section class="levelbox level01">
+                <div class="">杠杆账户</div>
+                <span class="mt5 ft12">总资产折合（BTC）</span>
+                <p class="mt10">{{leverList.totle}}</p>
+                <span class="mt5">≈{{leverList.CNY}}CNY</span>
+              </section>
+            </section>
+          </section> -->
+          <section class="swiper-slide">
+            <section class="agent_level">
+              <section class="levelbox level02">
+                <div class="">法币账户</div>
+                <span class="mt5 ft12">总资产折合（BTC）</span>
+                <p class="mt10">{{legalList.totle}}</p>
+                <span class="mt5">≈{{legalList.CNY}}CNY</span>
+              </section>
+            </section>
+          </section>
+          <section class="swiper-slide">
+            <section class="agent_level">
+              <section class="levelbox level04">
+                <div class="">交易账户</div>
+                <span class="mt5 ft12">总资产折合（BTC）</span>
+                <p class="mt10">{{changeList.totle}}</p>
+                <span class="mt5">≈{{changeList.CNY}}CNY</span>
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+      <div class="soso flex alcenter">
+        <img src="images/searchs.png" alt="" style="width:20px; margin-right:10px">
+        <input type="text" style="background:transparent;color:#06365a" placeholder="搜索币种" />
+      </div>
+      <!--等级内容-->
+      <!-- ===========杠杆============== -->
+      <!-- <section class="level_con" style="display:none;">
+        <section style="padding:15px 10px;">
+          <ul>
+            <li v-for="(aa) in leverList.balance">
+              <a href="legalAccount.html">
+                <div class="title" style="font-weight:bold">btc/usdt</div>
+                <div class="flex between tc ft12" style="color:#666">
+                  <span>币种</span>
+                  <span>可用</span>
+                  <span>已借</span>
+                </div>
+                <div class="item flex between">
+                  <span class="name bold blue">btc</span>
+                  <span>09888.0000</span>
+                  <span>09888.0000</span>
+                </div>
+                <div class="item flex between">
+                  <span class="name bold blue">usdt</span>
+                  <span>09888.0000</span>
+                  <span>09888.0000</span>
+                </div>
+                <div class="sum" style="color:#666">折合0.00CNY</div>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </section> -->
+      <!-- <section class="level_con">
+        <section style="padding:15px 10px;">
+          <ul>
+            <li v-for="(aa) in leverList.balance">
+              <a  :href="'LeveragedAccounts.html?id=' + aa.currency+'&type=0'">
+                <p class="blue bold">{{aa.currency_name}}</p>
+                <div class="flex mt5">
+                  <div class="flex1">
+                    <span class="ft12">可用</span>
+                    <p>{{aa.lever_balance}}</p>
+                  </div>
+                  <div class="flex1">
+                    <span class="ft12">冻结</span>
+                    <p>{{aa.lock_lever_balance}}</p>
+                  </div>
+                  <div class="flex1 tr">
+                    <span class="ft12">折合（CNY）</span>
+                    <p class="zz"></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </section> -->
+      <!-- =============法币============== -->
+      <section class="level_con" style="display:none;">
+        <section style="padding:15px 10px;">
+          <ul>
+            <li v-for="(aa) in legalList.balance">
+              <a  :href="'legalAccount.html?id=' + aa.currency+'&type=1'">
+                <p class="blue bold">{{aa.currency_name}}</p>
+                <div class="flex mt5">
+                  <div class="flex1">
+                    <span class="ft12">可用</span>
+                    <p>{{aa.legal_balance}}</p>
+                  </div>
+                  <div class="flex1">
+                    <span class="ft12">冻结</span>
+                    <p>{{aa.lock_legal_balance}}</p>
+                  </div>
+                  <div class="tr flex1">
+                    <span class="ft12">折合（CNY）</span>
+                    <p class="zz">
+                      </>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <!-- ================交易=============== -->
+      <section class="level_con">
+        <section style="padding:15px 10px;">
+          <ul>
+            <li v-for="(aa) in changeList.balance">
+              <a  :href="'leverAccount.html?id=' + aa.currency+'&type=2'">
+                <p class="blue bold">{{aa.currency_name}}</p>
+                <div class="flex mt5">
+                  <div class="flex1">
+                    <span class="ft12">可用</span>
+                    <p>{{aa.change_balance}}</p>
+                  </div>
+                  <div class="flex1">
+                    <span class="ft12">冻结</span>
+                    <p>{{aa.lock_change_balance}}</p>
+                  </div>
+                  <div class="flex1 tr">
+                    <span class="ft12">折合（CNY）</span>
+                    <p class="zz"></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+
+    </div>
+  </div>
+  <script>
+    $(function () {
+      var swiper = new Swiper('.mycontainer', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+        });
+      var current = 0;
+      window.onscroll = function () {
+        var y = window.scrollY;
+        if (y != 0) {
+          $('header').addClass('header-scroll');
+        } else {
+          $('header').removeClass('header-scroll')
+        }
+
+
+      }
+      $('.level_con').eq(current).show().siblings('.level_con').hide();
+      var mySwiper = new Swiper(".swiper-container", {
+        slidesPerView: "auto",
+        centeredSlides: !0,
+        watchSlidesProgress: !0,
+        pagination: ".swiper-pagination",
+        onProgress: function (a) {
+          var b, c, d;
+          for (b = 0; b < a.slides.length; b++) c = a.slides[b],
+            d = c.progress,
+            scale = 1 - Math.min(Math.abs(.2 * d), 1),
+            es = c.style,
+            //透明度的改变，原代码如下   es.opacity = 1 - Math.min(Math.abs(d / 2), 1),
+            es.opacity = 1,
+            es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform =
+            "translate3d(0px,0," + -Math.abs(150 * d) + "px)"
+        },
+        onSetTransition: function (a, b) {
+          for (var c = 0; c < a.slides.length; c++) es = a.slides[c].style,
+            es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration =
+            es.OTransitionDuration = es.transitionDuration = b + "ms"
+        },
+        onTransitionEnd: function (swiper) {
+          // console.log(swiper.activeIndex);
+
+          $(".level_con").hide();
+          $(".level_con").eq(swiper.activeIndex).show();
+        },
+        onSlideChangeEnd: function (swiper) {
+          current = swiper.activeIndex;
+          // console.log($('.top-tab span').eq(index));
+          $('.level_con').eq(current).show().siblings('.level_con').hide();
+          $('.top-tab span').eq(current).addClass('active').siblings().removeClass()
+        }
+      });
+      $('.top-tab span').click(function () {
+        current = $(this).index();
+        $(this).addClass('active').siblings().removeClass();
+        mySwiper.slideTo(current);
+        $('.level_con').eq(current).show().siblings('.level_con').hide();
+      })
+    });
+  </script>
+</body>
+
+</html>
+<script>
+  var vue = new Vue({
+    el: '#app',
+    data: {
+      leverList: {},
+      legalList: {},
+      changeList: {}
+    },
+
+    mounted: function () {
+      var self = this;
+      var token = get_user_login();
+      $.ajax({
+        url: _API + "wallet/list",
+        type: "POST",
+        dataType: "json",
+        async: true,
+        beforeSend: function beforeSend(request) {
+          request.setRequestHeader("Authorization", token);
+        },
+        success: function success(data) {
+          console.log(data)
+          if (data.type == 'ok') {
+            var list = data.message;
+            self.legalList = list.legal_wallet;
+            self.leverList = list.lever_wallet;
+            self.changeList = list.change_wallet;
+
+          } else if (data.type == '999') {
+            window.location =  'login.html';
+          }
+        }
+      });
+    },
+    methods: {
+
+      //跳详情
+      particulars: function (id) {
+        window.location =  'Transferred.html?Id=' + id;
+      }
+    }
+  });
+</script>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提币</title>
+    <link rel="stylesheet" href="static/css/common.css">
+</head>
+<style>
+#header a{height: 45px;line-height: 45px;}
+#header img{width: 25px;margin: 0 5px}
+.bline{border-bottom: 1px solid #eee;padding: 10px 0;}
+.mt30{margin-top: 30px}
+.color1b{color: #728daf}
+.mention{width: 100%;height: 40px;line-height: 40px;color: #fff;background:#24c9cd;}
+.addbox img{width: 20px;}
+.addbox span{padding: 0 5px}
+</style>
+
+<body>
+    <div id="header">
+        <a class="pull-left flex alcenter" href='javascript:history.go(-1)'>
+            <img src="static/images/arrowlf.png" />
+        </a>
+    </div>
+    <div class="plr15 ft12 ">
+        <div class="ft20"><span class="title">USDT</span>提币</div>
+        <p class="mt20">可用</p>
+        <p class="mt20 ft14 bold"><span class="balance-num">0.00</span> <span class="title">USDT</span></p>
+        <div class="bline mt30">
+            <p>提币地址</p>
+            <div class="flex between alcenter mt20">
+                <input type="text" placeholder="输入或长按粘贴地址" class="ft14 address">
+                <div class="color3 flex alcenter addbox">
+                    <img src="static/images/ercode.png" alt="" onclick="BSL.Qcode('0','code')">
+                    <!-- <span>|</span>
+                    <img src="static/images/choose.png" alt=""> -->
+                </div>
+            </div>
+        </div>
+        <div class="bline mt30">
+            <p>数量</p>
+            <div class="flex between alcenter mt20">
+                <input type="number" placeholder="最小提币数量200" class="ft14 count">
+                <div>
+                    <span class="white_gray title">USDT</span>
+                    <span class="">|</span>
+                    <span class=" bold all_in">全部</span>
+                </div>
+            </div>
+        </div>
+        <div class="bline mt30">
+            <p>手续费( <span class="ratenum">5.000-5.000</span> <span class="title">USDT</span> )</p>
+        </div>
+        <div class="flex between alcenter ft14 mt20">
+            <p style="color:#9faaaf">到账数量</p>
+            <p class="bold  ft14"><span class="reach-num">0.0000</span> <span class="title  bold">USDT</span></p>
+        </div>
+        <div class="mention tc ft14 mt20">提币</div>
+    </div>
+    <script src="static/javascripts/jquery.min.js"></script>
+    <script src="static/javascripts/main.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script>
+    <script src="static/lib/layer_mobile/layer.js"></script>
+    <script>
+        $(function () {
+            var currency = get_param('id');
+            var balance,min_number,rate;
+            initDataToken({url:'/wallet/get_info',type:'post',data:{currency}},function(res){
+                console.log(res)
+                balance=res.change_balance;
+                $('.balance-num').html(balance)
+                $('.title').html(res.name)
+                rate=res.rate;
+                $('.ratenum').html(rate+'%')
+                min_number=res.min_number;
+                $('.count').attr('placeholder','最小提币数量'+min_number)
+                var num=0;
+                $('.reach-num').html(num.toFixed(8));
+            })
+            function postData() {
+                var address = $('.address').val();
+                var number = $('.count').val();
+                if(!address){
+                    layer_msg('请输入提币地址');
+                    return;
+                } 
+                if(!number){
+                    layer_msg('请输入提币数量');
+                    return;
+                } 
+
+                if((number-0)<min_number){
+                    console.log(number,min_number)
+                    return layer_msg('输入的提币数量小于最小值');
+                }
+                
+                initDataToken({url:'/wallet/out',type:'post',data:{currency,number,rate,address}},function(res){
+                    console.log(res)
+                    layer_msg(res)
+                    setTimeout(() => {
+                        location.href='account_details.html?id='+currency
+                    }, 1500);
+                })
+              
+            }
+            $('.mention').click(function(){
+                postData();
+            })
+            function code(result){
+                $(".address").val(result)
+            }  
+            $('.all_in').click(function(){
+                $('.count').val(balance)
+            })
+            $('.count').keyup(function(){
+                var value=$(this).val();
+                var num=value*(1-rate/100)
+                $('.reach-num').html(num)
+            })
+           
+        })
+    </script>
+</body>
+
+</html>

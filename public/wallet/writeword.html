@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>确认助记词</title>
+    <link rel="stylesheet" href="static/css/creatAccount.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<body>
+<div class="header">
+    备份助记词
+    <s class="back backPage"></s>
+</div>
+<div class="container">
+    <h4>确认你的钱包助记词</h4>
+    <p>请按顺序点击助记词，请确认你的备份助记词正确。</p>
+    <!-- <ul class="word_list  word_list_2 clear">
+    </ul> -->
+    <div class="word_box write_word">
+        <p class="" id="write_word">
+        </p>
+    </div>
+    <ul class="word_list_3 show_word clear">
+    </ul>
+    <form id="form_content" action="/users/writeword" method="post">
+        <input name="content" type="hidden" id="input_content" value="<%= word_content %>">
+        <div class="btn_2 login_btn">确定</div>
+    </form>
+</div>
+<div style="height:2rem;"></div>
+<div class="common_footer">
+    <a href="index.html" class="active"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>	
+<script type="text/javascript" src="static/javascripts/writeword.js"></script>
+</body>
+</html>

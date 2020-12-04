@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<title>重置密码</title>
+		<link href="lib/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+	    <script src="./lib/language_cookie.js"></script>
+	</head>
+	<style>
+		.codebox{
+            display: flex;
+            justify-content: space-between;
+        }
+        .codebox #code{
+            width: 83% !important;
+            align-items: center;
+        }
+        .send{
+            padding: 2px 5px;
+            color: #fff;
+            background: #588cd8;
+            border-radius: 4px;
+			margin-top: 5px;
+			font-size: 12px;
+			height: 25px;
+        }
+        .blue{color: #588cd8!important}
+        .tr{text-align: right}
+        .block{display: block}
+	</style>
+	<body>
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16" data-localize="safe.newPwd">重新设置密码</h4>
+		</header>
+		<div class="header-space"></div>
+		<div id="resetpass">
+			<div class="theme ftw ft16">
+				<div class="tips">
+					<img src="images/warning.png" >
+					<span data-localize="safe.len">密码需要6-20个字符</span>
+				</div>
+				<form>
+					<div class="form-group">
+						<input type="password"  id="setpassword" placeholder="请输入密码" data-localize="safe.ppwd" name="password" value="" />
+						<p id="mes1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+					</div>
+					<div class="form-group">
+						<input type="password" id="verifypassword" placeholder="请再次输入新密码" data-localize="safe.reppwd" name="repassword" value="" />
+						<p id="mes2" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p>
+					</div>
+					<div class="form-group codebox">
+						<input type="number" class="form-control" id="code" placeholder="请输入验证码" data-localize="safe.pcode" name="code" value=""/>
+						<input type="button" class="blue" id="fbtain" value="发送" data-localize="safe.send" /> 
+					</div>
+					<a class="btn btn-default ftw ft16" id="resetp" data-localize="safe.repwd">重置密码</a>
+					<p id="mes3" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript">
+		    var token = get_user_login();
+			$('input[type=text]').blur(function(){
+				setTimeout(function(){
+					document.body.scrollTop = document.body.scrollHeight;
+				},300);
+			})
+			$("#setpassword").change(function() {
+				var pass = $("#setpassword").val();
+				if (pass.length < 6 || pass.length > 16) {
+					$("#mes1").html(plength);
+
+				} else {
+					$("#mes1").html("");
+				}
+			})
+			$("#verifypassword").change(function() {
+
+				if ($("#setpassword").val() != $("#verifypassword").val()) {
+					$("#mes2").html(twonot);
+					return;
+				} else {
+					$("#mes2").html("");
+				}
+
+			})
+			//重置密码
+			$('#resetp').click(function() {
+				var s = function() {
+
+					var ps = /^[a-zA-Z0-9]{6,16}$/;
+					if (!ps.test($('#setpassword').val())) {
+						layer_msg(plength);
+					} else {
+						return true;
+					}
+				}
+
+				var ss = function() {
+					if ($('#verifypassword').val() == $('#setpassword').val()) {
+						return true;
+					} else {
+						layer_msg(twonot);
+					}
+				}
+				var pass = $('#setpassword').val();
+				var repass = $('#verifypassword').val();
+				var code = $('#code').val();
+
+				if (s() == true && ss() == true) {
+					$.ajax({
+						type: "post",
+						url: _API + "safe/update_password",
+						data: {
+							password: pass,
+							re_password: repass,
+							code:code
+						},
+						datatype: "json",
+						beforeSend: function beforeSend(request) {
+							request.setRequestHeader("Authorization", token);
+						},
+						success: function(data) {
+							layer_msg(data.message);
+							//console.log(data.message);
+							if (data.type == "ok") {
+
+								setTimeout(function() {
+									window.location.href = "Security.html";
+								}, 2000);
+
+
+							}
+						}
+					});
+				} else {
+					//layer_msg('请检查输入信息')
+				}
+			})
+			$('#fbtain').click(function(){
+				var disabled = $("#fbtain").attr("disabled");
+				if (disabled) {
+					return false;
+				}
+				let user_string = localStorage.getItem('phone');
+				var reg = /^1[345678]\d{9}$/;
+                var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+				var url= 'sms_send';
+				if (emreg.test(user_string)){
+					url= 'sms_mail';
+				}
+				$.ajax({
+					type: "post",
+					url: _API+url,
+					data: {scene: 'change_password',user_string: user_string},
+					datatype: "json",
+					beforeSend: function beforeSend(request) {
+						request.setRequestHeader("Authorization", token);
+					},
+					success: function (data) {
+						settime();
+						if (data.type == "ok") {
+							layer_msg(data.message)
+						}
+					}
+				});
+			});
+			var countdown = 60;
+			var generate_code = $("#fbtain");
+			function settime() {
+				if (countdown == 0) {
+					generate_code.attr("disabled", false);
+					generate_code.val(tsend);
+					$("#fbtain").css('color', '#5890bd');
+					countdown = 60;
+					return false;
+				} else {
+					$("#fbtain").attr("disabled", true);
+					$("#fbtain").css('color', '#b6bfc4');
+					generate_code.val(countdown + "s");
+					countdown--;
+				}
+				setTimeout(function () {
+					settime();
+				}, 1000);
+			}
+
+		</script>
+	</body>
+</html>

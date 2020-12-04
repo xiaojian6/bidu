@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="lib/swiper.min.css" />
+    <link rel="stylesheet" href="lib/swipers.css" />
+    <link rel="stylesheet" href="lib/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index2.css">
+    <link rel="stylesheet" href="css/footer.css" />
+</head>
+<body>
+    <div id="app" v-clock style="padding-bottom: 60px;">
+        <div class="bgWhite" style="border-bottom-left-radius: 45px;">
+            <div class="index_bg white pl20">
+                <div class="flex alcenter">
+                    <p class="flex alcenter ptb20">
+                        <img src="images/protect.png" alt="" class="wt20">
+                        <span class="pl10 ft12" data-localize="index.protect">资产保护中</span>
+                    </p>
+                </div>
+                <div class="flex between alcenter ptb20 pr10">
+                        <!-- style="border-bottom:1px solid #323334" -->
+                    <div>
+                        <p class="ft16" data-localize="index.total">总资产</p>
+                        <p class="mt10">$<span class="ft18 bold">{{walletList.totle}}</span> </p>
+                        <!-- <p class="mt10">(≈ 10.000 GCNT)</p> -->
+                    </div>
+                    <div>
+                        <img src="images/yang.png" alt="" style="width: 90px;">
+                    </div>
+                </div>
+                <!-- <div class="ptb20">
+                    <p>GCNT转入矿池可放大十倍</p>
+                </div> -->
+            </div>
+            <div class="news flex alcenter between ptb10 plr20">
+                <div class="flex alcenter">
+                    <img src="images/new2.jpg" class="wt20" />
+                    <ul class="lists ft12 pl10 color9a" style="margin-bottom:0;">
+                        <li class='news-item' v-for="item in newsList">
+                            <a :href="'journalism.html?id= '+ item.id">{{item.title}}</a>
+                        </li>
+                    </ul> 
+                </div>
+                <img src="images/mores.png" class="wt20" />
+            </div>
+        </div>
+        <div class="flex tc ft12 plr20 ptb20">
+            <div class="flex1">
+                <a href="transaction.html">
+                    <img src="images/i1.png" alt="" class="wt30 radius50">
+                    <p class="mt10" data-localize="footer.currency">币币交易</p>
+                </a>
+            </div>
+            <div class="flex1">
+                <a href="fiatrad.html">
+                    <img src="images/i2.png" alt="" class="wt30 radius50">
+                    <p class="mt10" data-localize="footer.legal">法币交易</p>
+                </a>
+                
+            </div>
+            <div class="flex1">
+                <a href="LeveragedDeals.html">
+                    <img src="images/i3.png" alt="" class="wt30 radius50">
+                    <p class="mt10" data-localize="footer.lever">杠杆交易</p>
+                </a>
+            </div>
+            <div class="flex1">
+                <a href="personal.html">
+                    <img src="images/i4.png" alt="" class="wt30 radius50">
+                    <p class="mt10" data-localize="footer.center">个人中心</p>
+                </a>
+            </div>
+        </div>
+        <!-- <div class="plr20 hide">
+            <p class="bold">精选推荐</p>
+            <div class="bgWhite ptb15 plr20 mt10 wradius50 flex alcenter between">
+                <div class="w65">
+                    <p class="flex between">
+                        <span>USDT</span>
+                        <span>0.000</span>
+                    </p>
+                    <p class="flex between color9a ft12">
+                        <span>7.00 CNY</span>
+                        <span>≈0.00 CNY</span>
+                    </p>
+                </div>
+                <div>
+1
+                </div>
+            </div>
+        </div> -->
+        <div class="plr20 mt20">
+            <p class="bold" data-localize="index.lian">链币资产</p>
+            <ul>
+                <li class="bgWhite ptb15 plr20 mt10 wradius50" v-for="item in walletList.balance">
+                    <p class="flex between">
+                        <span>{{item.currency_name}}</span>
+                        <span>{{item.legal_balance}}</span>
+                    </p>
+                    <p class="flex between color9a ft12">
+                        <span>{{getlg('frezz')}}：{{item.lock_legal_balance}}</span>
+                        <span>≈{{((item.usdt_price-0)*(item.legal_balance-0)) | Fixed2}} CNY</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <footer style="background: #ffffff;">
+        <a href="index.html" class="select">
+            <div>
+                <p class="img img0"></p>
+                <span data-localize="footer.home">首页</span>
+            </div>
+        </a>
+        <a href="market.html">
+            <div>
+                <p class="img img1"></p>
+                <span data-localize="footer.quotation">行情</span>
+            </div>
+        </a>
+        <!-- <a href="fiatrad.html">
+            <div>
+                <p class="img img2"></p>
+                <span>法币交易</span>
+            </div>
+        </a> -->
+        <a href="transaction.html">
+            <div>
+                <p class="img img2"></p>
+                <span data-localize="footer.currency">币币交易</span>
+            </div>
+        </a>
+        
+        <a  href="LeveragedDeals.html">
+            <div>
+                <p class="img img3"></p>
+                <span data-localize="footer.lever">杠杆交易</span>
+            </div>
+        </a>
+        <a href="assets.html">
+            <div>
+                <p class="img img4"></p>
+                <span data-localize="footer.assets">资产</span>
+            </div>
+        </a>
+    </footer>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/jquery.bootstrap.newsbox.min.js"></script>
+    <script src="lib/swiper.min.js"></script>
+    <script src="lib/vue.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+    <script src="./lib/language_cookie.js"></script>
+    <script>
+        
+    </script>
+    <script>
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                newsList:[],
+                walletList:[]
+            },
+            filters: {
+                Fixed2: function (value) {
+                	value=Number(value);
+                    return value.toFixed(2);
+                }
+            },
+            mounted(){
+                this.getNews();
+                this.getWallet();
+            },
+            methods:{
+                getNews(){
+                    let that = this;
+                    initData({url:'news/list',type:'post',data:{c_id:4}},function(res){
+                        that.newsList = res.list;
+                        that.$nextTick(function(){
+                            $(".lists").bootstrapNews({
+                                newsPerPage: 1,
+                                autoplay: true,
+                                pauseOnHover: true,
+                                navigation: false,
+                                direction: 'down',
+                                newsTickerInterval: 2500,
+                                onToDo: function () {}
+                            });
+                        });
+                    })
+                },
+                getWallet(){
+                    let that = this;
+                    initDataToken({url:'wallet/list',type:'post'},function(res){
+                        that.walletList = res.legal_wallet;
+                    })
+                }
+            }
+
+        })
+    </script>
+
+</body>
+</html>

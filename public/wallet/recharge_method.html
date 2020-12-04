@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>支付方法</title>
+        <link rel="stylesheet" href="static/css/imtoken/recharge_method.css">
+        <link rel="stylesheet" href="static/css/iconfont.css">
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+        <link rel="stylesheet" href="static/css/footer.css">
+        <script src="static/javascripts/imtoken/flexble.js"></script>
+		
+    </head>
+</head>
+
+<body>
+    <div id="user_info" ></div>
+    <div class="header back">
+        <h5>请选择充值方式</h5> 
+        <i class="back backPage"></i>
+    </div>
+	<div style="height: 1.2rem;"></div>
+    <div class="select-recharge">
+        <ul>
+            <li class="select-card active" data-way="we_chat">
+                <div class="back-card wechat">
+					<h5>微信</h5>
+                    <span  id="chat_name"></span>
+					
+                    <span id="chat_acc">账户：</span>
+                </div>
+                <div class="select">
+                    <input type="checkbox" class="check">选择
+                </div>
+            </li>
+			<li class="select-card" data-way="ali_pay">
+				<div class="back-card zhifu">
+					<h5>支付宝</h5>
+					<span  id="ali_name"></span>
+
+					<span id="ali_acc">账户：</span>
+				</div>
+				<div class="select">
+					<input type="checkbox" class="check">选择
+				</div>
+			</li>
+			<!-- <li class="select-card" data-way="bank">
+				<div class="back-card bank">
+					<h5 id="bank_name2">民生银行许昌长葛支行</h5>
+					<span id="bank_acc">账户：</span>
+					<span id="bank_add">地址：</span>
+				</div>
+				<div class="select">
+					<input type="checkbox" class="check">选择
+				</div>
+			</li> -->
+        </ul>
+        <input type="text" value="charge" id="tab" hidden>
+    </div>
+    <div class="btnok">
+		<!-- <a href="/users/recharge_money?way=12" class="btn-ok">确定</a> -->
+        <input type="button" value="确定" class="btn-ok">
+    </div>
+    <div class="common_footer">
+        <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+        <a href="fiatrad.html"  class="active" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+
+    <script type="text/javascript" src="static/javascripts/recharge_method.js"></script>
+</body>
+
+</html>

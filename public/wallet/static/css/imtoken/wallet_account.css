@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F4F4F4;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: #9A9A9A;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #FFFFFF;
+    background: #14CAD7;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    width: 100%;
+    font-size: 1.3rem;
+}
+
+.back {
+    position: absolute;
+    top: 55%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: url(../../images/imtoken/back_white.png)no-repeat;
+    background-size: 1.3rem;
+    width: 1.2rem;
+    height: 1.7rem;
+    margin-left: 0.8rem;
+}
+
+.account-money {
+    width: 92%;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 0.5rem;
+    margin-top: 0.7rem;
+    height: auto;
+}
+
+.user-head {
+    margin: 0.7rem;
+    position: relative;
+}
+
+.user-link {
+    display: block;
+    background: #fff;
+    height: 2.2267rem;
+    width: 100%;
+    line-height: 2.2267rem;
+    color: #333;
+    font-size: 0.9rem;
+    padding-left: 2.5rem;
+    position: relative;
+}
+
+.user-link img{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    width: 2rem!important;
+    height: 2rem;
+}
+
+.userinfo-box {
+    width: 92%;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 0.5rem;
+    margin-top: 0.7rem;
+}
+
+.user-head img {
+    width: 100%;
+}
+
+.userinfo-item {
+    display: flex;
+    align-items: center;
+}
+
+.userinfo-item img {
+    position: absolute;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 5%;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.7rem;
+    margin-left: 1rem;
+}
+
+.userinfo-item>a {
+    position: relative;
+    flex: 1;
+    border-bottom: 1px solid #eee;
+    line-height: 2.4rem;
+    padding: .3rem 0;
+}
+
+.userinfo-item span {
+    margin-left: 3.5rem;
+}
+
+.userinfo-item i {
+    float: right;
+    margin: 0.7rem 0.5rem 0rem 0rem;
+    height: 1.6rem;
+    width: 0.8667rem;
+    background: url(../../images/imtoken/return_r.png)no-repeat;
+    background-size: 0.5rem;
+}
+
+.user-box {
+    text-align: center;
+    width: 50%;
+    /* position: absolute;
+    top: 15%;
+    left: 46%; */
+}
+
+.user-box h5 {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.user-box p {
+    color: #fff;
+    font-size: .8rem;
+    /* text-align: right; */
+}

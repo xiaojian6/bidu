@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+		<title></title>
+		<style type="text/css">
+			div#fiatDeal{
+				padding: 15px 3%;
+			}
+			div#header img{
+				width: 25px;
+			}
+			div#cipher h1{
+				font-weight: bold;
+			}
+			div#cipher p,
+			div#cipher input{
+				width: 100%;
+				position: relative;				
+			}
+			div#cipher p{
+				margin-top: 20px;
+			}
+			div#cipher p span{
+				position: absolute;
+			    right: 5%;
+			    top: 35px;
+			    display: inline-block;
+			    height: 35px;
+			    width: 30px;
+			    z-index: 2;
+			}
+			div#cipher input{
+				height: 35px;
+				border: none;
+				outline: none;
+				font-size: 1.2rem;
+				line-height: 35px;
+				text-indent: 5px;
+				margin-bottom: 5px;
+								
+			}
+			div#cipher>span{
+				color: red;
+				display: none;
+			}
+			div#cipher input.nickname{
+				border-bottom: 1px solid #5c89d3;
+			}
+			div#cipher input.cryptogram{
+				background: url(images/hide.png) no-repeat 95% 0;
+			}
+			div#fiatDeal button{
+				position: fixed;
+				bottom: 10px;
+				left: 4%;
+				width: 92%;
+				height: 50px;
+				line-height: 50px;
+				color: #fff;
+				border: none;
+				outline: none;
+				font-size: 1.4rem;
+				font-weight: bold;
+				background: #CFD9DE;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="fiatDeal">
+			<div id="header">
+				<img src="images/arrows.png"  onclick="location.href='index.html'"/>
+			</div>
+			<div id="cipher">
+				<h1>法币交易设置</h1>
+				<p>昵称</p>
+				<input type="text" class="nickname" id="nickname" placeholder="4-16位" />
+				<span>长度不符合</span>
+				<p>
+					法币资金密码
+					<span class="code"></span>
+				</p>
+				<input type="password" class="cryptogram" id="password" placeholder="6-16位"/>
+				<span>长度不符合</span>
+				<p>
+					确认密码
+					<span class="code"></span>
+				</p>
+				<input type="password" class="cryptogram" id="password1" placeholder="请确认您的法币资金密码"/>
+				<span>密码不相同</span>
+			</div>	
+			<button id="affirm">确认</button>	
+		</div>
+		
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+	 	<script src="javascripts/main.js"></script>		
+		<script type="text/javascript">
+//		<!--=================显示隐藏密码===================-->			
+			$('.code').on('touchstart',function(){				
+				$(this).parent('p').next('input').attr('type','text').css('background','url(images/show.png) no-repeat 95% 0');					
+			});
+			$('.code').on('touchend',function(){
+				$(this).parent('p').next('input').attr('type','password').css('background','url(images/hide.png) no-repeat 95% 0');
+			})
+
+//		<!--===============昵称===================-->
+			$('#nickname').blur(function(){
+				var length = $(this).val().length;
+				if(length >= 4 && length <=12){
+					$('#nickname').next('span').hide().addClass('accord');
+				}else{
+					$('#nickname').next('span').show();
+				}
+			})
+		//====================校对两次密码是否一致=========================	
+			$('#password').blur(function(){
+				var length1 = $(this).val().length;
+				if(length1 >= 6 && length1 <=16){
+					$('#password').next('span').hide().addClass('accord');
+				}else{
+					$('#password').next('span').show();
+				}
+			})
+			$('#password1').blur(function(){
+				if($('#password').val() == $('#password1').val()){
+					$('#password1').next('span').hide().addClass('accord');
+				}else{
+					$('#password1').next('span').show();
+				}					
+			})			
+			
+			
+			
+			$('#affirm').click(function(){
+				if($('#password').val() == $('#password1').val()){
+					$('#password1').next('span').hide().addClass('accord');
+				}else if($('#password1').val() == null || $('#password').val() == null){
+					$('#password1').next('span').hide().addClass('accord');
+				}else{
+					$('#password').next('span').show();
+					$('#password1').next('span').show();
+				}				
+				
+				
+				//====================确认===========================
+				var nickname =  $('#nickname').val();	
+				var pass =  $('#password').val();
+				var newpassword =  $('#password1').val();
+				console.log(nickname+'----'+pass+"----"+newpassword)
+				if($('.accord').length == 3){
+					layer_msg('完成');
+				//===================提交=============================			
+		  		 var token = get_user_login();
+			      	 $.ajax({
+			       	    type:'post',
+			          	url:_API + 'user/setaccount',		          	
+			          	dataType:'json',
+			          	data:{
+			          		account: nickname ,
+			          		password: pass,
+			          		repassword: newpassword	
+			          	},
+			           	beforeSend: function beforeSend(request) {
+			           		request.setRequestHeader("Authorization",token);
+			           	},
+			          	success:function(data){	
+			          		//console.log(data);
+			          		window.history.go(-1);
+			          	}
+			        });							
+				}else{
+					layer_msg('检查');					
+				}
+				
+				
+				
+
+				
+
+			})
+		</script>
+	</body>
+</html>

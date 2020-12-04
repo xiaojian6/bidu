@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <style>
+    .lgs{position: absolute;right: 10px;top: 0}
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <header class="header" style="background: #102030;">
+            <!-- <a class="back mt5" href="index.html">
+               
+            </a> -->
+            <h4 class="ftw ft16" data-localize="lg.lgs">登录</h4>
+            <a class="lgs" href="languages.html" data-localize="index.language">语言</a>
+        </header>
+        <div class="header-space"></div>
+        <div id="login">
+            <div class="logo">
+                <!-- <img src="images/logo.png" style="width:50px" />
+                <h5 class="white_gray mt10" data-localize="lg.lgbt">登录BIBEX</h5> -->
+            </div>
+            <div class="theme">
+                <form>
+                    <!-- <div class="flex alcenter white" @click='showcity(0)'>
+                        <span class='city_name'>{{city_name}}</span>
+                        <img src="images/down.png" alt="">
+                    </div> -->
+                    <div class="form-group mt20">
+                        <div class='flex alcenter white' style='border-bottom: solid 1px #3e536b;'>
+                            <!-- <div class='flex alcenter' @click='showcity(1)'>
+                                <span class='city_code'>{{city_code}}</span>
+                                <img class='ml10' style='width:10px;' src="images/trade_arrow_down.png" alt=""> 
+                            </div> -->
+                            <input type="text" class="form-control logtxt ftw flex1" id="name" style='border:none;padding-left:3px;margin-left:5px' v-model="userName" placeholder="请输入账号" name="name" data-localize="lg.paccount" @keyup="userConfirm" />
+                        </div>
+                        <!-- <p id="mes1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p> -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" class="form-control logtxt" id="password" v-model="passwords" placeholder="请输入密码" name="password"
+                        @blur="passblur"  @keyup="passwordConfirm" data-localize="lg.ppwd"  />
+                        <!-- <input type="text" class="form-control logtxt" id="text" placeholder="请输入密码" value="" style="display:none"
+                            @blur="txtblur" /> -->
+                        <img src="images/accountm.png" id="imgs" class='icons' @click="shpass" />
+                        <!-- <p id="mes2" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p> -->
+                    </div>
+                    <!-- <div class="form-group logincode">
+                        <input type="text" class="form-control logtxt"  v-model="sms_code" placeholder="请输入验证码" data-localize="lg.pcode" />
+                        <button type="button" class="code mt5" @click="getCode()">{{codeText}}</button>
+                        <p id="code1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                    </div> -->
+                    <!-- <div class="remember-password"><input v-model="checkboxValue" @change="selectInput();" type="checkbox"> 
+                        <span data-localize="lg.mepwd">记住密码</span>
+                    </div> -->
+                    <a class="btn btn-default" id="sendLogin" @click="logon" data-localize="lg.lgs">登录</a>
+                    <!-- <p id="mes3" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p> -->
+
+                    <!-- <a class="help-block" href="forgetpass.html" data-localize="lg.ftpwd">忘记密码？</a> -->
+                </form>
+            </div>
+            <!-- <div class="nocount">
+                <span data-localize="lg.noaccount">还没有BIBEX账号？</span>
+                <a href="register.html" data-localize="lg.register">注册</a>
+            </div> -->
+        </div>
+        <!-- <ul :class="['country',{'showcity':cshow}]">
+            <li class="flex between p10 white" v-for="item in countryList" @click='cityChoose(item.name_en,item.area_code)'>
+                <div>
+                    <span class="c_ename">{{item.name_en}}</span>
+                    <span class="c_name">({{item.name_cn}})</span>
+                </div>
+                <span class="c_number">{{item.area_code}}</span>
+            </li>
+        </ul> -->
+    </div>
+
+    <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="javascripts/country.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="lib/layer_mobile/layer.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <script type="text/javascript" src="lib/vue.min.js"></script>
+    <script type="text/javascript" src="javascripts/loginTransfer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+footer{width: 100%;overflow: hidden; font-size:14px;position: fixed;bottom:0;background:#fff;}
+footer a{color:#a2a6a5;}
+footer div{width:20%;height:55px;float: left;text-align: center;}
+footer .img{width: 25px;height: 25px;margin:3px auto;background-size: cover;background-repeat: no-repeat;background-position: center center;}
+.select{color:#5a8de0}
+.img0{background-image: url(../images/footer/index0.png);}
+.img1{background-image: url(../images/footer/hang0.png);}
+.img2{background-image: url(../images/footer/trade0.png);}
+.img3{background-image: url(../images/footer/gang0.png);}
+.img4{background-image: url(../images/footer/mine0.png);}
+.select .img0{background-image: url(../images/footer/index1.png);}
+.select .img1{background-image: url(../images/footer/hang1.png);}
+.select .img2{background-image: url(../images/footer/trade1.png);}
+.select .img3{background-image: url(../images/footer/gang1.png);}
+.select .img4{background-image: url(../images/footer/mine1.png);}

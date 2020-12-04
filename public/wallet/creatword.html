@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>生成助记词</title>
+    <link rel="stylesheet" href="static/css/createword.css">
+    <link rel="stylesheet" href="static/css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<body>
+<div class="header ">
+    <h5>生成助记词</h5>
+    <i class="back backPage"></i>
+</div>
+<form id="form_content" action="creatword.html" method="post" class="mgthead">
+<div class="container">
+    <h4>抄写下你的助记词</h4>
+    <p>助记词用于恢复钱包或重置钱包密码，将它准确的抄写到纸上，并存放在只有你知道的安全的地方。</p>
+    <div class="word_box">
+        <i class="iconfont icon-xunhuan font24  fontc_hdl" ></i>
+        <p id="span_content"></p>
+    </div>
+    <input name="content" id="input_content" value="" type="hidden">
+    <div class="btn_2 login_btn" href="javascript:void(0)">下一步</div>
+</div>
+</form>
+<div style="height:  1.5rem"></div>
+
+<div class="common_footer">
+    <a href="index.html" class="active"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+<script type="text/javascript" src="static/javascripts/creatword.js"></script>
+</body>
+</html>

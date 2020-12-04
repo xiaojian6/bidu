@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>BTC/USDT</title>
+	<link rel="stylesheet" type="text/css" href="css/present_entrust.css" />
+	<link rel="stylesheet" href="css/iconfont.css">
+	<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+	<div class="header">
+		<div class="header-title">
+			<h5>
+				<i class="iconfont" style="margin-right: 20px;font-size: 20px" onclick="location.href='transaction.html'">&#xe6d0;</i>BTC/USDT</h5>
+			<a href="history_record.html">
+				<i class="iconfont" style="font-size: 16px;">&#xe6b9;</i>
+				历史
+			</a>
+		</div>
+	</div>
+	<div class="entrust">
+		<h5>当前委托</h5>
+		<a href="javascript:;" id="tit">
+			<i class="iconfont" style="font-size: 12px;">&#xe663;</i>
+			筛选
+		</a>
+	</div>
+	<div class="entrust-box hide">
+		<div style="height: 1px;background: #E5E9EC;"></div>
+		<div class="entrust-title">
+			<h6>交易对</h6>
+		</div>
+		<div class="entrust-input">
+			<input type="text" placeholder="币种">
+			<span>/</span>
+			<input type="text" readonly onfocus="this.blur()" placeholder="选择计价单位" id="ipt">
+			<i class="iconfont icf" id="icf">&#xe60b;</i>
+			<ul style="display: none;" class="prt">
+				<li>USDT</li>
+				<li>BTC</li>
+				<li>ETH</li>
+				<li>HT</li>
+			</ul>
+		</div>
+		<div class="entrust-state">
+			<h6>订单状态</h6>
+			<ul>
+				<li>买入</li>
+				<li>卖出</li>
+			</ul>
+		</div>
+		<div class="entrust-btn">
+			<a>重置</a>
+			<a class="entrust-cla">确定</a>
+		</div>
+	</div>
+	<div class="entrust-bgc" style="display: none;"></div>
+	<div class="entrust-img">
+		<img src="images/anonymous.png">
+		<p>暂无记录</p>
+	</div>
+	<script type="text/javascript">
+		$(function () {
+			$("#tit").click(function () {
+				$(".entrust-bgc").css("display", "block");
+				if ($(".entrust-box").hasClass("hide")) {
+					$(".entrust-box").removeClass("hide");
+					$("#tit").addClass("blue");
+
+				} else {
+					$(".entrust-box").addClass("hide");
+					$(".entrust-bgc").css("display", "none");
+					$("#tit").removeClass("blue");
+				}
+			})
+
+			$(".entrust-bgc").click(function () {
+				$(this).css("display", "none");
+				$(".entrust-box").addClass("hide");
+				$("#tit").removeClass("blue");
+			});
+
+			$("#ipt").click(function () {
+
+				$(".prt").toggle();
+
+				var display = $('.prt').css('display');
+
+				if (display == 'block') {
+					$("#ipt").addClass("ipt-blue");
+					$("#icf").addClass("icon");
+				} else {
+					$("#ipt").removeClass("ipt-blue");
+					$("#icf").removeClass("icon");
+				}
+			});
+			
+			$(".prt li").click(function(){
+				$(this).toggleClass("li-blue");
+			});
+		});
+	</script>
+</body>
+
+</html>

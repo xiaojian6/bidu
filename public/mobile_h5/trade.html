@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>我的交易</title>
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style>
+			.active{background-color: rgba(0, 0, 0, 0)}
+		</style>
+	</head>
+	<body>
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16">交易账户</h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="pd50">
+			<div class="title-select flex alcenter tc ftw">
+				<p class="active" data-urls="transaction_out"><span>正在卖</span></p>
+				<p data-urls="transaction_in"><span>正在买</span></p>
+				<p data-urls="transaction_complete"><span>已完成</span></p>
+			</div>
+			<div class="content ft12 plr5 ftw">
+				<div class="select">
+					<ul class="outlis ftw">
+					</ul>
+					<div class="load-more tc gray6" style="color:#728DAF;">加载更多</div>
+				</div>
+			</div>
+		</div>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+		<script src="./lib/language_cookie.js"></script>
+		<script>
+			$(function() {
+				// 切换
+				$('.title-select>p').click(function() {
+					var n = $(this).index();
+					page = 1;
+					urls = $(this).attr('data-urls');
+					$('.outlist').html('');
+					$(this).addClass('active').siblings().removeClass('active');
+					$('.load-more').show();
+					getDataing(urls)
+				})
+				var token = get_user_login();
+				var page = 1;
+				var urls = 'transaction_out';
+				getDataing(urls);
+				// 获取数据
+				function getDataing(urls) {
+					console.log(urls)
+					layer_loading();
+					$.ajax({
+						url: _API + urls,
+						type: "POST",
+						data: {
+							page: page
+						},
+						dataType: "json",
+						async: true,
+						beforeSend: function beforeSend(request) {
+							request.setRequestHeader("Authorization", token);
+						},
+						success: function success(res) {
+							layer_close();
+							console.log(res)
+							if (res.type == 'ok') {
+								var html = '';
+								if (res.message.list.length === 0) {
+									layer_msg(nomore);
+									$('.load-more').hide();
+									return false;
+								}
+								var types = '';
+								if (urls == 'transaction_out') {
+									types = 'out';
+								} else if (urls == 'transaction_in') {
+									types = 'in';
+								} else {
+									types = '';
+								}
+								for (i in res.message.list) {
+									var typt_str = '';
+									if (urls == 'transaction_complete') {
+										if (res.message.list[i].type == 'in') {
+											typt_str = '买入';
+										} else {
+											typt_str = '卖出';
+										};
+										html +=
+											` <li class="alcenter listitem bgColor mt10">
+											          <div class="trade-list-headers clearfix ftw">
+																<p class="fl">
+																<span class="ft18">${res.message.list[i].legal_name}</span>
+																<span class="ft12">/${res.message.list[i].currency_name}</span>
+																</p>
+																<button data-id="${res.message.list[i].id}" data-type="${types}" id="${typt_str=='撤销'?'cel':''}" class="ft13 fr ${typt_str=='卖出'?'red':'blues'}"  class="ft13 fr" type="button">${typt_str}</button>
+																</div>
+                            <div class="trade-list clearfix ft13 ftw">
+                            	<p class="col-xs-5 col-sm-5">
+                            		<span>价格</span>
+                            		<span>${res.message.list[i].price}</span>
+                            	</p>
+                            	<p class="col-xs-3 col-sm-3">
+                            		<span>数量</span>
+                            		<span>${res.message.list[i].number}</span>
+                            	</p>
+                            	<p class="col-xs-4 col-sm-4 tr">
+                            		<span>时间</span>
+                            		<span>${res.message.list[i].time}</span>
+                            	</p>
+                            </div>
+                                
+                            </li>`
+									} else {
+										typt_str = '撤销';
+										html +=
+											` <li class="alcenter listitem bgColor mt10">
+													<div class="trade-list-headers clearfix ftw">
+														<p class="fl">
+															<span class="ft18">${res.message.list[i].legal_name}</span>
+															<span class="ft12">/${res.message.list[i].currency_name}</span>
+														</p>
+														<button data-id="${res.message.list[i].id}" data-type="${types}" id="${typt_str=='撤销'?'cel':''}" class="ft13 fr ${typt_str=='卖出'?'red':'blues'}"  type="button">${typt_str}</button>
+													</div>
+													<div class="trade-list clearfix ft13 ftw">
+														<p class="col-xs-5 col-sm-5">
+															<span>价格</span>
+															<span>${res.message.list[i].price}</span>
+														</p>
+														<p class="col-xs-3 col-sm-3">
+															<span>数量</span>
+															<span>${res.message.list[i].number}</span>
+														</p>
+														<p class="col-xs-4 col-sm-4 tr">
+															<span>时间</span>
+															<span>${res.message.list[i].create_time}</span>
+														</p>
+													</div>  
+                        </li>`
+									}
+								}
+								$('.outlist').append(html);
+								if (urls == 'transaction_complete') {
+									$('#todo').text('完成类型')
+								}
+								page++;
+							} else if (res.type == '999') {
+								window.location =  'login.html';
+							}
+						}
+					});
+				}
+				// 加载更多
+				$('.load-more').click(function(res) {
+					getDataing(urls);
+				})
+
+				// 撤销
+				$("body").on("click", "#cel", function() {
+					var id = $(this).attr('data-id');
+					var type = $(this).attr('data-type');
+					var obj = $(this);
+					console.log(id)
+					layer.open({
+						content: '您确定要撤销吗？',
+						btn: ['确定', '取消'],
+						yes: function(index) {
+							layer_loading();
+							$.ajax({
+								type: "POST",
+								url: _API + 'transaction_del',
+								data: {
+									type: type,
+									id: id
+								},
+								dataType: "json",
+								async: true,
+								beforeSend: function beforeSend(request) {
+									request.setRequestHeader("Authorization", token);
+								},
+								success: function(res) {
+									console.log(res)
+									layer_close();
+									layer_msg(res.message)
+									if (res.type == "ok") {
+										obj.parent().parent().remove()
+									}
+								}
+							})
+						}
+					});
+				})
+			})
+		</script>
+	</body>
+</html>

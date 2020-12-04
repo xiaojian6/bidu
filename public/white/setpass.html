@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title></title>
+    
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <style type="text/css">
+        /*公共样式*/
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#f6f7f9;font-size:14px;font-family: "微软雅黑";}
+        ul li{list-style:none;}
+        a{text-decoration:none;color:#333;}
+        
+        input[type=button], input[type=submit], input[type="text"],input[type="password"], button { cursor: pointer; -webkit-appearance: none; } 
+        input:focus { outline: none; }
+        /*设置密码*/
+        .toptit{padding:15px 20px;}
+        .toptit a{color:#adbac0;}
+        header .toptit .return-img{background: url(images/return11.png)no-repeat;
+    background-size: 2.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0px auto;
+    display: block;
+    float: left;margin-left: -10px;}
+        #setpass{padding:0 30px;margin-top:60px;}
+        #setpass .txtit{margin-bottom:35px;}
+        #setpass .txtit h5{color:#2b464f;margin-top:0;font-size:28px;margin-bottom:10px;}
+        #setpass .txtit span{color:#9aa4a6;}
+        #setpass .theme .groups{margin-bottom:25px;}
+        #setpass .theme .form-control{background-color:#f6f7f9;border:solid 1px #f6f7f9;box-shadow:none;border-bottom:solid 1px #ccc;border-radius:0px;padding:6px 1px;font-size:16px;}
+        #setpass .theme input::-webkit-input-placeholder{color:#c5cacd;font-size:16px;}
+        #setpass .theme input[placeholder], [placeholder], *[placeholder] {color:#1d455f !important;}
+
+        #setpass .theme .checkbox{margin-top:25px;color:#808b8f;}
+        #setpass .theme .checkbox a{color:#4684bd;}
+        #setpass .theme .btn-default{background:#d0d9de;color:#fff;border-color:#d0d9de;width:100%;font-size:15px;margin-top:35px;border-radius:0;padding: 10px 0;}
+        #setpass .theme .agree{background:#588cd8;border-color:#588fe1;}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="toptit">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+        </div>
+    </header>
+    <div id="setpass">
+        <div class="txtit">
+            <h5>设置密码</h5>
+            <span>6-20个字符，不可以是纯数字</span>
+        </div>
+        <div class="theme">
+            <form>
+                <div class="form-group">
+                    <input type="text" style="display:none;" id="name" value="" />
+                    <input type="text" style="display:none;" id="verificate" value="" />
+                  <input type="password" class="form-control focu" id="setpassword" placeholder="请输入密码" name="password" value=""/>
+                    <p id="mes1" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                </div>
+                <div class="form-group groups">
+                  <input type="password" class="form-control focu" id="verifypassword" placeholder="请再次输入密码" name="password" value=""/>
+                    <p id="mes2" style="color:#cc704b;font-size:12px;margin:5px 0 0 10px;"></p>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control focu" id="invite" placeholder="邀请码(选填)" name="invite" value=""/>
+                    <p id="mes3" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                </div>
+                <div class="checkbox">
+                   <label>
+                     <input type="checkbox" id="agree"/> 我同意
+                       <a href="###">《用户协议及隐私政策》</a>
+                   </label>
+                 </div>
+                  <a class="btn btn-default" id="sendSet" disabled="disabled">注册</a>
+                  <p id="mes" style="color:#cc704b;font-size: 12px;margin:5px 0 0 10px;"></p>
+                
+              </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $("#agree").click(function () {
+            $("#sendSet").toggleClass("agree");
+            var st = $("#sendSet").attr("disabled");
+            if (st == "disabled") {
+                $("#sendSet").removeAttr("disabled");
+            } else {
+                $("#sendSet").attr({ "disabled": "disabled" });
+            }
+        })
+        $(".focu").focus(function(){
+            $(this).css("border-bottom","1px solid #5d7ace")
+        })
+        $(".focu").blur(function(){
+            $(this).css("border-bottom","1px solid #ccc")
+        })
+        //注册验证密码
+        $("#setpassword").change(function () {
+            var pass = $("#setpassword").val();
+            if (pass.length < 6 || pass.length > 16) {
+                $("#mes1").html("密码的长度在6~16位");
+                //layer_msg("密码的长度在6~16位");
+
+            } else {
+                $("#mes1").html("");
+            }
+        })
+        $("#verifypassword").change(function () {
+            if ($("#mes2").html() == "密码的长度在6~16位") {
+                return;
+            }
+            if ($("#setpassword").val() != $("#verifypassword").val()) {
+                $("#mes2").html("两次密码输入不一致");
+                //layer_msg("两次密码输入不一致");
+            } else {
+                $("#mes2").html("");
+            }
+
+        })
+        //注册
+        $('#sendSet').click(function () {
+            var s = function () {
+
+                var ps = /^[a-zA-Z0-9]{6,16}$/;
+                if (!ps.test($('#setpassword').val())) {
+                    layer_msg('密码必须为 6-16 位');
+                } else {
+                    return true;
+                }
+            }
+
+            var ss = function () {
+                if ($('#verifypassword').val() == $('#setpassword').val()) {
+                    return true;
+                } else {
+                    layer_msg('两次密码输入不一致');
+                }
+            }
+            var name = $('#name').val();
+            var verify = $("#verificate").val();
+            var pass = $('#setpassword').val();
+            var repass = $("#verifypassword").val();
+            var reg = /^1[34578]\d{9}$/;
+            var emreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+
+            if (s() == true && ss() == true) {
+                if (reg.test(name)) {
+                    $.ajax({
+                        type: "post",
+                        url: _API+"user/register",
+                        data: { "user_string": name, "password": pass, "extension_code": "", "re_password": repass, "type": "mobile", "code": verify },
+                        datatype: "json",
+                        success: function (data) {
+                            console.log(data.message);
+                            if (data.type == "ok") {
+                                layer_msg(data.message);
+                                
+                                $("#sendSet").attr("disabled", "true");
+                                setTimeout(function () {
+                                    $("#sendSet").removeAttr("disabled");
+                                    window.location.href = "login.html";
+                                }, 3000);
+                            }
+                        }
+                    });
+                } else if (emreg.test(name)) {
+                    $.ajax({
+                        type: "post",
+                        url: _API + "user/register",
+                        data: { "user_string": name, "password": pass, "extension_code": "", "re_password": repass, "type": "email", "code": verify },
+                        datatype: "json",
+                        success: function (data) {
+                            console.log(data.message);
+                            //layer_msg(data.message);
+                            if (data.type == "ok") {
+                                layer_msg(data.message);
+                                $("#sendSet").attr("disabled", "true");
+                                setTimeout(function () {
+                                    $("#sendSet").removeAttr("disabled");
+                                    window.location.href = "login.html";
+                                }, 3000);
+                            }
+                        }
+                    });
+                }
+                
+            } else {
+                layer_msg('请检查填写信息')
+            }
+        });
+        //
+        function maVals() {
+            var url = window.location.search;
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+        //console.log(location.search.concat());
+        
+        var v = maVals();
+        $("#name").attr("value", v['user_string']);
+        $("#verificate").attr("value", v['code']);
+    </script>
+</body>
+</html>

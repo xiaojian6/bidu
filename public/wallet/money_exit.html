@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>提币</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+</head>
+<style>
+</style>
+<body class="backF">
+	<header style="background: #fff;" class="borderB ">
+        <i class="iconfont icon-jianzuo font24  fontc_6 backPage"></i>
+        <h1 class="fontc_3 font18">提币</h1>
+    </header>
+
+	<section class="mgthead1" id="user_info"  >
+		<div class="pd10">
+			<div>
+				<span class="fontc_6 font12">可用</span>
+				<p class="fontc_3"><span id="available" class="mgr10"> </span>华盾币</p>
+			</div>
+			<div class="mgt10 ">
+				<span class="fontc_6 font12">提币地址</span>
+				<div class="input_lr borderB">
+					<input type="text" id="extract_addr" style="flex:1;" placeholder="输入或长按粘贴此处">
+					<i class="iconfont icon-saomiaoerweima font20  fontc_6 backPage"></i>
+				</div>
+			</div>
+			<div class="mgt10 ">
+				<span class="fontc_6 font12">数量</span>
+				<div class="input_lr borderB">
+					<input type="number"  style="flex:1;" id="extract_num" placeholder="最小提币数量0.015">
+					<p class="font14 "><span class="fontc_6">华盾币 </span><span class="fontc_9" style="margin:0 .4rem;">|</span><span class="fontc_3">全部</span></p>
+				</div>
+			</div>
+			<!--<div class="mgt10 ">
+				<span class="fontc_6 font12">手续费</span>
+				<div class="input_lr borderB">
+					<input type="text" class="" style="flex:1;" placeholder="0.005">
+					<p class="font14 "><span class="fontc_6">华盾币 </span></p>
+				</div>
+			</div>-->
+			<div class="mgt10 ">
+				<span class="fontc_6 font12">到账以太币</span>
+				<div class="input_lr borderB">
+					<!--<span class="fontc_6  font14">0.005</span>-->
+					<input type="text" id="rate_exc" disabled style="flex:1;" placeholder="0.015">
+					<p class="fontc_6"><span >ETH </span></p>
+				</div>
+			</div>
+
+			<div class="money_exit_txt">
+				<p>最小提币数量：0.025华盾币</p>
+				<p>请不要直接提币到ICO的众筹地址，这会导致您无法收取众筹到的数字资产。</p>
+				<p>提币到合约地址可能会发生合约执行失败，将导致转账失败，资产将退回到华盾链。华盾链会人工处理退回到账户，处理时间较长，请您谅解</p>
+				<p>网络转账费用是不固定的，取决于转账时合约执行需要消耗的算力。当前华盾币为提币支付的Gas Limit为90000gas，将导致转账失败，资产将退回到原账户，请您谅解</p>
+			</div>
+
+			<a class="login_btn quit_btn" id="extract_btn" href="javascript:;">提币</a>
+
+		</div>
+	</section>
+
+	
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/money_exit.js"></script>
+
+</body>
+</html>

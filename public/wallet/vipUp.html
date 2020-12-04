@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>会员升级</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+    <link rel="stylesheet" href="static/css/footer2.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+</head>
+<style type="text/css">
+    .vip{width: 96%;margin-left: auto;margin-right: auto;}
+    .vip h2{text-align: center;line-height:4rem;}
+    .grade{width: 90%;height: 6px;background:#EEEEEE;margin: 0 auto;border-radius: 3px;position: relative; }
+    .grade span{width: 13px;height: 13px;border-radius: 100%;background: #ccc;position: absolute;left: 24px;bottom: -3px;}
+    .vip_state{background:#24c9cd !important;}
+    .grade-sm{display: flex;justify-content: space-between;width: 90%;margin: 0 auto;line-height: 3;padding-bottom: 15px;}
+    .vip-dj{border-bottom: 1px solid #eee;}
+    .jixu{line-height:3;font-size: 14px;}
+    .vip-sj li img{width:2.6rem;}
+    .vip-sj li:first-child{margin:15px 0;}
+    .vip-sj li{display: flex;justify-content: space-between;}
+    .disflex{display: flex;align-items: center;}
+    .disflex div{padding-left: 5px;}
+    .vip-sj .disflex:first-child p{color: black;}
+    .vip-sj .disflex:first-child span{color: #ccc;font-size: 12px;}
+    .vip-sj .disflex:last-child p{color: #24c9cd;font-size: 12px;text-align: right;}
+    .vip_grade_btn{border:1px solid #24c9cd;color: #24c9cd;border-radius:15px;font-size: 12px; padding: 2px .4rem;}
+    .vip-sj button{color: #fff;text-align: center;background: #24c9cd;border-radius:30px;width: 100%;border: none;letter-spacing:2px;padding:10px 0;margin-top: 5px;}
+    .pay h1{color: #666;text-align: center;font-size: 14px;margin:15px 0;}
+    .grade_act{background:#24c9cd !important;color:#fff !important;}
+    .grade_ash{border:1px solid #ccc !important;color:#999 !important;}
+    .vip_pass{
+        position: relative;
+        width:90%;margin:1rem;
+    }
+    .vip_pass input{
+        width:100%;line-height: 3rem;box-sizing: border-box; border-bottom: 1px solid #eee;
+    }
+    .vip_pass::before{
+        content: "*";
+            color: red;
+        position: absolute;
+        right: 4px;
+        top: 20px;
+    }
+    .disflex div.vip-r{
+        text-align: right;
+    }
+
+</style>
+<body style="background:#fff; ">
+<header class="borderB">
+    <i class="iconfont icon-jianzuo font24  fontc_6 backPage"></i>
+    <h1 class="fontc_6 font18">升级会员</h1>
+</header>
+
+<section class="mgthead vip" id="user_info" >
+    <h2>当前会员等级</h2>
+    <div class="vip-dj">
+        <ul class="grade">
+            <li>
+                <span class="vip_state"></span>
+                <span style="left:50%"></span>
+                <span style="left:90%"></span>
+            </li>
+        </ul>
+        <ul class="grade-sm">
+            <li>普通会员</li>
+            <li>VIP1</li>
+            <li>VIP2</li>
+        </ul>
+    </div>
+    <p class="jixu">继续升级，您可享受更多服务</p>
+    <div class="vip-sj">
+        <ul>
+            <li class="vip1">
+                <div class="disflex">
+                    <img src="static/images/hdl/v1.png" alt="">
+                    <div>
+                        <p> VIP1</p>
+                        <span>开通此会员，可以租1000HWAD矿机</span>
+                    </div>
+                </div>
+                <div class="disflex">
+                    <div class="vip-r">
+                        <p>999 HWAD</p>
+                        <input type="button"  class="vip_grade_btn" data-vip="1" value="升级会员">
+                    </div>
+                </div>
+            </li>
+            <li class="vip2">
+                <div class="disflex">
+                    <img src="static/images/hdl/v2.png" alt="">
+                    <div>
+                        <p> VIP2</p>
+                        <span>开通此会员，可以租10000HWAD矿机</span>
+                    </div>
+                </div>
+                <div class="disflex">
+                    <div class="vip-r">
+                        <p>9999 HWAD</p>
+                        <input type="button"  class="vip_grade_btn" data-vip="2" value="升级会员">
+                    </div>
+                </div>
+            </li>
+            <div >
+                <div class="vip_pass">
+                    <input type="password" id="vip_pass" placeholder="请输入钱包密码" />
+                </div>
+            </div>
+        </ul>
+        <div class="pay">
+            <h1>为了活跃市场，回馈平台忠实和活跃用户，华盾链实行用户VIP等级系统。VIP等级系统一共分为 （VIP1--VIP2 ）二个等级。越高等级的用户享租矿机等级越大。</h1>
+            <button class="vip_grade">立即支付</button>
+        </div>
+
+    </div>
+
+</section>
+<div class="common_footer">
+    <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html"  class="active" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+<script type="text/javascript" src="static/javascripts/vipUp.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提币</title>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<style>
+    #header a{height: 45px;line-height: 45px;}
+#header img{width: 25px;margin: 0 5px}
+.bline{border-bottom: 1px solid #eee;padding: 10px 0;}
+.mt30{margin-top: 30px}
+.color1b{color: #1b3b51}
+.mention{width: 100%;height: 40px;line-height: 40px;color: #fff;background: linear-gradient(to right,#689df4,#5789d3)}
+.addbox img{width: 20px;}
+.addbox span{padding: 0 5px}
+</style>
+
+<body>
+    <div id="header">
+        <a class="pull-left flex alcenter" href='javascript:history.go(-1)'>
+            <img src="images/arrows.png" />
+        </a>
+    </div>
+    <div class="plr15 ft12 color1b">
+        <div class="ft20"><span class="title">USDT</span>提币</div>
+        <p class="mt20">可用</p>
+        <p class="mt20 ft14 bold black"><span class="balance-num">0.00</span> <span class="title">USDT</span></p>
+        <div class="bline mt30">
+            <p>提币地址</p>
+            <div class="flex between alcenter mt20">
+                <input type="text" placeholder="输入或长按粘贴地址" class="ft14 address">
+                <div class="color3 flex alcenter addbox">
+                    <img src="images/saocode.png" alt="" onclick="BSL.Qcode('0','code')">
+                    <span>|</span>
+                    <img src="images/choose.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="bline mt30">
+            <p>数量</p>
+            <div class="flex between alcenter mt20">
+                <input type="number" placeholder="最小提币数量200" class="ft14 count">
+                <div>
+                    <span class="color1 title">USDT</span>
+                    <span class="">|</span>
+                    <span class="black bold all_in">全部</span>
+                </div>
+            </div>
+        </div>
+        <div class="bline mt30">
+            <p>手续费(<span class="ratenum">5.000-5.000</span> <span class="title">USDT</span> )</p>
+            <div class="flex between alcenter mt20">
+                <input type="number" value="5" class="ft14 rate">
+                <div class="">
+                    <span class="title">USDT</span>
+                </div>
+            </div>
+        </div>
+        <div class="flex between alcenter ft14 mt20">
+            <p style="color:#9faaaf">到账数量</p>
+            <p class="bold black ft14"><span class="reach-num">0.0000</span> <span class="title black bold">USDT</span></p>
+        </div>
+        <div class="mention tc ft14 mt20">提币</div>
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script>
+        $(function () {
+            var currency = get_param('id');
+            var balance,min_number;
+            initDataToken({url:'wallet/get_info',type:'post',data:{currency}},function(res){
+                console.log(res)
+                balance=res.change_balance;
+                $('.balance-num').html(balance)
+                $('.title').html(res.name)
+                $('.ratenum').html(res.rate+'-'+res.rate)
+                $('.rate').val(res.rate)
+                min_number=res.min_number;
+                $('.count').attr('placeholder','最小提币数量'+min_number)
+                var num=0;
+                $('.reach-num').html(num.toFixed(8));
+            })
+            function postData() {
+                var address = $('.address').val();
+                var number = $('.count').val();
+                var rate = $('.rate').val();
+                if(address == ''){
+                    layer_msg('请输入提币地址');
+                    return;
+                } 
+                if(!number){
+                    layer_msg('请输入提币数量');
+                    return;
+                } 
+                if(number<min_number){
+                    return layer_msg('输入的提币数量小于最小值');
+                }
+                if(rate=='' || rate>1){
+                    layer_msg('请输入0-1之间的提币手续费');
+                    return;
+                }
+                $.ajax({
+                    url: _API + 'wallet/out',
+                    type: 'POST',
+                    data:{currency:currency,number:number,rate:rate,address:address},
+                    success: function (res) {
+                        console.log(res);
+
+                    }
+                })
+            
+                
+            }
+            function code(result){
+                $(".address").val(result)
+            }  
+            $('.all_in').click(function(){
+                $('.count').val(balance)
+            })
+            $('.count').keyup(function(){
+                var value=$(this).val();
+                var rate=$('.rate').val();
+                var num=value*(1-rate)<0?value*(1-rate):0.00000000;
+                $('.reach-num').html(num)
+            })
+            $('.rate').keyup(function(){
+                var rate=$(this).val();
+                var value=$('count').val();
+                var num=value*(1-rate)<0?value*(1-rate):0.00000000;
+                $('.reach-num').html(num)
+            })
+        })
+    </script>
+</body>
+
+</html>

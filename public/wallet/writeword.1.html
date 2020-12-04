@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>确定助记词</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+</head>
+<style type="text/css">
+	body{
+        background:#fcfcfd url(static/images/home/register_bg.png) no-repeat;
+        background-size:100%;
+    }
+	.blue{
+		background:#24c9cd !important;
+        color:#fff !important;
+	}
+</style>
+<body>
+  <header >
+    <i class="iconfont icon-jianzuo font24  fontc_f backPage"></i>
+    <h1></h1>
+  </header>
+   <div class="mgthead">
+       <ul class="time_word">
+           <li class="act">
+               <span></span>
+               <span>生成助记词</span>
+           </li>
+           <li class="act">
+               <span></span>
+               <span>确定助记词</span>
+           </li>
+           <li>
+               <span></span>
+               <span>创建钱包</span>
+           </li>
+       </ul>
+
+        <div>
+            <div class="word_box write_word">
+                <p class="" id="write_word">
+                </p>
+            </div>
+            <div class="show_word">
+                <span>床</span>
+                <span>前</span>
+                <span>明</span>
+                <span>月</span>
+                <span>光</span>
+                <span>疑</span>
+                <span>是</span>
+                <span>地</span>
+                <span>上</span>
+                <span>霜</span>
+            </div>
+        </div>
+		<form id="form_content" action="/users/writeword" method="post">
+            <div class="careful_box">
+                <p class="red font16">
+                    <i class="iconfont icon-zhuyi font20 red" style="bottom:0;"></i>
+                    注意
+                </p>
+                <p>截图或用互联网手机拍照保存可能回泄露助记词</p>
+                <p>助记词一旦泄露账号资产将会被盗</p>
+                <p>助记词一旦丢失资产将无法找回</p>
+            </div>
+            <input name="content" type="hidden" id="input_content" value="<%= word_content %>">
+            <a class="login_btn mgb10" style="margin-top: 0.5rem;" href="javascript:void(0)">下一步</a>
+        </form>
+   </div>
+
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script type="text/javascript" src="static/javascripts/writeword.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+
+</body>
+</html>

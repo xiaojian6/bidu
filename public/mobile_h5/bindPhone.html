@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>手机验证</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="../js/mobile-util.js"></script>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="javascripts/order.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+	    <script src="./lib/language_cookie.js"></script>
+	</head>
+	<body>
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16">手机验证</h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="nav ftw ft16 ml12">
+			<p class="mt30">手机</p>
+			<ul class="bind-phone">
+				<li></li>
+			</ul>
+		</div>
+		<footer class="none">
+			<a class="ftw ft18" onclick="bindetel()">下一步</a>
+		</footer>
+	</body>
+</html>
+<script>
+	function check_phone() {
+		var reg = /^1[345789]\d{9}$/;
+		if ($("#phone").val() == '') {
+			$('#phone').next().css('display', 'block').html('请输入手机号码');
+			$("#phone").focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+<script>
+	$(document).ready(function() {
+		var token = get_user_login();
+		$.ajax({
+			url: _API + "safe/safe_center",
+			type: "post",
+			dataType: "json",
+			async: true,
+			beforeSend: function beforeSend(request) {
+				request.setRequestHeader("Authorization", token);
+			},
+			success: function success(data) {
+				var tel = data.message.mobile;
+				if (tel == null || tel == '') {
+					var html =
+						"<li><input type='text' placeholder='请输入手机号' class='big' id='phone' name='phone' onchange='check_phone()'></li>" +
+						"<li class='clearfix'><input type='text' placeholder='请输入验证码' class='big w-160 verify fl mt15' id='code'><input type='button' value='发送验证码' class='send fr' onclick='sendCode(this)'></li>"
+					$(".nav>ul").html(html);
+					$(".none").show();
+				} else {
+					var html = "<li>" + tel + '</li>'
+					$(".nav>ul").html(html);
+					$(".none").hide();
+				}
+			}
+		})
+	})
+	var clock = '';
+	var nums = 60;
+	var btn;
+
+	function sendCode(thisBtn) {
+		var res = check_phone();
+		var phone = $('#phone').val();
+		if (res == true) {
+			$.ajax({
+				type: "post",
+				url: _API + "sms_send",
+				data: {
+					user_string: phone,
+					type: ''
+				},
+				dataType: "json",
+				success: function(data) {
+					console.log(data);
+					if (data == 'OK') {
+
+					} else {
+						layer_msg(data.message)
+					}
+				}
+			});
+		} else {
+			layer_msg('请输入手机号');
+			return false;
+		}
+		btn = thisBtn;
+		btn.disabled = true; //将按钮置为不可点击
+		btn.value = nums + '秒后重新获取';
+		clock = setInterval(doLoop, 1000); //一秒执行一次			
+	}
+
+	function doLoop() {
+		nums--;
+		if (nums > 0) {
+			btn.value = nums + '秒后重新获取';
+		} else {
+			clearInterval(clock); //清除js定时器
+			btn.disabled = false;
+			btn.value = '发送验证码';
+			nums = 60; //重置时间
+		}
+	}
+
+	function bindetel() {
+		var phone = $('#phone').val();
+		var code = $('#code').val();
+		var token = get_user_login();
+		if (phone != '' && code != '') {
+			$.ajax({
+				type: "post",
+				url: _API + "safe/mobile",
+				data: {
+					mobile: phone,
+					code: code
+				},
+				dataType: "json",
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function(data) {
+					console.log(data);
+					if (data.type == "ok") {
+						setTimeout(function() {
+							window.location.href = "Security.html";
+						}, 2000);
+					} else {
+						layer_msg(data.message)
+					}
+				}
+			});
+		} else {
+			layer_msg('请输入信息');
+		}
+	}
+</script>

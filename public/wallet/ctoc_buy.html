@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>C2C</title>
+    <link rel="stylesheet" href="static/css/common.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<style>
+.wheelDetail .iconbox ul li{
+    width: 100%;
+    background: #13171c;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+}
+.icon-pic img{
+    width: 45px;
+    height: 45px;  
+}
+.c2c-title{
+    width: 40%;
+    justify-content: space-around;
+    height: 40px;
+}    
+.c2c-title p{
+    padding: 5px 15px;
+    font-size: 16px;
+}  
+.c2c-title .active{
+    color: #fff;
+    border-bottom: 2px solid #fff
+}
+.sell{
+    border-radius: 4px;
+    margin-top: 10px;
+    display: block;
+    padding: 3px 10px;
+}
+.payhave img{
+    width: 15px;
+    margin-left: 5px
+}
+.coin{
+    right: 10px;
+    background: none;
+    border: none;
+    color: #37bac9;
+}
+.release{
+    right: 30px;
+    bottom: 100px;
+    background: #ff9800;
+    color:#fff;
+    width: 1.3rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    border-radius: 50%;
+    z-index: 999;
+}
+</style>
+<body>
+    <header class="mi-header fixed flex tc">
+        <div class="c2c-title  ft14 mauto flex w50 alcenter">
+            <p class="active"><a href="ctoc_buy.html">买入</a></p>
+            <p><a href="fiatrad.html">卖出</a></p>
+        </div>
+        <!--<select class="abstrot white coin">-->
+            <!--<option value="">USDT</option>-->
+            <!--<option value="">ETC</option>-->
+        <!--</select>-->
+    </header>
+    <div class="wheelDetail">
+        <div class="mt40 mb55">
+            <div class="iconbox">
+                <ul class="list">
+                    <!--<li class="flex between alcenter">-->
+                        <!--<div class="">-->
+                            <!--<div class="gold ft18 flex alcenter">-->
+                                <!--<span>race_li</span>-->
+                                <!--<p class="payhave">-->
+                                    <!--<img src="images/wechat.png" alt="">-->
+                                    <!--<img src="images/zhi.png" alt="">-->
+                                    <!--<img src="images/card.png" alt="">-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<p class="gray mt5">数量：100</p>-->
+                        <!--</div>-->
+                        <!--<div class="ft14">-->
+                            <!--<p class="red">6.25000CNY</p>-->
+                            <!--<p class="fr">-->
+                               <!--<a href="buy.html" class="sell mainbg gray tc">详情</a>-->
+                            <!--</p>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                </ul>
+
+                <button class="load-more">加载更多</button>
+
+            </div>
+        </div>
+    </div>  
+    <!--<div class="release fixed tc ball ft16">-->
+        <!--<a href="trading.html" class="inblock linerColor">发布</a>-->
+    <!--</div>-->
+    <div class="common_footer">
+        <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html"><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+        <a href="ctoc_buy.html" class="active"><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script>
+        var page=1;
+        getData();
+
+        function getData(){
+            layer_loading('正在加载');
+            $.get(laravel_api + '/c2c/list', {type: 0,page:page}, function (res) {
+                layer_close();
+                var html='';
+
+                if(res.message.list.length===0){
+                    layer_msg('没有更多了');
+                    $('.load-more').remove();
+                    return false;
+                }
+
+                for (i in res.message.list){
+                    var src='';
+                    switch (res.message.list[i].pay_mode){
+                        case '支付宝':
+                            src='images/zhi.png';
+                            break;
+                        case '微信':
+                            src='images/wechat.png';
+                            break;
+                        case '银行卡':
+                            src='images/card.png';
+                            break;
+                    }
+                    html+='<li class="flex between alcenter">\n' +
+                        '                        <div class="">\n' +
+                        '                            <div class="gold ft18 flex alcenter">\n' +
+                        '                                <span>'+res.message.list[i].token+'</span>\n' +
+                        '                                <p class="payhave">\n' +
+                        '                                    <img src="'+src+'" alt="">\n' +
+                        '                                </p>\n' +
+                        '                            </div>\n' +
+                        '                            <p class="gray mt5">数量：'+res.message.list[i].number+'</p>\n' +
+                        '                        </div>\n' +
+                        '                        <div class="ft14">\n' +
+                        '                            <p class="red">'+res.message.list[i].price+'CNY</p>\n' +
+                        '                            <p class="fr">\n' +
+                        '                               <a href="buy.html?id='+res.message.list[i].id+'" class="sell mainbg gray tc">详情</a>\n' +
+                        '                            </p>\n' +
+                        '                        </div>\n' +
+                        '                    </li>';
+                }
+                console.log(res);
+                $('.list').append(html);
+                page++;
+            })
+        }
+
+        $('.load-more').click(function(res){
+            getData();
+        })
+    </script>
+</body>
+
+</html>

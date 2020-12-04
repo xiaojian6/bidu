@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>我的</title>
+		<link rel="stylesheet" href="css/footer.css">
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/personal.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				list-style:none;
+				text-decoration: none;
+			}
+			.hide{
+				display: none !important;
+			}
+			html{
+				height: 100%;
+			}
+			body{
+				min-height:100%;
+				background:url(images/myimg/125293555952086935.jpg)no-repeat;
+				background-size:100% 100%;
+				line-height: 1.42857143;
+			}
+			header{
+				width:90%;
+				margin: 0 auto;	
+				overflow: hidden;
+			}
+			header img{
+				float: right;
+				width: 23px;
+				height: 21px;
+				margin-top:22px;
+			}
+			.login img{
+				width: 34px;height: 34px;
+				float: left;
+				margin-right:24px;	
+			}
+			.login  p{
+				/*font-size:55px;*/
+				font-size:25px;
+			}
+			.login span{
+				margin-left:60px;
+				margin-top:30px;
+				/*font-size:27px;*/
+				font-size:14px;
+			}
+			.nav{
+				width:90%;
+				margin: 0 auto;	
+				overflow: hidden;
+				margin-bottom:58px;
+			}
+			.nav li{
+				width:100%;
+				line-height:50px;
+				font-size:16px;
+				color:#0c2c41;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.nav li:last-child>span{
+				border: none;
+			}
+			.nav ul>li>i>img{
+				width: 20px;
+				height: 20px;
+				/* float: left; */
+				/* margin-top:16px; */
+				margin-right:16px;
+			}
+			.nav span{
+				display: block;
+				border-bottom:1px solid #f2f2f2;
+				width:80%;
+				/* float: left; */
+			}
+			
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="images/myimg/shzhi.gif" alt="" />
+		</header>
+		<div style="width:90%;margin:0 auto; color:#0c2c41; overflow: hidden;display: none;" class="login" id="login" >
+			<p><img src="images/myimg/touxiang.gif" alt="" />点击登录</p>
+			<span>欢迎来到必火</span>
+		</div>
+		<div style="width:90%;margin:0 auto; color:#0c2c41; overflow: hidden;display: none; " class="login" id="ooo">
+			<p><img src="images/myimg/touxiang.gif" alt=""/><sapn class="name"></sapn></p>
+			<span>UID:<span class="UID" style="margin-left:0px;"></span></span>
+		</div>
+		<div class="nav">
+			<ul>
+				<li class="jiTou">
+					<i>
+						<img src="images/myimg/wode.gif" alt="" />
+					</i>
+					<span>我的资产</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="ft_shop hide">
+					<i>
+						<img src="images/myimg/wode.gif" alt="" />
+					</i>
+					<span>我的商铺</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="dingDan">
+					<i>
+						<img src="images/myimg/dingdan.gif" alt="" />
+					</i>
+					<span>订单管理</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="legal">
+					<i>
+						<img src="images/myimg/dingdan.gif" alt="" />
+					</i>
+					<span>法币订单</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="trade">
+					<i>
+						<img src="images/myimg/dingdan.gif" alt="" />
+					</i>
+					<span>我的交易</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<!--<li class="seller">-->
+					<!--<i>-->
+						<!--<img src="images/myimg/dingdan.gif" alt="" />-->
+					<!--</i>-->
+					<!--<span>法币出售方订单操作</span>-->
+					<!--<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>-->
+				<!--</li>-->
+				<li class="yaoQing" style="display: none">
+					<i>
+						<img src="images/myimg/yaoqing.gif" alt="" />
+				   </i>
+				   <span>邀请返佣</span>
+				   <img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="geRen">
+					<i>
+						<img src="images/myimg/geren.gif" alt="" />
+					</i>
+					<span>个人中心</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="anQuan">
+					<i>
+						<img src="images/myimg/anquan.gif" alt="" />
+					</i>
+					<span>安全中心</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="shouKuan">
+					<i>
+						<img src="images/myimg/shoukuan.gif" alt="" />
+					</i>
+					<span>收款方式</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="tiBi">
+					<i>
+						<img src="images/myimg/tixian.gif" alt="" />
+					</i>
+					<span>提币地址</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+				<li class="guanYu">
+					<i>
+						<img src="images/myimg/guanyu.gif" alt="" />
+					</i>
+					<span>关于我们</span>
+					<img src="images/myimg/jitou.png" alt="" style="width:12px;"/>
+				</li>
+			</ul>
+		</div>
+		<footer>
+			<a href="index.html">
+				<div>
+					<p class="img img0"></p>
+					<span>首页</span>
+				</div>
+			</a>
+			<a href="market.html">
+				<div>
+					<p class="img img1"></p>
+					<span>行情</span>
+				</div>
+			</a>
+			<a href="transaction.html">
+				<div>
+					<p class="img img2"></p>
+					<span>交易</span>
+				</div>
+			</a>
+			<a href="#"  class="onc">
+				<div>
+					<p class="img img3"></p>
+					<span>杠杆交易</span>
+				</div>
+			</a>
+			<a href="personal.html" class="select">
+				<div>
+					<p class="img img4"></p>
+					<span>我的</span>
+				</div>
+			</a>	
+		</footer>
+	</body>
+</html>
+<script>
+	$(function(){
+		var token = get_user();
+		 $.ajax({
+            url: _API + "user/info",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+                if (data.type == 'ok') {
+					$("#ooo").css("display","block");
+					$("#login").css("display","none");    
+					$(".name").html(data.message.account);
+					$(".UID").html(data.message.id);
+					if(data.message.is_seller==1){
+						$('.ft_shop').removeClass('hide');
+					}
+                } else {
+                    $("#ooo").css("display","none");
+					$("#login").css("display","block");
+					layer_msg(data.message);	
+                }
+            }
+        });
+        $("#login").click(function(){
+        	window.location.href=_SERVER+'login.html';
+        })
+	})
+	   $('.onc').click(function(){
+            layer_msg("暂未开放")
+        })
+</script>

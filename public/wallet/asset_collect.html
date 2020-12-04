@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>收款</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+	<link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+	<link rel="stylesheet" href="static/css/footer2.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+</head>
+<style>
+	body{
+		width:100%;
+		height:100%;
+		background:url(static/images/hdl/money_rechange_bg.png) no-repeat ;
+		background-size:100%;
+	}
+	.rechange_con{
+		padding:.6rem;
+	}
+	.rechange_con .rechange_ewm{
+		width:9rem;
+		height:9rem;
+		margin:2rem auto 1rem;
+	}
+	.rechange_con .gobuy_btn{
+		display:block;width:40%;margin-left:26%;text-align:center;padding:.5rem .8rem;
+	}
+	.rechange_con .rechange_copy{
+		margin-top:2rem;
+	}
+</style>
+<body >
+	<header  class="borderB ">
+        <i class="iconfont icon-jianzuo font24  fontc_6 backPage"></i>
+        <h1 >收款</h1>
+    </header>
+
+	<section class="mgthead" id="user_info"  >
+		<div class="rechange_con">
+			<div>
+				<img src="" class="rechange_ewm" alt="">
+				<!--<span class="gobuy_btn" >保存二维码至相册</span>-->
+				<div class="rechange_copy">
+					<p class="mgb10" id="addr" style="width: 100%;overflow-y: scroll;"> </p>
+					<a class="gobuy_btn copy"  data-clipboard-action="copy" data-clipboard-target="#addr">复制地址</a>
+				</div>
+			</div>
+
+			<!-- <div class="money_exit_txt" style="background:none;">
+				<p>收款描述</p>
+				<p>收款描述</p>
+				<p>收款描述。</p>
+				<p>收款描述。</p>
+			</div> -->
+		</div>
+	</section>
+
+	<div class="common_footer">
+		<a href="index.html"  class="active" ><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+		<a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+			<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+		<a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+		<a href="userinfo.html"><i class="icon-size iconfont icon-wo"></i>我的</a>
+	</div>
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/clipboard.min.js"></script>
+	<script type="text/javascript" src="static/javascripts/asset_collect.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>划转</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+</head>
+<style>
+    #header{height: 45px;line-height: 45px;}
+    #header img{display: block; width: 20px}
+    .coinbox{width: 50%;background-color: #262a42;border-radius: 4px;color: #fff;line-height: 30px;padding: 0 5%;border: 1px solid #52688c;}
+    .coinbox option{text-align: center;}
+    .imgbox{width: 50px;height: 50px;border: 1px solid #1B2A3E}
+    .textbox{width: 80%;}
+    .line{height: 10px;background:#102030; }
+    .bline{border-bottom: 1px solid #1B2A3E;padding: 10px 0;}
+    .transit{width: 100%;height: 40px;line-height: 40px; color: #fff;background: #cfd9de;margin-top: 80px}
+    .btnbox{position: fixed;bottom: 10px;padding: 0 15px;width: 100%}
+    .transit{width: 100%;height: 40px;line-height: 40px; color: #fff;background: #1881d2;border-radius: 4px;}
+	.huazhuan-num{background-color: rgba(0,0,0,0);}
+</style>
+
+<body>
+
+    <header class="header">
+        <a class="back mt5" href="javascript:history.go(-1)">
+        </a>
+        <h4 class="ftw ft16" data-localize="assets.transfer">划转</h4>
+        <div class="right">
+            <!-- <img src="images/record1.png" /> -->
+        </div>
+    </header>
+    <div class="header-space"></div>
+    <div class="Transferred">
+        <div class="transfer plr15">
+            <!-- <div class="coin-header">
+                <p class="selected"></p>
+                <ul class="coinbox flex tc mt20 between">
+
+                </ul>
+            </div> -->
+            <!-- <select class="coinbox"></select> -->
+            <div class="flex between center mt30">
+                <div class="flex flexcol between textbox" data-index="2">
+                    <div class="flex between">
+                        <p class="ftw" data-localize="assets.from">从</p>
+                        <p class="account1 ftw" data-localize="assets.legalAccount">法币账户</p>
+                    </div>
+                    <div class="flex between">
+                        <p class="ftw" data-localize="assets.to">到</p>
+                        <p class="account2 ftw" data-localize="assets.curAccount">交易账户</p>
+                    </div>
+                </div>
+                <div class="imgbox tc flex alcenter jucenter transferbtn">
+                    <img src="images/transfer1.png" alt="" style="width:25px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="line mt30"></div>
+    <div class="plr15">
+        <div class="bline mt30">
+            <p class="ftw" data-localize="assets.transnum">划转数量</p>
+            <div class="flex between alcenter mt20">
+                <input type="text" placeholder="请输入划转数量" data-localize="assets.pmin" class="ft14 huazhuan-num ftw">
+                <div class="ftw">
+                    <span class="white_gray coin coin-name now-coin">USDT</span>
+                    <span class="white_gray">|</span>
+                    <span class="ftw all" data-localize="assets.all">全部</span>
+                </div>
+            </div>
+        </div>
+        <p class="ftw ft12 mt5"><span data-localize="assets.avaiable">可用</span> <span class="aviable"></span> <span class="coin now-coin"></span></p>
+    </div>
+    <div class="btnbox">
+        <div class="transit tc ft14 ftw" data-localize="assets.transfer">划转</div>
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+    <script>
+        $(function () {
+            // 跳转划转记录
+            $('.right').click(function () {
+                location.href = 'TransferRecord.html';
+            })
+            var currency01 = get_param('id'),
+                type01 = get_param('type');
+                name=get_param('name');
+            console.log(name)
+            var legalList = {}; //币种信息
+            var changeList = {}; //币种信息
+            var type = 3; //默认为法币-杠杆
+            var currency_id = '';
+            var text = ['法币账户', '交易账户']; //顺序
+            var legalBalance = 0.00;
+            var changeBalance = 0.00;
+            var currencyName = '';
+            getLegalList();
+            $('.transferbtn').click(function () {
+                type = type == 3 ? 4 : 3;
+                text.reverse();
+                $('.account1').text(text[0]);
+                $('.account2').text(text[1]);
+                $('.huazhuan-num').val('');
+                if (type == 3) {
+                    $('.aviable').text(Number(legalBalance).toFixed(2));
+                    $('.now-coin').text(currencyName);
+
+                } else {
+                    $('.aviable').text(Number(changeBalance).toFixed(2));
+                    $('.now-coin').text(currencyName);
+                }
+            })
+            $('.all').click(function () {
+                var num = $('.aviable').text();
+                $('.huazhuan-num').val(num);
+
+            })
+            $('.transit').click(function () {
+                var that = this;
+                var data = {};
+                var token = get_user_login();
+                if ($('.huazhuan-num').val() == '') {
+                    layer_msg(hnum);
+                    return;
+                } else {
+                    data.number = $('.huazhuan-num').val();
+                }
+                data.currency_id = currency_id;
+                data.type = type;
+                layer.open({
+                    anim: 'up',
+                    content: shua,
+                    btn: [sure, ceil],
+                    yes: function (index) {
+                        layer.close(index);
+                        $.ajax({
+                            url: _API + 'wallet/change',
+                            data: data,
+                            type: 'POST',
+                            beforeSend: function beforeSend(request) {
+                                request.setRequestHeader("Authorization", token);
+                            },
+                            success: function (res) {
+                                layer_msg(res.message)
+                                if (res.type == 'ok') {
+                                    setTimeout(function () {
+                                        // window.location = 
+                                        //     'TransferRecord.html';
+                                        location.reload();
+                                    }, 2000)
+                                }
+                            }
+                        })
+                    }
+                });
+            })
+            //获取币种信息
+            function getLegalList() {
+                var self = this;
+                var token = get_user_login();
+                $.ajax({
+                    url: _API + "wallet/list",
+                    type: "POST",
+                    dataType: "json",
+                    async: true,
+                    beforeSend: function beforeSend(request) {
+                        request.setRequestHeader("Authorization", token);
+                    },
+                    success: function success(data) {
+                        console.log(data)
+                        if (data.type == 'ok') {
+                            var l = data.message;
+                            self.changeList = l.change_wallet;
+                            self.legalList = l.legal_wallet;
+                            console.log(self.legalList.balance);
+                            self.changeList.balance.forEach(function (item, index) {
+                                if (item.currency_name == name) {
+                                    currency_id = item.currency;
+                                    changeBalance = item.change_balance;
+                                    currencyName = item.currency_name
+                                }
+                            })
+                            self.legalList.balance.forEach(function (item, index) {
+                                if (item.currency_name == name) {
+                                    currency_id = item.currency;
+                                    legalBalance = item.legal_balance;
+                                    currencyName = item.currency_name
+                                }
+                            })
+                            $('.aviable').text(legalBalance);
+                            $('.now-coin').text(currencyName);
+
+                        } else if (data.type == '999') {
+                            window.location =  'login.html';
+                        }
+                    }
+                })
+
+            }
+        })
+    </script>
+</body>
+
+</html>

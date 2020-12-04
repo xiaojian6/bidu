@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>资产详情</title>
+    <link rel="stylesheet" href="static/css/asset2_details.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<body>
+ <div id="user_info"  ></div>
+<div class="header">
+    <i class="back backPage"></i>
+    <h5>转账</h5>
+    <!-- <i class="close close_grey backPage"></i> -->
+    <!-- <i class="scan"></i> -->
+</div>
+ <script>
+	 // $is_ios = true;
+     // var ua = navigator.userAgent.toLowerCase();
+     // if (/iphone|ipad|ipod/.test(ua)) {
+     //     $is_ios = true;
+     // } else if (/android/.test(ua)) {
+     //     $is_ios = false;
+     // }
+	 //
+     // function  showjson(json){
+     //     layer_msg(json)
+     // }
+	 //
+     // //调用摄像头
+     // function callQRScan() {
+     //     if ($is_ios){
+     //         window.location = "js://scan"
+		//  } else{
+     //         var json=window.MyBrowserAPI.getLocationData("从页面传给手机的message");//拿到本地数据,并可以传给手机一些内容，可选
+	 //
+		// 	 showjson(json); //在页面上显示出结果
+		//  }
+     // }
+	 //
+     // function callbackQRScan(param) {
+     //     layer_msg(param)
+     // }
+
+     function code(result){
+         $("#addr").val(result)
+     }
+ </script>
+
+<div class="container">
+    <!--名片图标-->
+    <div onclick="BSL.Qcode('0','code')" class="card"></div>
+    <input type="text" class="one_line_input" id="addr" name="addr" placeholder="收款人钱包地址" style="margin-top:0">
+    <input type="number" class="one_line_input" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" id="number" name="number" placeholder="请输入转出数量">
+    <input type="password" class="one_line_input" id="password" name="password" placeholder="请输入钱包密码">
+    <input type="text" class="one_line_input" placeholder="备注" name="remarks" id="remarks">
+    <!-- <div class="fee">
+        矿工费用
+        <i></i>
+    </div> -->
+    <!-- <input type="range" class="slide_input" value="30" oninput="slide(this)">
+    <div class="choose_fee">
+        <span class="fl">慢</span>
+        <span class="fee_money">0.0000037800 ether</span>
+        <span class="fr">快</span>
+    </div> -->
+    <div class="btn_1 active login_btn">提交</div>
+</div>
+<div class="common_footer">
+    <a href="index.html" class="active"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+<script type="text/javascript" src="static/javascripts/asset2_details.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+</head>
+<style type="text/css">
+	/* body{
+        background:#fcfcfd url(static/images/home/register_bg.png) no-repeat;
+        background-size:100%;
+    } */
+</style>
+<body>
+    <div class="header back">
+        <h5>注册</h5> 
+        <i class="back backPage"></i>
+    </div>
+   <div class="mgthead1">
+      
+        <form id="form_content" >
+            <div class="login_box">
+                    <div class="login_tab" >
+                        <div class="input-con" >
+                            <i class="iconfont icon-ren font24 fontc_hdl"></i>
+                            <input  type="text" value="" name="account_number" id="account_number" placeholder="请输入账号" />
+                        </div>
+                        <div class="input-con">
+                            <i class="iconfont icon-icon-system-fn-lock font24 fontc_hdl"></i>
+                            <input  type="password" id="password" name="password" value="" placeholder="请输入密码" />
+                        </div>
+                        <div class="input-con">
+                            <i class="iconfont icon-icon-system-fn-lock font24 fontc_hdl"></i>
+                            <input  type="password" id="confirm_password" name="confirm_password" value="" placeholder="确认密码" />
+                        </div>
+                        <div class="input-con">
+                            <i class="iconfont icon-yaoqing font24 fontc_hdl"></i>
+                            <input  type="text" value="" id="parent_id" name="parent_id" placeholder="邀请手机号（选填）" />
+                        </div>
+                    </div>
+                    <div class="quick-nav mgt10">
+                        <a href="javascript:;" class="fontc_hdl">
+                            <i class="iconfont icon-iconfontgantanhao4  fontc_hdl"></i>
+                            <span class="font12">用户协议</span>
+                        </a>
+                    </div>
+            </div>
+            <input name="content" type="hidden" id="input_content">
+            <input name="address" type="hidden" id="address" value="">
+            <a class="login_btn" href="javascript:;">注册</a>
+        </form>
+   </div>
+
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/register.js"></script>
+</body>
+</html>

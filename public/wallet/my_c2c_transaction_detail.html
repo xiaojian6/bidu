@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>详情</title>
+    <link rel="stylesheet" href="static/css/common.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<style>
+    .h40 {
+        height: 40px
+    }
+
+    .w20 {
+        width: 20%;
+    }
+
+    .blline {
+        border-bottom: 1px solid #eee;
+    }
+
+    .pl20 {
+        padding-left: 20px;
+    }
+
+    .buyinfo {
+        padding: 20px 10px;
+    }
+
+    .buy_btn {
+        width: 100%;
+    }
+
+    .buy_btn input {
+        background: #37bac9;
+        border-radius: 8px;
+        height: 35px;
+        width: 80%;
+        color: #fff;
+    }
+
+    .btn {
+        margin-bottom: 15px;
+    }
+</style>
+<body>
+<header class="mi-header fixed flex tc">
+    <a href="javascript:history.go(-1)" class="back gold"></a>
+    <h1 class="mi-header-title white ft18 mauto">详情</h1>
+</header>
+<div class="mt40 content white ft14">
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">我的账号：</span>
+        <span class="flex1 pl10 transaction_username"></span>
+    </div>
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">交易类型：</span>
+        <span class="flex1 pl10 type"></span>
+    </div>
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">币种：</span>
+        <span class="flex1 pl10 token"></span>
+    </div>
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">价格：</span>
+        <span class="flex1 pl10 price"></span>
+    </div>
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">支付方式：</span>
+        <span class="flex1 pl10 pay-mode"></span>
+    </div>
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">数量：</span>
+        <span class="flex1 pl10 number"></span>
+    </div>
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">详情：</span>
+        <span class="flex1 pl10 m-content"></span>
+    </div>
+    <div class="flex h40 blline pl20 alcenter">
+        <span class="w20 gold">交易人：</span>
+        <span class="flex1 pl10 seller_name"></span>
+    </div>
+
+    <div class="account-info">
+        <div class="flex h40 blline pl20 alcenter">
+            <span class="w20 gold">微信账号：</span>
+            <span class="flex1 pl10 wechat"></span>
+        </div>
+        <div class="flex h40 blline pl20 alcenter">
+            <span class="w20 gold">支付宝：</span>
+            <span class="flex1 pl10 alipay"></span>
+        </div>
+        <div class="flex h40 blline pl20 alcenter">
+            <span class="w20 gold">银行卡：</span>
+            <span class="flex1 pl10 bank_card"></span>
+        </div>
+    </div>
+</div>
+
+<div class="buy_btn tc mt40">
+    <!--<input type="button" id="cancel-transaction" class="ft14 btn" value="取消和他交易">-->
+    <!--<input type="button" id="cancel" class="ft14 btn" value="取消发布">-->
+    <input type="button" id="complete" class="ft14 btn" value="确认交易完成">
+    <!--<p class="mt10 blue f12">*温馨提示：请截屏保存卖出订单信息</p>-->
+</div>
+<div class="common_footer">
+    <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html"><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="ctoc_buy.html" class="active"><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="static/javascripts/main.js"></script>
+<script>
+    var id = get_param('id');
+
+    if (id) {
+        layer_loading('正在加载');
+        $.get(laravel_api + '/c2c/detail', {id: id}, function (res) {
+            layer_close();
+            $('.seller_name').text(res.message.user_info.account_number);
+            $('.pay-mode').text(res.message.c2c.pay_mode);
+            $('.price').text(res.message.c2c.price);
+            $('.number').text(res.message.c2c.number);
+            $('.token').text(res.message.c2c.token);
+            $('.m-content').text(res.message.c2c.content);
+            $('.type').text(res.message.c2c.type ? '卖出' : '买入');
+
+            if (res.message.c2c.type == 1) {
+                $('#complete').remove();
+            }
+
+            if(res.message.c2c.status != 0){
+                $('.wechat').text(res.message.account_info.wechat);
+                $('.alipay').text(res.message.account_info.alipay);
+                $('.bank_card').text(res.message.account_info.bank_name + res.message.account_info.bank_card);
+            }else{
+                $('.account-info').remove();
+            }
+
+            if (res.message.c2c.status == 0) {
+                $('.transaction_username').text('暂无');
+                $('#cancel-transaction').remove();
+                $('#complete').remove();
+                return true;
+            }
+
+            if (res.message.c2c.status == 1) {
+                $('.transaction_username').text(res.message.transaction_user.account_number);
+                $('#cancel').remove();
+                return true;
+            }
+
+            if (res.message.c2c.status == 2) {
+                $('.transaction_username').text(res.message.transaction_user.account_number);
+                $('.buy_btn').empty();
+                return true;
+            }
+
+            if (res.message.c2c.status == 3) {
+                $('.buy_btn').empty();
+            }
+        });
+
+
+        // $('#cancel').click(function () {
+        //     layer_loading('正在加载');
+        //     $.post(laravel_api + '/c2c/cancel', {id: id}, function (res) {
+        //         layer_close();
+        //         layer_msg(res.message);
+        //         if (res.type == 'ok') {
+        //             setTimeout(function () {
+        //                 location.reload();
+        //             }, 2000)
+        //         }
+        //     })
+        // });
+        //
+        //
+        // $('#cancel-transaction').click(function () {
+        //     layer_loading('正在加载');
+        //     $.post(laravel_api + '/c2c/cancel_transaction', {id: id}, function (res) {
+        //         layer_close();
+        //         layer_msg(res.message);
+        //         if (res.type == 'ok') {
+        //             setTimeout(function () {
+        //                 location.reload();
+        //             }, 2000)
+        //         }
+        //     })
+        // });
+        //
+        $('#complete').click(function () {
+            layer_loading('正在加载');
+            $.post(laravel_api + '/c2c/complete', {id: id}, function (res) {
+                layer_close();
+                layer_msg(res.message);
+                if (res.type == 'ok') {
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }
+            });
+        })
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>账户明细</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <link rel="stylesheet" href="static/css/footer2.css">
+    <style>
+        .flex{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body style="background: #f5f5f5;">
+        <div class="header">
+                <i class="back backPage"></i>
+                <h5>交易记录</h5>
+        </div>
+    <div id="user_info"  class="mgthead">
+        <section>
+            <div class="tab_box">
+                <div class="record_info " id="all_details"  >
+                    <ul class="record_item " id="data_ul" data-page="1">
+                        
+                    </ul>
+                </div>
+            </div>
+        </section>   
+    </div>
+    <div class="common_footer">
+        <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+        <a href="fiatrad.html"><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html"  class="active"><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script type="text/javascript" src="static/javascripts/account_details.js"></script>
+    
+</body>
+</html>

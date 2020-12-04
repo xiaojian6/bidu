@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>邀请榜单</title>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+        <script src="javascripts/main.js"></script>
+        <script src="javascripts/jquery.cookie.js"></script>
+        <script src="lib/vue.min.js"></script>	
+        <style>
+        	*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+		}
+		header{
+			width:90%;
+			position: fixed;
+			top:0;
+			left:5%;
+			background-color:#fff;
+		}
+		header img{
+			width: 48px;height: 48px;
+			margin-top:40px;
+		}
+		header h3{
+			font-size:56px;
+			margin-top:60px;
+			color:#06365a;
+		}
+		.ranking{
+				width:90%;
+				margin:0 auto;
+				overflow: hidden;
+				margin-top:200px;
+			}
+			.first{
+				width: 33%;
+				float: left;
+				background-color:#f7fbfe;
+				margin-top:83px;
+				text-align: center;
+				font-size:26px;
+				margin-left:0.3%;
+			}
+			.first p{
+				line-height:80px;
+				font-size:26px;
+				color:#888d90 ;
+			}
+			.firstTop{
+				width:108px;
+				height:134px;
+				margin:0 auto;
+				margin-top:20px;
+				background:url(images/myimg/aDASD.png) no-repeat ;
+				background-size: 100% 100%;
+				text-align: center;
+				line-height:134px;
+				overflow: hidden;
+				text-align: center;
+				color: #fff;
+				justify-content: center
+
+			}
+			.firstTop p{
+				/* float: left; */
+				margin-top:60px;
+				color: #fff;
+				font-size: 20px;
+				/* margin-left:26px; */
+			}
+			.firstTop p i:nth-child(2){
+				font-size: 30px;
+			}
+			.second{
+				background:url(images/myimg/yi.png) no-repeat ;
+				background-size: 100% 100%;
+			}
+			.third{
+				background:url(images/myimg/san.png) no-repeat ;
+				background-size: 100% 100%;
+			}
+			.ass{
+				width: 90%;
+				margin: 0 auto;
+				margin-top:20px;
+			}
+			.ass li{
+				width: 100%;
+                overflow: hidden;
+                font-size:28px;
+                border-bottom:1px solid #E2E2E2;
+			}
+			.ass li>div{
+				line-height:60px;
+				font-size:28px;
+			}
+        </style>
+	</head>
+	<body>
+		<div id="app">
+			<header>
+			<a href="javascript:history.go(-1)"><img src="images/myimg/40802415792124626_03.jpg" alt="" /></a>
+			<h3>邀请榜单</h3>
+		    </header>
+		 <div class="ranking">
+		  <div class="first">
+			<div class="firstTop flex alcenter">
+			   <p><i>N0.</i><i class="ft20">2</i></p>
+			</div>
+			<p>{{List2.account}}</p>
+			<span>{{List2.total}}USDT</span>
+		  </div>
+		  <div class="first">
+			<div class="firstTop second">
+			   <p><i>N0.</i><i class="ft20">1</i></p>
+			</div>
+			<p>{{List1.account}}</p>
+			<span>{{List1.total}}USDT</span>
+		  </div>
+		  <div class="first">
+			<div class="firstTop third">
+				<p><i>N0.</i><i class="ft20">3</i></p>
+			</div>
+			<p>{{List3.account}}</p>
+			<span>{{List3.total}}USDT</span>
+		  </div>
+		</div>
+		<div class="ass">
+			<ul>
+				<li v-for="(aa) in List">
+					<p><i>N0.</i><i class="ft20">{{aa.num}}</i></p>
+					<div><span style="float: left;">{{aa.account}}</span><span style="float: right;">{{aa.total}}USDT</span></div>	
+				</li>
+			</ul>
+		</div>	
+		</div>
+	</body>
+</html>
+<script>
+	 var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[],
+         List1:[],
+         List2:[],
+         List3:[],
+        },
+        mounted: function () {
+             var self = this;
+		     var token = get_user_login();
+		     $.ajax({
+            url: _API + "user/invite_list",
+            type: "POST",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	//console.log(data)
+            	
+                if (data.type == 'ok') {
+                	
+                	self.List1 = data.message[0];
+                	self.List2 = data.message[1];
+                	self.List3 = data.message[2];
+                	var arr= data.message;
+                	if(arr.length >3){
+                		for(i in arr){
+                           var num =1;
+                           num+=Math.floor(i);
+                           arr[i].num= num;
+
+                	     }
+                	     //console.log(arr);
+                	     arr=arr.slice(3);
+                	    // console.log(arr);
+                	     self.List=arr;
+
+                	}else{
+                		$('.ass').hide();
+
+                	}
+                	
+                	console.log(arr);
+
+                } else if(data.type == '999'){
+                 window.location =_SERVER+'login.html';
+                }
+            }
+        });	
+	    },
+	    	methods:{
+            particulars:function(id,name,has_address_num){
+				window.location =_SERVER+'detailed.html?id='+ id+'&name='+name+'&has_address_num='+has_address_num;
+			}
+	    }
+	});
+	
+	
+</script>

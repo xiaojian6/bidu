@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PB转账</title>
+    <link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16">PB转账</h4>
+		</header>
+		<div class="header-space"></div>
+    <div class="plr15 ft12 ftw">
+        <p class="mt20">可用</p>
+        <p class="mt20 ft14 bold"><span class="balance-num">0.00</span> <span class="title">PB</span></p>
+        <div class="bline mt30 bdt">
+            <p>转账用户名</p>
+            <div class="flex between alcenter mt20">
+                <input type="text" placeholder="请输入用户名" class="ft14 address ftw">
+            </div>
+        </div>
+        <div class="bline mt30 bdt">
+            <p>数量</p>
+            <div class="flex between alcenter mt20">
+                <input type="number" placeholder="请输入转账数量" class="ft14 count ftw">
+                <div>
+                    <span class="white_gray title">PB</span>
+                    <span class="">|</span>
+                    <span class=" bold all_in">全部</span>
+                </div>
+            </div>
+        </div>
+        <div class="mention tc ft14 mt40">转账</div>
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script>
+        $(function () {
+            var balance,rate;
+            function postData() {
+                var address = $('.address').val();
+                var number = $('.count').val();
+                if(!address){
+                    layer_msg('请输入用户名');
+                    return;
+                } 
+                if(!number){
+                    layer_msg('请输入转账数量');
+                    return;
+                } 
+                initDataToken({url:'sendLtcKMB',type:'post',data:{money:number,account_number:address}},function(res){
+                    console.log(res)
+                    layer_msg(res)
+                    setTimeout(() => {
+                        location.href='leverAccount.html?id='+'1'+'&type=2'
+                    }, 1500);
+                })
+              
+            }
+            $('.mention').click(function(){
+                postData();
+            })
+            
+            $('.all_in').click(function(){
+                $('.count').val(balance)
+            })
+            var token = get_user_login();
+            $.ajax({
+                url: _API + 'PB',
+                type: "get",
+                dataType: "json",
+                async: true,
+                beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+                },
+                success: function success(res) {
+                    if (res.type == 'ok') {
+                        $('.balance-num').html(res.message);
+                    }
+                },
+            });
+           
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">		
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div#journalism{
+				padding:5px 3%;
+			}
+			div#header,
+			div#content{
+				width: 100%;
+			}
+			div#header{
+				position: fixed;
+				top: 0;
+				left: 0;
+				background: #fff;
+			}
+			div#header img{
+				width: 25px;
+				margin:-5px 10px;
+			}			
+			div#header a{
+				display: inline-block;
+				width: 30%;
+				height: 40px;
+				text-align: center;
+				margin: 0 21%;
+				line-height: 40px;
+				font-size: 1.4rem;
+			}
+			div#content{
+				margin:50px 0 30px;
+				font-size: 1rem;
+			}
+			div#content ul{
+				list-style: none;
+			}
+			div#content ul li{
+				text-indent: 20px;
+			}
+			div#content p{
+				line-height: 25px;
+				text-indent: 30px;
+			}
+			div#correlation ol{
+				margin-left: 30px;
+			}
+			div#correlation ol li{
+				line-height: 1.6rem;
+			}
+			div#correlation ol li a{
+				text-decoration: none;
+				color: #000;
+			}
+			div#content h2,
+			div#correlation h2{
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="journalism">
+			<div id="header">
+				<img src="images/arrows.png"  onclick="location.href='index.html'"/>
+				<a>公告</a>
+				<hr />	
+			</div>
+			<div id="content">
+				<h2></h2>
+				<div></div>
+			</div>
+			<div id="correlation">
+				<h2>相关新闻</h2>
+				<ol></ol>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		
+		<script type="text/javascript">
+  	//===============新闻详情======================
+  		var id = request('id');
+       	$.ajax({
+       	    type:'post',
+          	url:_API + 'news/detail',
+          	dataType:'json',	
+			data:{
+          		id:id
+          	},
+          	success:function(data){			
+				$('#content>div').html(data.message.content);
+          	}
+        });
+  	
+  	  	
+	    $.ajax({
+       	    type:'post',
+          	url:_API + 'news/list',
+          	dataType:'json',	
+          	success:function(data){
+          		var attr=[];
+          		var attr1=[];
+				for(i=0;i<data.message.list.length;i++){
+					if(data.message.list[i].id != id){
+						attr.push(data.message.list[i].title);
+						attr1.push(data.message.list[i].id);
+					}else{
+						$('#content>h2').html(data.message.list[i].title);
+					}
+				};
+				var Attr = attr.slice(0,5);
+				var Attr1 = attr1.slice(0,5);
+				var html='';
+				for(x = 0;x < Attr.length;x++){
+					html +="<li onclick=''><a href='journalism.html?id="+Attr1[x]+"'>"+Attr[x]+"</a></li>"
+				};				
+				$('#correlation>ol').html(html);
+				
+          	}
+        });
+
+		//==================获取地址后缀======================
+		function request(key) {
+		    var url = location.search; //获取url中"?"符后的字串
+		    var theRequest = {};
+		    if (url.indexOf("?") != -1) {
+		        var str = url.substr(1);
+		        strs = str.split("&");
+		        for(var i = 0; i < strs.length; i ++) {
+		            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+		        }
+		    }
+		    return theRequest[key] || null;
+		}
+		</script>
+	</body>
+</html>

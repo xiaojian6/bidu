@@ -1,0 +1,163 @@
+@charset "UTF-8";
+html {
+  color: #000;
+  background: #fff;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+html * {
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: '微软雅黑';
+  height: 100%;
+  background: #f1f1f1;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0;
+}
+
+input, select, textarea {
+  font-size: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+ol, ul {
+  list-style: none;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: 500;
+}
+
+ins, a {
+  text-decoration: none;
+}
+
+input {
+  border: 0;
+  outline: 0;
+}
+
+.header {
+  width: 100%;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  font-size: 0.4800rem;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  border-bottom: 1px solid #ebebeb;
+  background: #37bac9;
+}
+
+.header .back {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0.4000rem;
+  height: 0.5rem;
+  width: 0.5rem;
+  background: url("../../images/imtoken/10.png");
+  background-size: cover;
+}
+
+.select-recharge{
+	padding: 0.3rem;
+}
+select-recharge ul li a{
+  display:inline-block;
+  margin-top:1rem;
+  background:yellow;
+}
+.select-card{
+	background: #fff!important;
+	border-radius: 0.2rem;
+	margin-bottom: 0.5rem;
+}
+
+.back-card{		
+		background-size: 100%;
+    color: #fff;
+}
+.wechat{
+  background: url(../../images/imtoken/wx.png) ;
+  background-size: 100%;
+}
+.zhifu{
+  background: url(../../images/imtoken/zhifubao.png);
+  background-size: 100%;
+}
+.bank{
+  background: url(../../images/imtoken/bank.png);
+  background-size: 100%;
+}
+.back-card h5 {
+    font-size: 0.413rem;
+		padding: 0.5rem 0.5rem 0rem 0.5rem;
+}
+
+.back-card span {
+  font-size: 0.32rem;
+  margin-top: 0.2rem;
+  display: inline-block;
+  padding: 0 .5rem .1rem;
+}
+.check{
+    background: url(../../images/imtoken/det_5@2x.png)no-repeat center left;
+    background-size: 100%;
+    position: absolute;
+    top: .25rem;
+    left: 0.5rem;
+    -webkit-appearance: none;
+    width: 0.45rem;
+    height: 0.45rem;
+}
+.select-card.active .check{
+  background:url(../../images/imtoken/det_2@2x.png)no-repeat ;
+  background-size: 100%;
+}
+
+
+.select{
+	  background: #FFFFFF;
+    height: 1.1rem;
+    line-height: 1.1rem;
+    border-radius: 0.2rem;
+    padding-left: 1.3rem;
+    position: relative;
+}
+
+
+
+.btnok .btn-ok{
+	display: block;
+	height: 1rem;
+  line-height: 1rem;
+  border-radius: .2rem;
+	background: #37bac9;
+	text-align: center;
+	color: #FFFFFF;
+	width: 90%;
+  font-size: 0.45rem;
+  margin: 0 auto;
+}

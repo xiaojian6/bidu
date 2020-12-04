@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的工单</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="javascripts/order.js"></script>
+		<script src="lib/swiper.jquery.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/vue.min.js"></script>
+	</head>
+	<style>
+		.nav h5{
+			width: 100%;
+			overflow-x: hidden;
+			word-break: break-all;
+		}
+	</style>
+	<body>
+		<div id="app" v-cloak>
+			<header class="header">
+				<a class="back mt5" href="javascript:history.go(-1)">
+				
+				</a>
+				<h4 class="ftw ft16">我的工单</h4>
+				<div class="right">
+					<img src="images/add.png" alt="" class="imgRight"/>
+				</div>
+			</header>
+			<div class="header-space"></div>
+			
+
+			<div class="nav ml12 ftw bgColor">
+				<ul>
+					<li class="mt15 ptb10 pb10 pl12" v-for="(aa) in add" @click="sdfsd(aa.id)">
+						<div class="navWen">
+							<h5>{{aa.content}}</h5>
+							<p class="mt10">{{aa.create_time}}</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var vue = new Vue({
+		el: '#app',
+		data: {
+			add: []
+		},
+		mounted: function() {
+			var self = this;
+			var token = get_user_login();
+			$.ajax({
+				url: _API + "feedback/list",
+				type: "POST",
+				dataType: "json",
+				async: true,
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization", token);
+				},
+				success: function success(data) {
+					console.log(data)
+					self.List = data.message;
+					self.add = data.message.list;
+					if (data.type == 'ok') {
+
+
+					}
+				}
+			});
+
+		},
+		methods: {
+			sdfsd: function(id) {
+				window.location.href = 'Complaint.html?id=' + id;
+			}
+		}
+	});
+</script>

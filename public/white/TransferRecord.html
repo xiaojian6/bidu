@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">		
+		<title>划转记录</title>
+		<link rel="stylesheet" type="text/css" href="css/BorrowingRecord.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css"/>
+	</head>
+	<body>
+		<div id="BorrowingRecord">
+			<div id="header">
+				<img src="images/arrows.png" onclick="history.go(-1)"/>
+			</div>		
+			<div id="record">
+				<h3 class="pull-left">
+					划转记录
+				</h3>
+				<p class="pull-right complete"> 
+					<span>
+						全部
+					</span>
+					<img src="images/pulldown.png"/>
+				</p>
+				<div>
+					<p><img src="images/anonymous.png"/></p>
+					<p>暂无记录</p>
+				</div>
+			</div>
+			<div id="mask1">
+		    	<div id="genre">
+					<ul>
+						<li>
+							<p class="p">全部</p>
+							<p>转出到交易账户</p>
+							<p>从交易账户转入</p>
+						</li>
+						<li class="cancel">取消</li>
+					</ul>
+				</div>
+		    </div>
+		</div>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="javascripts/BorrowingRecord.js"></script>
+	</body>
+</html>

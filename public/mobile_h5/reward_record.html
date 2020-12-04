@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通证奖励记录</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        [v-cloak] {display: none}
+        .header-space{height: 40px;}
+        .p15{padding: 15px;}
+        .listbox{padding: 0 10px;}
+        .tl{text-align: left}
+        .listbox li{padding: 10px;border-radius: 4px;margin-top: 10px;}
+    </style>
+</head>
+<body>
+    <header class="header header40 mainbg">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <div class="tc title white">通证奖励记录</div>   
+    </header>
+    <div class="header-space"></div>
+    <div id="app" v-cloak>
+        <ul class="listbox white">
+            <li class="mainbg" v-for='(item,index) in relist'>
+                <!-- <div class="flex1">
+                    <p>详情</p>
+                    <p class="mt10 tl">{{item.memo}}</p>
+                </div> -->
+                <!-- <div class="flex tc">
+                   <div class="flex1">
+                        <p>数量</p>
+                        <p class="mt10">{{item.reward_qty}}</p>
+                    </div>
+                    
+                    <div class="flex1">
+                        <p>时间</p>
+                        <p class="mt10">{{item.create_time}}</p>
+                    </div> 
+                </div> -->
+                <div>数量：{{item.reward_qty}}</div>
+                <div class="mt10">时间：{{item.create_time}}</div>
+                <div class="mt10">详情：{{item.memo}} </div>
+                
+
+            </li>
+        </ul>
+        <!-- <div class="tc p15 white_gray" @click='more'>加载更多</div> -->
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="lib/vue.min.js"></script>
+    <script>
+        var token = get_user_login();
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                relist:[],
+                page:1
+            },
+            methods:{
+                getlist(){
+                    var that = this;
+                    $.ajax({
+                        url: _API + "candy/candyhistory",
+                        type: "GET",
+                        dataType: "json",
+                        async: true,
+                        beforeSend: function beforeSend(request) {
+                            request.setRequestHeader("Authorization", token);
+                        },
+                        success: function (res) {
+                            if (res.type == 'ok') {
+                                console.log(res)
+                                var list = res.message
+                                that.relist=that.relist.concat(list);
+
+                            } else {
+                            }
+                        }
+                    });
+                },
+                more(){
+
+                }
+            },
+            mounted(){
+                this.getlist();
+            }
+        })
+
+    </script>
+</body>
+</html>

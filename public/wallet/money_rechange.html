@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>充币</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+	<link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+	<link rel="stylesheet" href="static/css/footer2.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+</head>
+<style>
+	body{
+		width:100%;
+		height:100%;
+		background:url(static/images/hdl/money_rechange_bg.png) no-repeat ;
+		background-size:100%;
+	}
+	.rechange_con{
+		padding:.6rem;
+	}
+	.rechange_con .rechange_ewm{
+		width:9rem;
+		height:9rem;
+		margin:2rem auto 1rem;
+	}
+	.rechange_con .gobuy_btn{
+		display:block;width:40%;margin-left:26%;text-align:center;padding:.5rem .8rem;
+	}
+	.rechange_con .rechange_copy{
+		margin-top:2rem;
+	}
+</style>
+<body >
+	<header class="header ">
+        <i class="back backPage"></i>
+        <h5>充币</h5>
+    </header>
+
+	<section class="mgthead" id="user_info"  >
+		<div class="rechange_con">
+			<div>
+				<img src="static/images/home/ewm.png" class="rechange_ewm" alt="">
+				<!--<span class="gobuy_btn" >保存二维码至相册</span>-->
+				<div class="rechange_copy">
+					<p class="mgb10" id="addr" style="width: 100%;overflow-y: scroll;"> </p>
+					<a class="gobuy_btn copy"  data-clipboard-action="copy" data-clipboard-target="#addr">复制地址</a>
+				</div>
+			</div>
+
+			<div class="money_exit_txt" style="background:none;">
+				<!--<p>请向上述地址充值imtoken币，imtoken兑换华盾币的比率是1:3900(1个imtoken可以兑换华盾币3900个）</p>-->
+				<p>您充值至上述地址后，需要整个网络节点的确认，6次网络节点确认后到账，到账时间一般是10分钟-60分钟之间。</p>
+				<!--<p>最小充值金额:2000华盾币，小于最小金额的充值将不会上账且无法退回。</p>-->
+				<!--<p>您的充值地址不会经常改变，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您。</p>-->
+				<!--<p>请务必确认电脑及浏览器安全，防止信息被篡改或泄露。</p>-->
+			</div>
+		</div>
+		<div style="height: 50px;"></div>
+	</section>
+	<div class="common_footer">
+		<a href="index.html" class="active"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+		<a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+			<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+		<a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+		<a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+	</div>
+	
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/clipboard.min.js"></script>
+	<script type="text/javascript" src="static/javascripts/money_rechange.js"></script>
+</body>
+</html>

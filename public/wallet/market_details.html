@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>行情详情</title>
+    <link rel="stylesheet" href="static/css/imtoken/market_details.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+<body>
+    <style>
+    .chartbox{
+        position: relative;
+        height: 250px;
+    }
+    .chartbox>li{
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 250px;
+        width: 100%;
+    }
+    .chartbox>li>div{
+        width: 100%;
+        height: 250px;
+    }
+    .chartbox>li.on{
+        opacity: 1;
+        z-index: 99;
+    }
+    #main{
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+    </style>
+<div id="user_info"  ></div>
+<div class="header">
+    行情详情
+    <i class="back backPage"></i>
+</div>
+<div class="asset"></div>
+<style>
+    .tc{text-align: center;}
+    .tc th{text-align: center}
+</style>
+<div class="container asset_detail tc">
+    <table>    
+        <tr class="tc">
+            <th>零点开盘</th>
+            <th>最高</th>
+            <th>最低</th>
+            <th>成交量</th>
+        </tr>
+        <tr>
+            <td class="open">$ 0</td>
+            <td class="hight">$ 0</td>
+            <td class="low">$ 0</td>
+            <td class="volume">0</td>
+        </tr>
+    </table>
+    <ul class="tabs">
+        <li class="active">分</li>
+        <li>天</li>
+        <li>周</li>
+        <li>月</li>
+    </ul>
+</div>
+<ul class="chartbox">
+    <li class="on">
+        <div id="chart0"></div>
+    </li>
+    <li>
+        <div id="chart1"></div>
+    </li>
+    <li>
+        <div id="chart2"></div>  
+    </li>
+    <li>
+        <div id="chart3"></div> 
+    </li>
+    
+</ul>
+    <script src="static/javascripts/imtoken/echarts.js"></script>
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/imtoken/market_details.js"></script>
+</body>
+</html>

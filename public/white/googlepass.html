@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- <meta name="viewport" content="width=750"/> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+		<title>谷歌验证</title>
+		<script src="../js/mobile-util.js"></script>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="javascripts/order.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<style>
+				*{
+				margin: 0;
+				padding: 0;
+				list-style:none;
+				text-decoration: none;
+			}
+		header{
+			width: 90%;
+			margin:0 auto;
+		}
+		header img{
+			margin-top:10px;
+			width: 20px;
+			height:20px;
+		}
+		.txt{
+			width: 90%;
+			margin:0 auto;
+			line-height:80px;
+			font-size:24px;
+			color: #06365a;
+			font-weight: normal;
+		}
+        #demo{
+            width:90%;
+            margin:auto;
+            padding:50px 5px;
+        }
+        #demo input:focus{ 
+            border-bottom: 1px solid #5886d4;
+           }
+           #demo input{
+            float:left;
+            width:12%;
+            border:none;
+            border-bottom:1px solid #ccc;
+            margin:auto;
+            margin-left:4%;
+            outline:none;
+            text-align:center;
+            padding:5px 0;
+            font-size:15px;
+            /* color:#5886d4; */
+        }
+		.clearfix:before,.clearfix:after {   
+            content: "";
+            display: block;
+            clear: both;
+         } 
+        .clearfix {
+           zoom: 1;
+         }
+		</style>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1)"><img src="images/myimg/40802415792124626_03.jpg" alt="" /></a>
+		</header>
+		<div class="txt">
+			<h4>谷歌验证码</h4>
+        </div>
+        <div id="demo" class="clearfix">
+            <form action="" >
+              <input type="number" maxlength='1'>
+              <input type="number" maxlength='1'>
+              <input type="number" maxlength='1'>
+              <input type="number" maxlength='1'>
+              <input type="number" maxlength='1'>
+              <input type="number" maxlength='1'>
+            </form>
+        </div>
+	</body>
+</html>
+<script>
+//    $('#demo input:last+1').keyup(function(e){   
+//         var reg=/^\d{6}$/;    
+// 			    if(!reg.test($("input").val())){      
+// 				         layer_msg("请输入正确"); 
+// 			     }else{
+//                      console.log(222)
+// 			     	layer_msg("成功");
+// 		  }
+//       })              
+//        var demo=document.getElementById('demo');
+//        var input=document.getElementsByTagName('input');
+//        var iNow=0;
+//        type =!-[1,]? 'onpropertychange':'oninput';
+//           limit=1;//满足自动切换焦点的字符数
+//           for(var i=0;i<input.length-1;i++){
+//               input[i].index=i;
+//               input[i][type]=function(){
+//                   iNow=this.index;
+//                   var that=this;
+//                   setTimeout(function(){
+//                       that.value.length>limit-1&&input[iNow+1].focus();
+//                   },0)
+//                     console.log(iNow); 
+//               }
+//           }
+onload = function () {
+            var txts = demo.getElementsByTagName("input");
+            for (var i = 0; i < txts.length; i++) {
+                var t = txts[i];
+                t.index = i;
+                t.setAttribute("readonly", true);
+                t.onkeyup = function () {
+                    this.value = this.value.replace(/^(.).*$/, '$1');
+                    var next = this.index + 1;
+                    if (next > txts.length - 1) return;
+                    txts[next].removeAttribute("readonly");
+                    txts[next].focus();
+                }
+            }
+            txts[0].removeAttribute("readonly");
+        }
+</script>

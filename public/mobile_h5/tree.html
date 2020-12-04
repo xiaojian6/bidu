@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <style>
+    .layui-tree li i,.layui-tree li a cite{color: #fff;}
+    .header{height: 48px;line-height: 48px;}
+    .topbox{padding: 10px;}
+    </style>
+</head>
+<body>
+    <header class="header mainbg">
+        <a class="back mt5" href="javascript:history.go(-1)">
+            
+        </a>
+        <h4 class="ftw ft16">我的会员</h4>
+    </header>
+    <div class="header-space"></div>
+    <div class="pd50 white">
+        <div class="flex topbox">
+            <p>
+                <span>我的团队业绩：</span>
+                <span class="money">--</span>
+            </p>
+            <p class="ml10">
+                <span>团队人数(实名)：</span>
+                <span class="man">--</span>
+            </p>
+        </div>
+        <ul id="BIBEX2"></ul>
+    </div>
+        
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="../layui/layui.all.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script> 
+
+    <script>
+    var token = get_user_login();
+    var user_id;
+    var date=[{"name":"我的会员","id":2}];
+    getinfo();
+    function getinfo(){
+        $.ajax({
+            url: _API + "user/info",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function (res) {
+                if (res.type == 'ok') {
+                    user_id=res.message.id;
+                    layui.use(['tree'], function () {
+                        var list = {};
+                        $.ajax({
+                            url:_API + "getNode",
+                            type:'post',
+                            data:{user_id:user_id},
+                            dataType:'json',
+                            success:function (res) {
+                                //console.log(res);
+                                if (res.type=='ok'){
+                                    var list = res.message.results;
+                                    $('.money').html(res.message.show_message.top_upnumber)
+                                    $('.man').html(res.message.show_message.real_teamnumber)
+                                    render_tree(list);
+                                } else{
+                                    layer.msg(res.message);
+                                }
+                            }
+                        });
+
+                        function reload(data){
+                            $('#BIBEX2').html('');
+                            render_tree(data);
+                        }
+
+                        function render_tree(data) {
+
+                            layui.tree({
+                                elem: '#BIBEX2'
+                                , nodes: data
+                                , click: function (node) {
+                                    var self=this;
+                                    $.ajax({
+                                        url: _API + "getNode",
+                                        type: 'post',
+                                        data: {user_id: node.id},
+                                        dataType: 'json',
+                                        success: function (res) {
+                                            //console.log(res);
+                                            node.children = res.message.results;
+                                            node.spread = true;
+                                            reload(self.nodes);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                } else {
+
+                }
+            }
+        });
+    }
+    window.onload = function() {
+        
+    }
+</script>
+</body>
+</html>

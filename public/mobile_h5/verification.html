@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>手机验证</title>
+		<script src="../js/mobile-util.js"></script>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>	
+		<link href="lib/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/common.css">
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style:none;
+			text-decoration: none;
+			color: #06365a;
+		}
+		header{
+			width: 90%;
+			margin:0 auto;
+		}
+		header img{
+			margin-top:42px;
+			width: 48px;
+			height:47px;
+		}
+		.txt{
+			width: 90%;
+			margin:0 auto;
+			margin-top:75px;
+			line-height:162px;
+			font-size:56px;
+			color:#0c2c41;
+		}
+		.nav{
+			width: 95%;
+			margin-left:5%;
+		}
+		.nav li{
+			width: 100%;
+			line-height: 128px;
+			border-bottom:1px solid #eee;
+			font-size:26px;	
+		}
+		.nav span{
+			float: right;margin-right:5%;
+		}
+		#bot{
+			width: 109px;height: 60px;
+			float: right;
+			margin-top:31px;
+			margin-right:5%;
+		}
+		.modal-content{
+			width: 80%;
+			margin-left:10%;
+			margin-top:400px;
+			text-align: center;
+		}
+		.modal-content p{
+			line-height:80px;
+			font-size:30px;
+		}
+		.modal-content button{
+			width: 50%;
+			border:none;
+			outline: none;
+			float: left;
+			line-height:80px;
+			text-align: center;
+			background:#fff;
+			font-size:30px;
+		}
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="images/arrowlf.png" alt="" />
+		</header>
+		<div class="txt">
+			<h4 style="font-size:56px;color: #06365a">手机验证</h4>
+		</div>
+		<div class="nav">
+			<ul>
+				<li>
+					手机 <span style="color:#728daf">187****7904</span>
+				</li>
+				<li>
+				       短信验证 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" id="bot">关闭</button>
+				</li>
+			</ul>
+		</div>
+		  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <p>安全设置更改后，24小时内无法提币</p>
+            <button>取消</button>
+            <button>确定</button>
+          </div>
+  </div>
+</div>
+	</body>
+</html>

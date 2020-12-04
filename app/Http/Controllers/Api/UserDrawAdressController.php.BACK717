@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\UserDrawAddress;
+use Illuminate\Support\Facades\Input;
+use Symfony\Component\HttpFoundation\Request;
+
+class UserDrawAdressController extends Controller
+{
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function user_update()
+    {
+        $data = Input::post();
+        $model = new UserDrawAddress();
+        if ($model->_update($data)) {
+            return $this->success('操作成功');
+        } else {
+            return $this->error('操作失败');
+        }
+
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function user_find(Request $request)
+    {
+        $user_id = Input::get('user_id');
+        $where['userid'] = $user_id;
+        $coin_name = Input::get('coin_name');
+        $where['coin'] = $coin_name;
+        $contract_address = Input::get('contract_address', false);
+        if ($contract_address) {
+            if ($contract_address != 'undefined') {
+                $where['tokenaddress'] = $contract_address;
+            }
+        }
+//        return $this->success($where);
+        $info = UserDrawAddress::where($where)->first();
+        if ($info) {
+            return $this->success($info);
+        } else {
+            return $this->error('操作失败');
+        }
+    }
+}

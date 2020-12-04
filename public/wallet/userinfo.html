@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>用户中心</title>
+    <link rel="stylesheet" href="static/css/userinfo.css">
+    <link rel="stylesheet" href="static/css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="static/css/iconfont.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+</head>
+<body>
+<div id="user_info"  ></div>
+<div class="user_header">
+    <div class="user_name">我的</div>
+    <div class="list-ico">
+        <div class="header_link">
+            <a href="index.html">管理钱包</a>
+        </div>
+        <div class="header_link">
+            <a href="account_details.html">交易记录</a>
+        </div>
+    </div>
+</div>
+<div class="user_links">
+    <!-- <div>
+        <a href="binding.html" class="user_link">
+            <img src="static/images/userinfo/ico-link.png" alt="">
+            以太坊账号绑定
+            <i></i>
+        </a>
+    </div> -->
+    <!-- <div>
+        <a href="Miner_item.html" class="user_link">
+            <img src="static/images/userinfo/ico-list.png" alt="">
+            矿机列表
+            <i></i>
+        </a>
+    </div> -->
+    <div>
+        <a href="fiatrad_fabu.html" class="user_link">
+            <img src="static/images/userinfo/partner.png" alt="">
+            发布C2C
+            <i></i>
+        </a>
+    </div>
+    <div>
+        <a href="fiatrad_detail.html" class="user_link">
+            <img src="static/images/userinfo/partner.png" alt="">
+            我的C2C
+            <i></i>
+        </a>
+    </div>
+    <!-- <div>
+        <a href="sysetup.html" class="user_link" style="border-bottom: none;">
+            <img src="static/images/userinfo/ico-sys.png" alt="">
+            系统设置
+            <i></i>
+        </a>
+    </div> -->
+    <div class="margin">
+        <a href="user_invite.html" class="user_link">
+            <img src="static/images/userinfo/ico-invite.png" alt="">
+            邀请码
+            <i></i>
+        </a>
+        <!-- <a href="information.html" class="user_link">
+            <img src="static/images/userinfo/ico-find.png" alt="">
+            发现
+            <i></i>
+        </a> -->
+    </div>
+    <script type="text/javascript">
+        function code(result){
+            layer_msg(result)
+        }
+    </script>
+
+    <!-- <div class="margin"> -->
+        <!-- <a href="javascript:;" class="user_link" onclick="BSL.Qcode('0','code')">
+            <img src="static/images/userinfo/ico-scan.png" alt="">
+                扫一扫
+            <i></i>
+        </a> -->
+        <!-- <a href="deal.html" class="user_link">
+            <img src="static/images/userinfo/ico-deal.png" alt="">
+                交易
+            <i></i>
+        </a> -->
+        <!-- <a href="chatRoom.html" class="user_link">
+            <img src="static/images/userinfo/ico-chat.png" alt="">
+                聊天室
+            <i></i>
+        </a>
+        <a href="javascript:;" class="user_link" onclick="layer_msg('功能暂未开放...')">
+            <img src="static/images/userinfo/ico-c2c.png" alt="">
+                OTC
+            <i></i>
+        </a> -->
+    <!-- </div> -->
+    <!-- <div>
+        <a href="vipUp" class="user_link">
+            <img src="static/images/userinfo/ico-member.png" alt="">
+            会员中心
+            <i></i>
+        </a>
+    </div> -->
+    <!-- <div id="none" style="display:none";>
+        <a href="accept_operation.html" class="user_link">
+            <img src="static/images/userinfo/ioc-cdcz.png" alt="">
+            承兑操作
+            <i></i>
+        </a>
+    </div> -->
+    <div>
+        <a href="adding.html" class="user_link">
+            <img src="static/images/userinfo/ico-set.png" alt="">
+            收款方式
+            <i></i>
+        </a>
+    </div>
+    <div>
+        <a href="personage.html" class="user_link">
+            <img src="static/images/userinfo/ico-set.png" alt="">
+            身份认证
+            <i></i>
+        </a>
+    </div>
+    <!-- <div>
+        <a href="user_photo.html" class="user_link">
+            <img src="static/images/userinfo/ico-set.png" alt="">
+            个人设置
+            <i></i>
+        </a>
+    </div> -->
+    <div>
+        <a href="helps.html" class="user_link">
+            <img src="static/images/userinfo/ico-help.png" alt="">
+           帮助中心
+            <i></i>
+        </a>
+    </div>
+    <!-- <div>
+        <a href="about_us.html" class="user_link">
+            <img src="static/images/userinfo/ico-about.png" alt="">
+            关于我们
+            <i></i>
+        </a>
+    </div> -->
+</div>
+<div class="common_footer">
+    <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+    <a href="market.html"><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+    <!-- <a href="deal.html"><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+    <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+    <a href="userinfo.html" class="active"><i class="icon-size iconfont icon-wo"></i>我的</a>
+</div>
+</body>
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+<script type="text/javascript" src="static/javascripts/userinfo.js"></script>
+</html>

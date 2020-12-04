@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/swiper-3.4.2.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+</head>
+<style>
+	.swiper-container{
+		width:100%;
+	}
+	.swiper-container img{
+		width:100%;
+	}
+	.img12_lay{
+		display: flex;
+		margin-top:1rem;
+		margin-bottom:1rem;
+	}
+	.img12_lay a{display: block;}
+	.img12_lay img{width:100%;}
+	section a{display: block;}
+	.swiper-pagination-bullet{
+		width:16px;
+		height:6px;
+		border-radius: 2px;
+		background:#1c6659;
+	}
+	.swiper-pagination-bullet-active{
+		background:#40fdda !important;
+	}
+</style>
+<body style="background:#23262e;">
+	<div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="static/images/qianbao/banner01.png" alt="" /></div>
+				<div class="swiper-slide"><img src="static/images/qianbao/banner02.png" alt="" /></div>
+				<div class="swiper-slide"><img src="static/images/qianbao/banner03.png" alt="" /></div>
+			</div>
+		     <!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
+		<div class="fontc_f font14 fontc_qbmine" style="padding-left:1rem;display:flex;align-items:center;" >
+			<i class="iconfont icon-laba font24 mgr10"></i>
+			<span>完成新一轮3000万美元融资</span>
+		</div>
+	</div>
+
+	<section style="padding:.6rem;margin-bottom:4rem;">
+		<div class="">
+			<a href="/users/qb_news?id=89"><img src="static/images/qianbao/qb_index_01.png" alt="" style="width:100%;"></a>
+		</div>
+		<div class="img12_lay">
+			<div >
+				<a href="/users/qb_news?id=90"><img src="static/images/qianbao/qb_index_02.png" alt="" style="width:100%;"></a>
+			</div>
+			<div class="mgl10">
+				<a href="/users/qb_news?id=91"><img src="static/images/qianbao/qb_index_03.png" alt=""></a>
+				<a href="/users/qb_news?id=92" class="mgt10"><img src="static/images/qianbao/qb_index_04.png" alt=""></a>
+			</div>
+		</div>
+		<div>
+			<a href="/users/qb_news?id=99"><img src="static/images/qianbao/qb_index_05.png" alt="" style="width:100%;"></a>
+		</div>
+	</section>
+
+	<footer class="qb_foot" style="background:#2d313b;border-top:1px solid #2d313b;">
+		<a href="/users/qb_index" class="qbact" >
+			<i class="iconfont icon-shouye font24"></i>
+			<span>首页</span>
+		</a>
+		<a href="index.html"  >
+			<i class="iconfont icon-wallet font24"></i>
+			<span>钱包</span>
+		</a>
+		<a href="/users/qb_jishu">
+			<i class="iconfont icon-xiangmu font24"></i>
+			<span>技术</span>
+		</a>
+		<a href="/users/qb_team" >
+			<i class="iconfont icon-duoren font24"></i>
+			<span>团队</span>
+		</a>
+	</footer>
+
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/javascripts/swiper-3.4.2.min.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script> 
+		var mySwiper = new Swiper('.swiper-container', {
+			// loop:true,
+			autoplay:3000,
+			pagination : '.swiper-pagination'
+			// paginationType : 'fraction'
+		})
+</script>
+</body>
+</html>

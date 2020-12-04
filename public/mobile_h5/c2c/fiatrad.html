@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>法币交易</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/fiatrad.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+    <script src="../javascripts/flexble.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <style>
+        body{
+            line-height: inherit;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="toptit baseBg">
+            <a class="return-img" href="javascript:;" onclick="javascript:history.go(-1);"></a>
+            <div class="fiat">
+                <a href="javascript:;" class="records"><img class="fiat1" src="../images/fiat1.jpg" /></a>
+                <!-- <img src="../images/fiat2.jpg" /> -->
+            </div>
+            <ul class="nav nav-tabs cointypes tc" role="tablist" >
+              <li role="presentation" class="active" data-type="sell"><a href="javascript:;" data-localize="fat.forsell">出售需求</a></li>
+              <li role="presentation"  data-type="buy" ><a href="javascript:;" data-localize="fat.forbuy">购买需求</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="fiatrad" class="mb50">
+        <div class="tab-content">
+          <div role="tabpanel"  >
+            <div class="fitab bdb">
+                <ul class="fabi nav nav-tabs  flex alcenter" role="tablist">
+
+                </ul>
+            </div>
+              <div class="tab-content mainlist white">
+                <div role="tabpanel"  >
+                    <ul>
+
+                    </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="layer_box_pwd" style="z-index: 100000">
+        <div class="layer_opeation2 pb10 bgColor mauto  ">
+            <div class="op_header maincolor plr10 ptb15 white">
+                <p class="ft20 tc" data-localize="td.pwd">交易密码</p>
+            </div>
+            <div class="plr20 ptb20">
+                <div class="flex alcenter mb20">
+                    <p class="color1" data-localize="td.ppwd">请输入交易密码</p>
+                    <input type="password" name="password" class="password  ptb10 pl10 inNum_pwd ml10 radius4 flex1">
+                </div>
+                <div class="bgLinearblue  ptb10 flex1 tc confirm_doit radius4 white" data-localize="td.sure">确认</div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="../index.html">
+            <div>
+                <p class="img img0"></p>
+                <span data-localize="footer.home">首页</span>
+            </div>
+        </a>
+        <a href="../market.html">
+            <div>
+                <p class="img img1"></p>
+                <span data-localize="footer.quotation">行情</span>
+            </div>
+        </a>
+        <!-- <a href="fiatrad.html"  class="select">
+            <div>
+                <p class="img img2"></p>
+                <span>法币交易</span>
+            </div>
+        </a> -->
+        <a href="../transaction.html">
+            <div>
+                <p class="img img2"></p>
+                <span data-localize="footer.currency">币币交易</span>
+            </div>
+        </a>
+        <!-- <a href="../LeveragedDeals.html">
+            <div>
+                <p class="img img3"></p>
+                <span data-localize="footer.lever">杠杆交易</span>
+            </div>
+        </a> -->
+        <a href="../assets.html">
+            <div>
+                <p class="img img4"></p>
+                <span data-localize="footer.assets">资产</span>
+            </div>
+        </a>
+        <a href="../personal.html">
+            <div>
+                <p class="img img3"></p>
+                <span data-localize="footer.mine">我的</span>
+
+            </div>
+        </a>
+    </footer>
+    <script src="../lib/fastclick.js"></script>
+	<script type="text/javascript" src="../lib/layer_mobile/layer.js"></script>
+    <script src="../javascripts/jquery.cookie.js"></script>
+    <script src="../lib/jquery.localize.min.js"></script>
+    <script src="../lib/language_cookie.js"></script>
+    <script src="../javascripts/main_c2c.js"></script>
+    <script>
+        $(function(){
+            FastClick.attach(document.body);
+            var currency_id,cointype,page=1;
+            $('.records').click(function(){
+                location.href='./fiatrad_detail.html?id='+currency_id;
+            })
+            $('input[type=password]').blur(function(){
+                setTimeout(function(){
+                    document.body.scrollTop = document.body.scrollHeight;
+                },300);
+            })
+            // 获取法币
+            initData({url:'currency/list'},function(res){
+                var legal_list = [];
+                if(res.legal&&res.legal.length>0){
+                    for(var i = 0; i < res.legal.length; i++) {
+                        var cur_data = res.legal[i];
+                        // if (cur_data.show_legal == 1) {
+                            legal_list.push(cur_data);
+                        // }
+                    }
+                    renderList(legal_list);
+                }
+                console.log(legal_list)
+            })
+            function renderList(data){
+                var html='';
+                for(var i in data){
+                    // if(data[i].name=='PB'){
+                        html+=` <li role="presentation" class="${i==0?'active':''}" data-id="${data[i].id}"><a href="#${data[i].name}" aria-controls="${data[i].name}" role="tab" data-toggle="tab">${data[i].name}</a></li>
+                        `
+                    // }
+                }
+                $('.fabi').html(html)
+                // eth币
+                currency_id=$('.fabi li.active').data('id');
+                console.log(currency_id)
+                getData('sell',1,currency_id)
+            }
+            // 获取数据列表
+
+            var type='sell';
+            function getData(type,page,cointype){
+                initDataToken({url:'c2c_deal_platform',data:{type,page,currency_id:cointype}},function(res){
+                   if(res.data&&res.data.length>0){
+                       renderList2(res.data)
+                   }else{
+                    //    layer_msg(nomore)
+                   }
+                })
+            }
+            // 购买出售切换
+
+            $('.cointypes li').click(function(){
+                $(this).addClass('active').siblings().removeClass('active')
+                $('.mainlist ul').html('')
+                var page=1
+                type=$(this).data('type');
+                currency_id=$('.fabi li.active').data('id');
+                if(type=='sell'){
+                    $('.layer_box .type_title').html('购买');
+                    $('.layer_box .tit_num').html('购买数量');
+              
+                    $('.layer_box .plac_number1').attr('placeholder','请输入欲购买法币总额');
+                    $('.layer_box .plac_number2').attr('placeholder','请输入欲购买数量');
+                 
+                    $('.layer_box .allIn').html('全部买入');
+
+                }else{
+                    $('.layer_box .type_title').html('出售')
+                    $('.layer_box .tit_num').html('出售数量');
+                  
+                    $('.layer_box .plac_number1').attr('placeholder','请输入欲出售法币总额');
+                    $('.layer_box .plac_number2').attr('placeholder','请输入欲出售数量');
+                  
+                    $('.layer_box .allIn').html('全部卖出');
+
+                }
+                console.log(page,type,currency_id)
+                getData(type,page,currency_id)
+
+
+            })
+            $('body').on('click','.fabi li',function(){
+                $('.mainlist ul').html('')
+                currency_id=$(this).data('id')
+                var page=1;
+                console.log(type,page,currency_id)
+                getData(type,page,currency_id)
+            })
+            function renderList2(data){
+                var html='';
+                for(var i in data){
+                var sellername=data[i].seller_name ||'无名'
+                    html+=` <li class="bdb">
+                            <div>
+                                <p>
+                                    <em>${sellername.substr(0,1)}</em>
+                                    <b class=''>${sellername}</b>
+                                </p>
+                            
+                            <div class='white_gray mt10 mb10 flex between alcenter'>
+                                <small>${tnum} ${Number(data[i].surplus_number).toFixed(2)} ${data[i].currency_name}</small>
+                                <div>
+                                    <p class="color1 tr">${tprice}</p>
+                                    <span>${Number(data[i].price).toFixed(2)} (${data[i].coin_code})</span>
+                                </div>
+                             </div>
+                            <img src="../images/zhi.png" style="display:${data[i].way=='ali_pay'?'inline-block':'none'}" />
+                            <img src="../images/chat.png" class="ml10" style="display:${data[i].way=='we_chat'?'inline-block':'none'}"/>
+                            <img src="../images/card.png" class="ml10" style="display:${data[i].way=='bank'?'inline-block':'none'}"/>
+                            <div class="btn btn-default ${data[i].type=='sell'?'':'hidden'}" href="javascript:;"  data-type='sell' data-id='${data[i].id}'>${buyin}</div>
+                            <div class="btn btn-default des ${data[i].type=='buy'?'':'hidden'}" href="javascript:;" data-type='buy' data-id='${data[i].id}'>${sellout}</div>
+                            </div>
+                        </li>`
+                }
+               $('.mainlist ul').append(html)
+            }
+            $(window).scroll(function(){
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if(scrollTop + windowHeight == scrollHeight){
+                    page++;
+                    getData(type,page,currency_id);
+                }
+            })
+            var curr_id;
+       
+            $('body').on('click','.mainlist .btn',function(){
+               curr_id=$(this).data('id');
+                layer_confirm(sureOd,function(){
+                    $('.layer_box_pwd').show();
+                    $('.password').val('');
+                })
+                
+                return false;
+                // total
+            })
+           
+            // 切换
+
+            $('.tab_con .item').click(function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                currentTab=$(this).data('tab');
+                $('.tab_content .'+currentTab).show().siblings().hide();
+                var val=$('.tab_content .'+currentTab).find('.num').val() || 0;
+                console.log(currentTab,val)
+                if(currentTab=='legal'){
+                    $('.total').html("￥"+(val-0).toFixed(2))
+                }else{
+                    $('.total').html("￥"+(val*price).toFixed(2))
+                }
+                // $('.total').html('0.00');
+            })
+            $('.layer_box_pwd .confirm_doit').click(function(){
+                var password=$('.password').val();
+                if(!password){
+                    return layer_msg(ptpwds)
+                }
+                initDataToken({url:'c2c/do_legal_deal',type:'post',data:{id:curr_id,password}},function(res){
+                    layer_msg(res.msg)
+                    setTimeout(() => {
+                        if(res.data.type=='sell'){
+                            location.href="./fiatrad_pay.html?id="+res.data.id;
+                        }else{
+                            location.href='./fiatrad_pay_cancel_buy.html?id='+res.data.id;
+                        }
+                        // $('.layer_box_pwd').hide();
+                    }, 1500);
+                })
+            })
+            $('.layer_opeation2').click(function(){
+                return false;
+            })
+            $('.layer_box_pwd').click(function(){
+                $(this).hide();
+            })
+           
+        })
+    </script>
+</body>
+</html>

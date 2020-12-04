@@ -1,0 +1,434 @@
+@charset "UTF-8";
+html {
+    color: #000;
+    background: #fff;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+html * {
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: '微软雅黑';
+    height: 100%;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    margin: 0;
+    padding: 0;
+}
+
+input, select, textarea {
+    font-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset, img {
+    border: 0;
+}
+
+abbr, acronym {
+    border: 0;
+    font-variant: normal;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+address, caption, cite, code, dfn, em, th, var {
+    font-style: normal;
+    font-weight: 500;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+caption, th {
+    text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: 500;
+}
+
+q:before, q:after {
+    content: '';
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -.5em;
+}
+
+sub {
+    bottom: -.25em;
+}
+
+ins, a {
+    text-decoration: none;
+}
+
+input {
+    border: 0;
+    outline: 0;
+}
+
+.clear:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.clear {
+    zoom: 1;
+}
+
+.hide {
+    display: none;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.header {
+    position:relative;
+    width: 100%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    font-size: 0.4800rem;
+    color: #585e69;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    border-bottom: 1px solid #ebebeb;
+    background:#fff;
+}
+
+.header .more {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 0.3467rem;
+    height: 0.5333rem;
+    width: 0.5333rem;
+    background: url("../../images/imtoken/more.png");
+    background-size: cover;
+}
+
+.header .back {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0.4000rem;
+    height: 0.6667rem;
+    width: 0.6667rem;
+    background: url("../../images/imtoken/back.png");
+    background-size: cover;
+}
+
+.header .scan {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 0.3467rem;
+    height: 0.5333rem;
+    width: 0.5333rem;
+    background: url("../images/imtoken/scan.png");
+    background-size: cover;
+}
+
+.header .share {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 0.3467rem;
+    height: 0.6000rem;
+    width: 0.6000rem;
+    background: url("../images/imtoken/share.png");
+    background-size: cover;
+}
+
+.header .close {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0.3467rem;
+    height: 0.6000rem;
+    width: 0.6000rem;
+    background: url("../images/imtoken/close.png");
+    background-size: cover;
+}
+
+.header .close.close_grey {
+    background: url("../images/imtoken/close_grey.png");
+    background-size: cover;
+}
+
+.ckb {
+    width: 0.6667rem;
+    height: 0.6667rem;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.ckb.active {
+    background: url("../images/imtoken/sure.png") no-repeat;
+    background-size: cover;
+    border: 2px solid #37bac9;
+}
+
+.one_line_input {
+    height: 1.0133rem;
+    line-height: 1.0133rem;
+    font-size: 0.3733rem;
+    border-bottom: 1px solid #c3c3c3;
+    width: 100%;
+    color: #333;
+    margin-top: 0.4800rem;
+}
+
+.one_line_input::placeholder {
+    color: #c3c3c3;
+}
+
+.form_box {
+    padding: 0  0.5333rem;
+}
+
+.btn_1 {
+    display: block;
+    text-align: center;
+    -webkit-border-radius: 0.1333rem;
+    -moz-border-radius: 0.1333rem;
+    border-radius: 0.1333rem;
+    color: #fff;
+    background: #d6d6d6;
+    height: 1.2000rem;
+    line-height: 1.2000rem;
+    font-size: 0.3733rem;
+    letter-spacing: 0.1333rem;
+}
+
+.btn_1.active {
+    background: #37bac9;
+}
+
+.btn_2 {
+    text-align: center;
+    -webkit-border-radius: 0.1067rem;
+    -moz-border-radius: 0.1067rem;
+    border-radius: 0.1067rem;
+    color: #fff;
+    background: #37bac9;
+    font-size: 0.4267rem;
+    height: 1.2000rem;
+    line-height: 1.2000rem;
+    margin: 0 auto;
+    width: 2.1867rem;
+    display: block;
+    letter-spacing: 0.1333rem;
+}
+
+.theme_color {
+    color: #37bac9;
+}
+
+.icon-size {
+    display: inline-block;
+    position: absolute;
+    top: 14%;
+    font-size: 0.55rem!important;
+  }
+.btn_footer a div img {
+    width: 0.4000rem;
+    height: 0.4000rem;
+    vertical-align: middle;
+}
+
+.btn_footer a span {
+    float: left;
+    height: 0.6667rem;
+    line-height: 0.6667rem;
+    color: #fff;
+    font-size: 0.3733rem;
+}
+
+.btn_footer a:last-child {
+    background: #0470b8;
+}
+
+.slide_input {
+    outline: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: -webkit-linear-gradient(#4cabbc, #4cabbc) no-repeat, #b4b4b4;
+    background-size: 30% 100%;
+}
+
+.slide_input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 0.8000rem;
+    width: 0.8000rem;
+    background: #fff;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: solid 1px #ddd;
+}
+
+body {
+    /* background: #ececec; */
+    padding-bottom: 1.3333rem;
+    height:100%;
+}
+
+.user_header {
+    height: 5.6000rem;
+    background: #37bac9;
+    width: 100%;
+    padding-top: 0.8000rem;
+}
+
+.user_header .user_name {
+    text-align: center;
+    color: #fff;
+    font-size: 0.4267rem;
+    margin-bottom: 1.6000rem;
+}
+
+.user_header .header_link {
+    width: 5.0000rem;
+    float: left;
+}
+
+.user_header .header_link a {
+    display: block;
+    width: 1.7333rem;
+    height: 1.6000rem;
+    color: #fff;
+    padding-top: 1.0667rem;
+    font-size: 0.3733rem;
+    text-align: center;
+    background: url("../images/imtoken/wallet.png") no-repeat top center;
+    background-size: 0.8533rem;
+    margin: 0 auto;
+}
+
+.user_header .header_link:nth-child(2) a {
+    background: url("../images/imtoken/jiaoyijilu.png") no-repeat top center;
+    background-size: 1.0667rem;
+}
+
+.user_links {
+    background: #ececec;
+    position:relative;
+    top:1.3rem;
+}
+
+.user_links > div {
+    padding-left: 0.5333rem;
+    background: #fff;
+}
+
+.user_links > div.margin {
+    margin: 0.3467rem 0;
+}
+
+.user_links .user_link {
+    display: block;
+    background: #fff;
+    height: 1.2267rem;
+    width: 100%;
+    border-bottom: 1px solid #ececec;
+    line-height: 1.2267rem;
+    color: #333;
+    font-size: 0.4267rem;
+    padding-left: 0.8667rem;
+    position: relative;
+}
+
+/* .user_links .user_link img {
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    width: 0.4800rem;
+    height: 0.4800rem;
+} */
+
+.user_links .user_link:after {
+    content: '';
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 0.5333rem;
+    width: 0.2667rem;
+    height: 0.2667rem;
+    background: url("../../images/imtoken/arrow.png") no-repeat;
+    background-size: 0.2667rem;
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>具体地址</title>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
+        <script src="javascripts/main.js"></script>
+        <script src="javascripts/jquery.cookie.js"></script>
+        <script src="lib/vue.min.js"></script>
+        <script src="lib/layer_mobile/layer.js"></script>
+		<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+		}
+		header{
+			width:90%;
+			position: fixed;
+			top:0;
+			left:5%;
+			background-color:#fff;
+		}
+		header img{
+			width: 48px;height: 48px;
+			margin-top:40px;
+		}
+		header h3{
+			font-size:56px;
+			margin-top:80px;
+			color:#06365a;
+		}
+		.part{
+			width: 90%;
+			margin: 0 auto;
+			margin-top:280px;
+			text-align:center;
+			margin-bottom:120px;
+			overflow: hidden;
+		}
+		.part li{
+			display:inline-block;
+			float: left;
+			width:95%;
+			border-bottom:1px solid;
+			text-align:left;
+			overflow: hidden;
+		}
+		.part li>h4{
+			overflow: hidden;
+			line-height:60px;
+			font-size:28px;
+		}
+		.part li>h4>img{
+			float: left;
+			width: 26px;
+			height: 34px;
+			margin-top:13px;
+			margin-right:20px;
+			
+		}
+		.part li>p{
+			margin-left:46px;
+			font-size:22px;
+			line-height:50px;
+		}
+		.part>img{
+			margin-top:100px;
+		}
+		.part span{
+			display: block;
+			width: 388px;
+			line-height: 100px;
+			background-color:#345368;
+			color:#fff;
+			font-size:30px;
+			margin:0 auto;
+			margin-top:20px;
+		}
+		.footer{
+			    width: 100%;
+				position: fixed;
+				bottom:0;
+				background-color:#fff;
+		}
+		footer{
+			width: 90%;
+			height:90px;
+			bottom:20px;
+			margin:0 auto;
+			text-align: center;
+		}
+		footer a{
+			display: inline-block;
+			width: 100%;
+			line-height:90px;
+			color:#fff;
+			background-color:#5b8cd9;
+			font-size:30px;
+		}
+		.dele{
+			width:120px;
+			line-height:45px;
+			font-size:26px;
+			background:#2984f3;
+			border: none;
+			float: right;
+			text-align: center;
+			color:#fff;
+			border-radius:5px;
+		}
+		#mask1 {
+	          position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	display: none;
+	background: rgba(130, 129, 129, 0.5);
+	width: 100%;
+	height: 100%;
+	z-index: 9;
+}
+.layui-m-layercont{
+	font-size:28px;
+}
+.layui-m-layerbtn>span{
+	font-size:28px;
+}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<header>
+			<a href="javascript:history.go(-1)"><img src="images/myimg/40802415792124626_03.jpg" alt="" /></a>
+			<h3>{{name}}地址</h3>
+		</header>
+		<div class="part">
+			<div class="part1">
+			 <img src="images/myimg/165639562956978150_07.jpg" alt="" />
+			 <span>你还没有地址</span>
+			</div>
+			<ul>
+			<li v-for="(aa) in List">
+				<h4><img src="images/myimg/aiudfui.png" alt="" />{{aa.notes}}</h4>
+				<p>{{aa.address}} <batton @click="dele(aa.id)" class="dele">删除</batton></p>
+			</li>
+		</ul>
+		</div>
+		 <div class="footer">
+		   <footer>
+			 <a href="#" @click="add(id,name,has_address_num)">添加地址</a>
+		   </footer>
+		 </div>
+		 <div id="mask1">
+	    	<div id="Limited">
+				<ul>
+					<li></li>
+					<li class="cancel">取消</li>
+				</ul>
+			</div>
+	    </div>	
+	 
+		</div>
+	</body>
+</html>
+<script>
+var vue = new Vue({
+		el: '#app',
+		data: {
+		List: [],
+		name:'',
+		id:'',
+		has_address_num:''
+		},
+		mounted: function () {
+          var self = this;
+          var id = getUrlParam("id");
+          var has_address_num = getUrlParam("has_address_num");
+          var name = getUrlParam("name");
+          self.name=name;
+          self.id=id;
+          self.has_address_num=has_address_num;
+		  var token = get_user_login();
+           $.ajax({
+			url: _API + "wallet/get_address",
+			type: "POST",
+           	dataType: "json",
+           	async: true,
+           	data: {
+           		currency: id
+           	},
+           	beforeSend: function beforeSend(request) {
+           		request.setRequestHeader("Authorization",
+           			token);
+           	},
+           	success: function success(data) {
+					self.List = data.message;
+           		if (data.type == "ok") {
+                   $(".part1").css("display","none") 
+           		}else{
+           		   $(".part1").css("display","block");
+           		   $(".part>ul").css("display","none")
+           		}
+           	}
+           })
+		},
+		methods:{
+			add:function(id,name,has_address_num){
+				window.location =_SERVER+'AddAddress.html?id='+id+'&name='+name+'&has_address_num='+has_address_num;
+			},
+			dele:function(id){
+
+				layer.open({
+					
+		            content: '确定删除吗？'
+		            ,btn: ['确定', '取消']
+		            ,yes: function(index){
+		            	//console.log(id);return false;
+		            	var token = get_user_login();
+			           $.ajax({
+						url: _API + "wallet/deladdress",
+						type: "POST",
+			           	dataType: "json",
+			           	async: true,
+			           	data: {
+			           		address_id: id
+			           	},
+			           	beforeSend: function beforeSend(request) {
+			           		request.setRequestHeader("Authorization",
+			           			token);
+			           	},
+			           	success: function success(data) {
+								//console.log(data);
+
+			           		if (data.type == "ok") {
+			                  layer_msg('删除成功');
+			                  window.location.reload();
+			           		}else{
+			           		  layer_msg('删除失败');
+			           		}
+			           	}
+			           })
+
+		               
+		            }
+	           });
+
+	
+			}
+		}
+	});
+		function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+</script>
+

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" type="text/css" href="css/dataMap.css" />
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+	</head>
+<style>
+.flex{display: -webkit-box;display: -ms-flexbox;display: flex;}
+.flex1{-webkit-box-flex: 1;-ms-flex: 1;flex: 1;}
+.between{-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between;}
+.around{-ms-flex-pack: distribute;justify-content: space-around;}
+.alcenter{-webkit-box-align: center;-ms-flex-align: center;align-items: center;}
+.tab_list{
+	display: none;
+	padding-bottom: 20px;
+}
+.kline>div{
+	display: none;
+	width: 98%; height: 390px;margin: 0 auto;
+}
+.kline div.active{
+	display: block;
+}
+</style>
+	<body style="background-size: 100%;background:#10202e;">
+		<div id="header">
+			<div class='header'>
+				<p class="pull-left" onclick="location.href='market.html'">
+					<img src="images/arrows.png" />
+					<span class="coinname"></span>
+				</p>
+				<p class="pull-right">
+					<img src="images/location.png" />
+				</p>
+			</div>
+			<div class="CNY">
+				<div class="pull-left">
+					<h2 class="new-price"></h2>
+					<h4 class="flex alcenter">
+						<span style="margin-left:5px" class="updown"></span>
+					</h4>
+				</div>
+				<ul class="pull-right">
+					<li class="flex alcenter between">
+						<p>高</p><span class="max-price"></span>
+					</li>
+					<li class="flex alcenter between">
+					   <p>低</p><span class="min-price"></span>
+					</li>
+					<li class="flex alcenter between">
+				       <p>24H量</p><span class="dayVom"></span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+		<div id="map">
+			<ul class="time">
+				<li class="borb" data-id='5' data-url='currency/market_day'>1天</li>
+				<li data-id='1' data-url='currency/timeshar'>分时</li>
+				<li data-id='2' data-url="currency/fifteen_minutes">15分</li>
+				<li data-id='3' data-url="currency/market_hour">1小时</li>
+				<li data-id='4' data-url="currency/four_hour">4小时</li>
+			</ul>
+			<hr class="hr" />
+			<div class="map kline" style="margin-top: -20px;">
+				<div class="active" id="main0"></div>
+				<div id="main1"></div>
+				<div id="main2"></div>
+				<div id="main3"></div>
+				<div id="main4"></div>
+			</div>
+			<hr class="hr" />
+		</div>
+		<div id="record">
+			<ul class="information ul">
+				<!-- <li>深度</li> -->
+				<li class="borb">成交</li>
+				<li>简介</li>
+			</ul>
+			<div class="tab_contentcolor1 mt20 plr10 mb50">
+                <!-- <div class="tab_list">
+                    <div class="tt  flex alcenter mtb10">
+                        <span class="flex1 ">盘口</span>
+                        <span class="flex1 tc">价格</span>
+                        <span class="flex1 ">数量</span>
+                    </div>
+                    <div class="con">
+                        <div class="flex alcenter ptb10">
+                            <span class="flex1">5</span>
+                            <span class="red flex1 ">6919.90</span>
+                            <span class="flex1 ">0.689</span>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <div class="tab_list complate_box">
+                    <div class="tt  flex alcenter mtb10">
+                        <span class="flex1 ">时间</span>
+                        <span class="flex1 tc">方向</span>
+                        <span class="flex1 tc">价格</span>
+                        <span class="flex1 tr">数量</span>
+                    </div>
+                    <div class="con complete_rec">
+                                            
+                    </div>
+                </div>
+                <div class="tab_list item">
+                    <p>demo</p>
+                    <div class="flex   alcenter between mtb10">
+                        <span>发行时间</span>
+                        <span>2019-9-12</span>
+                    </div>
+                    <div class="flex   alcenter between mtb10">
+                        <span>发行总量</span>
+                        <span>21000000</span>
+                    </div>
+                    <p>简介</p>
+                    
+                </div>
+            </div>
+		</div>
+		</div>
+		<div id="bottom">
+			<button class="goTranbuy">买入</button>
+			<button class="goTransell">卖出</button>
+			<dl>
+				<dt>
+					<img src="images/collect2.png"/>
+				</dt>
+				<dd>
+					添加自选
+				</dd>
+			</dl>
+		</div>
+		<script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script type="text/javascript" src="javascripts/dataMap.js"></script>
+		<script type="text/javascript" src="lib/echarts.js"></script>
+		<script>
+			//    开盘 收盘，最低，最高，成交量
+			$(function(){
+				function stopScrolling(event){
+					event.preventDefault();
+					document.addEventListener('touchmove',stopScrolling,false);
+				}
+				//点击买入
+				$('.goTranbuy').click(function(){
+					location.href='transaction.html?id1='+params.legal_id+'&id2='+params.currency_id+'&name1='+name1+'&name2='+name2+'&type=1';
+				})
+				//点击卖出
+				$('.goTransell').click(function(){
+					location.href='transaction.html?id1='+params.legal_id+'&id2='+params.currency_id+'&name1='+name1+'&name2='+name2+'&type=2';
+				})
+				var params=get_all_params()
+				var legal_id = params.legal_id;
+				var currency_id =params.currency_id;
+				var type=5;
+				var a=0;
+				var b=10;
+				var upColor = '#00da3c';
+				var downColor = '#ec0000';
+				var token = get_user_login();
+				var url='currency/market_day';
+				var myChart='main0';
+			// 点击切换
+			$('.time li').click(function(){
+				$(this).addClass('borb').siblings().removeClass('borb')
+				var index=$(this).index();
+				type=$(this).data('id');
+				var $div=$('.kline>div').eq(index);
+				myChart=$div.attr('id');
+				console.log(myChart,123)
+				$div.addClass('active').siblings().removeClass('active');
+				url=$(this).data('url');
+				console.log('url',url)
+				switch (type){
+					case 1:
+						a=11;
+						b=16;
+					break;
+					case 2:
+						a=5;
+						b=16;
+					break;
+					case 3:
+					    a=5;
+						b=16;
+					break;
+					case 4:
+					    a=5;
+						b=16;
+					break;
+					case 5:
+						a=0;
+						b=10;
+					break;
+				}
+                chart(a,b)
+			})
+			var name1,name2,coin_names;
+			chart(a,b);
+			function chart(a,b){
+				$.ajax({
+					type: 'post',
+					url: _API + url,
+					data: {
+						legal_id: legal_id,
+						currency_id: currency_id,
+					},
+					dataType: 'json',
+					// beforeSend: function beforeSend(request) {
+					// 	request.setRequestHeader("Authorization", token);
+					// },
+			 		success: function (res) {
+						console.log(res);
+						if(res.type=='ok'){
+							name1=res.message.legal.name;
+							name2=res.message.currency.name;
+							coin_names=res.message.currency.name+'/'+res.message.legal.name;
+							
+							$('.coinname').text(coin_names)
+							latestNumber=res.message.now_quotation;
+							$('.new-price').text(latestNumber.end_price);
+							$('.max-price').text(latestNumber.highest);
+							$('.min-price').text(latestNumber.mminimum)
+							$('.dayVom').text((latestNumber.number-0).toFixed(0))
+							var tempprice=latestNumber.end_price-latestNumber.start_price;
+							console.log(latestNumber,tempprice,latestNumber.end_price,latestNumber.start_price)
+							var fuhao=tempprice>0?"+":"";
+							var resprice=tempprice/latestNumber.start_price*100;
+							resprice=isNaN(resprice)?0:resprice;
+							console.log(resprice)
+							$('.updown').text(fuhao+(resprice).toFixed(2)+'%')
+							var datas=res.message.quotation;
+							var dateses=[];
+							if(type==1){
+								return getChart2(splitData(datas,a,b),myChart)
+							}
+							getChart(splitData(datas,a,b),myChart);
+                            
+						}else{
+							layer_msg(res.message)
+						}
+
+					}
+				});
+			}
+				
+	    // 图
+		 function splitData(rawData,a,b) {
+			 console.log(rawData)
+			var categoryData = [];
+			var values = [];
+			var volumes = [];
+			var macds = [];
+			 var difs = [];
+			 var deas = [];
+			 console.log(type)
+			 for (var i = 0; i < rawData.length; i++) {
+				categoryData.push(rawData[i].times.substring(a,b));
+				if(type==1){
+					values.push(rawData[i].avg_price)
+					volumes.push([i, rawData[i].avg_price, rawData[i].start_price > rawData[i].end_price ? 1 : -1]);
+				}else{
+					var temp=[rawData[i].start_price,rawData[i].end_price,rawData[i].mminimum,rawData[i].highest,rawData[i].mminimum]
+					values.push(temp)
+					macds.push(rawData[i].mminimum);
+					difs.push(rawData[i].mminimum);
+					deas.push(rawData[i].mminimum);
+					volumes.push([i, rawData[i].mminimum, rawData[i].start_price > rawData[i].end_price ? 1 : -1]);
+				}
+				
+			 }
+			 console.log(values,123)
+			 return {
+				 categoryData: categoryData,
+				 values: values,
+				 macds: macds,
+				 difs: difs,
+				 deas: deas,
+				 volumes:volumes
+			 };
+		 }
+		 
+		 function calculateMA(dayCount, data) {
+			 console.log(data,data.values)
+				var result = [];
+			
+			for (var i = 0, len = data.values.length; i < len; i++) {
+				if (i < dayCount) {
+					result.push('-');
+					continue;
+				}
+				var sum = 0;
+				for (var j = 0; j < dayCount; j++) {
+					if(type==1){
+						sum=0;
+					}else{
+						sum = data.values[i - j][1]-0+sum;
+					}
+				}
+				result.push(+(sum / dayCount).toFixed(3));
+			}
+			console.log(result)
+			return result;
+		}
+		function getChart (data0,myChart) {
+
+			var data = data0;
+			var upColor = '#3CBC6C';
+			var downColor = '#E76D42';
+			option = {
+				textStyle:{
+					color:'#818283'
+				},
+				backgroundColor:'#fff',
+				legend: {
+					top: 6,
+					left:'0',
+					data: [coin_names,{ name:'MA5',backgroundColor:'transparent'}, 'MA10', 'MA20', 'MA30'],
+					itemWidth:19,
+					textStyle:{
+						color:'#818283',
+						fontSize:'10px'
+					}
+				},
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'cross'
+					},
+					backgroundColor: 'rgba(0, 0, 0, 0.5)',
+					borderWidth: 1,
+					borderColor: '#1B2A3E',
+					padding: 10,
+					
+					textStyle: {
+						color: '#728DAF',
+						align:'left'
+					},
+					position: function (pos, params, el, elRect, size) {
+						var obj = {top: 10};
+						obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+						return obj;
+					}
+					// extraCssText: 'width: 170px'
+				},
+				axisPointer: {
+					link: {xAxisIndex: 'all'},
+					label: {
+						backgroundColor: '#777'
+					}
+				},
+			
+				visualMap: {
+					show: false,
+					seriesIndex: 5,
+					dimension: 2,
+					pieces: [{
+						value: 1,
+						color: downColor
+					}, {
+						value: -1,
+						color: upColor
+					}],
+					
+				},
+				grid: [
+					{
+						left: '11%',
+						right: '2%',
+						height: '50%',
+						top:'15%'
+					},
+					{
+						left: '11%',
+						right: '2%',
+						top: '75%',
+						height: '10%'
+					}
+				],
+				xAxis: [
+					{
+						type: 'category',
+						data: data.categoryData,
+						scale: true,
+						boundaryGap : false,
+						axisLine: {onZero: false},
+						splitLine: {
+							show: true,
+							lineStyle:{
+								color:'#1B2A3E'
+							}
+						},
+						splitNumber: 20,
+						min: 'dataMin',
+						max: 'dataMax',
+						axisPointer: {
+							z: 100
+						}
+					},
+				
+					{
+						type: 'category',
+						gridIndex: 1,
+						data: data.categoryData,
+						scale: true,
+						boundaryGap : false,
+						axisLine: {onZero: false},
+						axisTick: {show: false},
+						splitLine: {show: false,
+							
+						},
+						axisLabel: {show: false},
+						splitNumber: 20,
+						
+						splitArea : {show : false},//保留网格区域
+						axisLine: {
+							show:false
+						},
+						min: 'dataMin',
+						max: 'dataMax'
+						
+					}
+				],
+				yAxis: [
+					{
+						type: 'value',
+						position:'left',
+						scale: true,
+						min:0,
+						// 
+						axisTick: {show:false},
+						splitLine:{
+							show:true,
+							lineStyle:{
+								color:'#1B2A3E'
+							}
+						},
+						axisLine: {show:false},
+						splitArea: {
+							show: true,
+							areaStyle:{
+								color:'transparent'
+							}
+						},
+						boundaryGap: ['20%', '20%']
+					},
+					// {
+					// 	type:'value',
+					// 	show:true,
+					// 	nameLocation:'start'
+					// },
+					{
+						scale: true,
+						gridIndex: 1,
+						splitNumber: 2,
+						axisLabel: {show: false},
+						splitLine:{show: false},//去除网格线
+						splitArea : {show : false},//保留网格区域
+						axisLine: {
+							show:false
+						},
+					}
+				],
+				dataZoom: [
+					{
+						type: 'inside',
+						xAxisIndex: [0, 1],
+						start: 0,
+						end: 100,
+					},
+					{
+						show: true,
+						xAxisIndex: [0, 1],
+						type: 'slider',
+						top: '88%',
+						start: 0,
+						end: 100,
+						right:'0%',
+						left:'0%',
+						background:'#fff',
+						fillerColor:"rgba(167,183,204,0.4)",
+						fillerColor:'rgba(0, 189, 128, .2)',
+						borderColor:'#1B2A3E'
+					}
+				],
+				series: [
+					{
+						name: coin_names,
+						type: 'candlestick',
+						data: data.values,
+						itemStyle: {
+							normal: {
+								color: upColor,
+								color0: downColor,
+								borderColor: null,
+								borderColor0: null
+							}
+						},
+						tooltip: {
+							formatter: function (param) {
+								param = param[0];
+								return [
+									'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
+									'Open: ' + param.data[0] + '<br/>',
+									'Close: ' + param.data[1] + '<br/>',
+									'Lowest: ' + param.data[2] + '<br/>',
+									'Highest: ' + param.data[3] + '<br/>'
+								].join('');
+							}
+						}
+					},
+					
+					{
+						name: 'MA5',
+						type: 'line',
+						data: calculateMA(5, data),
+						smooth: true,
+							lineStyle: {
+								normal: {opacity: 0.5}
+							}
+					},
+				{
+					name: 'MA10',
+					type: 'line',
+					data: calculateMA(10, data),
+					smooth: true,
+					lineStyle: {
+						normal: {opacity: 0.5}
+					}
+				},
+				{
+					name: 'MA20',
+					type: 'line',
+					data: calculateMA(20, data),
+					smooth: true,
+					lineStyle: {
+						normal: {opacity: 0.5}
+					}
+				},
+				{
+					name: 'MA30',
+					type: 'line',
+					data: calculateMA(30, data),
+					smooth: true,
+					lineStyle: {
+						normal: {opacity: 0.5}
+					}
+				},
+				{
+					name: 'Volume',
+					type: 'bar',
+					xAxisIndex: 1,
+					yAxisIndex: 1,
+					data: data.volumes,
+					
+				}
+				]
+			};
+			console.log(myChart,456)
+			
+			var myChart = echarts.init(document.getElementById(myChart));
+			myChart.setOption(option); 
+		};
+		function getChart2(data0,myChart){
+			
+			var data = data0;
+			var upColor = '#3CBC6C';
+			var downColor = '#E76D42';
+			option = {
+				textStyle:{
+					color:'#818283'
+				},
+				backgroundColor:'#fff',
+				
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'cross'
+					},
+					backgroundColor: 'rgba(0, 0, 0, 0.5)',
+					borderWidth: 1,
+					borderColor: '#1B2A3E',
+					padding: 10,
+					
+					textStyle: {
+						color: '#728DAF',
+						align:'left'
+					},
+					position: function (pos, params, el, elRect, size) {
+						var obj = {top: 10};
+						obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+						return obj;
+					}
+					// extraCssText: 'width: 170px'
+				},
+				axisPointer: {
+					link: {xAxisIndex: 'all'},
+					label: {
+						backgroundColor: '#777'
+					}
+				},
+			
+				visualMap: {
+					show: false,
+					seriesIndex: 5,
+					dimension: 2,
+					pieces: [{
+						value: 1,
+						color: downColor
+					}, {
+						value: -1,
+						color: upColor
+					}],
+					
+				},
+				grid: [
+					{
+						left: '10%',
+						right: '2%',
+						height: '50%',
+						top:'15%'
+					},
+					{
+						left: '10%',
+						right: '2%',
+						top: '75%',
+						height: '10%'
+					}
+				],
+				xAxis: [
+					{
+						type: 'category',
+						data: data.categoryData,
+						scale: true,
+						boundaryGap : false,
+						axisLine: {onZero: false},
+						splitLine: {
+							show: true,
+							lineStyle:{
+								color:'#1B2A3E'
+							}
+						},
+						splitNumber: 20,
+						min: 'dataMin',
+						max: 'dataMax',
+						axisPointer: {
+							z: 100
+						}
+					},
+				
+					{
+						type: 'category',
+						gridIndex: 1,
+						data: data.categoryData,
+						scale: true,
+						boundaryGap : false,
+						axisLine: {onZero: false},
+						axisTick: {show: false},
+						splitLine: {show: false,
+							
+						},
+						axisLabel: {show: false},
+						splitNumber: 20,
+						
+						splitArea : {show : false},//保留网格区域
+						axisLine: {
+							show:false
+						},
+						min: 'dataMin',
+						max: 'dataMax'
+						
+					}
+				],
+				yAxis: [
+					{
+						type: 'value',
+						position:'left',
+						scale: true,
+						minInterval:0.001,
+						
+						axisTick: {show:false},
+						splitLine:{
+							show:true,
+							lineStyle:{
+								color:'#1B2A3E'
+							}
+						},
+						axisLine: {show:false},
+						splitArea: {
+							show: true,
+							areaStyle:{
+								color:'transparent'
+							}
+						},
+						boundaryGap: ['20%', '20%']
+					},
+					// {
+					// 	type:'value',
+					// 	show:true,
+					// 	nameLocation:'start'
+					// },
+					{
+						scale: true,
+						gridIndex: 1,
+						splitNumber: 2,
+						axisLabel: {show: false},
+						splitLine:{show: false},//去除网格线
+						splitArea : {show : false},//保留网格区域
+						axisLine: {
+							show:false
+						},
+					}
+				],
+				dataZoom: [
+					{
+						type: 'inside',
+						xAxisIndex: [0, 1],
+						start: 0,
+						end: 100,
+					},
+					{
+						show: true,
+						xAxisIndex: [0, 1],
+						type: 'slider',
+						top: '88%',
+						start: 0,
+						end: 100,
+						right:'0%',
+						left:'0%',
+						background:'#fff',
+						fillerColor:"rgba(167,183,204,0.4)",
+						fillerColor:'rgba(0, 189, 128, .2)',
+						borderColor:'#1B2A3E'
+					}
+				],
+				series: [
+						{
+							name: coin_names,
+							type: 'line',
+							data: data.values,
+							
+							tooltip: {
+								formatter: function (param) {
+									param = param[0];
+									return [
+										'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
+										'Open: ' + param.data[0] + '<br/>',
+										'Close: ' + param.data[1] + '<br/>',
+										'Lowest: ' + param.data[2] + '<br/>',
+										'Highest: ' + param.data[3] + '<br/>'
+									].join('');
+								}
+							}
+						},
+						
+					
+					{
+						name: 'Volume',
+						type: 'bar',
+						xAxisIndex: 1,
+						yAxisIndex: 1,
+						data: data.volumes,
+						itemStyle: {
+								normal: {
+									color: upColor,
+									color0: downColor,
+									borderColor: null,
+									borderColor0: null
+								}
+							},
+						
+					}
+				]
+			};
+			var myChart = echarts.init(document.getElementById(myChart));
+			myChart.setOption(option); 
+		}
+		//成交记录
+		$.ajax({
+			type:'post',
+			url: _API + 'transaction/deal',
+			data:{
+               legal_id:legal_id,
+			   currency_id:currency_id,
+			},
+			beforeSend: function beforeSend(request) {
+						request.setRequestHeader("Authorization", token);
+			},
+			success:function(res){
+			  console.log(res);
+			  if(res.type == 'ok'){
+				var complete_rec = '';
+				$.each(res.message.complete,function(k,v){
+					complete_rec += `
+					<div class="flex alcenter ptb10">
+                            <span class="flex1">${v.time}</span>
+                            <span class="flex1 tc">买入</span>
+                            <span class="flex1 tc">${v.price}</span>
+                            <span class="flex1 tr">${v.number}</span>
+                        </div>
+					`
+				});
+                $('.complete_rec').html(complete_rec)
+			  }
+			}
+		})
+	})	
+    </script>
+	</body>
+
+</html>

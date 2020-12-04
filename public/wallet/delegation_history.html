@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <meta name="viewport" content="width=750"> -->
+    <meta charset="utf-8" />
+    <title>历史委托</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/css/imtoken/delegation_history.css" />
+    <link rel="stylesheet" href="static/css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="static/css/iconfont.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+
+</head>
+
+<body>
+    <div id="user_info" ></div>
+    <!--  头部begin -->
+    <div class="header">
+        <h5>历史委托</h5>
+        <i class="back backPage"></i>
+    </div>
+    <!-- 头部end -->
+    <!-- 买入begin -->
+    <div class="centera">   
+        <p class="tab">
+            <a href="javascript:;" class="hover" >买入</a>
+            <a href="javascript:;">卖出</a>
+        </p>	
+        <div id="tablea" class="tablea">
+            <div class="box">
+                <div class="delLists">
+                    <div class="title">
+                        <!-- <div>账户</div> -->
+                        <div>价格</div>
+                        <div>数量</div>
+                        <div class="time">时间</div>
+                    </div>
+                    <div class="delCons" id="buy">
+                        <!-- <div class="item">
+                            <span>1.1000</span>
+                            <span>1.1000</span>
+                            <span>1.1000</span>
+                            <span>1.1000</span>
+                            <div class="do"><a href="">取消</a></div>
+                        </div> -->
+                    </div>
+                    <div class="delCons" id="sell" style="display: none">
+                        <!-- <div class="item">
+                            <span>1.1000</span>
+                            <span>1.1000</span>
+                            <span>1.1000</span>
+                            <span>1.1000</span>
+                            <div class="do"><a href="">取消</a></div>
+                        </div> -->
+                    </div>
+                </div>	    
+			</div>
+        </div>
+       
+    </div>
+    <!-- 买入end -->
+    <div class="common_footer">
+        <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html"><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        <a href="deal.html" class="active"><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a>
+        <a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+    <!-- 买入end -->
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+    <script src='https://cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script>
+    <script type="text/javascript" src="static/javascripts/imtoken/delegation_history.js"></script>
+
+</body>
+
+</html>

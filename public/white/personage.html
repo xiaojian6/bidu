@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+		<title>个人中心</title>
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+        <script src="javascripts/main.js"></script>
+        <script src="javascripts/jquery.cookie.js"></script>
+        <script src="lib/vue.min.js"></script>
+        <script src="lib/layer_mobile/layer.js"></script>
+		<style>
+		*{
+				margin: 0;
+				padding: 0;
+                list-style: none;
+				text-decoration: none;
+			}
+		header{
+			width: 90%;
+			margin:0 auto;
+		}
+		header img{
+			margin-top:42px;
+			width: 48px;
+			height:47px;
+		}
+		.txt{
+			width: 90%;
+			margin:0 auto;
+			line-height:162px;
+			font-size:56px;
+			color:#0c2c41;
+		}
+		.aaa{
+			width: 100%;
+			overflow: hidden;
+			border-bottom:10px solid #E2E2e2;
+			border-top:10px solid #E2E2e2;
+		}
+		ul{
+			width:100%;
+			overflow: hidden;
+			padding:0 20px;
+			margin:30px 0px;
+		}
+		.aaa h3{
+		   display: block;
+		   width: 100%;
+		   font-size:34px;
+		   line-height:80px;
+		   padding-left:20px;
+		   border-bottom:1px solid #e2e2e2;
+		}
+		.aaa span{
+			float:right;
+			margin-right:40px;
+		}
+		.aaa h3>span{
+            color:#fa6643;
+		}
+		 ul li{
+			font-size:28px;
+		}
+		</style>
+	</head>
+	<body>
+	 <div id="app">
+		<header>
+			<a href="javascript:history.go(-1)"><img src="images/myimg/40802415792124626_03.jpg" alt="" /></a>
+		</header>
+		<div class="txt">
+			<h4>个人中心</h4>
+		</div>
+		<div class="aaa">
+			<h3>身份验证     
+				<span v-show="List.review_status==0" @click="aa()">去认证</span>
+				<span v-show="List.review_status==1">审核中</span>
+				<span v-show="List.review_status==2">已认证</span>
+			</h3>
+			<ul>
+				<li v-show="List.review_status==0">·&nbsp;认证后可提升提币额度</li>
+				<li v-show="List.review_status==0">·&nbsp;认证后可进行法币交易</li>
+				<li v-show="List.review_status==1">·&nbsp;认证后可提升提币额度</li>
+				<li v-show="List.review_status==1">·&nbsp;认证后可进行法币交易</li>
+				<li v-show="List.review_status==2">姓名<span>{{List.name}}</span></li>
+				<li v-show="List.review_status==2">账户<span>{{List.account}}</span></li>
+				<li v-show="List.review_status==2">UID<span>{{List.email}}</span></li>
+				<li v-show="List.review_status==2">证件号码<span>{{List.card_id}}</span></li>
+			</ul>
+		</div>
+	 </div>
+	</body>
+</html>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+         List:[]
+        },
+        mounted: function () {
+         var self = this;
+		     var token = get_user_login();
+		     $.ajax({
+            url: _API + "user/center",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader("Authorization", token);
+            },
+            success: function success(data) {
+            	console.log(data)
+            	self.List = data.message;
+                if (data.type == 'ok') {
+                	
+                } else if(data.type == '999'){
+                 window.location =_SERVER+'login.html';
+                }
+            }
+        });	
+	    },
+	    	methods:{
+	    		aa:function(){
+	    			window.location =_SERVER+'authentication.html';
+	    		}
+	    }
+	});
+</script>

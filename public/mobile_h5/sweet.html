@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通证兑换USDT</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .mainbox{padding: 10px;}
+        .topbox{height: 100px;border-radius: 5px;padding-left: 15px;background-image: linear-gradient(90deg, #5887D3,#6696E5);}
+        .less{padding-top: 10px;}
+        .number{font-size: 24px;}
+        .numbox{width: 100%;padding: 0 10px;border-radius: 4px;}
+        .numbers{height: 50px;}
+        .submit{width:100%;height: 40px;border-radius: 4px;background:#5887D3;margin-top: 80px;}
+        .go{position: absolute;right: 12px;display: block;top: 0px;}
+    </style>
+</head>
+<body>
+    <header class="header header40 mainbg">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <div class="tc title white">通证兑换USDT</div>  
+        <a href="sweet_record.html" class="white go">兑换记录</a> 
+    </header>
+    <div class="header-space"></div>
+    <div class="mainbox">
+        <div class="topbox white">
+            <div>
+                <p class="less">剩余通证</p>
+                <p class="mt10 ft18 number">--</p>
+            </div>
+        </div>
+        <div class="numbox flex alcenter mainbg mt15 white">
+            <span class="exnum">兑换数量：</span>
+            <input type="number" class="flex1 pl10 numbers" placeholder="请输入兑换数量">
+        </div>
+
+        <input type="button" value="兑换" class="white submit">
+
+    </div>
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script>
+        var token = get_user_login();
+        var number=0;
+        getnum();
+        function getnum(){
+            $.ajax({
+                url: _API + "user/info",
+                type: "GET",
+                dataType: "json",
+                async: true,
+                beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                },
+                success: function (res) {
+                    if (res.type == 'ok') {
+                        $('.number').text(res.message.candy_number);
+                        number=res.message.candy_number-0;
+                    } else {
+                    }
+                }
+            });
+        }
+        $('.submit').click(function(){
+            var numbers = $('.numbers').val();
+            if(numbers==''||numbers<=0){
+              return layer_msg('请输入兑换数量');
+            }
+            if(numbers>number){
+              return layer_msg('兑换数量大于剩余数量'); 
+            }
+            $.ajax({
+                type: 'POST',
+                url: _API + 'candy/candy_tousdt',
+                dataType: 'json',
+                data: {
+                    candy_number:numbers,
+                },
+                beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("Authorization", token);
+                },
+                success: function (res) {
+                    if (res.type == 'ok') {
+                        layer_msg(res.message);
+                        $('.numbers').val('');
+                        getnum();
+                    } else {
+                        layer_msg(res.message);
+                    }
+                }
+            });
+        })
+        
+    
+    </script>
+</body>
+</html>

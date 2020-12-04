@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>系统设置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css2/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css2/global.css" />
+	<link rel="stylesheet" type="text/css" href="static/css2/iconfont.css" />
+	<link rel="stylesheet" href="static/css/footer2.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+</head>
+<style type="text/css">
+	.dialog_show{
+		display: none;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 3rem;
+		line-height: 3rem;
+		color: #fff;
+		background: #05befe;
+		text-align: center;
+		z-index: 66;
+		font-size: 16px;
+	}
+</style>
+<body style="background:#f2f2f2; ">
+	<header class="borderB">
+		<i class="iconfont icon-jianzuo font24  fontc_6 backPage"></i>
+		<h1 class="fontc_6 font18">系统设置</h1>
+	</header>
+
+	<section class="mgthead">
+		<div class="loginPage mgt10">
+		    <div class="" style="background: #fff;padding:0 .6rem">
+		        <div class="login_tab" >
+		            <!--<a class="input-con dialog_txt" href="javascript:;">-->
+		            	<!--<span class="fontc_3 font14">语言</span>-->
+		                <!--<span>-->
+		                	<!--<i class="fontc_3 txt">简体中文</i>-->
+		                	<!--<i class="iconfont icon-jianyou fontc_6 font20"></i>-->
+		                <!--</span>-->
+		            <!--</a>-->
+		            <!---->
+		            <!--<a class="input-con dialog_txt" href="javascript:;">-->
+		            	<!--<span class="fontc_3 font14">货币单位</span>-->
+		                <!--<span>-->
+		                	<!--<i class="fontc_3 txt">CNY</i>-->
+		                	<!--<i class="iconfont icon-jianyou fontc_9 font20"></i>-->
+		                <!--</span>-->
+		            <!--</a>-->
+		            <a class="input-con" href="javascript:;">
+		            	<span class="fontc_3 font14">反馈意见</span>
+		                <span class="fontc_3">server@moneybag.org</span>
+		            </a>
+		            <a class="input-con" href="/users/about_us">
+		            	<span class="fontc_3 font14">关于我们</span>
+		            </a>
+		            <a class="input-con" href="javascript:;">
+		            	<span class="fontc_3 font14">版本</span>
+		                <span class="fontc_3">V1.0</span>
+		            </a>
+		            <!--<a class="input-con" href="javascript:;">-->
+		            	<!--<span class="fontc_3 font14">更新版本</span>-->
+		            <!--</a>-->
+		        </div>
+		    </div>
+		    <a class="login_btn quit_btn" href="/users/login">退出登录</a>
+		</div>
+	</section>
+	<div class="mask_box"></div>
+	<div class="dialog_show"></div>
+	<div class="common_footer">
+		<a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+		<a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+			<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+		<a href="fiatrad.html" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+		<a href="userinfo.html"  class="active" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+	</div>
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript">
+		$(".login_tab").on("click",".dialog_txt",function(){
+			console.log(2);
+			var txt = $(this).find(".txt").html();
+			$(".mask_box").css("display","block");
+			$(".dialog_show").css("display","block");
+			$(".dialog_show").html(txt);
+		})
+		$(".mask_box").click(function(){
+			$(this).css("display","none");
+			$(".dialog_show").css("display","none");
+		})
+		
+	</script>
+</body>
+</html>

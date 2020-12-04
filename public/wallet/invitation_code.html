@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>邀请码</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/css/iconfont.css">
+    <link rel="stylesheet" href="static/css/imtoken/invitation_code.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+    <script src="static/javascripts/jquery.js"></script>
+    <script>
+		$(document).ready(function () {
+			$("#share_btn").click(function (e) {
+				e.stopPropagation();
+				$(".bdsharebuttonbox").removeClass("hide").show();
+				$(".mask_box").css("display","block");
+			});
+			$(".mask_box").click(function () {
+				$(".mask_box").hide();
+				$('.bdsharebuttonbox').show().addClass("hide");
+			});
+		});
+    </script>
+</head>
+<body>
+    <div class="header">
+        <i class="back backPage"></i>
+    </div>
+    <div class="invite_con">
+        <img class="invite_ewm" src="..static/images/imtoken/09.png" alt="">
+        <p class="fontc_yellow mgb10">推广码：
+            <span id="code">5632</span>
+        </p>
+        <p class="font12">扫上面的二维码图案或输入推广码，确认注册</p>
+        <a class="line_btn trade_link" id="share_btn">点此分享</a>
+        <div class="bdsharebuttonbox  share_icon hide">
+            <a href="javascript:;" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+            <a href="javascript:;" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+        </div>
+        <div class="mask_box"></div>
+	</div>
+</body>
+<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+
+</html>

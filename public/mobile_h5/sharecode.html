@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>邀请</title>
+		<link rel="stylesheet" href="css/common.css">
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-2.1.1.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/vue.min.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+		<script src="./lib/language_cookie.js"></script>
+	</head>
+	<style>
+		.codes{
+			width: 220px;height: 220px;
+			border: 10px solid #fff;
+			margin: 0 auto;
+		}
+		#code{
+			width: 200px;
+			height: 200px;
+		}
+	</style>
+	<body>
+		<header class="header">
+			<a class="back mt5" href="javascript:history.go(-1)">
+				
+			</a>
+			<h4 class="ftw ft16" data-localize="code.mycode">我的推广码</h4>
+		</header>
+		<div class="header-space"></div>
+		<div class="code_box plr10 ptb10 tc mt40 ft16">
+			<!-- <img width="200" class="invite_ewm" src="" alt=""> -->
+			<div class="codes">
+				<div id="code"></div>
+			</div>
+			<p class="mtb10 red mt15"><span data-localize="code.code">推广码</span> ：<span class="code"></span></p>
+			<p class="mt10 ftw ft14" data-localize="code.qrcode">扫上面的二维码图案或输入推广码，确认注册</p>
+		</div>
+	</body>
+</html>
+<script src="javascripts/jquery.qrcode.min.js"></script>
+<script src="javascripts/clipboard.min.js"></script>
+<script>
+	$(function() {
+		var code = get_param('code');
+		var token = get_user_login();
+		$('.code').html(code);
+		var url=_DOMAIN+'/mobile/register.html?code=' + code;
+		console.log(url)
+		codes(url);
+		// 生成二维码
+		function codes(addre){
+			$('#code').qrcode({
+				width: 200, //宽度
+				height:200, //高度
+				text:addre
+			});
+		}
+		// layer_loading();
+		// var url = 'http://qrcode.adminchao.com/api/qr?text='+_DOMAIN+'/mobile/register.html?code=' + code;
+		// var type = 'get';
+
+		
+		// $.ajax({
+		// 	url,
+		// 	type,
+		// 	data: {},
+		// 	success: function(res) {
+		// 		layer_close();
+		// 		console.log(res)
+
+		// 		$('.invite_ewm').attr('src', res.data)
+		// 	}
+		// })
+	})
+</script>

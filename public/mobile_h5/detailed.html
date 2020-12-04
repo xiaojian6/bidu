@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>具体地址</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="../js/mobile-util.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/jquery.cookie.js"></script>
+		<script src="lib/vue.min.js"></script>
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="./lib/jquery.localize.min.js"></script>
+	    <script src="./lib/language_cookie.js"></script>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<header class="header">
+				<a class="back mt5" href="javascript:history.go(-1)">
+					
+				</a>
+				<h4 class="ftw ft16">{{name}} <span data-localize="ads.address">地址</span></h4>
+			</header>
+			<div class="header-space"></div>
+			<div class="part">
+				<div class="part1">
+					<img src="images/no_data.png" alt="" />
+					<span class="ftw ft16" data-localize="ads.noads">你还没有地址</span>
+				</div>
+				<ul>
+					<li v-for="(aa) in List" class="ft15 ftw clearfix">
+						<img class="fl" src="images/myimg/aiudfui.png" alt="" />
+						<div class="address-detail-content fl">
+							<p>{{aa.notes}}</p>
+							<div class="clearfix">
+								<p class="fl">{{aa.address}}</p>
+								<button class="fr ftw" type="button" @click="dele(aa.id)" data-localize="ads.cel">删除</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="add-address-sapce"></div>
+			<div class="footer">
+				<footer>
+					<a href="javascript:;" @click="add(id,name,has_address_num)" class="ftw" data-localize="ads.adds">添加地址</a>
+				</footer>
+			</div>
+			<div id="mask1">
+				<div id="Limited">
+					<ul>
+						<li></li>
+						<li class="cancel" data-localize="safe.ceil">取消</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var vue = new Vue({
+		el: '#app',
+		data: {
+			List: [],
+			name: '',
+			id: '',
+			has_address_num: ''
+		},
+		mounted: function() {
+			var self = this;
+			var id = getUrlParam("id");
+			var has_address_num = getUrlParam("has_address_num");
+			var name = getUrlParam("name");
+			self.name = name;
+			self.id = id;
+			self.has_address_num = has_address_num;
+			var token = get_user_login();
+			$.ajax({
+				url: _API + "wallet/get_address",
+				type: "POST",
+				dataType: "json",
+				async: true,
+				data: {
+					currency: id
+				},
+				beforeSend: function beforeSend(request) {
+					request.setRequestHeader("Authorization",
+						token);
+				},
+				success: function success(data) {
+					self.List = data.message;
+					if (data.type == "ok") {
+						$(".part1").css("display", "none")
+					} else {
+						$(".part1").css("display", "block");
+						$(".part>ul").css("display", "none")
+					}
+				}
+			})
+		},
+		methods: {
+			add: function(id, name, has_address_num) {
+				window.location =  'AddAddress.html?id=' + id + '&name=' + name + '&has_address_num=' + has_address_num;
+			},
+			dele: function(id) {
+
+				layer.open({
+
+					content: pdel,
+					btn: [sure, ceil],
+					yes: function(index) {
+						//console.log(id);return false;
+						var token = get_user_login();
+						$.ajax({
+							url: _API + "wallet/deladdress",
+							type: "POST",
+							dataType: "json",
+							async: true,
+							data: {
+								address_id: id
+							},
+							beforeSend: function beforeSend(request) {
+								request.setRequestHeader("Authorization",
+									token);
+							},
+							success: function success(data) {
+								//console.log(data);
+
+								if (data.type == "ok") {
+									layer_msg(dels);
+									window.location.reload();
+								} else {
+									layer_msg(delno);
+								}
+							}
+						})
+
+
+					}
+				});
+
+
+			}
+		}
+	});
+
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg); //匹配目标参数
+		if (r != null) return unescape(r[2]);
+		return null; //返回参数值
+	}
+</script>

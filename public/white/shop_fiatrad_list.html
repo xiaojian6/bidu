@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <title>商家详情</title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+       
+
+        .logo{border-radius: 50%;}
+         img{
+            width: 20px;
+            vertical-align: middle;
+        }
+       
+		.layer_opeation	{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background-color: #fff;
+        }
+        .all{
+            right: 10px;
+            top:0;
+            height: 100%;
+        }
+        .inNum{
+            border:1px solid #C6D0D6;
+        }
+        .tab_con{
+            width: 40%;
+        }
+        .active{
+            color: #5282D0;
+            border-bottom: 1px solid #5282D0;
+        }
+        input::placeholder{
+            color: #BEC9D0;
+        }
+        .unlegal{
+            display: none;
+        }
+        .sp_out_info>a,
+        .sp_in_info>a{
+            display: block;
+        }
+        .sp_out_info>a:last-child{
+            border-bottom: none;
+        }
+        .sp_in_info>a:last-child{
+            border-bottom: none;
+        }
+        .fb{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header bgWhite">
+        <a class="back" href="javascript:;" onclick="javascript:history.go(-1);"></a> 
+        <div class="tc title"></div>
+    </header>
+    <div class="color1 bgGray ft10 pt40">
+        <div class="sp_info bgWhite">
+            <!-- 头部 -->
+            <div class="top mb10  ptb10 plr10 bdb">
+               <div class="flex alcenter between">
+                    <div class="flex alcenter">
+                        <div class="logo baseBg white ft16 pd5 mr10"></div>
+                        <div class="">
+                            <p class="ft14 bold sp_name"></p>
+                            <p class=" ">
+                                <img src="images/vip.png" alt="">
+                                认证商家 | 注册时间 <span class="zc_time"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="btn btn-danger fb">
+                        发布
+                    </div>
+               </div>
+                <div class="sp_times  plr10 color3 mt10">
+                    <div class="item flex alcenter between">
+                        <div class="flex1">
+                            <p class="black ft14 all_times" ></p>
+                            <p class="">总成单</p>
+                        </div>
+                        <div class="flex1 tc">
+                            <p class="black ft14 thirty_times"></p>
+                            <p class="">30日成单</p>
+                        </div>
+                        <div class="flex1  tc">
+                            <p class="black ft14 done_times"></p>
+                            <p class="">完成单</p>
+                        </div>
+                        <div class="flex1 tr">
+                            <p class="black ft14 per_times"></p>
+                            <p class="">完成率</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="ptb10 plr10">
+                <div class="flex alcenter between renz">
+                    <span>邮箱认证<img src="images/regi.png" alt="" class="prove_email"></span>
+                    <span>手机认证<img src="images/regi.png" alt="" class="prove_mobile"></span>
+                    <span>实名认证<img src="images/regi.png" alt="" class="prove_real"></span>
+                    <span>高级认证<img src="images/regi.png" alt="" class="prove_level"></span>
+                </div>
+            </div>
+            
+        </div>
+        <!-- 在线出售 -->
+        <div class="mainlist">
+            <div class="sp_out mt10 bgWhite ">
+                <header class="ptb10 plr10  black ft14 bdb">我的出售</header>
+                <div class="sp_out_info plr10 ptb10">
+                   
+                </div>
+            </div>
+            <div class="sp_in mt10 bgWhite">
+                <header class="ptb10 plr10  black ft14 bdb">我的求购</header>
+                <div class="sp_in_info plr10 ptb10">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- 发布弹框 -->
+    <div class="layer_box" id="fabu">
+        <div class="layer_opeation pb10">
+            <div class="op_content plr10">
+                <div class="flex alcenter bdb mt20 mb10 ft16 bold tab_type">
+                    <div class="flex1 mr20 active tc " data-type='buy'>购买</div>
+                    <div class="flex1 tc " data-type='sell'>出售</div>
+                </div>
+               <div class="flex alcenter bdb ">
+                   <span class="flex1">币种</span>
+                  <span class="ptb10 flex2 coin_type">usdt</span>
+               </div>
+               <div class="flex alcenter bdb ptb10 ">
+                    <span class="flex1">请选择支付方式</span>
+                    <select name="coins" id="method" class="flex2 ptb10 plr10 bd">
+                        <option value="-1">请选择</option>
+                        <option value="ali_pay"> 支付宝</option>
+                        <option value="we_chat">微信</option>
+                        <option value="bank">银行卡</option>
+                    </select>
+                </div>
+                <div class="flex alcenter bdb mt10">
+                    <span class="flex1">单价:</span>
+                    <input class="ptb10 flex2 price" type="number" placeholder="请输入单价" name="price">
+                </div>
+                <div class="flex alcenter bdb mt10">
+                    <span class="flex1">数量:</span>
+                    <input class="ptb10 flex2 total_number" type="number" placeholder="请输入数量" name="number">
+                </div>
+                <div class="flex alcenter bdb mt10">
+                    <span class="flex1">最小交易量:</span>
+                    <input class="ptb10 flex2 min_number" type="number" placeholder="请输入最小交易量">
+                </div>
+            </div>
+            <div class="flex between alcenter mt10 white plr10">
+               
+                <div class="bgLinearblue  ptb10 flex1 tc fabu" data-id="">发布</div>
+            </div>
+        </div>
+    </div>
+    <!-- 购买出售弹框 -->
+    <div class="layer_box" id='operator'>
+            <div class="layer_opeation pb10">
+                <div class="op_content">
+                    <div class="op_header flex between bgGray plr10 ptb15">
+                        <div class="">
+                            <p class="ft20 black">购买<span class="cointype">USDT</span>  </p>
+                            <P class="mt15">单价<span class="blue price">￥6.88</span></P>
+                        </div>
+                        <div class="tc"><img src="images/coin_type.png" alt="" class="coin_logo"></div>
+                    </div>
+                    <div class="op_con plr10 bgWhite">
+                        <div class="tab mb10 flex mt10">
+                            <div class="ft14 pr10 tab_con flex bdb pb5">
+                                <div class="color1 item active mr20" data-tab='legal'>法币交易</div>
+                                <div class="color1 item" data-tab='unlegal'>购买数量</div>
+                            </div>
+                        </div>
+                        <div class="tab_content">
+                            <div class="mt10 legal">
+                                <div class="reltive inNum plr10 mb10">
+                                    <input type="text" class="block ptb15 num" placeholder="请输入欲购买法币总额" >
+                                    <div class="abstrot all ptb15 ft14">
+                                        <span class="black pr10 bdr">CNY</span>
+                                        <span class="blue pl10 allIn" >全部买入</span>
+                                    </div>
+                                </div>
+                                <p class="color1">限额<span class="limit">￥100.00-99591.00</span></p>
+                                <!-- <p class="ft10 tr color1 mb10">实际购买 <span class="actual">0.0000 </span><span class="cointype"></span> </p> -->
+                                <div class="ft14 flex alcenter between mt10">
+                                    <span class="color1 ">交易总额</span>
+                                    <span class="blue ft18 total" >￥0.00</span>
+                                </div>
+                            </div>
+                            <div class="mt10 unlegal">
+                                    <div class="reltive inNum plr10 mb10">
+                                        <input type="text" class="block ptb15 num" placeholder="请输入要购买数量" >
+                                        <div class="abstrot all ptb15 ft14">
+                                            <span class="black pr10 bdr cointype"></span>
+                                            <span class="blue pl10 allIn" >全部买入</span>
+                                        </div>
+                                    </div>
+                                    <p class="color1">限额<span class="limit">￥100.00-99591.00</span></p>
+                                    <!-- <p class="ft10 tr color1 mb10">实际购买 <span class="actual">0.0000 </span><span class="cointype"></span> </p> -->
+                                    <div class="ft14 flex alcenter between mt10">
+                                        <span class="color1 ">交易总额</span>
+                                        <span class="blue ft18 total" >￥0.00</span>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex between alcenter mt10 white plr10">
+                    <div class="bgLinear ptb15 flex1 tc">
+                        <span class="cutdown">60</span> s自动取消
+                    </div>
+                    <div class="bgGray2 ml15 ptb15 flex1 tc doit" data-id="">下单</div>
+                </div>
+            </div>
+        </div>
+    <script src="lib/layer_mobile/layer.js"></script>
+    <script src="javascripts/jquery.cookie.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script>
+    $(function(){
+        var id=get_param('id'),currency_id,currentTab='legal';
+        var page=1;
+        getData(page);
+        function getData(page){
+            initDataToken({url:'seller_info',data:{id,page}},function(res){
+               if(page==1){
+                    console.log(res,id)
+                    var name=res.name;
+                    $('.sp_name').html(name)
+                    $('.logo').html(name.substr(0,1))
+                    $('.zc_time').html(res.create_time)
+                    $('.all_times').html(res.total)
+                    $('.thirty_times').html(res.thirtyDays)
+                    $('.done_times').html(res.done)
+                    $('.per_times').html((res.done/res.total*100).toFixed(2) +'%')
+                    $('.coin_type').html(res.currency_name)
+                    $('.title').html(name)
+                    if(res.is_myseller==1){
+                        $('.fb').show();
+                    }
+                    currency_id=res.currency_id;
+                    if(res.prove_email==1){
+                        $('.prove_email').attr('src','images/ok.png')
+                    }
+                    if(res.prove_mobile==1){
+                        $('.prove_mobile').attr('src','images/ok.png')
+                    }
+                    if(res.prove_real==1){
+                        $('.prove_real').attr('src','images/ok.png')
+                    }
+                    if(res.prove_level==1){
+                        $('.prove_level').attr('src','images/ok.png')
+                    }
+               }
+                var lists=res.lists.data;
+                if(lists&&lists.length>0){
+                    render_list(lists)
+                }else{
+                    layer_msg('没有更多数据了...');
+                }
+            })
+        }
+        
+        function render_list(data){
+            var outHtml='',inHtml='';
+            for(var i in data){
+                if(data[i].type=='sell'){
+                    outHtml+=`<a href="shop_fiatrad_detail.html?id=${data[i].id}" class='bdb pb10'>
+                             <header class="ft14 ptb10">
+                                <img src="${data[i].currency_logo}" alt="">
+                                <span class="black">${data[i].currency_name}</span>
+                            </header>
+                            <div class="flex between">
+                                <div>数量 <span>${data[i].surplus_number} ${data[i].currency_name}</span></div>
+                                <div>单价</div>
+                            </div>
+                            <div class="flex between mt10">
+                                <div>限额 <span>￥${data[i].limitation.min} - ￥${data[i].limitation.max}</span></div>
+                                <div class="blue ft18">￥${data[i].price}</div>
+                            </div>
+                            <div class="flex between mt10 alcenter">
+                                <div class="pay_type">
+                                    <img src="images/card.png" alt="" style="display:${data[i].way=='bank'?'inline-block':'none'}">
+                                    <img src="images/WeChat.jpg" alt="" style="display:${data[i].way=='we_chat'?'inline-block':'none'}">
+                                    <img src="images/zhi.png" alt="" style="display:${data[i].way=='ali_pay'?'inline-block':'none'}">
+                                </div>
+                                <div>
+                                    <div class="btn btn-default white bgLinearblue" data-id='${data[i].id}'>查看订单</div>
+                                </div>
+                            </div>
+                            </a>
+                            `   
+                }else{
+                    inHtml+=`<a href="shop_fiatrad_detail.html?id=${data[i].id}" class='bdb pb10'>
+                            <header class="ft14 ptb10">
+                                    <img src="${data[i].currency_logo}" alt="">
+                                    <span class="black">${data[i].currency_name}</span>
+                                </header>
+                                <div class="flex between">
+                                    <div>数量 <span>${data[i].surplus_number} ${data[i].currency_name}</span></div>
+                                    <div>单价</div>
+                                </div>
+                                <div class="flex between mt10">
+                                    <div>限额 <span>￥${data[i].limitation.min} - ￥${data[i].limitation.max}</span></div>
+                                    <div class="blue ft18">￥${data[i].price}</div>
+                                </div>
+                                <div class="flex between mt10 alcenter">
+                                    <div class="pay_type">
+                                        <img src="images/card.png" alt="" style="display:${data[i].way=='bank'?'inline-block':'none'}">
+                                        <img src="images/WeChat.jpg" alt=""style="display:${data[i].way=='we_chat'?'inline-block':'none'}">
+                                        <img src="images/zhi.png" alt=""style="display:${data[i].way=='ali_pay'?'inline-block':'none'}">
+                                    </div>
+                                    <div>
+                                        <div class="btn btn-default white bgLinear" data-id="${data[i].id}">查看订单</div>
+                                    </div>
+                                </div>
+                                </a>`
+                }
+            }
+            $('.sp_out_info').append(outHtml);//出售
+            $('.sp_in_info').append(inHtml);//购买
+            
+        }
+        $(window).scroll(function(){
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if(scrollTop + windowHeight == scrollHeight){ 
+                page++;
+                getData(page);
+            }
+        }) 
+        var type='buy';
+        $('.fabu').click(function(){
+            var way=$('#method').val();
+            var price=$('.price').val();
+            var total_number=$('.total_number').val();
+            var min_number=$('.min_number').val();
+            if(way<0){
+                return layer_msg('请先选择支付方式')
+            }
+            if(!price){
+                return layer_msg('请先输入单价')
+            }
+            if(!total_number){
+                return layer_msg('请先输入数量')
+            }
+            if(!min_number){
+                return layer_msg('请先输入最小交易量')
+            }
+            initDataToken({url:'legal_send',data:{type,way,price,total_number,min_number,currency_id},type:'post'},function(res){
+                layer_msg(res)
+                setTimeout(() => {
+                 window.location.reload();
+                }, 1500);
+            })
+        })
+       
+      
+        $('.fb').click(function(){
+            $('.layer_box#fabu').show();
+        })
+        $('.layer_box').click(function(){
+            $(this).hide();
+            // time=60;
+            // $('.cutdown').html(time);
+            // clearInterval(interId)
+        })
+        $('.layer_opeation').click(function(){
+            return false;
+        })
+       
+        $('.tab_type>div').click(function(){
+            $(this).addClass('active').siblings().removeClass('active')
+            type=$(this).data('type');
+        })
+    })
+    </script>
+</body>
+</html>

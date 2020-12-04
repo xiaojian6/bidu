@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>确定助记词</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+</head>
+<style type="text/css">
+	body{
+        background:#fcfcfd url(static/images/home/register_bg.png) no-repeat;
+        background-size:100%;
+    }
+</style>
+<body>
+  <header >
+    <i class="iconfont icon-jianzuo font24  fontc_6 backPage"></i>
+  </header>
+   <div class="mgthead">
+       <ul class="time_word">
+           <li class="act">
+               <span></span>
+               <span>生成助记词</span>
+           </li>
+           <li class="act">
+               <span></span>
+               <span>确定助记词</span>
+           </li>
+           <li class="act">
+               <span></span>
+               <span>创建钱包</span>
+           </li>
+       </ul>
+
+        <div class="add_money_hint">
+        <p>密码用于保护私钥和交易授权，强度非常重要</p>
+        <p>不存储密码，也无法帮您找回，请务必牢记</p>
+    </div>
+    <form id="form_content" action="/users/creataccounts" method="post" >
+        <!--<ul class="out_details" style="margin-top:.6rem;">
+            <li style="justify-content: space-between;background:none;">
+                <div class="out_input">
+                    <input type="text" name="wallet_name" id="wallet_name" style="background:none;" placeholder="钱包名称">
+                </div>
+            </li>
+            <li style="background:none;">
+                <div class="out_input">
+                    <input  type="password" id="password" name="password" style="background:none;" placeholder="密码">
+                </div>
+            </li>
+            <li style="background:none;">
+                <div class="out_input">
+                    <input type="password" id="password_prompt" name="password_prompt" style="background:none;"  placeholder="重复密码">
+                </div>
+            </li>
+            <li style="border:0;background:none;">
+                <div class="out_input">
+                    <input type="text" id="memorizing_words" name="memorizing_words" style="background:none;" placeholder="密码提示信息（可不填）">
+                </div>
+            </li>
+            <li style="background:none;border:0;">
+                <label for="">
+                    <input type="checkbox" ><span class="font12 fontc_6 mgl10 ">我已经仔细阅读并同意<span class="fontc_hdl"> 服务及隐私条款</span></span>
+                </label>            
+            </li>
+        </ul>-->
+        <div class="login_box">
+                    <div class="login_tab" >
+                        <div class="input-con" >
+                            <i class="iconfont icon-ren font24 fontc_hdl"></i>
+                            <input  type="text" value="" name="account_number"  id="wallet_name" placeholder="钱包名称"  class="fontc_f"/>
+                        </div>
+                        <div class="input-con">
+                            <i class="iconfont icon-icon-system-fn-lock font24 fontc_hdl"></i>
+                            <input  type="password" id="password" name="password" value="" placeholder="请输入密码" class="fontc_f" />
+                        </div>
+                        <div class="input-con">
+                            <i class="iconfont icon-icon-system-fn-lock font24 fontc_hdl"></i>
+                            <input  type="password" id="password_prompt" name="password_prompt" value="" placeholder="重复密码" class="fontc_f" />
+                        </div>
+                        <div class="input-con">
+                            <i class="iconfont icon-icon-system-fn-lock font24 fontc_hdl"></i>
+                            <!--<input  type="text" value="" id="parent_id" name="parent_id" placeholder="邀请人" class="fontc_f" />-->
+                             <input type="text" id="memorizing_words" name="memorizing_words" style="background:none;" placeholder="密码提示信息（可不填）">
+                        </div>
+                    </div>
+                    <div class="quick-nav mgt10">
+                        <a href="javascript:;" class="fontc_hdl">
+                            <i class="iconfont icon-iconfontgantanhao4  fontc_hdl"></i>
+                            <span class="font12">用户协议</span>
+                        </a>
+                    </div>
+            </div>
+            <input name="content" type="hidden" id="input_content" value="<%= word_content %>">
+            <input name="user_id" type="hidden" id="user_id" value="<%= user_id %>">
+          <a href="javascript:;" class="login_btn">创建钱包</a>
+     </form>
+        
+   </div>
+
+	<script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+	<script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+	<script type="text/javascript" src="static/javascripts/creatAccount.js"></script>
+</body>
+</html>

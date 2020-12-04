@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">			
+		<title>杠杆账户</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	</head>
+	<style>
+    .gtop{
+		padding-top: 30px;
+	}
+	.line{
+		height: 10px;
+		background: linear-gradient(to right, #E8E8E8, #C5CFD1); 
+	}
+	.listbox li{
+		color: #1f3f59;
+		margin-top: 10px;
+	}
+	.titlebox li,.listbox li span{flex: 1;}
+	.recordnone{min-height: 150px;}
+	.recordnone img{width: 80px;}
+	.btbox{position: fixed;bottom: 0;left: 0;z-index: 99;width: 100%;padding: 10px 0;background: #fff;}
+	.btbox a{display: block;flex: 1;text-align: center}
+	.iconbox{
+		width: 50PX;
+		height: 50PX;
+		text-align: center;
+		margin: 0 auto;
+		border: 1px solid #e2edff;
+		border-radius: 4px
+	}
+	.btbox a img{width: 30px;margin: 0 auto;}
+	#header{
+        height: 45px;
+        line-height: 45px;
+    }
+	#header img{width: 25px;margin: 0 5px}
+	.pd85{padding-bottom: 85px}
+	</style>
+	<body>
+		<div id="header">
+			<a class="pull-left flex alcenter" href='assets.html'>					
+				<span>杠杆账户</span>
+			</a>
+		</div>
+	    <div class="pd85">
+			<div class="ggbox plr15">
+				<div class="gtop">
+					<div class="title ft20 bold color1f">BTC/USDT</div>	
+					<p class="mt20 flex alcenter">
+						<span class="color8">风险率 --</span>
+						<img src="images/query.png" alt="" style="width:20px;margin-left: 5px">
+					</p>
+					<p class="line mt5"></p>
+				</div>
+				<ul class="flex titlebox mt20 color3 ft14">
+					<li>类型</li>
+					<li>BTC</li>
+					<li class="tr">USDT</li>
+				</ul>
+				<ul class="listbox color1f ft14">
+					<li class="flex alcenter">
+						<span class="color8">可用</span>
+						<span>0.0000000</span>
+						<span class="tr">0.0000000</span>
+					</li>
+					<li class="flex alcenter">
+						<span class="color8">冻结</span>
+						<span>0.0000000</span>
+						<span class="tr">0.0000000</span>
+					</li>
+					<li class="flex alcenter">
+						<span class="color8">已借</span>
+						<span>0.0000000</span>
+						<span class="tr">0.0000000</span>
+					</li>
+				</ul>
+				<div class="ft14 color8 mt15">折合 <span class="padding:0 5px"> 0.000000000</span>CNY</div>
+			</div>
+			<div style="height:10px;background:#f6f6fa;margin: 20px 0"></div>
+			<div class="apply plr15">
+				<div class="flex between alcenter">
+					<p class="ft18 color1f bold">当前申请</p>
+					<a href="BorrowingRecord.html" class="flex alcenter">
+						<img src="images/record1.png" alt="" style="width:20px;">
+						<span style="padding-left:5px">全部</span>
+					</a>
+				</div>
+				<div class="recordnone tc flex alcenter">
+					<div style="width:100%">
+							<img src="images/anonymous.png"/>
+						<p class="color3">暂无记录</p>				
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="btbox">
+			<div class="flex">
+				<!-- <a href="debitCredit.html">
+					<div class="iconbox flex alcenter">					
+						<img src="images/debitcredit.png" alt="">
+					</div>
+					<p class="mt5">借贷</p>
+				</a> -->
+				<a href="Transferred.html">
+					<div class="iconbox flex alcenter">
+					    <img src="images/transfer.png" alt="">
+					</div>
+					<p class="mt5">划转</p>
+				</a>
+				
+					<div class="iconbox flex alcenter">
+					    <img src="images/deal.png" alt="">
+					</div>
+					<p class="mt5">交易</p>
+				</a>
+			</div>
+		</div>
+	<script src="lib/jquery-1.8.3.min.js"></script>
+	<script src="lib/layer_mobile/layer.js"></script>
+	<script src="javascripts/jquery.cookie.js"></script>
+	<script src="javascripts/main.js"></script>
+	<script src="./lib/jquery.localize.min.js"></script>
+	<script src="./lib/language_cookie.js"></script>
+	<script>
+		$(function(){
+			var currency=get_param('id'),type=get_param('type');
+			if(type==0){
+				type='lever'
+			}else if(type==1){
+				type='change'
+			}else{
+				type='legal'
+			}
+			console.log(currency,type)
+			initDataToken({url:'wallet/detail',type:'post',data:{currency,type}},function(res){
+				console.log(res)
+			})
+		})
+	</script>
+	</body>
+</html>

@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>充值</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/css/imtoken/recharge_money.css" />
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_766828_rcl48dsu2eq.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script src="static/javascripts/imtoken/flexble.js"></script>
+</head>
+
+<body>
+    <div id="user_info" ></div>
+    <div class="centera">
+        <div class="header">
+            <i class="back backPage"></i>
+            <h5>充值提现</h5>
+        </div>
+       
+        <div class="tablea" >
+            <p id="oranger" class="oranger">
+                <a class="hover" href="javascript:;" data-way="0">充值</a>
+                <a class="" href="javascript:;" data-way="1">提现</a>
+            </p>
+            <div id="tablea">
+                    <div class="box charge">
+                            <div class="information">
+                                <div class="cceptance">
+                                    <span>承兑商</span>
+                                    <span class="input-con under-name"></span>
+                                    <!-- <input type="text" class="input-con under-name"   /> -->
+                                </div>
+                                <!-- <div class="cceptance">
+                                    <span>交易码</span>
+                                    <input type="text" class="input-con" placeholder="456" />
+                                </div> -->
+                                <div class="cceptance">
+                                    <span>手机号码</span>
+                                    <input type="text" class="input-con" placeholder="请输入您的手机号码" name="moblie"/>
+                                </div>
+                                <!-- <div class="cceptance">
+                                    <span>验证码</span>
+                                    <input type="text" class="input-con" placeholder="请输入验证码"  name="code" />
+                                    <a href="javascript:;" class="sendCode">发送验证码</a>
+                                </div> -->
+                            </div>
+                            <div class="recharge-way">
+                                <a href="" class="chargeWay" id="charge" >
+                                    <span>请选择充值方式</span>
+                                    <div class="way-info">
+                                        <p></p>
+                                        <p></p>
+                                    </div>
+                                    <i></i>
+                                </a>
+                            </div>
+                            <!-- <div class="information">
+                                <div class="cceptance">
+                                    <span>交易账号</span>
+                                    <input type="text" class="input-con" placeholder="请输入您的交易账号" name="account"/>
+                                </div>
+                            </div> -->
+                            <div class="recharge-money">
+                                    充值金额<span id="chargeMoney"></span>(CNY)
+                                <p>￥<input type="text" class="input-con ipt-money" name="money"/></p>
+                            </div>
+                            <!-- <div class="acceptance-message">
+                                <span>承兑商信息</span>
+                                <i></i>
+                            </div> -->
+                            <div class="btnok">
+                                <a href="javascript:;">确定</a>
+                            </div>
+                        </div>
+                        <div class="box out" style="display:none;">
+                            <div class="information">
+                                <div class="cceptance">
+                                    <span>承兑商</span>
+                                    <span class="input-con under-name"></span>
+                                    
+                                </div>
+                                <div class="cceptance">
+                                    <span>手机号码</span>
+                                    <input type="text" class="input-con" placeholder="请输入您的手机号码" name="moblie" />
+                                </div>
+                                <!-- <div class="cceptance">
+                                    <span>验证码</span>
+                                    <input type="text" class="input-con" placeholder="请输入验证码" name="code" />
+                                    <a href="javascript:;" class="sendCode">发送验证码</a>
+                                </div> -->
+                            </div>
+                            <div class="recharge-way">
+                                <a href="javascript:;" class="chargeWay" id="out">
+                                    <span>请选择提现方式</span>
+                                    <div class="way-info">
+                                        <p></p>
+                                        <p></p>
+                                    </div>
+                                    <i></i>
+                                </a>
+                            </div>
+                            <!-- <div class="information">
+                                <div class="cceptance">
+                                    <span>交易账号</span>
+                                    <input type="text" class="input-con" placeholder="请输入您的交易账号" name="account"/>
+                                </div>
+                            </div> -->
+                            <div class="recharge-money">
+                                <span>提现金额(CNY)</span>
+                                <span style="float: right;" class="balance">账户余额: <span class="allbalance"></span>       CNY</span>	
+                                <p>￥<input type="text" class="input-con ipt-money" name="money"/></p>
+                            </div>
+                            <!-- <div class="acceptance-message">
+                                <span>承兑商信息</span>
+                                <i></i>
+                            </div> -->
+                            <div class="attention">
+                                <p>注意:</p>
+                                <span>提现订单提交成功后请关注订单状态,如果承兑商标记已转账后20分钟内用户未确认,该订单会自动确认。</span>	
+                            </div>
+                            <div class="btnok">
+                                <a href="javascript:;">确定</a>
+                            </div>
+                        </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="common_footer">
+        <a href="index.html"><i class="icon-size iconfont icon-chanyeguimo"></i>资产</a>
+        <a href="market.html" ><i class="icon-size iconfont icon-hangqing"></i>行情</a>
+        	<!-- <a href="deal.html" ><i class="icon-size iconfont icon-shuffle__easy"></i>交易</a> -->
+        <a href="fiatrad.html"  class="active" ><i class="icon-size iconfont icon-navjiaoyizhongxin"></i>C2C</a>
+        <a href="userinfo.html" ><i class="icon-size iconfont icon-wo"></i>我的</a>
+    </div>
+</body>
+    <script type="text/javascript" src="static/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="static/lib/layer_mobile/layer.js"></script>
+    <script src="static/javascripts/jquery.cookie.js"></script><script type="text/javascript" src="static/javascripts/main.js"></script>
+
+	<script type="text/javascript" src="static/javascripts/recharge_money.js"></script>
+	
+</html>
